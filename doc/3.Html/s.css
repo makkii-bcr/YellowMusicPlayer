@@ -54,3 +54,7 @@ dt {
   margin-bottom:0px;
   font-weight:bold;
 }
+
+li.bold {
+  font-weight:bold;
+}
