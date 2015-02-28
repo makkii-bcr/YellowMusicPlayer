@@ -1,6 +1,23 @@
 body {
   background-color:#FFFFFF;
   color:#000000;
+  font-family:"ÉÅÉCÉäÉI",Verdana,Arial,Helvetica,sans-serif; 
+  font-size:x-small;
+  line-height:120%;
+}
+
+a {
+  line-height:140%;
+}
+
+h2 {
+  line-height:120%;
+}
+
+table {
+  font-size:x-small;
+  line-height:120%;
+
 }
 
 strong {
@@ -16,6 +33,7 @@ pre {
   margin-bottom:5px;
   padding:5px;
   background-color:#EEFFEE;
+  font-size:x-small;
 }
 
 .green {

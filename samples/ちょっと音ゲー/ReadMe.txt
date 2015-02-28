@@ -1,4 +1,4 @@
-YellowMusicPlayerでMidiの再生時間を求めて、Tonyuでより正確な音ゲーを作ってみました！
+YellowMusicPlayerでMidi,Oggの再生時間を求めて、Tonyuでより正確な音ゲーを作ってみました！
 
 最初の設定では、タイミングをBGMに合わせるようにしています。
 効果音を鳴らしたい場合は、Shiftを押して「効果音のタイミングをBGMに合わせる」にしてください。
