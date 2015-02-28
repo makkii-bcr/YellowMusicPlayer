@@ -1,0 +1,37 @@
+extends Object;
+
+native _n_FileWriter;
+constructor FileWriter(fn) {
+   _body=_n_FileWriter (_body,fn);
+}
+
+native _n_close;
+function close() {
+   if (!_body) return;
+   _n_close (_body);
+   _body=0;
+}
+
+destructor destroy() {
+  close();
+}
+
+native _n_write;
+function write(d) {
+   if (!_body) return null;
+   return _n_write (_body,d);
+}
+
+native _n_writeLn;
+function writeStr(s) {
+   if (!_body) return null;
+   return _n_writeLn (_body,s);
+}
+
+function writeLn(s) {
+   writeStr(s+"\r\n");
+}
+
+function error() {
+   return (_body==0);
+}

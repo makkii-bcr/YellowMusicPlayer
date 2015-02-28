@@ -1,0 +1,44 @@
+extends PlainChar;
+
+//native _changeAttr;
+//native _inspect;
+//native _dynamicInspect;
+
+function assignChar() {
+   $_Char_seq+=1;
+   return ((($_Char_seq-1) % 13)+3);
+}
+
+function setDefaultProperties(xx,yy) {
+   super.setDefaultProperties(xx,yy);
+   p=assignChar();
+   changeAttr("p",p);
+}
+
+
+constructor SpriteChar(xx,yy,pp,ff){
+ super(xx,yy);
+ p=pp;
+ f=ff;
+}
+
+function getWidth() {
+  var r;r=native_getPWidth(p);
+  if (r>24) return r*0.8;
+  return r*0.66;
+}
+function getHeight() {
+  var r;r=native_getPHeight(p);
+  if (r>24) return r*0.8;
+  return r*0.66;
+}
+
+function draw() {
+    drawSprite(x,y,p,f,zOrder);
+    super.draw();
+}
+
+function newAnimation() {
+   return appear(new AnimationAdaptor(this));
+}
+while(1) {update();}

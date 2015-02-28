@@ -1,0 +1,11 @@
+extends CustomResource;
+
+function onInit() {
+  setGlobal(getName(),this);
+  return $_istat_completed;
+}
+
+native _n_open;
+function open() {
+  _n_open(getURL());
+}

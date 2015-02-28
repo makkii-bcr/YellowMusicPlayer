@@ -1,0 +1,34 @@
+extends classes.lang.Object;
+
+constructor MouseEvent(){
+}
+
+function getTarget (x,y) {
+  var i,c,p;
+  i=0;c=$chars.size();
+  while(i<c) {
+   p=$chars.get(i);
+   if (p.crashAt(x,y)) return p;
+   i=i+1;
+  }
+  return 0;
+}
+
+function onDown(x,y,lb,rb) {
+  var t;
+//  t=getTarget(x,y);
+  if (t) t.onMouseDown(x,y,lb,rb);
+  else {
+    if ($map ) $map.mouseDown(x,y,lb,rb);
+  }
+}
+
+function onDrag(sx,sy,dx,dy,lb,rb) {
+  var t; 
+//  t=getTarget(sx,sy);   
+  if (t) t.onMouseDrag (sx,sy,dx,dy,lb,rb);
+  else {
+    if ($map ) $map.mouseDrag(sx,sy,dx,dy,lb,rb);
+  }
+}
+

@@ -1,0 +1,55 @@
+extends PlainChar;
+
+native _changeAttr;
+//native _inspect;
+//native _dynamicInspect;
+
+constructor DXChar(xx,yy,pp,ff,sz,rt,al){
+ super(xx,yy);
+ p=pp;
+ f=ff;
+ scaleX=1;
+ if (sz) scaleX=sz;
+ angle=0;
+ if (rt) angle=rt;
+ alpha=255;
+ if (al) alpha=al;
+}
+
+function assignChar() {
+   $_DxChar_seq+=1;
+   return ((($_DxChar_seq-1) % 13)+3);
+}
+
+function setDefaultProperties(xx,yy) {
+   super.setDefaultProperties(xx,yy);
+   p=assignChar();
+   changeAttr("p",p);
+   changeAttr("angle",0);
+   changeAttr("alpha",255);
+   changeAttr("scalex",1);
+      
+}
+
+function getWidth() {
+  var r;r=native_getPWidth(p)*scalex;
+  if (r>24) return r-8;
+  return r*0.66;
+}
+function getHeight() {
+  var r,sc;
+  sc=scaley; if (!sc) sc=scalex;
+  r=native_getPHeight(p)*sc;
+  if (r>24) return r-8;
+  return r*0.66;
+}
+
+function draw() {
+    drawDxSprite(x,y,p,f,zOrder,angle,alpha,scalex,scaley);
+    super.draw();
+}
+function newAnimation() {
+   return appear(new AnimationAdaptor(this));
+}
+
+while(1) {update();}

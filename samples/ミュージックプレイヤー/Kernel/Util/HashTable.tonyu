@@ -1,0 +1,6 @@
+extends AbstractHashtable;
+
+native _n_init;
+constructor HashTable() {
+  _body=_n_init();
+}

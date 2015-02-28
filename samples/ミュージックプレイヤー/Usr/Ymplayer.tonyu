@@ -1,0 +1,354 @@
+extends MediaPlayer;
+// *--------------------------------*
+// *  YellowMidiPlayer用の$mplayer  *
+// *--------------------------------*
+//                     version 2.0用
+
+
+constructor Ymplayer() {
+  super();
+  
+  midiPause = 0;
+  oggPause  = 0;
+  bgmGettingPlayerStatus = 0;
+  
+  playerMidiStatus    = 0;
+  playerMidiPlayNo    = 0;
+  playerMidiTempo     = 0;
+  playerMidiTick      = 0;
+  playerMidiTime      = 0;
+  playerMidiLoopCount = 0;
+  
+  midiTimeBase      = 0;
+  midiTotalTick     = 0;
+  midiTotalTime     = 0;
+  midiFirstNoteTick = 0;
+  midiFirstNoteTime = 0;
+  midiLastNoteTick  = 0;
+  midiLastNoteTime  = 0;
+  midiLoopTick      = 0;
+  midiLoopTime      = 0;
+  
+  timeHour        = 0;
+  timeMinute      = 0;
+  timeSecond      = 0;
+  timeMilliSecond = 0;
+  timeYear        = 0;
+  timeMonth       = 0;
+  timeDay         = 0;
+  timeDayOfWeek   = 0;
+  
+  playerOggStatus    = 0;
+  playerOggTime      = 0;
+  playerOggLoopCount = 0;
+  oggTotalTime       = 0;
+  oggChannels        = 0;
+  oggSamplingRate    = 0;
+  oggTotalSamples    = 0;
+  oggFileLoopStart   = 0;
+  oggFileLoopEnd     = 0;
+  
+  playerExeName       = "";
+  playerDirectMusicSW = 0;
+  playerMode          = 0;
+  playerReadSpeed     = 0;
+  playerMidiCache     = 0;
+  
+  
+  initAllPlayingInfomation();
+  
+  deleteFile("YMPStatus.dat");
+}
+
+// playメソッドをオーバーライド(再定義)
+function play(s, ar, v) {
+  var f;
+  
+  if ((s is SoundEffect) || (s is BGM)) { // midi再生(サウンドオブジェクトの場合)
+    if (s is BGM) restart(); // 再生したらポーズフラグをリセット
+    if (!v || (v>=0 && v<=128)) {
+      s.play(ar,v);
+    } else {
+      s.play(ar,128);
+    }
+  } else if (s is String) { // ogg再生(文字列の場合)
+    oggPause  = 0;
+    f = new FileWriter("ogg_sig.dat");
+    f.writeLn(s);
+    f.write(ar);
+    f.close();
+    return f.error()*(-1);
+  }
+}
+
+// stopメソッドをオーバーライド(再定義)(ポーズフラグをリセットするため)
+function stop(bgmType) {
+  var f;
+  
+  if (!bgmType || bgmType == 1) {
+    restart(); // 停止したらポーズフラグをリセット
+    super.stop(); // 元々のstopメソッドを呼び出す
+  }
+  if (!bgmType || bgmType == 2) {
+    oggPause  = 0;
+    f = new FileWriter("ogg_sig.dat");
+    f.writeStr("0");
+    f.close();
+    return f.error()*(-1);
+  }
+}
+
+
+// YellowMidiPlayer用の追加メソッド //////////////////////////////////////
+
+// 公開メソッド ////////
+function pause(bgmType) {
+  var f, e1, e2;
+  
+  e1 = 0; e2 = 0;
+  if (!bgmType || bgmType == 1) {
+    midiPause = 1;
+    e1 = updatePlayingInfomation();
+  }
+  if (!bgmType || bgmType == 2) {
+    oggPause  = 1;
+    f = new FileWriter("ogg_sig.dat");
+    f.writeStr("1");
+    f.close();
+    e2 = f.error()*(-1);
+  }
+  if (e1 || e2) return -1;
+  else          return  0;
+}
+function restart(bgmType) {
+  var f, e1, e2;
+  
+  e1 = 0; e2 = 0;
+  if (!bgmType || bgmType == 1) {
+    midiPause = 0;
+    e1 = updatePlayingInfomation();
+  }
+  if (!bgmType || bgmType == 2) {
+    oggPause  = 0;
+    f = new FileWriter("ogg_sig.dat");
+    f.writeStr("2");
+    f.close();
+    e2 = f.error()*(-1);
+  }
+  if (e1 || e2) return -1;
+  else          return  0;
+}
+function updatePlayingInfomation() {
+  var f;
+  
+  f = new FileWriter("eff_midi.txt");
+  if (f.error()) { f.close(); return -1; }
+  f.writeLn(midiVolume);
+  f.writeLn(midiTempo);
+  f.writeLn(midiFadeOutTime);
+  f.writeLn(midiPause);
+  f.writeLn(midiPitch);
+  f.writeLn(midiFadeInTime);
+  f.writeLn(midiKeyShift);
+  f.writeLn(midiStartTick);
+  f.writeLn(midiSkipBeginning);
+  f.writeLn(midiSkipEnding);
+  f.writeLn(midiMasterPitch);
+  f.writeLn(midiNormalize);
+  f.writeLn(midiExclusive);
+  f.writeLn(bgmGettingPlayerStatus);
+  f.writeLn(oggVolume);
+  f.writeLn(oggTempo);
+  f.writeLn(oggPan);
+  f.writeLn(oggFadeInTime);
+  f.writeLn(oggFadeOutTime);
+  f.writeLn(oggStartTime);
+  f.writeLn(oggLoopStartTime);
+  f.writeLn(oggLoopEndTime);
+  f.writeLn(oggFileLoop);
+  if (f.error()) { f.close(); return -1; }
+  f.close();
+  
+  return 0;
+}
+function setDynamicEffect(vol, tempo, pitch) {
+  if (vol   != null) midiVolume = vol;
+  if (tempo != null) midiTempo  = tempo;
+  if (pitch != null) midiPitch  = pitch;
+}
+function setDynamicEffectOgg(vol, tempo, pan) {
+  if (vol   != null) oggVolume = vol;
+  if (tempo != null) oggTempo  = tempo;
+  if (pan   != null) oggPan    = pan;
+}
+function setStaticEffect(fadeInTime, fadeOutTime, startTick, keyShift) {
+  if (fadeInTime  != null) midiFadeInTime  = fadeInTime;
+  if (fadeOutTime != null) midiFadeOutTime = fadeOutTime;
+  if (startTick   != null) midiStartTick   = startTick;
+  if (keyShift    != null) midiKeyShift    = keyShift;
+}
+function setStaticEffectOgg(fadeInTime, fadeOutTime, startTime, loopStartTime, loopEndTime, fileLoop) {
+  if (fadeInTime    != null) oggFadeInTime    = fadeInTime;
+  if (fadeOutTime   != null) oggFadeOutTime   = fadeOutTime;
+  if (startTime     != null) oggStartTime     = startTime;
+  if (loopStartTime != null) oggLoopStartTime = loopStartTime;
+  if (loopEndTime   != null) oggLoopEndTime   = loopEndTime;
+  if (fileLoop      != null) oggFileLoop      = fileLoop;
+}
+function setPlayingOption(skipBeginning, skipEnding, masterPitch, normalize, exclusive) {
+  if (skipBeginning != null) midiSkipBeginning = skipBeginning;
+  if (skipEnding    != null) midiSkipEnding    = skipEnding;
+  if (masterPitch   != null) midiMasterPitch   = masterPitch;
+  if (normalize     != null) midiNormalize     = normalize;
+  if (exclusive     != null) midiExclusive     = exclusive;
+}
+
+function initDynamicEffect() {
+  midiVolume = 127;
+  midiTempo  = 1;
+  midiPitch  = 0;
+}
+function initDynamicEffectOgg() {
+  oggVolume = 127;
+  oggTempo  = 1;
+  oggPan    = 0;
+}
+function initStaticEffect() {
+  midiFadeInTime  = 0;
+  midiFadeOutTime = 0;
+  midiStartTick   = 0;
+  midiKeyShift    = 0;
+}
+function initStaticEffectOgg() {
+  oggFadeInTime    = 0;
+  oggFadeOutTime   = 0;
+  oggStartTime     = 0;
+  oggLoopStartTime = 0;
+  oggLoopEndTime   = 0;
+  oggFileLoop      = 0;
+}
+function initPlayingOption() {
+  midiSkipBeginning = 1;
+  midiSkipEnding    = 0;
+  midiMasterPitch   = 0;
+  midiNormalize     = 0;
+  midiExclusive     = 0;
+}
+function initAllPlayingInfomation() {
+  initDynamicEffect();
+  initDynamicEffectOgg();
+  initStaticEffect();
+  initStaticEffectOgg();
+  initPlayingOption();
+}
+function setGettingPlayerStatus(interval) {
+  bgmGettingPlayerStatus = interval;
+}
+function getPlayerStatus(scope) {
+  var f;
+  
+  f = new FileReader("YMPStatus.dat");
+  if (f.error()) { f.close(); return -1; }
+  playerMidiStatus    = f.read();
+  playerMidiPlayNo    = f.read();
+  playerMidiTempo     = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  playerMidiTick      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  playerMidiTime      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  playerMidiLoopCount = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiTimeBase        = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiTotalTick       = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiTotalTime       = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiFirstNoteTick   = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiFirstNoteTime   = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiLastNoteTick    = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiLastNoteTime    = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiLoopTick        = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  midiLoopTime        = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  if (scope == 0 || scope >= 2) {
+    playerOggStatus    = f.read();
+    playerOggTime      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    playerOggLoopCount = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    oggChannels        = f.read();
+    oggSamplingRate    = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    oggTotalTime       = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    oggTotalSamples    = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    oggFileLoopStart   = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+    oggFileLoopEnd     = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
+  }
+  if (scope == 0 || scope >= 3) {
+    timeHour        = f.read();
+    timeMinute      = f.read();
+    timeSecond      = f.read();
+    timeMilliSecond = f.read() + f.read()*256;
+    timeYear        = f.read() + f.read()*256;
+    timeMonth       = f.read();
+    timeDay         = f.read();
+    timeDayOfWeek   = f.read();
+  }
+  if (f.error()) { f.close(); return -1; }
+  f.close();
+}
+function getPlayerPreparation() {
+  return fileExists("YMPPreparation.dat");
+}
+function getMidiList() {
+  var soundsAry, midiAry, a;
+  
+  // MediaPlayer.tonyu にあった隠しメソッドを利用
+  // BGM,効果音の入った配列を返す
+  soundsAry = getResource(soundsPath()).getSubRes();
+  
+  // bgmAry にBGM(Midi)だけを追加する(Mzoも含まれてしまう)
+  midiAry = new Array();
+  for (a in soundsAry) {
+    if (a is BGM) midiAry.add(a);
+  }
+  
+  // BGMのみ格納された配列を返す
+  return midiAry;
+}
+
+function getPlayerConfig() {
+  var f, val;
+  
+  f = new FileReader("YMPConfig.txt");
+  if (f.error()) { f.close(); return -1; }
+  val = f.readLn(); if (val != null && val != "") playerExeName       = val;
+  val = f.readLn(); if (val != null && val != "") playerDirectMusicSW = valueOf(val);
+  val = f.readLn(); if (val != null && val != "") playerMode          = valueOf(val);
+  val = f.readLn(); if (val != null && val != "") playerReadSpeed     = valueOf(val);
+  val = f.readLn(); if (val != null && val != "") playerMidiCache     = valueOf(val);
+  if (f.error()) { f.close(); return -1; }
+  f.close();
+  
+  return 0;
+}
+function setPlayerConfig(exeName, directMusicSW, playerMode, playerReadSpeed, midiCache) {
+  var f;
+  
+  f = new FileWriter("YMPConfig.txt");
+  if (f.error()) { f.close(); return -1; }
+  f.writeLn(exeName);
+  f.writeLn(directMusicSW);
+  f.writeLn(playerMode);
+  f.writeLn(playerReadSpeed);
+  f.writeLn(midiCache);
+  if (f.error()) { f.close(); return -1; }
+  f.close();
+  
+  return 0;
+}
+function resetPlayer(dm, rs) {
+  var f;
+  
+  getPlayerConfig();
+  if (dm != null) playerDirectMusicSW = dm;
+  if (rs != null) playerReadSpeed     = rs;
+  setPlayerConfig(playerExeName, playerDirectMusicSW, playerMode, playerReadSpeed, playerMidiCache);
+  
+  f = new FileWriter("YMPPreparation.dat");
+  f.writeLn(dm); // DirectMusicの設定値
+  f.writeLn(rs); // ファイル読み込み速度
+  f.close();
+  return f.error()*(-1);
+}

@@ -1,0 +1,41 @@
+extends Object;
+
+native _n_exit;
+function exit(){
+   return _n_exit (_body);
+}
+
+native _n_openIDE;
+function openIDE() {
+   return _n_openIDE (_body);
+}
+
+native _n_version;
+function getVersion() {
+   return _n_version();
+}
+native _n_locale;
+function getLocale() {
+   return _n_locale();
+}
+
+native _n_setFrameRate;
+function setFrameRate(frate, maxSkip) {
+  var flen;
+  flen=1000/frate;
+  frameRate=frate;
+  if ($mplayer is MediaPlayer) $mplayer.setFrameRate(flen);
+  return _n_setFrameRate(flen,maxSkip);
+}
+native _n_setStackSize;
+function setStackSize(n) {
+  _n_setStackSize(n);
+}
+
+native _n_editCode;
+function editCode(cname) {
+  _n_editCode(cname);
+}
+constructor System() {
+  setFrameRate(60);
+}

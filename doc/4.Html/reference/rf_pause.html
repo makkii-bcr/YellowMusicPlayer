@@ -1,0 +1,65 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.pause</h2>
+  Midi, Ogg を一時停止します<br><br>
+  ※ Midiに対してこのメソッドを呼び出すと、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>も自動的に呼び出されます<br>
+
+  <h3>書式</h3>
+<pre>
+pause(bgmType)
+</pre>
+
+  <dl>
+   <dt>bgmType(省略可能)</dt>
+   <dd>0, null, (省略) = MidiとOggの両方を一時停止<br>
+       1 = Midiだけ一時停止<br>
+       2 = Oggだけ一時停止<br>
+   </dd>
+  </dl>
+  <h3>戻り値</h3>
+  Midi, Ogg のどちらでも戻り値を返します<br>
+  MusicPlayerに命令を知らせるファイル(eff_midi.txt), (ogg_sig.dat)を書き込めたら0、<br>
+  どちらか一つでもエラーが起きたら-1を返します<br>
+  <br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+  （Tonyu開発環境版ではプロジェクトを開いてから、一度Midiを演奏させないとOggが再生できません）<br>
+  Z, X, C, V キー：Midiの 再生, 停止, 一時停止, 再開、　Shiftキーを押しながらだとOggに対して命令します。<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+while (1) {
+  // 「Shift + キー」でOgg、ShiftなしでMidi に対して命令する
+  if (getkey(16) > 0) bgmType = 2; else bgmType = 1;
+  if (getkey(90) == 1) {
+    if (bgmType == 1) $mplayer.play($se_test  , 1); // Z:繰り返し再生
+    else              $mplayer.play("test.ogg", 1); // 
+  }
+  if (getkey(88) == 1) $mplayer.stop(bgmType);      // X:停止
+  if (getkey(67) == 1) $mplayer.<strong>pause</strong>(bgmType);     // C:一時停止
+  if (getkey(86) == 1) $mplayer.restart(bgmType);   // V:一時停止から再開
+  update();
+}
+</pre>
+  ※ Tonyu開発環境版では、プロジェクトを開いてから一度でもMidiを演奏しないと、Oggを鳴らすことができません。<br>
+  　　（Midiを演奏すると、今開いているプロジェクトの場所(パス)がわかるため）<br>
+  　　Tonyuランタイム版では、すぐにOggを鳴らせます。<br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

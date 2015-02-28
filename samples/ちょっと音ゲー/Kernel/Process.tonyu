@@ -1,0 +1,68 @@
+extends classes.lang.Object;
+
+destructor free(){
+  parent=0;
+  native_free(p); 
+}
+native native_free;
+
+constructor Process(o,f,a) {
+ p=native_init(o,f);
+ aobj=o;
+ o._pProc=this;
+ autoKill=a;
+ parent=$currentProcess;
+}
+native native_init;
+
+function exec() {
+//  if (parent && parent.halted()) {
+//    kill();
+//  } else {
+    $currentProcess=this;
+    native_exec(p);
+//  }
+}
+native native_exec;
+
+function suspend() {
+  native_suspend(p);
+}
+native native_suspend;
+
+function halted() {
+  return native_halted(p);
+}
+native native_halted;
+
+function gc_mark() {
+  native_proc_mark(p);
+}
+native native_proc_mark;
+
+function kill() {
+  aobj._pProc=0;
+  aobj=0;
+  native_kill(p);
+}
+native native_kill;
+
+// nextWait 0: active
+//          1: eternal
+//       other: wake at nextWait
+function wait(t) {
+  if (nextWake) return;
+  if (!t) nextWake=1;
+  else {
+    nextWake=$curProcGroup.frameCount+trunc(t);
+    $waitProcs.add(this);
+  }
+  deletedFromProcs=0;
+  suspend();
+}
+
+function notify() {
+  if (!nextWake || !aobj) return;
+  if (deletedFromProcs) $procs.add(this);
+  nextWake=0;
+}

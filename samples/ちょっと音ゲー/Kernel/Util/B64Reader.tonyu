@@ -1,0 +1,13 @@
+extends BinaryArrayReader;
+
+nfunction makeBinaryArrayFromB64(String s) {
+
+}
+
+constructor B64Reader(String s) {
+     
+}
+
+function readInt() {
+
+}

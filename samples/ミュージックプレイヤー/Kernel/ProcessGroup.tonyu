@@ -1,0 +1,81 @@
+extends Object;
+
+constructor ProcessGroup(chr) {
+  frameCount=2; 
+  waitProcs=new WaitProc();
+  procs=new ProcessList();
+  if (!chr) chars=new Array(); else chars=chr;
+  resumed=0;
+}
+
+function killAll() {
+  procs.killAll();
+}
+
+function setCurrent() {
+  $chars=chars;
+  $procs=procs; 
+  $waitProcs=waitProcs;
+  $curProcGroup=this;
+}
+function interrupt() {
+   intr=1;
+}
+function resumeInterrupt() {
+   resumed=1;
+}
+
+function exec() {
+    var p,c,i;
+    intr=0;
+    if ($frameManager) $frameManager.onBeforeMove();
+    if (!resumed) pIdx=0; else resumed=0;
+    for (1; pIdx<procs.size() ; pIdx++) {
+      p=procs.get(pIdx);
+      if ( p.aobj) {
+        if ( p.aobj.died ){
+          p.kill(); 
+          procs.set(pIdx,0);
+        } else if (p.nextWake) {
+          p.deletedFromProcs=1;
+          procs.set(pIdx,0);
+        } else if (p.halted() ){
+          if (p.autoKill) p.aobj.die();
+          p.kill();
+          procs.set(pIdx,0);
+        } else {
+          p.exec();
+        }
+      }
+      if (intr) break;
+    }
+    for (i=chars.size()-1 ; i>=0 ; i--) {
+      p=chars.get(i);
+      if ( p.died ){
+        p.clearAllValues();
+        p.died=1;    // clearAll‚Ådied‚ª0‚É‚È‚Á‚¿‚á‚¤‚©‚ç
+        chars.delete(i);
+      }
+    }
+    if (!intr) {
+      procs.pack();
+      if ($frameManager) $frameManager.onAfterMove();
+      frameCount++;
+      waitProcs.autoWake(frameCount);
+    }
+}
+    
+
+function draw() {
+    var i,p,c;
+    setAdjust(0,0);
+    $map.draw();
+    if($panel) $panel.draw();
+    setAdjust($viewX,$viewY);
+    c=chars.size();
+    for (i=0 ; i<c ; i++){
+      p=chars.get(i);
+      if (p._visible) p.draw();
+    }
+    p=0;
+}

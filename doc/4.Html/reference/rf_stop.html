@@ -1,0 +1,59 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.stop</h2>
+  Midi, Ogg ,Mzo を停止します<br>
+  <a href="http://hoge1e3.sakura.ne.jp/tonyu/wiki/index.php?%24mplayer.stop">($mplayer.stopと同じです(Tonyuヘルプページ))</a><br>
+
+  <h3>書式</h3>
+<pre>
+stop(bgmType)
+</pre>
+<dl>
+ <dt>bgmType(省略可能)</dt>
+ <dd>0, null, (省略) = Midi(またはMzo), Ogg の両方を停止<br>
+     1 = Midi(またはMzo)だけ停止<br>
+     2 = Oggだけ停止<br>
+ </dd>
+</dl>
+  <h3>戻り値</h3>
+  Oggの停止をした場合に限り、戻り値を返します<br>
+  MusicPlayerに命令を知らせるファイル(ogg_sig.dat)を書き込めたら0、<br>
+  エラーが起きたら-1を返します<br>
+  <br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+  （Tonyu開発環境版ではプロジェクトを開いてから、一度Midiを演奏させないとOggが再生できません）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+while (1) {
+  if (getkey(90) == 1) $mplayer.play($se_test, 1);   // Z:Midi再生
+  if (getkey(88) == 1) $mplayer.<strong>stop</strong>(1);             // X:Midi停止
+  if (getkey(67) == 1) $mplayer.play("test.ogg", 1); // C:Ogg再生
+  if (getkey(86) == 1) $mplayer.<strong>stop</strong>(2);             // V:Ogg停止
+  if (getkey(66) == 1) $mplayer.<strong>stop</strong>();              // B:すべて停止
+  update();
+}
+</pre>
+  ※ Tonyu開発環境版では、プロジェクトを開いてから一度でもMidiを演奏しないと、Oggを鳴らすことができません。<br>
+  　　（Midiを演奏すると、今開いているプロジェクトの場所(パス)がわかるため）<br>
+  　　Tonyuランタイム版では、すぐにOggを鳴らせます。<br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

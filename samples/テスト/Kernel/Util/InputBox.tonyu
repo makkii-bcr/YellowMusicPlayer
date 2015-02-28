@@ -1,0 +1,14 @@
+extends Object;
+
+native _n_open;
+function open(title,prompt,default) {
+  _n_open(title,prompt,default);
+}
+native _n_getStatus;
+function getStatus() {
+  return _n_getStatus();
+}
+native _n_getText;
+function getText() {
+  return _n_getText();
+}

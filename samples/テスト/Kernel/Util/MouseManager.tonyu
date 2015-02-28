@@ -1,0 +1,32 @@
+extends Object;
+
+constructor MouseManager() {
+    showCursor(1);
+    enabled=1;
+}
+
+function disable() {
+    showCursor(1);
+    enabled=0;
+}
+
+native _n_moveCursor;
+function moveCursor(x,y) {
+   if (designMode() || !enabled) return;
+   relX = -$mouseX; relY=-$mouseY;
+   refreshXY();
+   relX +=$mouseX;  relY+=$mouseY;
+   $mouseX=x;$mouseY=y;
+   _n_moveCursor (_body,x,y);
+}
+
+native _n_showCursor;
+function showCursor(n) {
+   if (designMode()) return _n_showCursor (_body,1);
+   return _n_showCursor (_body,n);
+}
+
+native _n_refreshXY;
+function refreshXY() {
+   _n_refreshXY (_body);
+}

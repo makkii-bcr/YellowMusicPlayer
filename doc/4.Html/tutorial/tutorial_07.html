@@ -1,0 +1,87 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「MusicPlayerの状態を取得する」</h2>
+  MusicPlayerから、「Midi,Oggの状態」「再生中のMidi,Oggの情報」「コンピュータ内の日付と時刻」が取得できます。<br>
+  ※ 白丸が実際に取得できる項目です。<br>
+  <br>
+  <ul>
+   <li>Midiの状態</li>
+   <ul>
+    <li>現在Midiは、再生中か停止中か一時停止中か</li>
+    <li>演奏中のMidi番号（MusicPlayerで割り振られた番号）</li>
+    <ul>
+     <li>↑プロジェクトでMidiを登録した順番に、0から番号が割り振られます。<br>
+         256個(255番)まで正常に割り振られますが、257個(256番)以降は全て255番になります。</li>
+    </ul>
+    <li>演奏中のMidiの、現在のデータ内のテンポ</li>
+    <li>演奏中のMidiの、現在のティック</li>
+    <li>現在のMidiデータ内での演奏時間(ミリ秒単位)</li>
+    <li>Midiを再生してからのループ回数</li>
+   </ul>
+   <li>演奏中のMidiの情報</li>
+   <ul>
+    <li>ベースカウント</li>
+    <li>総ティック</li>
+    <li>総演奏時間（ミリ秒単位）</li>
+    <li>最初の発音ティック</li>
+    <li>最初の発音の時間（ミリ秒単位）</li>
+    <li>最後の発音ティック</li>
+    <li>最後の発音の時間（ミリ秒単位）</li>
+    <li>CC#111の位置（ティック単位）</li>
+    <li>CC#111の位置（ミリ秒単位）</li>
+   </ul>
+   <li>Oggの状態</li>
+   <ul>
+    <li>現在Oggは、再生中か停止中か一時停止中か</li>
+    <li>現在のOggデータ内での演奏時間(ミリ秒単位)</li>
+    <li>Oggを再生してからのループ回数</li>
+   </ul>
+   <li>再生中のOggの情報</li>
+   <ul>
+    <li>チャンネル数</li>
+    <li>サンプリングレート</li>
+    <li>総再生時間（ミリ秒単位）</li>
+    <li>総サンプリング数</li>
+    <li>Oggループの開始位置（ミリ秒単位）（Oggループに対応している場合）</li>
+    <li>Oggループの終了位置（ミリ秒単位）（Oggループに対応している場合）</li>
+   </ul>
+   <li>コンピュータ内の日付と時刻</li>
+   <ul>
+    <li>現在の時刻「時」</li>
+    <li>現在の時刻「分」</li>
+    <li>現在の時刻「秒」</li>
+    <li>現在の時刻「ミリ秒」</li>
+    <li>現在の日付「年」</li>
+    <li>現在の日付「月」</li>
+    <li>現在の日付「日」</li>
+    <li>現在の日付「曜日」(0:日,1:月,2:火,…,6:土)</li>
+   </ul>
+  </ul>
+  MusicPlayerの状態を取得するには、まず<a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>で、<br>
+  MusicPlayerの状態取得機能をONにします。<br>
+  次に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>で、状態取得機能をONにしたことを、MusicPlayerに反映させます。<br>
+  後は、<a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a>で実際に情報を取得します。<br>
+  <br>
+  ※ MusicPlayerの状態取得機能をONにすると、MusicPlayerがファイルの書き込みをします。<br>
+  <br>
+  使い方は、以下のページを参照してください。<br>
+  <ul>
+   <li><a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a></li>
+   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a></li>
+  </ul>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,69 @@
+extends PlainChar;
+
+constructor TextChar(xx,yy,t,c,s){
+ super(xx,yy);
+ text=null;
+ col=$clWhite;
+ size=20;
+ if (t) text=t;
+ if (c) col=c;
+ if (s) size=s;
+}
+
+function setDefaultProperties(xx,yy) {
+   super.setDefaultProperties(xx,yy);
+   text="テキスト";
+   col=$clWhite;
+   font="ＭＳ ゴシック";
+   changeAttr("font","\""+font+"\"");
+   changeAttr("text","\"テキスト\"");
+   changeAttr("col","$clWhite");
+   size=20;
+   changeAttr("size",size);
+   maxTextWidth=0;
+}
+
+function maxTextLength(s,w,sz) {
+   var t;
+   t=s.length();
+   while (textWidth(s.subString(0,t),sz)>w && t>0) t-=1;
+   return t;
+}
+
+function draw() {
+   var w,t,yy,ds;
+   
+   if (!text && designMode()) text="(no caption)";
+   setFont(font,bold,italic,underLine);
+   if (!maxTextWidth) {
+       drawText(x,y,text,col,size,zOrder);
+   } else {
+      ds=text;
+      yy=y;
+      while (ds.length()>0) {
+         t=maxTextLength(ds,maxTextWidth,size);
+         if (t<=0) t=1;
+         drawText(x,yy, ds.subString(0,t),col,size,zOrder);
+         ds=ds.subString(t);
+         yy+=textHeight(ds,size);
+      }  
+      if(designMode()) drawLine(x+maxTextWidth,y,x+maxTextWidth,yy+4,$clAqua);
+   }             
+   super.draw();
+}
+
+function edit(width) {
+  $TextEditor.setTextListener(this);
+  $TextEditor.setText(text);
+  if (width) {
+    $TextEditor.setPosition(x,y,width,0);
+  } else {
+    $TextEditor.setPosition(x,y,textWidth(text,size),0);
+  }
+  $TextEditor.setFont(size,font);
+  $TextEditor.edit();
+}
+
+function onTextEditComplete(t) {
+  text=t;
+}

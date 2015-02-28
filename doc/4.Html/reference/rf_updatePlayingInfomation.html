@@ -1,0 +1,64 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.updatePlayingInfomation</h2>
+<ul>
+<li>setDynamicEffect()</li>
+<li>setStaticEffect()</li>
+<li>setPlayingOption()</li>
+<li>setDynamicEffectOgg()</li>
+<li>setStaticEffectOgg()</li>
+<li>initDynamicEffect()</li>
+<li>initStaticEffect()</li>
+<li>initPlayingOption()</li>
+<li>initDynamicEffectOgg()</li>
+<li>initStaticEffectOgg()</li>
+<li>initAllPlayingInfomation()</li>
+<li>setGettingPlayerStatus()</li>
+</ul>
+上記のメソッドでエフェクト・再生オプションを設定した後、<br>
+その設定をMusicPlayerに反映するには、このメソッドを使います。<br>
+<br>
+このメソッドは、MusicPlayerがエフェクトなどの設定を読み取るために必要なファイルを、書き込むメソッドです。<br>
+filesフォルダに、「eff_midi.txt」というファイルが書き込まれます。<br>
+
+  <h3>書式</h3>
+<pre>
+updatePlayingInfomation()
+</pre>
+
+  <h3>戻り値</h3>
+  「eff_midi.txt」を書き込めたら0<br>
+  書き込めなかったら-1
+
+  <h3>例</h3>
+  下記を参照<br>
+<ul>
+<li><a href="rf_setDynamicEffect.html">setDynamicEffect()</a></li>
+<li><a href="rf_setStaticEffect.html">setStaticEffect()</a></li>
+<li><a href="rf_setPlayingOption.html">setPlayingOption()</a></li>
+<li><a href="rf_setDynamicEffectOgg.html">setDynamicEffectOgg()</a></li>
+<li><a href="rf_setStaticEffectOgg.html">setStaticEffectOgg()</a></li>
+<li><a href="rf_initDynamicEffect.html">initDynamicEffect()</a></li>
+<li><a href="rf_initStaticEffect.html">initStaticEffect()</a></li>
+<li><a href="rf_initPlayingOption.html">initPlayingOption()</a></li>
+<li><a href="rf_initDynamicEffectOgg.html">initDynamicEffectOgg()</a></li>
+<li><a href="rf_initStaticEffectOgg.html">initStaticEffectOgg()</a></li>
+<li><a href="rf_initAllPlayingInfomation.html">initAllPlayingInfomation()</a></li>
+<li><a href="rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a></li>
+</ul>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,13 @@
+<resourcelist name="usr">
+ <resourcelist name="patterns">
+ </resourcelist>
+ <resourcelist name="classes">
+ </resourcelist>
+ <resourcelist name="gen">
+<generator className="Main" name="$Main" inst_x="50" inst_y="50" inst_angle="0" inst_alpha="255" inst_scalex="1" inst_p="-1"/>
+ </resourcelist>
+ <resourcelist name="global">
+  <globalvalue name="$screenWidth" value="640"/>
+  <globalvalue name="$screenHeight" value="480"/>
+ </resourcelist>
+</resourcelist>

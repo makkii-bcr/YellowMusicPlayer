@@ -1,0 +1,98 @@
+extends SecretChar;
+
+function init(group,number) {
+  var a,b;
+  radioButton=new Matrix(group);
+  radioButton.addRows(number);
+  for(a=0;a<group;a++) {
+    for(b=0;b<number;b++) {
+      radioButton.set(a,b,0);
+    }
+    radioButton.set(a,0,1);
+  }
+}
+
+function create(x,y,group,number,mnumber,col,zOr) {
+  var a;
+  drawLine(x,y,x,y+10,col,zOr);
+  drawLine(x,y+10,x+10,y+10,col,zOr);
+  drawLine(x+10,y+10,x+10,y,col,zOr);
+  drawLine(x+10,y,x,y,col,zOr);
+  if ($mouseX>=x && $mouseX<=x+10 && $mouseY>=y && $mouseY<=y+10) {
+    if (getkey(1)==1) {
+      if (RadioButton.get(group,number)==0) {
+        for(a=0;a<mnumber;a++) {
+          RadioButton.set(group,a,0);
+        }
+        RadioButton.set(group,number,1);
+      }
+    }
+  }
+  if (RadioButton.get(group,number)==1) {
+    fillRect(x+2,y+2,x+9,y+9,col,zOr);
+    return 1;
+  }
+  return 0;
+}
+
+
+/*
+************ newRadioButton(group,number) ************
+   RadioButton用の状態を格納する変数を初期化します
+*メインループの前に配置してください(必ず呼んでください)*
+
+group
+        オブジェクト内で作るラジオボタンのグループの数
+      *ボタンをクリックすると反応するのが同じグループです
+number
+        グループの中で作るラジオボタンの最大数
+        
+        
+*** radioButton(x,y,group,number,mnumber,col[,zOr]) ***
+               ラジオボタンを作ります
+返り値: ON=1 OFF=0  (直接変数RadioButtonを参照することも出来ます)
+
+x
+         x座標
+y
+         y座標
+group
+         そのボタンが属しているグループのID(0から詰めてください)
+         *ボタンをクリックすると反応するのが同じグループです
+number
+         ラジオボタンのID(0から詰めてください)
+mnumber
+         グループ内のラジオボタンの最大数
+col
+         色
+zOr
+         絵画順序
+
+
+//************サンプル         
+extends RadioButton;
+
+a=new Array();
+a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");
+newRadioButton(3,3);
+while(1) {
+  if (radioButton(300,120,0,0,3,$clBlack)==1) a.set(0,"ON");else a.set(0,"OFF");
+  if (radioButton(300,140,0,1,3,$clRed)==1) a.set(1,"ON");else a.set(1,"OFF");
+  if (radioButton(300,160,0,2,3,$clGreen)==1) a.set(2,"ON");else a.set(2,"OFF");
+  if (radioButton(350,120,1,0,3,$clYellow)==1) a.set(3,"ON");else a.set(3,"OFF");
+  if (radioButton(350,140,1,1,3,$clPink)==1) a.set(4,"ON");else a.set(4,"OFF");
+  if (radioButton(350,160,1,2,3,$clWhite)==1) a.set(5,"ON");else a.set(5,"OFF");
+  drawText(320,120,a.get(0),$clBlack,10);
+  drawText(320,140,a.get(1),$clBlack,10);
+  drawText(320,160,a.get(2),$clBlack,10);
+  drawText(370,120,a.get(3),$clBlack,10);
+  drawText(370,140,a.get(4),$clBlack,10);
+  drawText(370,160,a.get(5),$clBlack,10);
+  update();
+}
+         
+         
+*/
+
+
+

@@ -1,0 +1,265 @@
+// basic 
+native print ; 
+native getkey ;
+native pset ; 
+native sub ;
+native suspend ;
+native currentProcess;
+native native_gc_mark;
+native _n_objhandle;
+native _n_refcount;
+native breakExec;
+native _fork;
+function newProc(s) {
+   $procs.add(new Process(this,s,0));  
+}
+
+constructor Object(){
+}
+
+function onSubProcess() {}
+function subProcess(a1,a2,a3,a4) {
+  appear(new SubProcExec(this,a1,a2,a3,a4));
+}
+
+native _n_errorValue;
+function _errorHook() {
+   return _n_errorValue(0);
+}
+
+//####### reflect
+native _getClassName;
+function getClassName() {
+  return _getClassName();
+}
+
+native _getParentClassName;
+function getParentClassName() {
+  return _getParentClassName();
+}
+
+
+native _newInstance;
+function newInstance(name) {
+  return _newInstance(name);
+}
+
+native _n_clearAllValues; 
+function clearAllValues(){
+  _n_clearAllValues();
+} 
+
+native TObject;
+
+native currentFunc;
+
+native _n_getValueByIndex;
+function getValueByIndex(idx) {return _n_getValueByIndex(idx);}
+native _n_setValueByIndex;
+function setValueByIndex(idx,v) {_n_setValueByIndex(idx,v);}
+native _n_getValueCount;
+function getValueCount() {return _n_getValueCount();}
+function getVariableCount() {return _n_getValueCount();}
+native _n_getValueName;
+function getValueName(idx) {return _n_getValueName(idx);}
+function getVariableName(idx) {return _n_getValueName(idx);}
+native _n_getValueIndex;
+function getValueIndex(varName) {return _n_getValueIndex(varName);}
+function getVriableIndex(varName) {return _n_getValueIndex(varName);} // Depreciated
+function getVariableIndex(varName) {return _n_getValueIndex(varName);}
+
+native isInt;
+native isFloat;
+
+//######### math
+native getTime;
+native _n_randomize;
+native rnd;
+native sin;
+native cos;
+native sqrt;
+native angle;
+native dist;
+native trunc;
+native floor;
+native valueOf;
+
+function randomize(s) {
+   if (s==null) _n_randomize(getTime());
+   else _n_randomize(s);
+}
+
+function angleDiff(a,b) {
+  // 角度a,bの差を-180 ～ 179 の範囲で返します。 
+  var c;
+  a=floor(a);
+  b=floor(b);
+  if (a>=b) {
+    c=(a-b) % 360;
+    if (c>=180) c-=360;
+  } else {
+    c=-((b-a) % 360);
+    if (c<-180) c+=360;
+  }
+  return c;
+}
+function abs(v) {
+//絶対値を返します。
+   if (v<0) v=-v;
+   return v;
+}
+function amod(a,b) {
+  a=trunc(a);
+  if (a>=0) return a % b;
+  return (a % b + b) % b;
+}
+
+//######## other
+
+native fileExists;
+native moveFile;
+native deleteFile;
+
+function timeStop() {
+  var t;
+  t=new TimeStopper(this);
+  suspend();
+  return t;
+}
+
+function appear(o) {
+  $chars.add(o);
+  return $procs.appear(o);
+}
+
+function getRed(c) {
+  return c%256;
+}
+function getGreen(c) {
+  return trunc(c/256)%256;
+}
+function getBlue(c) {
+  return trunc(c/65536)%256;
+}
+function color(r,g,b){
+ return b*65536+g*256+r;
+}
+function colorHSL(iroai,azayakasa,akarusa) {
+  var r,g,b,nul,a;
+  //色合いで色を決める
+  r = abs(120-((trunc(iroai+0.5)   % 240) % 240))*6-240;
+  g = abs(120-((trunc(iroai+160.5) % 240) % 240))*6-240;
+  b = abs(120-((trunc(iroai+80.5)  % 240) % 240))*6-240;
+  r = trunc(r*1.0625+0.5);
+  g = trunc(g*1.0625+0.5);
+  b = trunc(b*1.0625+0.5);
+  if (r>255) r = 255;
+  if (g>255) g = 255;
+  if (b>255) b = 255;
+  if (r<0) r = 0;
+  if (g<0) g = 0;
+  if (b<0) b = 0;
+  if (azayakasa==nul) return color(r,g,b);
+  
+  //鮮やかさで色を決める
+  r = trunc(127.5+(r-127)/240*azayakasa);
+  g = trunc(127.5+(g-127)/240*azayakasa);
+  b = trunc(127.5+(b-127)/240*azayakasa);
+  if (akarusa==nul)return color(r,g,b);
+  
+  //明るさで色を決める
+  if (akarusa<120) {
+    r = trunc(0.5+r/120*akarusa);
+    g = trunc(0.5+g/120*akarusa);
+    b = trunc(0.5+b/120*akarusa);
+  }
+  if (akarusa>120) {
+    r+= trunc(0.5+(255-r)/120*(akarusa-120));
+    g+= trunc(0.5+(255-g)/120*(akarusa-120));
+    b+= trunc(0.5+(255-b)/120*(akarusa-120));
+  }
+  if (r>255) r = 255;
+  if (g>255) g = 255;
+  if (b>255) b = 255;
+  if (r<0) r = 0;
+  if (g<0) g = 0;
+  if (b<0) b = 0;
+  return color(r,g,b);
+}
+
+
+function strcat(a,b) {
+  var t;
+  t=""; t=t.add(a);
+  return t.add(b);
+}
+
+function designMode() {
+  return $_design_mode;
+}
+
+native _n_refresh;
+
+//######### generate
+function getGenerator() {
+  return 0;
+}
+function setGenerator(g) {
+  return 0;
+}
+function onGenerate() {
+  return 1;
+}
+function onSaveToGen() {
+}
+
+native _n_setGenAttr;
+function setGenInstAttr(a,s) {
+   if (!getGenerator()) return 0;
+   return _n_setGenAttr (getGenerator(),a,s);
+}
+
+native getPageHashCode;
+
+//native _n_getGenAttr;
+//function getGenAttr(a) {
+//   if (!getGenerator()) return 0;
+//   return _n_getGenAttr (getGenerator(),a);
+//}
+
+native _inspect;
+native _dynamicInspect;
+function inspect() {
+}
+
+function dynamicinspect() {
+  _dynamicInspect();  
+}
+
+
+//######### resource
+native _n_getResource;
+function getResource(s) {
+  return _n_getResource(s);
+}
+
+native _n_initResource;
+function initResource(s) {
+  return _n_initResource(s);
+}
+
+native setGlobal;
+native getGlobal;
+native _n_moduleCommand;
+
+native setAdjust;
+
+//######### obsolated?
+native setMapPat;
+function _is(x){
+ return native_is(x);
+}
+native native_is;
+function _test_print(p) {
+ print(p);
+}

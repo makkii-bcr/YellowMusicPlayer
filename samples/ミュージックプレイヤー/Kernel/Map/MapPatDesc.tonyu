@@ -1,0 +1,31 @@
+extends Object;
+
+constructor MapPatDesc(s,o) {
+// offの意味は２つ：変数と値の対応では ( ($pat_hoge,3)   ($pat_haga,5) )  
+//                  変換テーブル上では  ( 3:($pat_hoge,0)  4:($pat_hoge,1) 5:($pat_haga,0) )
+  name=s; off=o;
+}
+
+function toString() {
+  return strcat(name,strcat(":",off));
+}
+
+function compareTo(o) {
+  return off-o.off;
+}
+
+
+function test() {
+  var s;
+  a=getResource("usr.patterns");
+  b=a.getSubRes();
+  s=new Array();
+  for (a in b) {
+    s.add(new MapPatDesc
+             ( a.getName() , getGlobal(a.getName()) )
+         );
+  }
+//  makeTable(s);
+}
+//
+//t=new MapPatDesc();t.test();

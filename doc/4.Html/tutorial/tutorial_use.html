@@ -1,0 +1,50 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使い方 (Midi)</h2>
+  <h3>$mplayerを使う場合</h3>
+  従来の$mplayerとまったく同じです。<br>
+  <br>
+  $mplayer.playメソッドで再生できますし、<br>
+  $mplayer.stopメソッドで停止できます。<br>
+  $mplayer.setDelay と $mplayer.setVolume も同じく使えます。<br>
+  <br>
+  <h3>Ymplayerを使う場合</h3>
+  あらかじめ、YellowMusicPlayer と Ymplayer.tonyu を導入しておいてください。<br>
+  <a href="../install.html">⇒ 導入方法</a><br>
+  <br>
+  Ymplayerクラスのオブジェクトを、newで生成してから使います。<br>
+  <br>
+  「$mplayer = new Ymplayer();」で、$mplayerにYmplayerオブジェクトを上書きすると、<br>
+  今まで「$mplayer.～」とコードを書いていた場合でも、コードを書き換えずに使うことができて便利です。<br>
+  <br>
+  $mplayerのメソッドはそのまま使えますし、<br>
+  Ymplayerで追加されたメソッドを使えば、YellowMusicPlayerの機能を使うことができます。<br>
+  <br>
+  追加されたメソッドは大まかに分けると、下記のものがあります。<br>
+  <ul>
+  <li>一時停止・一時停止からの再開</li>
+  <li>エフェクト・再生オプションの設定</li>
+  <li>エフェクト・再生オプションの設定をデフォルト値に戻す</li>
+  <li>エフェクト・再生オプションの設定などをMusicPlayerに反映</li>
+  <li>MusicPlayerの情報取得機能のON/OFF</li>
+  <li>MusicPlayerの情報取得</li>
+  <li>MusicPlayerが準備中か調べる</li>
+  <li>Tonyu登録されているMidiを取得する</li>
+  </ul>
+  <a href="../reference.html">命令リファレンス</a>に機能の一覧が載っています。<br>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

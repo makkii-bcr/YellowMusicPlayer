@@ -1,0 +1,38 @@
+extends Reader;
+
+native _n_FileReader;
+constructor FileReader(fn) {
+   _body=_n_FileReader (_body,fn);
+}
+
+native _n_close;
+function close() {
+   if (!_body) return;
+   _n_close (_body);
+   _body=0;
+}
+
+destructor destroy() {
+  close();
+}
+
+native _n_read;
+function read() {
+   if (!_body) return null;
+   return _n_read (_body);
+}
+
+native _n_readLn;
+function readLn() {
+   if (!_body) return null;
+   return _n_readLn (_body);
+}
+
+function error() {
+   return (_body==0);
+}
+
+native _n_eof;
+function eof() {
+   return _n_eof(_body);
+}

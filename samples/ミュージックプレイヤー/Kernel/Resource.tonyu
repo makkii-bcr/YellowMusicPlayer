@@ -1,0 +1,85 @@
+extends Object;
+
+native _n_getURL;
+function getURL() {
+//  if (_generator is String) return getResource(_generator).getURL();
+  if (_generator) return _n_getURL(_generator);
+  return null;
+}
+
+native _n_getName;
+function getName() {
+//  if (_generator is String) return getResource(_generator).getName();
+  if (_generator) return _n_getName(_generator);
+  return null;
+}
+
+//Tonyuから一意に参照できる名前を得る
+//native _n_getFullPath;
+//function getFullPath () {
+//  return _n_getFullPath(_generator);
+//}
+
+// Name=nのサブリソースを得る
+// n省略：全部のサブリソースのArray
+function getSubRes() {
+}
+
+// サブリソースを追加する
+function addSubRes(r) {
+}
+
+// サブリソースrを削除する
+function delSubRes(r) {
+}
+
+function onInit() {
+}
+
+// このリソースが参照する全ファイル(url)とdirの
+// 親ディレクトリとなれる最長のディレクトリを返す
+// \a\b\c\d    \a\b\e\g     -> \a\b
+//function getTopDir(dir) {
+//   var a;
+//   dir = _getCommonParent(dir,url);
+//   for (a in getSubRes() ) {
+//      dir=a.getTopDir(dir);
+//   } 
+//   return dir;
+//}
+
+
+// urlを toAbsolute(toRelative(url,srcDir ),dstDir)にコピー   
+//function mkRunTime(srcDir,dstDir) {
+//   _copyFile( url, toAbsolute(toRelative(url,srcDir ),dstDir)) ;
+//}
+
+// cmml形式で保存
+function save(cmml) {
+}
+
+function onCreate(cmml) {
+}
+
+function onDestroy() {
+// 削除されたとき。
+// なぜデストラクタではないのか？ ... リソースが死んでもオブジェクトとしてはのこる
+// $a= getResource("hoge.haga")
+//   _generator=getFullPath();
+   _generator=null;
+}
+
+constructor Resource(g) {
+  _generator=g;
+}
+
+native _n_getFullPath;
+function getFullPath() {
+   //if (_generator is String) return _generator;
+   if (!_generator) return null;
+   return _n_getFullPath(_generator);
+}
+
+function getTObject() {
+   return _generator;
+}

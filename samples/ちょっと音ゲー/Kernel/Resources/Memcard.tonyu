@@ -1,0 +1,18 @@
+extends CustomResource;
+
+nfunction load();
+
+function onInit() {
+  _body=load();
+  return $_istat_completed; 
+}
+
+nfunction unload(_body);
+
+function onDestroy() {
+  unload(_body);
+}
+
+nfunction get(s);
+nfunction set(s,v);
+

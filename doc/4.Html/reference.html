@@ -1,0 +1,420 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+ </head>
+ <body>
+  <h1>
+   <img src="res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="res/icon.png" align="top">
+  </h1>
+  <hr><br>
+  従来のように$mplayerを使う場合と、付属のYmplayer.tonyuを使う場合があります。<br>
+  YellowMusicPlayerの機能を使う場合はYmplayerを使ってください。<br>
+  また、$mplayerには一部バグになりそうなコードがあるため、YellowMusicPlayerではYmplayerを使うことを推奨します。
+  <h2>$mplayerオブジェクトを使う場合</h2>
+  <h3>メソッド一覧</h3>
+  <a href="http://hoge1e3.sakura.ne.jp/tonyu/wiki/index.php?%24mplayer">従来と同じです。(Tonyuヘルプページ)</a><br>
+  ※ $mplayer.play(s,autoReplay,vol) のvolは、効果音(wav)の音量であり、Midiの音量は調節できません。<br>
+  　　Midiの音量を調節するには、Ymplayerを使ってください。
+  <h2>Ymplayerクラスを使う場合</h2>
+  <h3>メソッド一覧</h3>
+<table border=1>
+<a href="http://hoge1e3.sakura.ne.jp/tonyu/wiki/index.php?%24mplayer">従来の$mplayerのメソッドも使えます。(Tonyuヘルプページ)</a><br>
+(予め、YellowMusicPlayerとYmplayer.tonyuを導入しておいてください)<br>
+(隣り合って色が同じ項目は関連性があります)<br>
+(使用度はよく使われそうだと思ったものほど「高」と書いています)<br>
+ <tr bgcolor="#cccccc">
+  <th>使用度</th>
+  <th>命令</th>
+  <th>概要</th>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_play.html"><b>play(s, ar, v)</b></a></td>
+  <td>BGM・効果音を再生($mplayerと同じ(Ogg対応版))</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_stop.html"><b>stop(bgmType)</b></a></td>
+  <td>BGMを停止($mplayerと同じ(Ogg対応版))</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF8000">並</font></td>
+  <td><a href="reference/rf_setDelay.html"><b>setDelay(time)</b></a></td>
+  <td>効果音を鳴らす際の待機時間の調整($mplayerと同じ)</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_setVolume.html"><b>setVolume(vol)</b></a></td>
+  <td>BGM(Mzo形式のみ)の音量を調節($mplayerと同じ)</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_pause.html"><b>pause(bgmType)</b></a></td>
+  <td>BGMを一時停止</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_restart.html"><b>restart(bgmType)</b></a></td>
+  <td>BGMを一時停止から再開</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_updatePlayingInfomation.html"><b>updatePlayingInfomation()</b></a></td>
+  <td>エフェクト情報・再生オプションをMusicPlayerに反映させる</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setDynamicEffect.html"><b>setDynamicEffect(vol, tempo, pitch)</b></a></td>
+  <td>Midiの再生中に動的に変更できるエフェクト項目をセットする</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setStaticEffect.html"><b>setStaticEffect(fadeInTime, fadeOutTime, startTick, keyShift)</b></a></td>
+  <td>Midiの再生前・停止前にあらかじめ設定するエフェクト項目をセットする</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setPlayingOption.html"><b>setPlayingOption(skipBeginning, skipEnding, masterPitch, normalize, exclusive)</b></a></td>
+  <td>Midiの再生オプションを設定する</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setDynamicEffectOgg.html"><b>setDynamicEffectOgg(vol, tempo, pan)</b></a></td>
+  <td>Oggの再生中に動的に変更できるエフェクト項目をセットする</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setStaticEffectOgg.html"><b>setStaticEffectOgg(fadeInTime, fadeOutTime, startTime, loopStartTime, loopEndTime, fileLoop)</b></a></td>
+  <td>Oggの再生前・停止前にあらかじめ設定するエフェクト項目をセットする</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_initDynamicEffect.html"><b>initDynamicEffect()</b></a></td>
+  <td>Midiの再生中に動的に変更できる各エフェクト項目をデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_initStaticEffect.html"><b>initStaticEffect()</b></a></td>
+  <td>Midiの再生前・停止前にあらかじめ設定する各エフェクト項目をデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_initPlayingOption.html"><b>initPlayingOption()</b></a></td>
+  <td>Midiの各再生オプションをデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_initDynamicEffectOgg.html"><b>initDynamicEffectOgg()</b></a></td>
+  <td>Oggの再生中に動的に変更できる各エフェクト項目をデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_initStaticEffectOgg.html"><b>initStaticEffectOgg()</b></a></td>
+  <td>Oggの再生前・停止前にあらかじめ設定する各エフェクト項目をデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF8000">並</font></td>
+  <td><a href="reference/rf_initAllPlayingInfomation.html"><b>initAllPlayingInfomation()</b></a></td>
+  <td>Midi,Oggのエフェクト設定・再生オプションの全てをデフォルト値に戻す</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_setGettingPlayerStatus.html"><b>setGettingPlayerStatus(interval)</b></a></td>
+  <td>MusicPlayerの状態取得機能を有効・無効にする</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_getPlayerStatus.html"><b>getPlayerStatus(_scope)</b></a></td>
+  <td>MusicPlayerの現在の状態などを取得する</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF0000">高</font></td>
+  <td><a href="reference/rf_getPlayerPreparation.html"><b>getPlayerPreparation()</b></a></td>
+  <td>MusicPlayerが準備中(起動中)かを取得する</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_getMidiList.html"><b>getBgmAry()</b></a></td>
+  <td>Tonyuで登録されているMidiファイルのリストを配列で返す</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#FF8000">並</font></td>
+  <td><a href="reference/rf_getPlayerConfig.html"><b>getPlayerConfig()</b></a></td>
+  <td>MusicPlayerの設定を取得する</td>
+ </tr>
+ <tr bgcolor="#ffffee">
+  <td align="center"><font color="#0080FF">低</font></td>
+  <td><a href="reference/rf_setPlayerConfig.html"><b>setPlayerConfig()</b></a></td>
+  <td>MusicPlayerの設定を書き込む</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td align="center"><font color="#FF8000">並</font></td>
+  <td><a href="reference/rf_resetPlayer.html"><b>resetPlayer(dm, rs)</b></a></td>
+  <td>「DirectMusicのON/OFF」「読み込み頻度」をMusicPlayer起動中に変更する</td>
+ </tr>
+</table>
+<br>
+  ※ play(s, autoReplay, vol) のvolは、効果音(wavファイル)の音量であり、Midiの音量は調節できません。<br>
+  　　Midiの音量を調節するには、setDynamicEffectメソッドとupdatePlayingInfomationメソッドを使ってください。<br>
+  <h3><a name="Ymplayer_variable">変数一覧</a></h3>
+<table border=1>
+（メソッドから操作すれば、自動的に格納したり、されたりするので基本的に見なくてもよい）<br>
+（MusicPlayerの状態取得機能に使われる変数は、見たほうがいいかもしれない (playerMidiStatus ～ timeDayOfWeek までの項目)）
+ <tr bgcolor="#cccccc">
+  <th>命令</th>
+  <th>概要</th>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiPause</td>
+  <td>midiが一時停止中なら1、それ以外なら0が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggPause</td>
+  <td>oggが一時停止中なら1、それ以外なら0が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>bgmGettingPlayerStatus</td>
+  <td>MusicPlayerから情報を取得するなら1～1000、情報を取得しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiVolume</td>
+  <td>midiの音量を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiTempo</td>
+  <td>midiのテンポを格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiPitch</td>
+  <td>midiのピッチを格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>midiFadeInTime</td>
+  <td>midiのフェードイン再生(ミリ秒単位)をするなら100～、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>midiFadeOutTime</td>
+  <td>midiのフェードアウト停止(ミリ秒単位)をするなら100～、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>midiStartTick</td>
+  <td>midiで再生し始めるティックの位置を決めるなら1～(総演奏時間 - 1)、しないなら0を格納する(0の場合はmidiの冒頭スキップができる)</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>midiKeyShift</td>
+  <td>midiのキーシフト(移調)をするなら0以外の数値(1で半音、12で1オクターブ移調)、しないなら0を格納する(マイナスの数値も可能)</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiSkipBeginning</td>
+  <td>midiの冒頭の空白をスキップするなら1、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiSkipEnding</td>
+  <td>midiの末尾の空白をスキップするなら1、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiMasterPitch</td>
+  <td>マスターピッチ機能をONにするなら1、OFFにするなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiNormalize</td>
+  <td>ノーマライズ機能をONにするなら1、OFFにするなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiExclusive</td>
+  <td>midiデータ中のエクスクルーシブを送信するなら1、送信しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>oggVolume</td>
+  <td>oggの音量を格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>oggTempo</td>
+  <td>oggのテンポを格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>oggPan</td>
+  <td>oggのパンを格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggFadeInTime</td>
+  <td>oggのフェードイン再生(ミリ秒単位)をするなら1～、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggFadeOutTime</td>
+  <td>oggのフェードアウト停止(ミリ秒単位)をするなら1～、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggStartTime</td>
+  <td>oggで再生し始める再生位置を決めるなら1～(総再生時間 - 1)、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggLoopStartTime</td>
+  <td>oggがループした後に戻る位置(ループ始端)を指定するなら1～(総再生時間 - 40)、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggLoopEndTime</td>
+  <td>oggがループする位置(ループ終端)を指定するなら1～(総再生時間)、しないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggFileLoop</td>
+  <td>oggファイル中のループ情報を使うなら1、使わないなら0を格納する</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiStatus</td>
+  <td>midiが停止中なら0、再生中なら1、一時停止中なら2が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiPlayNo</td>
+  <td>演奏中のmidi番号（MusicPlayer内でつけられた番号）が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiTempo</td>
+  <td>midiデータ内の現在のテンポが格納される(bgmTempoとは別物です)</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiTick</td>
+  <td>midiの現在のティックが格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiTime</td>
+  <td>midiデータ内での現在の演奏時間(ミリ秒単位)が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerMidiLoopCount</td>
+  <td>midiを再生してからのループ回数が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiTimeBase</td>
+  <td>演奏中のmidiの、ベースカウント(四分音符の分解能)が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiTotalTick</td>
+  <td>演奏中のmidiの、総ティックが格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiTotalTime</td>
+  <td>演奏中のmidiの、総演奏時間（ミリ秒単位）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiFirstNoteTick</td>
+  <td>演奏中のmidiの、最初の発音ティックが格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiFirstNoteTime</td>
+  <td>演奏中のmidiの、最初の発音の時間（ミリ秒単位）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiLastNoteTick</td>
+  <td>演奏中のmidiの、最後の発音ティックが格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiLastNoteTime</td>
+  <td>演奏中のmidiの、最後の発音の時間（ミリ秒単位）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiLoopTick</td>
+  <td>演奏中のmidiの、CC#111の位置（ティック単位）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>midiLoopTime</td>
+  <td>演奏中のmidiの、CC#111の位置（ミリ秒単位）が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerOggStatus</td>
+  <td>oggが停止中なら0、再生中なら1、一時停止中なら2が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerOggTime</td>
+  <td>oggデータ内での現在の再生時間(ミリ秒単位)が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>playerOggLoopCount</td>
+  <td>oggを再生してからのループ回数が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggChannels</td>
+  <td>再生中のoggの、チャンネル数が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggSamplingRate</td>
+  <td>再生中のoggの、サンプリングレートが格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggTotalTime</td>
+  <td>再生中のoggの、総再生時間(ミリ秒)が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggTotalSamples</td>
+  <td>再生中のoggの、総サンプリング数が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggFileLoopStart</td>
+  <td>再生中のoggの、oggファイル中にあるループ始端の位置が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>oggFileLoopEnd</td>
+  <td>再生中のoggの、oggファイル中にあるループ終端の位置が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeHour</td>
+  <td>現在の時刻「時」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeMinute</td>
+  <td>現在の時刻「分」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeSecond</td>
+  <td>現在の時刻「秒」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeMilliSecond</td>
+  <td>現在の時刻「ミリ秒」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeYear</td>
+  <td>現在の日付「年」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeMonth</td>
+  <td>現在の日付「月」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeDay</td>
+  <td>現在の日付「日」が格納される</td>
+ </tr>
+ <tr bgcolor="#eeffee">
+  <td>timeDayOfWeek</td>
+  <td>現在の日付「曜日」（0:日,1:月,2:火,…,6:土）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>playerExeName</td>
+  <td>MusicPlayerの設定の１行目の内容（実行ファイル名）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>playerDirectMusicSW</td>
+  <td>MusicPlayerの設定の２行目の内容（DirectMusicのON/OFF）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>playerMode</td>
+  <td>MusicPlayerの設定の３行目の内容（他のプレイヤーのモード）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>playerReadSpeed</td>
+  <td>MusicPlayerの設定の４行目の内容（ファイルの読み込み頻度）が格納される</td>
+ </tr>
+ <tr bgcolor="#ffeeee">
+  <td>playerMidiCache</td>
+  <td>MusicPlayerの設定の５行目の内容（MidiファイルのキャッシュのON/OFF）が格納される</td>
+ </tr>
+</table>
+  <br>
+  <a href="../ReadMe.html">戻る</a>
+<hr>
+ </body>
+</html>

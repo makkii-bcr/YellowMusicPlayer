@@ -1,0 +1,15 @@
+extends Object;
+
+native _n_open;
+function open(prompt,title,st1,st2,st3,st4) {
+  var ti,s1,s2;  
+  ti=title; if (!ti) ti="Šm”F";
+  s1=st1; if (!s1) s1="‚Í‚¢(&Y)";
+  s2=st2; if (!s2) s2="‚¢‚¢‚¦(&N)";
+  _n_open(prompt,ti,s1,s2,st3,st4);
+}
+
+native _n_getStatus;
+function getStatus() {
+  return _n_getStatus();
+}

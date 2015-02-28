@@ -1,0 +1,16 @@
+extends PlainChar;
+
+constructor SubProcExec (t,_a0,_a1,_a2,_a3) {
+  super(0,0,0);
+  target=t;
+  a0=_a0;
+  a1=_a1;
+  a2=_a2;
+  a3=_a3;
+/*
+a=_n_objhandle(this);
+  print (_n_refcount(a));
+*/
+}
+
+target.onSubProcess(a0,a1,a2,a3);

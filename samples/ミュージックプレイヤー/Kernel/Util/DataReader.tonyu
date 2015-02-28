@@ -1,0 +1,37 @@
+extends Object;
+
+constructor DataReader(rr) {
+  r=rr;
+}
+
+function read() {
+  return r.read();
+}
+
+function readInt() {
+  var i;
+  i=r.read();
+  i=i+r.read()*256;
+  i=i+r.read()*65536;
+  i=i+r.read()*256*65536;
+  return i;
+}
+
+function readString() {
+  var l,s;
+  l=readInt();s="";
+  while (l>0) {
+    s=strcat(s, new String(r.read()) );
+    if (eof()) l=0; 
+    l-=1;
+  }
+  return s;
+}
+
+function eof() {
+  return r.eof();
+}
+
+function close() {
+  r.close();
+}

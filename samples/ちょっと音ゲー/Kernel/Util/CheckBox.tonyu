@@ -1,0 +1,74 @@
+extends SecretChar;
+
+function init(number) {
+  var a;
+  ChkBox=new Array();
+  for (a=0;a<number;a++) {
+    ChkBox.add(0);
+  }
+}
+
+function create(x,y,number,col,zOr) {
+  var a;
+  drawLine(x,y,x,y+10,col,zOr);
+  drawLine(x,y+10,x+10,y+10,col,zOr);
+  drawLine(x+10,y+10,x+10,y,col,zOr);
+  drawLine(x+10,y,x,y,col,zOr);
+  if ($mouseX>=x && $mouseX<=x+10 && $mouseY>=y && $mouseY<=y+10) {
+    if (getkey(1)==1) {
+      if (ChkBox.get(number)==1) ChkBox.set(number,0);else ChkBox.set(number,1);
+    }
+  }
+  if (ChkBox.get(number)==1) {
+    fillRect(x+2,y+2,x+9,y+9,col,zOr);
+  }
+  if (ChkBox.get(number)==1) return 1;
+  return 0;
+}
+
+
+/*
+***************** NewChkBox(number) ******************
+      ChkBox用の状態を格納する変数を初期化します
+*メインループの前に配置してください(必ず呼んでください)*
+
+number
+        オブジェクト内で作るチェックボックスの数
+
+************ ChkBox(x,y,number,col[,zOr]) ************
+              チェックボックスを作ります
+返り値: ON=1 OFF=0  (直接変数ChkBoxを参照することも出来ます)
+
+x
+         x座標
+y
+         y座標
+number
+         チェックボックスのID(0から詰めてください)
+col
+         色
+zOr
+         絵画順序
+
+         
+         
+a=new Array();
+a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");a.add("OFF");
+newCheckBox(6);
+while(1) {
+  if (checkBox(60,120,0,$clBlack)==1) a.set(0,"ON");else a.set(0,"OFF");
+  if (checkBox(60,140,1,$clRed)==1) a.set(1,"ON");else a.set(1,"OFF");
+  if (checkBox(60,160,2,$clGreen)==1) a.set(2,"ON");else a.set(2,"OFF");
+  if (checkBox(110,120,3,$clYellow)==1) a.set(3,"ON");else a.set(3,"OFF");
+  if (checkBox(110,140,4,$clPink)==1) a.set(4,"ON");else a.set(4,"OFF");
+  if (checkBox(110,160,5,$clWhite)==1) a.set(5,"ON");else a.set(5,"OFF");
+  drawText(75,120,a.get(0),$clBlack,10);
+  drawText(75,140,a.get(1),$clBlack,10);
+  drawText(75,160,a.get(2),$clBlack,10);
+  drawText(125,120,a.get(3),$clBlack,10);
+  drawText(125,140,a.get(4),$clBlack,10);
+  drawText(125,160,a.get(5),$clBlack,10);
+  update();
+}
+         
+*/

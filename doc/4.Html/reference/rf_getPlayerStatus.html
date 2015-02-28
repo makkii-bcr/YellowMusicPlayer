@@ -1,0 +1,189 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.getPlayerStatus</h2>
+  MusicPlayerから、「Midi,Oggの状態」「再生中のMidi,Oggの情報」「コンピュータ内の日付と時刻」が取得できます。<br>
+  ※ このメソッドを使う前に<a href="rf_setGettingPlayerStatus.html">setGettingPlayerStatus</a>メソッドで<br>
+  　　MusicPlayerの状態取得機能を有効にする必要があります<br>
+  <br>
+  状態取得機能は、MusicPlayerがfilesフォルダに「YMPStatus.dat」を書き込み、<br>
+  そのファイルを読み取ることで行っています。<br>
+  このメソッドを呼び出すと、「YMPStatus.dat」を読み込みます<br>
+  <br>
+  ※ 状態取得した情報は、ファイル読み書きのタイムラグにより少し遅れることがあります。<br>
+  　　setGettingPlayerStatusメソッドの引数を大きい値にすると、その分タイムラグが大きくなります。<br>
+  <br>
+  結果はYmplayerオブジェクトの各変数に返されます<br>
+  <br>
+  <h3>書式</h3>
+<pre>
+getPlayerStatus(_scope)
+</pre>
+<dl>
+<dt>_scope</dt>
+<dd>情報取得する項目の範囲<br>
+0やnullを設定、または省略すると、すべての項目を取得します<br>
+<br>
+_scope が 1～ のとき取得する項目<br>
+<ul>
+  <li>playerMidiStatus　　　(Midiは再生中か(0:停止中 1:再生中 2:一時停止中))</li>
+  <li>playerMidiPlayNo　　　(再生中のMidi番号)</li>
+  <li>playerMidiTempo　　　(現在のMidiのテンポ)</li>
+  <li>playerMidiTick　　　(現在のMidiのティック)</li>
+  <li>playerMidiTime　　　(Midiデータ内での現在の演奏時間)</li>
+  <li>playerMidiLoopCount　　　(Midiを再生してからのループ回数)</li>
+  <li>midiTimeBase　　　(演奏中のMidiの、ベースカウント)</li>
+  <li>midiTotalTick　　　(演奏中のMidiの、総ティック)</li>
+  <li>midiTotalTime　　　(演奏中のMidiの、総演奏時間(ミリ秒))</li>
+  <li>midiFirstNoteTick　　　(演奏中のMidiの、最初の発音ティック)</li>
+  <li>midiFirstNoteTime　　　(演奏中のMidiの、最初の発音の時間(ミリ秒))</li>
+  <li>midiLastNoteTick　　　(演奏中のMidiの、最後の発音ティック)</li>
+  <li>midiLastNoteTime　　　(演奏中のMidiの、最後の発音の時間(ミリ秒))</li>
+  <li>midiLoopTick　　　(演奏中のMidiの、CC#111のティック)</li>
+  <li>midiLoopTime　　　(演奏中のMidiの、CC#111の位置(ミリ秒))</li>
+</ul>
+<br>
+_scope が 2～ のとき取得する項目<br>
+<ul>
+  <li>playerOggStatus　　　(Oggは再生中か(0:停止中 1:再生中 2:一時停止中))</li>
+  <li>playerOggTime　　　(Oggデータ内での現在の再生時間(ミリ秒))</li>
+  <li>playerOggLoopCount　　　(Oggを再生してからのループ回数)</li>
+  <li>oggChannels　　　(再生中のOggの、チャンネル数)</li>
+  <li>oggSamplingRate　　　(再生中のOggの、サンプリングレート)</li>
+  <li>oggTotalTime　　　(再生中のOggの、総再生時間(ミリ秒))</li>
+  <li>oggTotalSamples　　　(再生中のOggの、総サンプリング数)</li>
+  <li>oggFileLoopStart　　　(再生中のOggの、Oggファイル中にあるループ始端)</li>
+  <li>oggFileLoopEnd　　　(再生中のOggの、Oggファイル中にあるループ終端)</li>
+</ul>
+<br>
+_scope が 3～ のとき取得する項目<br>
+<ul>
+  <li>timeHour　　　(現在の時刻「時」)</li>
+  <li>timeMinute　　　(現在の時刻「分」)</li>
+  <li>timeSecond　　　(現在の時刻「秒」)</li>
+  <li>timeMilliSecond　　　(現在の時刻「ミリ秒」)</li>
+  <li>timeYear　　　(現在の日付「年」)</li>
+  <li>timeMonth　　　(現在の日付「月」)</li>
+  <li>timeDay　　　(現在の日付「日」)</li>
+  <li>timeDayOfWeek　　　(現在の日付「曜日」（0:日,1:月,2:火,…,6:土）)</li>
+</ul>
+<br>
+</dd>
+</dl>
+  変数の意味は、<a href="../reference.html#Ymplayer_variable">変数一覧</a>や<a href="../tutorial/tutorial_07.html">チュートリアル</a>を参照<br>
+  または、例１を実行する<br>
+  <br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+  （全ての項目を表示するためプログラムが長くなってしまいましたが、長いだけなので、そこまで難しくありません）<br>
+  ←・→キーで更新頻度を調節すると、情報が取得できます<br>
+  Z, X, C, V キー：Midiの 再生, 停止, 一時停止, 再開、　Shiftキーを押しながらだとOggに対して命令する。<br>
+<pre>
+extends SpriteChar;
+
+setFont("ＭＳ ゴシック"); // 文字をそろえやすくなる
+$mplayer = new Ymplayer();
+
+interval = 1; // 更新頻度
+$mplayer.setGettingPlayerStatus(interval); // 更新頻度調節
+$mplayer.updatePlayingInfomation();        // 更新
+
+timeDayOfWeekText = "";
+while (1) {
+  // 「Shift + キー」でOgg、ShiftなしでMidi に対して命令する
+  if (getkey(16) > 0) bgmType = 2; else bgmType = 1;
+  if (getkey(90) == 1) {
+    if (bgmType == 1) $mplayer.play($se_test  , 1); // Z:繰り返し再生
+    else              $mplayer.play("test.ogg", 1); // 
+  }
+  if (getkey(88) == 1) $mplayer.stop(bgmType);      // X:停止
+  if (getkey(67) == 1) $mplayer.pause(bgmType);     // C:一時停止
+  if (getkey(86) == 1) $mplayer.restart(bgmType);   // V:一時停止から再開
+  
+  if ((getkey(37)==1 || getkey(37)>5) && interval > 0) { // ←:頻度上げる・無効
+    interval -= 1 + (getkey(37)>60)*19;
+    if (interval < 0) interval = 0;
+    $mplayer.setGettingPlayerStatus(interval); // 更新頻度調節
+    $mplayer.updatePlayingInfomation();        // 更新
+  }
+  if ((getkey(39)==1 || getkey(39)>5) && interval < 1000) { // →:頻度下げる・有効
+    interval += 1 + (getkey(39)>60)*19;
+    if (interval > 1000) interval = 1000;
+    $mplayer.setGettingPlayerStatus(interval); // 更新頻度調節
+    $mplayer.updatePlayingInfomation();        // 更新
+  }
+  
+  $mplayer.<strong>getPlayerStatus</strong>(); // 状態取得
+  // ↑毎回呼び出す必要はありません
+  // ５フレームに１回など読み込み頻度を少なくすることを勧めます
+  
+  if      ($mplayer.timeDayOfWeek == 0) timeDayOfWeekText = " (日)";
+  else if ($mplayer.timeDayOfWeek == 1) timeDayOfWeekText = " (月)";
+  else if ($mplayer.timeDayOfWeek == 2) timeDayOfWeekText = " (火)";
+  else if ($mplayer.timeDayOfWeek == 3) timeDayOfWeekText = " (水)";
+  else if ($mplayer.timeDayOfWeek == 4) timeDayOfWeekText = " (木)";
+  else if ($mplayer.timeDayOfWeek == 5) timeDayOfWeekText = " (金)";
+  else if ($mplayer.timeDayOfWeek == 6) timeDayOfWeekText = " (土)";
+  
+  drawText(80, 11* 0 , "Midi演奏状態　　　　　　　　　　　　　　：" + $mplayer.playerMidiStatus   , $clWhite, 9);
+  drawText(80, 11* 1 , "現在のMidiのテンポ　　　　　　　　　　　：" + $mplayer.playerMidiPlayNo   , $clWhite, 9);
+  drawText(80, 11* 2 , "Midiデータ内のテンポ　　　　　　　　　　：" + $mplayer.playerMidiTempo    , $clWhite, 9);
+  drawText(80, 11* 3 , "現在のMidiのティック　　　　　　　　　　：" + $mplayer.playerMidiTick     , $clWhite, 9);
+  drawText(80, 11* 4 , "Midiデータ内での現在の演奏時間(ミリ秒)　：" + $mplayer.playerMidiTime     , $clWhite, 9);
+  drawText(80, 11* 5 , "Midiを再生してからのループ回数　　　　　：" + $mplayer.playerMidiLoopCount, $clWhite, 9);
+  drawText(80, 11* 6 , "演奏中のMidiの、ベースカウント　　　　　：" + $mplayer.midiTimeBase       , $clWhite, 9);
+  drawText(80, 11* 7 , "演奏中のMidiの、総ティック　　　　　　　：" + $mplayer.midiTotalTick      , $clWhite, 9);
+  drawText(80, 11* 8 , "演奏中のMidiの、総演奏時間(ミリ秒)　　　：" + $mplayer.midiTotalTime      , $clWhite, 9);
+  drawText(80, 11* 9 , "演奏中のMidiの、最初の発音ティック　　　：" + $mplayer.midiFirstNoteTick  , $clWhite, 9);
+  drawText(80, 11*10 , "演奏中のMidiの、最初の発音の時間(ミリ秒)：" + $mplayer.midiFirstNoteTime  , $clWhite, 9);
+  drawText(80, 11*11 , "演奏中のMidiの、最後の発音ティック　　　：" + $mplayer.midiLastNoteTick   , $clWhite, 9);
+  drawText(80, 11*12 , "演奏中のMidiの、最後の発音の時間(ミリ秒)：" + $mplayer.midiLastNoteTime   , $clWhite, 9);
+  drawText(80, 11*13 , "演奏中のMidiの、CC#111のティック　　　　：" + $mplayer.midiLoopTick       , $clWhite, 9);
+  drawText(80, 11*14 , "演奏中のMidiの、CC#111の位置(ミリ秒)　　：" + $mplayer.midiLoopTime       , $clWhite, 9);
+  
+  drawText(80, 11*16, "Ogg演奏状態          　　　　　       :" + $mplayer.playerOggStatus   , $clWhite, 9);
+  drawText(80, 11*17, "Oggデータ内での現在の再生時間(ミリ秒) :" + $mplayer.playerOggTime     , $clWhite, 9);
+  drawText(80, 11*18, "Oggを再生してからのループ回数　　　　 :" + $mplayer.playerOggLoopCount, $clWhite, 9);
+  drawText(80, 11*19, "再生中のOggの、チャンネル数　　　　　 :" + $mplayer.oggChannels       , $clWhite, 9);
+  drawText(80, 11*20, "再生中のOggの、サンプリングレート　　 :" + $mplayer.oggSamplingRate   , $clWhite, 9);
+  drawText(80, 11*21, "再生中のOggの、総再生時間(ミリ秒)　　 :" + $mplayer.oggTotalTime      , $clWhite, 9);
+  drawText(80, 11*22, "再生中のOggの、総サンプリング数　　　 :" + $mplayer.oggTotalSamples   , $clWhite, 9);
+  drawText(80, 11*23, "再生中のOggの、Oggループ開始位置　　　:" + $mplayer.oggFileLoopStart  , $clWhite, 9);
+  drawText(80, 11*24, "再生中のOggの、Oggループ終了位置　　　:" + $mplayer.oggFileLoopEnd    , $clWhite, 9);
+  
+  drawText(80, 11*26, "日付 : " + $mplayer.timeYear
+                            +"/"+ $mplayer.timeMonth
+                            +"/"+ $mplayer.timeDay
+                                + timeDayOfWeekText
+                                , $clWhite, 9);
+  drawText(80, 11*27, "時刻 : " + $mplayer.timeHour 
+                            +":"+ $mplayer.timeMinute
+                            +":"+ $mplayer.timeSecond
+                            +"."+ ($mplayer.timeMilliSecond / 100 % 10)
+                                + ($mplayer.timeMilliSecond / 10  % 10)
+                                + ($mplayer.timeMilliSecond       % 10)
+                                , $clWhite, 9);
+  
+  drawText(80, 11*29 , "更新頻度：" + interval, $clWhite, 12);
+  drawText(80, 11*31, "← →：更新頻度を調節" , $clWhite, 20);
+  
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

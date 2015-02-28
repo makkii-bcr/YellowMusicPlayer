@@ -1,0 +1,263 @@
+extends classes.lang.Object;
+
+destructor Free() {
+}
+
+constructor Sprite(){
+//constructor Sprite(x,y,p,f){
+//   _a=native_init();
+//   set(x,y,p,f);
+}
+
+function setText(x,y,t,c,s) {
+   native_setText(x,y,t,c,s);
+}
+
+native native_textExtent;
+function textWidth(t,s) {
+   return native_textExtent(0,t,s);
+}
+function textHeight(t,s) {
+   return native_textExtent(1,t,s);
+}
+native _n_setFont;
+function setFont(s,b,i,u) {
+  _n_setFont(s,b,i,u);
+}
+
+function drawText (x,y,t,c,s,z) {
+   var ss,cc,zz;
+   if (s) ss=s; else ss=12; 
+   if (c) cc=c; else c=color(255,255,255);
+   native_setText(x,y,t,cc,ss,z);
+}
+
+function drawLine (x,y,dx,dy,c,z) {
+   native_drawLine(x,y,dx,dy,c,z);
+}
+
+function drawBrokenLine(sx,sy,dx,dy,col,zorder,length){
+  var i,nx,ny,space,d;
+  d=dist(sx-dx,sy-dy);
+  if (d>0 && length>0) {
+    space=trunc(d/(length*2));
+    nx=(dx-sx)/space;
+    ny=(dy-sy)/space;
+    for(i=0;i<space;i++){
+      drawline(sx+(nx*i),sy+(ny*i),sx+nx*(i+1)-nx/2,sy+ny*(i+1)-ny/2,col,zorder);
+    }
+    drawline(sx+(nx*i),sy+(ny*i),dx,dy,col,zorder);
+  }
+}
+
+function fillRect (x,y,dx,dy,c,z) {
+   native_fillRect(x,y,dx,dy,c,z);
+}
+
+//function set(x,y,p,f) {
+//   if (_a!=0)
+//     native_set(1,x,y,p,f);
+//}
+
+function drawSprite(x,y,p,f,z) {
+     native_set(1,x,y,p,f,z);
+}
+
+
+function freeSprite() {
+//   native_free(_a);
+//   _a=0;
+}
+
+function getPatWidth(p) {
+   return native_getPWidth(p);
+}
+
+function getPatHeight(p) {
+   return native_getPHeight(p);
+}
+
+native native_free;
+native native_init;
+native native_set;
+native native_setText;
+native native_drawLine;
+native native_fillRect;
+native native_getPWidth;
+native native_getPHeight;
+
+native _n_drawMapSprite;
+function drawMapSprite(xx,yy,pw,ph) {
+   return _n_drawMapSprite (xx,yy,pw,ph);
+}
+native _n_drawChip;
+function drawChip(xx,yy,pp) {
+   return _n_drawChip (xx,yy,pp);
+ 
+}
+
+native _n_drawDxSprite;
+function drawDxSprite(x,y,p,f,z,rt,al,szx,szy) {
+   var szyy; szyy=szx; if(szy) szyy=szy;
+   _n_drawDxSprite(x,y,p,f,z,rt,al,szx,szyy);
+}
+
+function drawScreenXY(s) {
+   if (s) { setAdjust(0,0); }
+   else   { setAdjust($viewX,$viewY); }
+}
+
+native _n_fillPolygon;
+function fillPolygon(x,y,points,col,zOrder) {
+  _n_fillPolygon(x,y,points,col,zOrder);
+}
+native _n_setPolygon;
+function setPolygon(index,x,y) {
+  _n_setPolygon(index,x,y);
+}
+
+//-----------extended graphics routine---------------------------
+function centerText(x,y,text,col,size[,zOr]) {
+  var a,b;
+  a=textWidth(text,size);
+  b=x-a/2;  // (((bx-ax)-(a))/2)+ax;
+  drawText(b,y,text,col,size,zOr);
+}
+
+function drawVerticalText(ax,ay,text,col,size[,zOr]) {
+  var by,length,o_text,o_width,o_height,a;
+  by=ay;
+  length=text.length();
+  for (a=0;a<length;a++) {
+    o_text=text.substring(a,a+1);
+    o_width=textWidth(o_text,size);
+    o_height=textHeight(o_text,size);
+    drawText(ax-(o_width/2),by,o_text,col,size,zOr);
+    by+=o_height;
+  }
+}
+
+function drawPolygon(x,y,number,size,col,ang[,zOr]) {
+  var a,b,c,polygon,ax,ay,bx,by;
+  b=360/number;
+  c=new Array();
+  for (a=0;a<=number;a++) {
+    c.add(b*a);
+  }
+  for (a=0;a<number;a++) {
+    ax=x+cos(c.get(a)+ang)*size;
+    ay=y+sin(c.get(a)+ang)*size;
+    if (a<number) bx=x+cos(c.get(a+1)+ang)*size;
+    if (a<number) by=y+sin(c.get(a+1)+ang)*size;
+    if (a==number) bx=x+sin(c.get(0)+ang)*size;
+    if (a==number) by=y+sin(c.get(0)+ang)*size;
+    drawLine(ax,ay,bx,by,col,zOr);
+    b+=b;
+  }
+}
+
+function drawRect(rx,ry,sx,sy,col[,zOr]) {
+  drawLine(rx,ry,rx,sy,col,zOr);
+  drawLine(rx,sy,sx,sy,col,zOr);
+  drawLine(sx,sy,sx,ry,col,zOr);
+  drawLine(sx,ry,rx,ry,col,zOr);
+}
+
+function drawRectDx(rx,ry,sx,sy,col,ang[,zOr]) {
+  var ax,ay,bx,by,cx,cy,dx,dy;
+  $Math.roll(rx+sx/2,ry+sy/2,ang,rx,ry);
+  ax=$Math.rx;ay=$Math.ry;
+  $Math.roll(rx-sx/2,ry+sy/2,ang,rx,ry);
+  bx=$Math.rx;by=$Math.ry;
+  $Math.roll(rx-sx/2,ry-sy/2,ang,rx,ry);
+  cx=$Math.rx;cy=$Math.ry;
+  $Math.roll(rx+sx/2,ry-sy/2,ang,rx,ry);
+  dx=$Math.rx;dy=$Math.ry;
+  drawLine(ax,ay,bx,by,col,zOr);
+  drawLine(bx,by,cx,cy,col,zOr);
+  drawLine(cx,cy,dx,dy,col,zOr);
+  drawLine(dx,dy,ax,ay,col,zOr);
+}
+
+function drawTriangle(ax,ay,bx,by,cx,cy,col,angle[,zOr]) {
+  var xx,yy,distA,distB,distC,vertexAx,vertexAy,vertexBx;
+  var angleA,angleB,angleC,vertexBy,vertexCx,vertexCy;
+  xx=(ax+bx+cx)/3;
+  yy=(ay+by+cy)/3;
+
+  $Math.roll(ax,ay,angle,xx,yy);
+  ax=$Math.rx; ay=$Math.ry;
+
+  $Math.roll(bx,by,angle,xx,yy);
+  bx=$Math.rx; by=$Math.ry;
+
+  $Math.roll(cx,cy,angle,xx,yy);
+  cx=$Math.rx; cy=$Math.ry;
+
+  drawLine(Ax,Ay,Bx,By,col,zOr);
+  drawLine(Bx,By,Cx,Cy,col,zOr);
+  drawLine(Cx,Cy,Ax,Ay,col,zOr);
+}
+
+
+function gradationLine(ax,ay,bx,by,col1,col2[,zOr]) {
+  var length,r_1,g_1,b_1,r_2,g_2,b_2,o_lengthX,o_lengthY,a;
+  length=dist(bx-ax,by-ay); 
+  o_lengthX=((bx-ax)/length);
+  o_lengthY=((by-ay)/length);
+  r_1=getRed(col1);
+  g_1=getGreen(col1);
+  b_1=getBlue(col1);
+  r_2=(getRed(col2)-getRed(col1))/length;
+  g_2=(getGreen(col2)-getGreen(col1))/length;
+  b_2=(getBlue(col2)-getBlue(col1))/length;
+  for (a=0;a<length;a++) {
+    drawLine(ax+(o_lengthX*a),ay+(o_lengthY*a),
+    ax+(o_lengthX*a)+o_lengthX,
+    ay+(o_lengthY*a)+o_lengthY,
+    color(r_1+trunc(r_2*a),g_1+trunc(g_2*a),b_1+trunc(b_2*a)),zOr);
+  }
+}
+
+function gradationRect(ax,ay,bx,by,shift,col1,col2[,zOr]) {
+  var length,r_1,g_1,b_1,r_2,g_2,b_2,a;
+  if (shift==0) length=bx-ax;
+  if (shift==1) length=by-ay;
+  r_1=getRed(col1);
+  g_1=getGreen(col1);
+  b_1=getBlue(col1);
+  r_2=(getRed(col2)-getRed(col1))/length;
+  g_2=(getGreen(col2)-getGreen(col1))/length;
+  b_2=(getBlue(col2)-getBlue(col1))/length;
+  for (a=0;a<length;a++) {
+    if (shift==0) {
+      fillRect(ax+a,ay,ax+a+1,by,
+      color(r_1+trunc(r_2*a),g_1+trunc(g_2*a),b_1+trunc(b_2*a)),zOr);
+    }
+    if (shift==1) {
+      fillRect(ax,ay+a,bx,ay+a+1,
+      color(r_1+trunc(r_2*a),g_1+trunc(g_2*a),b_1+trunc(b_2*a)),zOr);
+    }
+  }
+}
+
+function gradationText(ax,ay,text,col1,col2,size[,zOr]) {
+  var length,width,o_text,l_text,l_width,r_1,g_1,b_1,r_2,g_2,b_2,a;
+  length=text.length();
+  r_1=getRed(col1);
+  g_1=getGreen(col1);
+  b_1=getBlue(col1);
+  r_2=(getRed(col2)-getRed(col1))/length;
+  g_2=(getGreen(col2)-getGreen(col1))/length;
+  b_2=(getBlue(col2)-getBlue(col1))/length;
+  width=textWidth(text,size);
+  for (a=0;a<length;a++) {
+    o_text=text.substring(a,a+1);
+    l_text=text.substring(0,a);
+    l_width=textWidth(l_text,size);
+    drawText(ax+l_width,ay,o_text,
+    color(r_1+trunc(r_2*a),g_1+trunc(g_2*a),b_1+trunc(b_2*a)),size,zOr);
+  }
+}
+//-----------end of extended graphics routine---------------------------
+

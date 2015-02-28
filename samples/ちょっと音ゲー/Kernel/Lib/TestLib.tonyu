@@ -1,0 +1,5 @@
+extends Library;
+
+function onLoadPage() {
+  print ("className="+getClassName() );
+}

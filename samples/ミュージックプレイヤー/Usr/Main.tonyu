@@ -1,0 +1,229 @@
+extends SecretChar;
+
+$map.setBGColor(0);
+$screenWidth  = 320;
+$screenHeight = 240;
+
+loop = 0;
+track = 0;
+back = 0;
+
+$mplayer = new Ymplayer();
+$mplayer.updatePlayingInfomation();  // デフォルトのエフェクト設定を書き込む
+$mplayer.setGettingPlayerStatus(2); // MidiPlayerの情報取得を毎秒33.33回行う
+
+midiTotalTime = 0; // midiの再生時間の長さ
+playerMidiTime    = 0; // 現在の再生時間
+playerMidiTick    = 0; // 現在のティック
+
+timeText      = "";
+totalTimeText = "";
+
+tempValue = 0;
+$mplayer.playerMidiLoopCount = 0;
+
+cnt = 0;
+while (1) {
+  cnt ++;
+  
+  // MidiPlayerの情報取得
+  if (back == 0 && cnt >= 0 && cnt % 2 == 0) $mplayer.getPlayerStatus();
+  
+  // ボタン判定
+  if (getkey(38) == 1) {
+    track --;
+    if (track < 0) track = 1;
+    back = 0;
+    $mplayer.midiTempo = 1;
+    $mplayer.stop();
+    playerMidiTime = 0;
+    $mplayer.playerMidiTime = 0;
+    $mplayer.midiStartTick = 0;
+    $mplayer.playerMidiStatus = 0;
+    $mplayer.updatePlayingInfomation();
+  }
+  if (getkey(40) == 1) {
+    track ++;
+    if (track > 1) track = 0;
+    back = 0;
+    $mplayer.midiTempo = 1;
+    $mplayer.stop();
+    playerMidiTime = 0;
+    $mplayer.playerMidiTime = 0;
+    $mplayer.midiStartTick = 0;
+    $mplayer.playerMidiStatus = 0;
+    $mplayer.updatePlayingInfomation();
+  }
+  if (getkey(90) == 1) { // 停止
+    back = 0;
+    $mplayer.midiTempo = 1;
+    $mplayer.stop();
+    playerMidiTime = 0;
+    $mplayer.playerMidiTime = 0;
+    $mplayer.midiStartTick = 0;
+    $mplayer.playerMidiStatus = 0;
+    $mplayer.updatePlayingInfomation();
+  }
+  if (getkey(88) == 1) { // 巻き戻し
+    if (back == 0) {
+      //$mplayer.stop();
+      back = 2;
+    } else if (back >= 1) {
+      if (back < 64) back = back * 2;
+    }
+    $mplayer.playerMidiStatus = 0;
+  }
+  if (getkey(67) == 1) { // 再生・一時停止
+    cnt = -5;
+    back = 0;
+    if (!$mplayer.playerMidiStatus) { // 停止中・初めて
+      $mplayer.playerMidiStatus = 1;
+      bgmPlay();
+    } else if ($mplayer.midiTempo == 1) {
+      $mplayer.stop();
+    }
+    $mplayer.midiTempo = 1;
+    $mplayer.updatePlayingInfomation();
+  }
+  if (getkey(86) == 1) { // 早送り
+    back = 0;
+    //$mplayer.playerMidiStatus = 0;
+    if (!$mplayer.playerMidiStatus) { // 停止中・初めて
+      bgmPlay();
+    }
+    if ($mplayer.midiTempo < 64) $mplayer.midiTempo = $mplayer.midiTempo * 2;
+    $mplayer.updatePlayingInfomation();
+  }
+  if (getkey(66) == 1) { // リピート
+    loop = !loop;
+    if (!$mplayer.playerMidiStatus && back == 0) { // 停止中・初めて
+      bgmPlay();
+    }
+  }
+  
+  
+  // ループしたら次の曲
+  if (loop == 0 && $mplayer.playerMidiLoopCount >= 1) {
+    playerMidiTick    = 0;
+    $mplayer.midiStartTick = 0;
+    $mplayer.playerMidiLoopCount = 0;
+    cnt = -1;
+    track ++;
+    if (track > 1) track = 0;
+    bgmPlay();
+  }
+  if (loop == 1) {
+    $mplayer.playerMidiLoopCount = 0;
+  }
+  
+  
+  // 巻き戻し
+  if (back >= 1) {
+    playerMidiTick -= trunc(($mplayer.midiTimeBase * $mplayer.playerMidiTempo/60)/60 * back);
+    if (playerMidiTick <= 0) {
+      playerMidiTick = 0;
+      $mplayer.playerMidiTime = 0;
+      back = 0;
+      cnt = 0;
+    }
+    $mplayer.midiStartTick = playerMidiTick;
+    
+    tempValue = trunc(( playerMidiTick / $mplayer.midiTotalTick ) * $mplayer.midiTotalTime);
+    playerMidiTime          = tempValue; // 
+    $mplayer.playerMidiTime = $mplayer.midiTotalTime; // 現在の再生時間を無理やり代入（巻き戻しした時の時間が一瞬反映前のが表示されるため）
+    
+    $mplayer.midiTempo = 1;
+    if (cnt % 30 == 0) {
+      bgmPlay();
+      $mplayer.updatePlayingInfomation();
+    }
+  } else if ($mplayer.midiTempo >= 16) { // 早送り ×16 以上
+    playerMidiTick += trunc(($mplayer.midiTimeBase * $mplayer.playerMidiTempo/60)/60 * $mplayer.midiTempo);
+    if (playerMidiTick > $mplayer.midiTotalTick) {
+      if (loop == 0) {
+        playerMidiTick = $mplayer.midiTotalTick - 1;
+        $mplayer.playerMidiTime = $mplayer.midiTotalTime;
+        $mplayer.playerMidiLoopCount ++;
+      } else {
+        playerMidiTick = 0;
+        $mplayer.playerMidiTime = 0;
+      }
+    }
+    $mplayer.midiStartTick = playerMidiTick;
+    
+    tempValue = trunc(( playerMidiTick / $mplayer.midiTotalTick ) * $mplayer.midiTotalTime);
+    playerMidiTime          = tempValue; // 
+    $mplayer.playerMidiTime = tempValue; // 現在の再生時間を無理やり代入（巻き戻しした時の時間が一瞬反映前のが表示されるため）
+    
+    if (cnt % 15 == 0) {
+      bgmPlay();
+      $mplayer.updatePlayingInfomation();
+    }
+  } else if ($mplayer.playerMidiStatus == 1 && cnt >= 0) {
+    // 時間取得
+    midiTotalTime = $mplayer.midiTotalTime; // midiの再生時間の長さ取得
+    playerMidiTime    = $mplayer.playerMidiTime;    // 現在の再生時間取得
+    playerMidiTick    = $mplayer.playerMidiTick;    // 現在のティック取得
+    $mplayer.midiStartTick  = playerMidiTick;       // 開始位置セット
+    if (midiTotalTime == null) midiTotalTime = 0;
+    if (playerMidiTime    == null) playerMidiTime    = 0;
+  }
+  
+  
+  // 表示
+  if ($mplayer.getPlayerPreparation() == 0) { // 準備完了したら表示
+    drawText($screenWidth/2-120-20, $screenHeight-40, "停止"  , $clWhite, 12);
+    drawText($screenWidth/2-60 -20, $screenHeight-40, "巻戻し", (back == 0) * $clWhite + (back >= 1)*$clGreen, 12);
+    if ($mplayer.playerMidiStatus == 1 && $mplayer.midiTempo == 1) {
+      drawText($screenWidth/2    -30, $screenHeight-40, "一時停止"  , $clWhite, 12);
+    } else {
+      drawText($screenWidth/2    -20, $screenHeight-40, "再生"  , $clWhite, 12);
+    }
+    drawText($screenWidth/2+60 -20, $screenHeight-40, "早送り", ($mplayer.midiTempo == 1)*$clWhite + ($mplayer.midiTempo != 1)*$clGreen, 12);
+    drawText($screenWidth/2+120-20, $screenHeight-40, "リピート"  , (loop == 0)*$clWhite + (loop == 1)*$clGreen, 12);
+    drawText($screenWidth/2-120-10, $screenHeight-20, "Z", $clWhite, 12);
+    drawText($screenWidth/2-60 -10, $screenHeight-20, "X", $clWhite, 12);
+    drawText($screenWidth/2    -10, $screenHeight-20, "C", $clWhite, 12);
+    drawText($screenWidth/2+60 -10, $screenHeight-20, "V", $clWhite, 12);
+    drawText($screenWidth/2+120-10, $screenHeight-20, "B", $clWhite, 12);
+    
+    drawText($screenWidth/2-120, $screenHeight/2-120, "bgm01.mid", (track != 0)*$clWhite + (track == 0)*$clGreen, 12);
+    drawText($screenWidth/2-120, $screenHeight/2-100, "bgm02.mid", (track != 1)*$clWhite + (track == 1)*$clGreen, 12);
+  }
+  
+  // 巻戻し・早送り倍率表示
+  if (back >= 1)              drawText($screenWidth/2-90-10, $screenHeight/2+20, "巻戻し × "+ back, $clWhite, 12);
+  if ($mplayer.midiTempo > 1) drawText($screenWidth/2+30-10, $screenHeight/2+20, "早送り × "+ $mplayer.midiTempo, $clWhite, 12);
+  
+  // 時間表示
+  if (back == 0 && $mplayer.midiTempo < 16) {
+    if (midiTotalTime) {
+      timeText      = "" + trunc($mplayer.playerMidiTime/600000)    + ($mplayer.playerMidiTime/60000%10)    +":"+ ($mplayer.playerMidiTime/10000%6)    + ($mplayer.playerMidiTime/1000%10);
+      totalTimeText = "" + trunc($mplayer.midiTotalTime/600000) + ($mplayer.midiTotalTime/60000%10) +":"+ ($mplayer.midiTotalTime/10000%6) + ($mplayer.midiTotalTime/1000%10);
+      drawText($screenWidth/2+90, $screenHeight-75, timeText +"/"+ totalTimeText, $clWhite, 9);
+    }
+  } else {
+    if (midiTotalTime) {
+      timeText      = "" + trunc(tempValue/600000)    + (tempValue/60000%10)    +":"+ (tempValue/10000%6)    + (tempValue/1000%10);
+      totalTimeText = "" + trunc($mplayer.midiTotalTime/600000) + ($mplayer.midiTotalTime/60000%10) +":"+ ($mplayer.midiTotalTime/10000%6) + ($mplayer.midiTotalTime/1000%10);
+      drawText($screenWidth/2+90, $screenHeight-75, timeText +"/"+ totalTimeText, $clWhite, 9);
+    }
+  }
+  
+  
+  // バー表示
+  if (midiTotalTime) {
+    timeLength = playerMidiTime / $mplayer.midiTotalTime;
+    fillRect(10,180,10+($screenWidth-20)*timeLength,180+10, color(64,160,255),9);
+  }
+  fillRect(10,180,$screenWidth-10,180+10, color(64,64,64),10);
+  
+  update();
+}
+
+
+
+function bgmPlay() {
+  if      (track == 0) $mplayer.play($se_bgm01, loop);
+  else if (track == 1) $mplayer.play($se_bgm02, loop);
+}

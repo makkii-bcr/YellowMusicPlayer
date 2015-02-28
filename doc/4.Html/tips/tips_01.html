@@ -1,0 +1,71 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;Tips・その他&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>$mplayer.play()のバグの原因となるコード</h2>
+$mplayerオブジェクトは、MediaPlayerクラスです。<br>
+MediaPlayerクラスのソースは、「Kernel\Util\MediaPlayer.tonyu」です。<br>
+この「MediaPlayer.tonyu」にバグの原因となるコードがあります。<br>
+<br>
+MediaPlayer.tonyuのplayメソッド定義部分<br>
+<pre>
+function play( s,ar,v) {
+  if ( s) {
+    if (s is BGM) stop();
+    if (!v || (v>=0 && v<=128)) {
+      s.play(ar,v);
+    } else {
+      s.play(ar,128);
+    }
+  }/* else {
+    (new BGM()).play();
+  }*/
+}
+</pre>
+<br>
+３行目のstop();が、バグの原因となっています。<br>
+サウンドオブジェクト（「$se_bgm01」など）がMidiの場合、<br>
+Midiを停止してから、再生しているように見えます。<br>
+<br>
+しかし、このplay()やstop()は、実際にはsigファイルを書き込んでいるだけです（play()はMidiの再生時のみ）<br>
+sigファイルの内容は、１行目にP,R,S,Xのどれか１つが書かれます。<br>
+意味は、P:再生（繰り返しなし）、R:再生（繰り返しあり）、S:停止、X:Tonyuの終了です。<br>
+１行目がP,Rの場合、２行目にはMidiファイルのパスが書き込まれます。<br>
+<br>
+sigファイルをMusicPlayerが読み込んで、MusicPlayerはそれぞれの動作をします。<br>
+<br>
+上のコードでは、Midiの再生をするのに２回も書き込み処理を行ってしまいます。<br>
+つまり、無駄な書き込みをしているということです。<br>
+<br>
+<h2>どのようなバグがおこるか</h2>
+再生命令を出してもMidiが再生されないことがあります。<br>
+例えば、BGMが切り替わる時に、次に再生するBGMが再生されず、BGMが停止した状態になることがあります。<br>
+<br>
+Tonyuからはsigファイルを書き込み、MusicPlayerからはsigファイルを読み込むので、<br>
+書き込みと読み込みのタイミングが重なると、再生・停止が行われない可能性があります。<br>
+<br>
+Ymplayer.tonyuと修正版MediaPlayer.tonyuでは、上の３行目のコードを省いているため、<br>
+バグが起こりにくくなります。<br>
+しかし、もしかするとYmeplayerクラスや修正版MediaPlayer.tonyuを使ってもバグが起こるかもしれません。<br>
+TonyuとMusicPlayerが、１つのファイルを読み書きする以上、同時アクセスが発生するので、<br>
+このバグを完全に消すことはできません。<br>
+<br>
+<h2>バグの原因となるプログラムを作らない</h2>
+このバグが起きる原因は、stop()のすぐ後にplay()を呼び出していることです。<br>
+プロジェクト上でこれと同じことをしている場合は、バグが起きやすいです。<br>
+BGMの切替をする場合は、なるべくこのようにしない方がいいです。<br>
+<br>
+  <a href="../tips.html">戻る</a>
+<hr>
+ </body>
+</html>

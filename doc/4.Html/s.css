@@ -1,0 +1,29 @@
+body {
+  background-color:#FFFFFF;
+  color:#000000;
+}
+
+strong {
+  color:#FF0000;
+  font-weight:normal;
+}
+
+pre {
+  border:solid;
+  border-width:1px;
+  border-color:#808080;
+  margin-top:5px;
+  margin-bottom:5px;
+  padding:5px;
+  background-color:#EEFFEE;
+}
+
+.green {
+  background-color:#DDFFDD;
+}
+
+dt {
+  margin-top:15px;
+  margin-bottom:0px;
+  font-weight:bold;
+}

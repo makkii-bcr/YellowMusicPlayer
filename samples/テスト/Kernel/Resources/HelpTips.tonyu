@@ -1,0 +1,6 @@
+extends CustomResource;
+
+keyword;
+summary;
+body;
+hid;

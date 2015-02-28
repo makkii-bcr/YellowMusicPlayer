@@ -1,0 +1,660 @@
+extends SecretChar;
+/*
+   音とタイミングの合わせ方は、
+   MusicPlayerから現在の再生時間を、最初１秒間に10回取得して、
+   しばらくしたら頻度を低くして、１秒間に2回取得するようにします。
+   さらにシステムタイマー(getTime())も使い
+   それをもとに、フレームを早送りor巻き戻しをしてタイミングを合わせています
+   
+   MusicPlayerからの再生時間の取得を、１秒間に2回にしている理由は
+   ディスクの書き込み回数を減らしたいからです。(ディスクキャッシュである程度高速に動作はするけど…)
+   あと、システムタイマの方が処理が軽く、こちらの方でも正確な時間取得を補えるからです。
+   
+   じゃあなんでシステムタイマだけで時間を求めないのかと言われると、
+   MusicPlayer内部でMidiの再生時間がずれるかもしれないと思ったからです。
+   
+   本当にずれるかどうか試すには、$mplayer.setGettingPlayerStatusのカッコ内を0にしてください。
+   最初の１秒だけ更新頻度10回/秒くらいにして、後はシステムタイマのみで時間を求めてもずれなかったりします。
+   逆に、MusicPlayerからの再生時間の取得は、ディスクの読み書きをするので、
+   そのときに、プチフリーズのような現象が起きて反ってタイミングがずれる羽目になることもあります。
+   ここは、各プログラマの判断に任せます！
+   
+   再生時間を１秒間に2回の頻度で取得だと、再生し始めに音がずれやすいので
+   再生し始めだけ更新頻度を高くしています。
+   
+   ちなみに再生時間の取得は、MusicPlayerが再生時間をファイルに書き込み、
+   そのファイルをTonyuが読み込むまでに、数十ミリ秒くらいのラグがあると思うので、
+   そこも考慮してください。
+*/
+
+
+if (!$fullScreen) $Window.setDrawMode("A");
+$System.setFrameRate(58, 5);
+$screenWidth  = 600;
+$screenHeight = 400;
+$bgcolor = 0;
+$Options.set("sleep_time", 0);
+$mplayer.setDelay(2200);
+
+// Midi,Ogg関係
+$mplayer = new Ymplayer();
+
+noteTypeAry = new Array();
+noteTimeAry = new Array();
+noteDisAry = new Array();
+notePushAry = new Array();
+
+frameCnt = -180;
+noteSeek = 0;
+noteTextSize = 30;
+textWidth  =  textWidth("X", noteTextSize)/2;
+textHeight = textHeight("X", noteTextSize)/2;
+rectSize = 20;
+
+noteX = 100;
+noteY = 200;
+
+
+
+
+// YellowMusicPlayerの準備が終わるまで待ち続ける
+while ($mplayer.getPlayerPreparation()) {
+  drawText(0,0,"MusicPlayer準備中…",$clYellow,20);
+  update();
+}
+
+// 曲を選ぶ
+while (1) {
+  if (getkey(90) == 1) {
+    selectBGM = 1;
+    break;
+  }
+  if (getkey(88) == 1) {
+    selectBGM = 2;
+    break;
+  }
+  
+  drawText(0,0,"曲を選んでください",$clYellow,20);
+  drawText(0,40,"Z : Para01.mid",$clGreen,16);
+  drawText(0,60,"X : tam-n13loop.ogg",$clGreen,16);
+  update();
+}
+
+bgmNoteSet(selectBGM);
+noteTime = 0;
+startNoteTime = 0;
+beginTime = getTime();
+firstDis = 1;
+
+localTime = 0;
+
+score = 0;
+noteGetCnt = 0;
+combo = 0;
+
+auto = 0;
+otonasi = 1;
+
+
+// 同じBGMは２回目以降反応が速くなるので、わざと音量0で再生して停める
+$mplayer.setDynamicEffect(0,null,null); // BGM音量0
+$mplayer.setDynamicEffectOgg(0,null,null); // BGM音量0
+$mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+if      (selectBGM == 1) $mplayer.play($se_Para01);
+else if (selectBGM == 2) $mplayer.play("tam-n13loop.ogg");
+wait(15);
+$mplayer.stop();
+wait(15);
+$mplayer.stop(); // 念のため２回ストップ
+
+
+$mplayer.setDynamicEffect(90,null,null);     // Midi音量変更
+$mplayer.setDynamicEffectOgg(127,null,null); // Ogg音量変更
+$mplayer.setGettingPlayerStatus(6); // 更新頻度を高くする (一秒に10回)
+$mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+
+
+
+
+while (1) {
+  if (frameCnt == 0) {
+    if      (selectBGM == 1) $mplayer.play($se_Para01);
+    else if (selectBGM == 2) $mplayer.play("tam-n13loop.ogg");
+  }
+  if (frameCnt >= 200 && $mplayer.bgmGettingPlayerStatus < 10) {
+    // 一定時間たったら更新頻度を低くする
+    $mplayer.setGettingPlayerStatus(33); // 更新頻度１秒間に2回にする
+    $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+  }
+  
+  
+  // 入力関係 ////////////////////////////////////////////////////////////
+  if (getkey(32)==1) auto = !auto;
+  if (getkey(90)==1) btnZ = 1; else btnZ = 0;
+  if (getkey(88)==1) btnX = 1; else btnX = 0;
+  if (getkey(13)==1) { $projectManager.loadPage($page_index); update(); }
+  if (getkey(16)==1) otonasi = !otonasi;
+  ////////////////////////////////////////////////////////////////////////
+  
+  
+  // 時間取得・誤差修正 //////////////////////////////////////////////////
+  
+  // 更新頻度が0より大きかったら、ファイルから情報を読み取る
+  if ($mplayer.bgmGettingPlayerStatus > 0) $mplayer.getPlayerStatus(); // 状態取得
+  
+  if (frameCnt > 0) {
+    if (selectBGM == 1) {
+      if ($mplayer.playerMidiTime != playerMidiTime_old) { // 時間が更新された時
+        playerMidiTime_old = $mplayer.playerMidiTime;
+        playerMidiTime_update = trunc(($mplayer.playerMidiTime - $mplayer.midiFirstNoteTime) * 60 / 1000); // 現在の再生時間をミリ秒からフレーム単位に直す
+        beginTime = getTime();          // システムタイマも取得
+        playerMidiTime = playerMidiTime_update; // 更新されたタイムを実際に使う
+      } else { // 更新されていない時
+        // システムタイマを使って擬似的に計算
+        playerMidiTime = playerMidiTime_update + trunc((getTime() - beginTime) * 60 / 1000);
+      }
+      // 演奏時間とフレームが遅れたら早送り・巻き戻し
+      if (!otonasi) {
+        //if (frameCnt < playerMidiTime-60) frameCnt +=40;
+        //if (frameCnt < playerMidiTime-30) frameCnt +=20;
+        //if (frameCnt < playerMidiTime- 8) frameCnt ++;
+        if (frameCnt < playerMidiTime- 6) frameCnt ++;
+        if (frameCnt > playerMidiTime- 5) frameCnt --;
+        if (frameCnt > playerMidiTime+55) frameCnt -=30;
+      } else {
+        //if (frameCnt < playerMidiTime-60) frameCnt +=35;
+        //if (frameCnt < playerMidiTime-30) frameCnt +=15;
+        //if (frameCnt < playerMidiTime-12) frameCnt ++;
+        if (frameCnt < playerMidiTime-11) frameCnt ++;
+        if (frameCnt > playerMidiTime-10) frameCnt --;
+        if (frameCnt > playerMidiTime+55) frameCnt -=30;
+      }
+    } else if (selectBGM == 2) {
+      
+      if ($mplayer.playerOggTime != playerOggTime_old) { // 時間が更新された時
+        playerOggTime_old = $mplayer.playerOggTime;
+        playerOggTime_update = trunc(($mplayer.playerOggTime) * 60 / 1000); // 現在の再生時間をミリ秒からフレーム単位に直す
+        beginTime = getTime();          // システムタイマも取得
+        playerOggTime = playerOggTime_update; // 更新されたタイムを実際に使う
+      } else { // 更新されていない時
+        // システムタイマを使って擬似的に計算
+        playerOggTime = playerOggTime_update + trunc((getTime() - beginTime) * 60 / 1000);
+      }
+      // 演奏時間とフレームが遅れたら早送り・巻き戻し
+      if (!otonasi) {
+        //if (frameCnt < playerOggTime-60) frameCnt +=40;
+        //if (frameCnt < playerOggTime-30) frameCnt +=20;
+        //if (frameCnt < playerOggTime- 8) frameCnt ++;
+        if (frameCnt < playerOggTime- 6) frameCnt ++;
+        if (frameCnt > playerOggTime- 5) frameCnt --;
+        if (frameCnt > playerOggTime+55) frameCnt -=30;
+      } else {
+        //if (frameCnt < playerOggTime-60) frameCnt +=35;
+        //if (frameCnt < playerOggTime-30) frameCnt +=15;
+        //if (frameCnt < playerOggTime-12) frameCnt ++;
+        if (frameCnt < playerOggTime-11) frameCnt ++;
+        if (frameCnt > playerOggTime-10) frameCnt --;
+        if (frameCnt > playerOggTime+55) frameCnt -=30;
+      }
+    }
+  }
+  ///////////////////////////////////////////////////////////////////////
+  
+  
+  // note関係 ///////////////////////////////////////////////////////////
+  size = noteSeek+30;
+  firstDis = 9999;
+  for (i = noteSeek; i<size; i++) {
+    if (i >= noteTimeAry.size()) break;
+    
+    noteTime = noteTimeAry.get(i);
+    noteTyep = noteTypeAry.get(i);
+    noteDis  = noteDisAry.get(i);
+    notePush = notePushAry.get(i);
+    nowNoteTime = noteTime - frameCnt;
+    thisDis = nowNoteTime * noteDis;
+    if (firstDis == 9999 && nowNoteTime >= 0) firstDis = noteDis;
+    
+    if (!notePush) {
+      if (noteTyep == 0) {
+        noteText = "Z";
+        noteColor = color(255,0,0);
+        if (!notePush) {
+          if (-5 <= nowNoteTime && nowNoteTime <= 5) {
+            if (btnZ || (auto && nowNoteTime <= 0)) {
+              combo ++;
+              if (-1 <= nowNoteTime && nowNoteTime <= 1) {
+                if (!otonasi) $mplayer.play($se_pan2,0,128);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 1, combo*3));
+                $bgcolor = color(64,64,64);
+                score += combo*3;
+              } else if (-3 <= nowNoteTime && nowNoteTime <= 3) {
+                if (!otonasi) $mplayer.play($se_pan2,0,64);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 2, combo*2));
+                $bgcolor = color(32,32,32);
+                score += combo*2;
+              } else {
+                if (!otonasi) $mplayer.play($se_pan2,0,32);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 3, combo));
+                $bgcolor = color(0,0,0);
+                score += combo;
+              }
+              notePushAry.set(i,1);
+              noteGetCnt ++;
+              btnZ = 0;
+            }
+          }
+        }
+      }else if (noteTyep == 1) {
+        noteText = "X";
+        noteColor = color(0,0,255);
+        if (!notePush) {
+          if (-5 <= nowNoteTime && nowNoteTime <= 5) {
+            if (btnX || (auto && nowNoteTime <= 0)) {
+              $bgcolor = color(32,32,32);
+              combo ++;
+              if (-1 <= nowNoteTime && nowNoteTime <= 1) {
+                if (!otonasi) $mplayer.play($se_pan1,0,128);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 1, combo*3));
+                $bgcolor = color(64,64,64);
+                score += combo*3;
+              } else if (-3 <= nowNoteTime && nowNoteTime <= 3) {
+                if (!otonasi) $mplayer.play($se_pan1,0,64);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 2, combo*2));
+                $bgcolor = color(32,32,32);
+                score += combo*2;
+              } else {
+                if (!otonasi) $mplayer.play($se_pan1,0,32);
+                appear(new Effect(noteX + thisDis, noteY, noteColor, 3, combo));
+                $bgcolor = color(0,0,0);
+                score += combo;
+              }
+              notePushAry.set(i,1);
+              noteGetCnt ++;
+              btnX = 0;
+            }
+          }
+        }
+      }
+      if (noteX + thisDis - rectSize <= $screenWidth) {
+        drawText(noteX + thisDis - textWidth, noteY - textHeight, noteText, $clWhite, noteTextSize, 10);
+        fillRect(noteX + thisDis - rectSize , noteY - rectSize  , noteX + thisDis + rectSize, noteY + rectSize, noteColor, 12);
+        drawRect(noteX + thisDis - rectSize , noteY - rectSize  , noteX + thisDis + rectSize, noteY + rectSize, $clWhite, 11);
+      }
+    }
+    if (nowNoteTime < -50) {
+      noteSeek ++;
+      if (!notePush) combo = 0;
+      startNoteTime = frameCnt;
+    }
+  }
+  /////////////////////////////////////////////////////////////////////
+  
+  
+  // 表示関係 /////////////////////////////////////////////////////////
+  $bgcolor -= color(1,1,1);
+  if ($bgcolor < 0) $bgcolor = 0;
+  
+  if (getkey(90)) drawRect(noteX - rectSize -4, noteY - rectSize -4, noteX + rectSize +3, noteY + rectSize +3, color(255,0,0),8);
+  if (getkey(88)) drawRect(noteX - rectSize -5, noteY - rectSize -5, noteX + rectSize +4, noteY + rectSize +4, color(0,0,255),9);
+  
+  
+  for(i=0;i<3;i++){
+    drawRect(noteX - rectSize -i, noteY - rectSize -i, noteX + rectSize +(i-1), noteY + rectSize +(i-1), $clWhite,10);
+  }
+  
+  if (selectBGM == 1) {
+    drawText(0, 0,"MusicPlayerから取得した時間(ミリ秒):"+$mplayer.playerMidiTime,$clWhite,12,10);
+    drawText(0,20,"擬似的に求めた時間(ミリ秒):"+(playerMidiTime_old + (getTime() - beginTime))+"    (フレーム数):"+ playerMidiTime,$clWhite,12,10);
+  } else if (selectBGM == 2) {
+    drawText(0, 0,"MusicPlayerから取得した時間(ミリ秒):"+$mplayer.playerOggTime,$clWhite,12,10);
+    drawText(0,20,"擬似的に求めた時間(ミリ秒):"+(playerOggTime_old + (getTime() - beginTime))+"    (フレーム数):"+ playerOggTime,$clWhite,12,10);
+  }
+  drawText(0,60,"Spaceキー：オートプレイ" ,(!auto)*$clWhite+(!(!auto))*$clGreen,12,10);
+  drawText(0,80,"Enterキー：リセット"     ,$clWhite,12,10);
+  if (!otonasi) drawText(0,100,"Shiftキー：効果音のタイミングをBGMに合わせる",$clWhite,12,10);
+  else          drawText(0,100,"Shiftキー：タイミングをBGMに合わせる(効果音なし)",$clWhite,12,10);
+  
+  drawText(0,340,"Score:"+score      ,$clWhite,12,10);
+  drawText(0,360,"Combo:"+combo      ,$clWhite,12,10);
+  percent = "" + trunc(100 * noteGetCnt / noteTimeAry.size()) +"."+ trunc(1000 * noteGetCnt / noteTimeAry.size())%10;
+  drawText(0,380,"NoteGetCnt:"+ noteGetCnt +"  ("+ percent +"%)" ,$clWhite,12,10);
+  
+  if (selectBGM == 1) {
+    for(i=0;i<5;i++){
+      lineX = $screenWidth-((frameCnt*firstDis+i*60*firstDis*120/156))%(60*firstDis*5*120/156) + 50;
+      drawLine(lineX, 0, lineX, $screenHeight, $clWhite, 1000);
+    }
+  } else if (selectBGM == 2) {
+    for(i=0;i<5;i++){
+      lineX = $screenWidth-((frameCnt*firstDis+i*60*firstDis*120/150))%(60*firstDis*5*120/150) + 50;
+      drawLine(lineX, 0, lineX, $screenHeight, $clWhite, 1000);
+    }
+  }
+/////////////////////////////////////////////////////////////////////
+  
+  
+  frameCnt ++;
+  update();
+}
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+// メソッド定義
+
+function noteSet(time, type, dis){
+  noteTimeAry.add(trunc(localTime));
+  noteTypeAry.add(type);
+  noteDisAry.add(dis);
+  notePushAry.add(0);
+  localTime += time;
+}
+function noteBlankSet(time) {
+  localTime += time;
+}
+
+
+// ノート登録
+function bgmNoteSet(bgm) {
+  var i,j,k;
+  
+  if (bgm == 1) {
+    for(i=0;i<10;i++){
+      noteSet( 60*120/156, 0, 4);
+      noteSet( 60*120/156, 1, 4);
+    }
+    for(i=0;i<4;i++){
+      noteSet( 30*120/156, 0, 4);
+      noteSet( 30*120/156, 1, 4);
+    }
+    noteSet(  90*120/156, 0, 4);
+    for(i=0;i<3;i++) {
+      noteSet(  15*120/156, 1, 4);
+      noteSet( 105*120/156, 1, 4);
+    }
+    noteSet(  120*120/156, 0, 4);
+    for(i=0;i<2;i++) {
+      noteSet(  15*120/156, 1, 4);
+      noteSet( 105*120/156, 1, 4);
+    }
+    noteSet(  15*120/156, 1, 4);
+    noteSet(  60*120/156, 1, 4);
+    noteSet(  75*120/156, 0, 4);
+    noteSet(  90*120/156, 0, 4);
+    for(i=0;i<3;i++) {
+      noteSet(  15*120/156, 1, 4);
+      noteSet( 105*120/156, 1, 4);
+    }
+    noteSet(  120*120/156, 0, 4);
+    
+    noteSet(  15*120/156, 1, 4);
+    noteSet( 105*120/156, 1, 4);
+    noteSet(  15*120/156, 1, 4);
+    noteSet(  55*120/156, 1, 4);
+    noteSet(  60*120/156, 1, 4);
+    noteSet( 140*120/156, 1, 4);
+    
+    for(i=0;i<4;i++)noteSet(  30*120/156, 0, 4);
+    
+    for(i=0;i<11;i++) {
+      noteSet(  15*120/156, 0, 6);
+      noteSet(  15*120/156, 1, 6);
+    }
+    noteSet(  15*120/156, 0, 6);
+    noteSet(  30*120/156, 1, 6);
+    
+    noteSet(  15*120/156, 1, 6);
+    noteSet(  45*120/156, 1, 6);
+    
+    noteSet(  15*120/156, 1, 6);
+    noteSet(  30*120/156, 1, 6);
+    for(i=0;i<11;i++) {
+      noteSet(  15*120/156, 0, 6);
+      noteSet(  15*120/156, 1, 6);
+    }
+    noteSet(  15*120/156, 0, 6);
+    noteSet(  30*120/156, 1, 6);
+    
+    noteSet(  15*120/156, 1, 6);
+    noteSet(  90*120/156, 1, 6);
+    
+    for(i=0;i<4;i++) {
+      noteSet(  30*120/156, 0, 5);
+      noteSet(  30*120/156, 1, 5);
+    }
+    for(i=0;i<8;i++) {
+      noteSet(  60*120/156, 0, 4);
+      noteSet(  60*120/156, 1, 4);
+    }
+    for(i=0;i<16;i++) {
+      noteSet(  30*120/156, 0, 5);
+    }
+    for(i=0;i<8;i++) {
+      noteSet(  30*120/156, 0, 4);
+      noteSet(  15*120/156, 0, 4);
+      noteSet(  15*120/156, 1, 4);
+    }
+    noteBlankSet(120*120/156);
+    for(i=0;i<5;i++) noteSet( 15*120/156, 0, 6);
+    
+    noteBlankSet(45*120/156);
+    for(j=0;j<2;j++) {
+      for(i=0;i<3;i++) {
+        noteSet( 20*120/156, 0, 8);
+        noteSet( 25*120/156, 0, 8);
+        noteSet( 15*120/156, 1, 8);
+      }
+      noteBlankSet(30*120/156);
+      noteSet( 15*120/156, 1, 8);
+      noteSet( 15*120/156, 1, 8);
+      for(i=0;i<3;i++) noteSet( 30*120/156, 1, 8);
+      noteSet( 15*120/156, 1, 8);
+      noteSet( 30*120/156, 1, 8);
+      noteSet( 60*120/156, 1, 8);
+      
+      noteSet( 15*120/156, 0, 8);
+      noteSet( 15*120/156, 1, 8);
+      noteSet( 15*120/156, 1, 8);
+    }
+    
+    for(i=0;i<2;i++) noteSet( 30*120/156, 1, 8);
+    noteSet( 20*120/156, 1, 8);
+    noteSet( 25*120/156, 1, 8);
+    noteSet( 15*120/156, 1, 8);
+    
+    for(i=0;i<5;i++) noteSet( 15*120/156, 0, 8);
+    noteBlankSet(10*120/156);
+    noteSet( 20*120/156, 1, 8);
+    noteSet( 15*120/156, 1, 8);
+    
+    
+    for(k=0;k<2;k++) {
+      for(j=0;j<3;j++) {
+        noteSet( 20*120/156, 1, 8);
+        noteSet( 25*120/156, 1, 8);
+        noteSet( 30*120/156, 1, 8);
+        for(i=0;i<3;i++) noteSet( 15*120/156, 0, 8);
+      }
+      for(i=0;i<8;i++) noteSet( 7.5*120/156, 0, 8);
+      for(i=0;i<8;i++) noteSet( 7.5*120/156, 1, 8);
+      //noteBlankSet(10*120/156);
+    }
+  } else if (bgm == 2) {
+    
+    noteBlankSet(50*120/150);
+    for(i=0;i<8;i++){
+      noteSet( 60*120/150, 0, 3);
+      noteSet( 60*120/150, 1, 3);
+    }
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 40*120/150, 0, 4);
+    noteSet( 20*120/150, 1, 4);
+    noteBlankSet(60*120/150);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteBlankSet(60*120/150);
+    noteSet( 15*120/150, 1, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteSet( 15*120/150, 1, 4);
+    
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 50*120/150, 0, 4);
+    noteSet(  7*120/150, 1, 4);
+    noteSet(  8*120/150, 1, 4);
+    noteSet(  7*120/150, 1, 4);
+    noteBlankSet(48*120/150);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 60*120/150, 1, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 60*120/150, 0, 4);
+    noteSet( 30*120/150, 0, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteSet( 15*120/150, 1, 4);
+    noteBlankSet(120*120/150);
+    for (j=0;j<2;j++){
+      for (i=0;i<3;i++) {
+        noteSet( 30*120/150, 0, 5);
+        noteSet( 30*120/150, 1, 5);
+        noteSet( 30*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+        noteSet( 60*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+        noteSet( 15*120/150, 1, 5);
+      }
+      noteSet( 30*120/150, 1, 5);
+      noteSet( 30*120/150, 0, 5);
+      noteSet( 30*120/150, 0, 5);
+      noteSet( 15*120/150, 1, 5);
+      noteSet( 30*120/150, 0, 5);
+      noteSet( 15*120/150, 1, 5);
+      noteSet( 15*120/150, 0, 5);
+      noteSet( 15*120/150, 1, 5);
+      noteSet( 15*120/150, 0, 5);
+      noteSet( 15*120/150, 1, 5);
+      noteSet( 15*120/150, 0, 5);
+      noteSet( 15*120/150, 1, 5);
+    }
+    for (i=0;i<2;i++){
+      noteSet( 45*120/150, 1, 4);
+      noteSet( 75*120/150, 0, 5);
+      noteSet( 30*120/150, 0, 6);
+      noteSet( 30*120/150, 1, 7);
+      noteSet( 30*120/150, 1, 8);
+      noteSet( 30*120/150, 1, 9);
+    }
+    noteSet(108*120/150, 0, 9);
+    noteSet(  7*120/150, 1, 9);
+    noteSet(  8*120/150, 1, 9);
+    noteSet(  7*120/150, 1, 9);
+    noteBlankSet(108*120/150);
+    noteSet( 75*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet(138*120/150, 1, 9);
+    
+    for(i=0;i<4;i++){
+      noteSet( 15*120/150, 1, 4);
+      noteSet( 15*120/150, 1, 4);
+      noteSet( 15*120/150, 0, 4);
+      noteSet( 30*120/150, 1, 8);
+      noteSet( 15*120/150, 1, 8);
+      noteSet( 30*120/150, 1, 8);
+      noteSet( 30*120/150, 1, 4);
+      noteSet( 30*120/150, 1, 4);
+      noteSet( 30*120/150, 1, 4);
+      noteSet( 30*120/150, 1, 4);
+    }
+    
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 40*120/150, 0, 9);
+    noteSet( 20*120/150, 1, 9);
+    noteBlankSet(60*120/150);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteBlankSet(60*120/150);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 15*120/150, 1, 9);
+    
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 50*120/150, 0, 9);
+    noteSet(  7*120/150, 1, 9);
+    noteSet(  8*120/150, 1, 9);
+    noteSet(  7*120/150, 1, 9);
+    noteBlankSet(48*120/150);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 60*120/150, 1, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 60*120/150, 0, 9);
+    noteSet( 30*120/150, 0, 9);
+    noteSet( 15*120/150, 1, 9);
+    noteSet( 30*120/150, 1, 9);
+    noteSet( 15*120/150, 0, 9);
+    noteSet( 15*120/150, 0, 9);
+    noteSet( 15*120/150, 1, 9);
+    
+  }
+  
+}

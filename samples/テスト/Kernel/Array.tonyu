@@ -1,0 +1,81 @@
+extends classes.lang.Object;
+
+constructor Array() {init();}
+
+function init() { _x=native_init();}
+native native_init ;
+function add(d) { native_add(_x,d);}
+native native_add ;
+function insert(i,o) { _n_insert(_x,i,o); } 
+native _n_insert;
+function get(i) { return native_get(_x,i);}
+native native_get ;
+function set(i,c) { return native_set(_x,i,c);}
+native native_set ;
+function size() { return native_size(_x);}
+native native_size ;
+function delete(i) { return native_delete(_x,i);}
+native native_delete ;
+function indexOf(o) { return native_indexof(_x,o);}
+native native_indexof ;
+function lightIndexOf(o) { return native_lightindexof(_x,o);}
+native native_lightindexof ;
+
+function remove(o) {
+  var i; 
+  i=indexOf(o);
+  if (i>=0) return delete(i);
+  return null;
+} 
+
+native _n_pack;
+function pack(v) {
+   return _n_pack (_x,v);
+}  
+
+function _setBody(x) {
+  native_free(_x);
+  _x=x;
+}
+
+destructor free() { native_free(_x); _x=null; }
+native native_free ;
+
+function gc_mark() {
+    var i,c;
+    i=0;c=size();
+    while(i<c) {
+      native_gc_mark(get(i));i=i+1;
+    }
+}
+
+function clear() {
+   while (size()>0) delete(0);
+}
+
+function load(fn) {
+   var s,eof,ln;
+   s=new FileReader(fn);
+   if (s.error() ) return s.error();
+   eof=0;clear();
+   while (!eof) {
+      ln=s.readLn();
+      if (ln!=null) add(ln); else eof=1;
+   }
+   s.close();
+   return 0;
+}
+
+function save(fn) {
+   var s,ln,lc;
+   s=new FileWriter(fn);
+   if (s.error()) return s.error();
+   lc=size();
+   for (ln in this) {
+       lc-=1; 
+       if (lc==0) s.writeStr(ln); else s.writeLn(ln);
+   }
+   s.close();
+   return 0;
+}
+

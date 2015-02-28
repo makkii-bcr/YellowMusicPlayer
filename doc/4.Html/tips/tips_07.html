@@ -1,0 +1,75 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;Tips・その他&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>YellowMusicPlayerで使用するファイル</h2>
+  <h3>標準Midiplayer2がMidiを鳴らす仕組み</h3>
+  Midiの演奏は、ファイルの読み書きを通して行っています。<br>
+  <br>
+  Midiplayer2は、Kernelフォルダにあるsigファイルを監視しています。<br>
+  Tonyuで $mplayer.play() や $mplayer.stop() でMidiの演奏命令を出す、またはTonyuを終了したとき、<br>
+  Tonyuはsigファイルを書き込みます。<br>
+  sigファイルには次のような内容が書き込まれます。<br>
+  <br>
+  １行目：P, R, S, X (P:Midi演奏(繰り返しなし), R:Midi演奏(繰り返しあり), S:Midi停止, X:Tonyuが終了した)<br>
+  ２行目：演奏するMidiの絶対パス（１行目が PとR のときのみ、パスが書き込まれます）<br>
+  <br>
+  この内容をMidiplayer2が読み込み、Midiを演奏したり停止したり、Midiplayer2が自分自身を終了したりします。<br>
+  Midiplayer2はsigファイルを読み込んだ後、sigファイルを削除します。<br>
+  <h3>YellowMusicPlayerがMidiを鳴らす仕組み</h3>
+  YellowMusicPlayerも、Midiplayer2と同じようにMidiの演奏は、ファイルの読み書きを通して行っています。<br>
+  Midiの演奏にはsigファイルを利用しています。<br>
+  <br>
+  Midiplayer2と挙動が違う部分もあります。<br>
+  Midiplayer2は、sigファイルを読み込んだ後はファイルを削除しますが、<br>
+  YellowMusicPlayerは、sigファイルを読み込んだ後はファイルの内容を空にします。<br>
+  <br>
+  また、YellowMusicPlayerはMidiにエフェクトをかけることができますが、<br>
+  このとき、filesフォルダにある「eff_midi.txt」というファイルを利用していますが、<br>
+  やはりこれもファイルの読み書きを通してエフェクトを設定しています。<br>
+  <br>
+  eff_midi.txtファイルは、Tonyuが書き込み、YellowMusicPlayerが読み込みをしています。<br>
+  <br>
+  ちなみに、eff_midi.txtファイルの内容は４行目まで Tonyu Midi Litest と同じです。<br>
+  つまり、Tonyu Midi Litest を使っていたゲームはそのまま YellowMusicPlayer でも動作します。<br>
+  <br>
+  <h3>YellowMusicPlayerがOggを鳴らす仕組み</h3>
+  Oggの演奏にはfilesフォルダにある「ogg_sig.dat」というファイルを利用しています。<br>
+  ogg_sig.datファイルは、Tonyuが書き込み、YellowMusicPlayerが読み込みをしています。<br>
+  <br>
+  エフェクトには、Midi同様に「eff_midi.txt」ファイルを利用しています。<br>
+  <br>
+  <h3>YellowMusicPlayerの状態取得機能の仕組み</h3>
+  情報取得機能には「YMPStatus.dat」ファイルを利用しています。<br>
+  このファイルは他のファイルとは逆で、YellowMusicPlayerが書き込み、Tonyuが読み込みをして情報を得ます。<br>
+  <br>
+  <h3>YellowMusicPlayerが準備中であることをTonyu側で知る仕組み</h3>
+  これには「YMPPreparation.dat」ファイルを利用しています。<br>
+  YellowMusicPlayerはTonyuから起動されます。そのときにMusicPlayerがこのファイルを作成します。（ファイルの内容は空）<br>
+  MusicPlayerがBGMを鳴らせる準備が完了すると、このファイルを削除します。<br>
+  Tonyu側は、そのファイルが有るか無いかを調べ、それでMusicPlayerが準備完了かどうかを知ることができるのです。<br>
+  <br>
+  <h3>YellowMusicPlayerでDirectMusicのON/OFFを起動時に切り替える仕組み</h3>
+  これには「YMPPreparation.dat」ファイルを利用しています。<br>
+  TonyuからDirectMusicのON/OFFを切り替える時、Tonyuがこのファイルを作成します。（ファイルの内容には設定値が書かれている）<br>
+  YellowMusicPlayerはこのファイルの有無を確認し、あった場合ファイルの中身をもとに、DirectMusicのON/OFFの切り替えが必要かを判断します。<br>
+  切り替えが必要なら、Midiデバイスを初期化します。<br>
+  <br>
+  初期化には少し時間がかかったり、かなり時間がかかったりします。<br>
+  初期化が終わると「YMPPreparation.dat」ファイルを消します。<br>
+  Tonyu側では「YMPPreparation.dat」があれば準備中、なければ準備完了ということがわかります。<br>
+  つまり、初期化が終わったかどうかもTonyu側でわかるわけです。<br>
+  <br>
+   <a href="../tips.html">戻る</a>
+  <hr>
+ </body>
+</html>

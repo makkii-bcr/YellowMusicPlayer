@@ -1,0 +1,262 @@
+extends classes.lang.Object;
+
+native generate;
+
+function doMouseMove() {
+  if (!$mouseSX) return;
+  if ($_tmp_cur_select) {
+    $_tmp_cur_select.mouseDrag(
+    $mouseSX,
+    $mouseSY,
+    $mouseX,
+    $mouseY, $leftButton,$rightButton);
+  } else {
+    if($_mouse_event) 
+    $_mouse_event.onDrag (
+    	    $mouseSX,
+    $mouseSY,
+    $mouseX,
+    $mouseY, $leftButton,$rightButton);
+  }
+  $mouseSX=0;
+}
+
+
+function updateAll () {
+  var i,c,p;
+  i=0;c=$chars.size();
+  setAdjust(0,0);
+  $map.draw();  
+  if($panel) $panel.draw();
+  setAdjust($viewX,$viewY);
+  while(i<c) {
+    p=$chars.get(i);
+    p.draw();  
+    i=i+1;
+  }
+  if ($_inspector_target) $_inspector_target.drawFocus();
+  if ($window) {
+    $window.setSize($screenWidth,$screenHeight,1);
+    //$window.setPos($windowX,$windowY);
+  }
+  doMouseMove();
+}
+
+function onLoadPage() {
+  $execOK=initResource("usr.classes");
+  //print("loading done status="+$execOK);
+}
+
+function initColorConst() {
+  $clBlack=color(8,8,16);
+  $clRed=color(255,0,0);
+  $clGreen=color(0,255,0);
+  $clYellow=color(255,255,0);
+  $clBlue=color(0,0,255);
+  $clPink=color(255,0,255);
+  $clAqua=color(0,255,255);
+  $clWhite=color(255,255,255);
+} 
+
+function startLibraries(path) {
+   var a,b,c;
+   a=getResource(path);
+   if (!a) return;
+   for (b in a.getSubres()) {
+      c=newInstance(b.getName());
+      if (c is Library) c.onLoadPage();
+   }
+}
+
+function onStart() {
+  var init,fs;
+  $_istat_wait      =0;
+  $_istat_progressed=1;
+  $_istat_completed =2;
+  $_istat_error     =3;
+  $systemLibraryPath="classes.lib";
+  startLibraries($systemLibraryPath);
+// 初期化。
+  $mouseSX=0;
+  $_tmp_cur_select=null;
+// 色
+  initColorConst(); 
+  fs=new Sprite();fs.setFont("ＭＳ Ｐゴシック",0,0,0);fs=0;
+// ページ
+  $ProjectManager=new ProjectManager();
+  $Options=$ProjectManager;
+  initResource("project.pages");
+// サウンド
+//  print ("snd:"+$_soundAdded);
+  if (!($mplayer is MediaPlayer) || $_soundAdded==1) {
+    $_soundAdded=0;
+    $mplayer=new MediaPlayer();
+    $mplayer.freeAllSE();
+    $mplayer.init() ; 
+  }
+// グローバル変数
+//  initResource("usr.global");
+// オブジェクト
+  $map=null;
+  if (designMode()) $chars=new Array();
+  $_hashCode=1;
+  $frameManager=null;
+  generate(); 
+// ランキング
+  initResource("usr.$ranking");
+// その他周辺機器
+  $window=new Window();
+  $Joystick=new Joystick(0);
+  $Joystick2=new Joystick(1);
+  $InputBox=new InputBox();
+  $SelectBox=new SelectBox();
+  $TextEditor=new TextEditor();
+  $mouseManager=new MouseManager();
+  $System=new System();
+  new Math();
+//  $_mouse_event= new MouseEvent();
+// マップ
+//  initResource("usr.mappat");
+  if (!$map) {
+    $map=new Map();
+    $map.setBGColor(color(20,80,180));
+    $map.init(0,0,320,320);
+  }
+  $map.refreshChips(0,0);
+// パネル
+  if (!$panel || $screenWidth>$panel.width || $screenHeight>$panel.height ) {
+    $panel=new Panel($screenWidth,$screenHeight);
+  } else {
+    $panel.clear();
+  }
+}
+
+function onStop() {
+  var a,b,o;
+  a=getResource("usr.gen").getSubRes();
+  for ( b in a ) {
+    o=getGlobal(b.getName());
+    if (o is PlainChar && o.isDied()) setGlobal(b.getName(),null);
+  }
+  $procs=null;
+  $chars=null;
+  //print ("process stopeed");
+  if ($mplayer) $mplayer.stop(); 
+}
+
+function onDesign() {
+}
+
+function design () {
+  $_design_mode=1;
+  $_seamLessLoad=0;
+  onStart();
+  //print ("play stopeed");
+  if ($mplayer) {
+    $mplayer.stop();
+    $mplayer.setEnable(0);
+  }
+  onDesign();
+  print ("設計中です");
+  while(1) {
+    updateAll();
+    suspend();
+  }
+}
+
+function onExecute() {
+  if ($frameManager) $frameManager.onStart();
+}
+
+function execute() {
+  var i,c,p,hwn;
+  /*E*/
+  $_design_mode=0;
+  /*D*/
+  $curProcGroup=new ProcessGroup();
+  $curProcGroup.setCurrent();
+  onStart();
+  print ("実行中です");
+  onExecute();
+  $_seamLessLoad=0;
+  while(1) {
+    //i=0; 
+    getkey();
+    $curProcGroup.exec();
+    /*A*/
+    doMouseMove();
+    if ($window) {
+        $window.setSize($screenWidth,$screenHeight,$window.sizeable);
+        $window.setPos($windowX,$windowY);
+    }
+    if ($panel)
+        $panel.resize($screenWidth,$screenHeight);
+    if ($mouseManager)
+        $mouseManager.refreshXY();
+ 
+    if ($_doDraw){
+       $curProcGroup.draw();
+    } 
+    /*B*/
+    suspend();
+    $frameCount=$curProcGroup.frameCount;
+    /*C*/
+  }
+}
+
+function progress () {
+  while (1) {
+    //print("test");
+    suspend();
+  } 
+}
+
+$_mouse_event= new MouseEvent();
+/*E if (!$execOK) {
+     print ("コンパイルエラーがあるので実行できません");
+      return;
+  }*/
+/*D $frameCount=2; 
+  $waitProcs=new WaitProc();
+  $procs=new ProcessList();*/
+/*A  if ($frameManager) $frameManager.onBeforeMove();
+    for (p in $procs) {
+      if ( p.aobj) {
+        if ( p.aobj.died ){
+          p.kill(); 
+          $procs.set(i,0);
+        } else if (p.nextWake) {
+          p.deletedFromProcs=1;
+          $procs.set(i,0);
+        } else if (p.halted() ){
+          if (p.autoKill) p.aobj.die();
+          p.kill();
+          $procs.set(i,0);
+        } else {
+          p.exec();
+        }
+      }
+      i+=1;
+    }
+    $procs.pack();
+    if ($frameManager) $frameManager.onAfterMove();
+*/
+/*B  p=0;
+    i=0;c=$chars.size();
+    while(i<c) {
+      p=$chars.get(i);
+      if ( p.died ){
+        //p.x=null;p.y=null;
+        p.clearAllValues();
+        p.died=1;    // clearAllでdiedが0になっちゃうから
+        $chars.delete(i);
+        c+=-1;
+      } else {
+        if ($_doDraw && p._visible) p.draw();
+        i+=1;
+      }
+    }
+    p=0;*/
+/*C $frameCount+=1; 
+    $waitProcs.autoWake($frameCount);*/
+    

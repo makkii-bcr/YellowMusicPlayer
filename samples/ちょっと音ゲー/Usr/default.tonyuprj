@@ -1,0 +1,37 @@
+<resourcelist name="project">
+ <resourcelist name="pages">
+<Page name="$page_index" src="index.cmml"/>
+ </resourcelist>
+ <resourcelist name="params">
+  <param name="commentID" value="10703150"/>
+  <param name="sound_stopOnPageLoad" value="1"/>
+  <param name="savedVersion" value="1260"/>
+  <param name="sleep_time" value="0"/>
+  <param name="mainPage" value="$page_index"/>
+  <param name="cond" value="再配布、改造ともに無断で許可"/>
+  <param name="title" value="ちょっと音ゲー"/>
+  <param name="author" value="マッキー"/>
+  <param name="version" value="1.0"/>
+  <param name="mail" value=""/>
+  <param name="web" value=""/>
+ </resourcelist>
+ <resourcelist name="classes">
+  <class name="Ymplayer" src="Ymplayer.tonyu" category=""/>
+  <class name="Main" src="Main.tonyu" category=""/>
+  <class name="Effect" src="Effect.tonyu" category=""/>
+ </resourcelist>
+ <resourcelist name="sounds">
+<BGM name="$se_Para01" src="Para01.mid"/>
+<SoundEffect name="$se_pan1" src="pan1.wav"/>
+<SoundEffect name="$se_pan2" src="pan2.wav"/>
+ </resourcelist>
+ <resourcelist name="filelist">
+<Page name="r_0" src="index.cmml"/>
+<Page name="r_1" src="Ymplayer.tonyu"/>
+<Page name="r_2" src="Main.tonyu"/>
+<Page name="r_3" src="Effect.tonyu"/>
+<Page name="r_4" src="Para01.mid"/>
+<Page name="r_5" src="pan1.wav"/>
+<Page name="r_6" src="pan2.wav"/>
+ </resourcelist>
+</resourcelist>

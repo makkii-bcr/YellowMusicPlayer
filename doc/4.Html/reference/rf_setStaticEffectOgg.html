@@ -1,0 +1,151 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setStaticEffectOgg</h2>
+  Oggの再生前・停止前にあらかじめ設定するエフェクト関係の項目をセットします<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+setStaticEffectOgg(fadeInTime, fadeOutTime, startTime, loopStartTime, loopEndTime, fileLoop)
+</pre>
+<dl>
+<dt>fadeInTime(省略可能)</dt>
+<dd>フェードインしながら再生する時間（ミリ秒）(1～)、フェードインしないなら0</dd>
+<dt>fadeOutTime(省略可能)</dt>
+<dd>フェードアウトしながら停止する時間（ミリ秒）(1～)、フェードアウトしないなら0</dd>
+<dt>startTime(省略可能)</dt>
+<dd>再生開始する時間をミリ秒単位で指定(1～(再生するoggの総再生時間-1))、指定しないなら0<br>
+    ※ loopEndTimeが0以外の時は、値を指定できる範囲は(1～loopEndTime)になります</dd>
+<dt>loopStartTime(省略可能)</dt>
+<dd>ループした後に戻る再生位置(ループ始端)をミリ秒単位で指定(1～(再生するoggの総再生時間-40))、指定しないなら0</dd>
+<dt>loopEndTime(省略可能)</dt>
+<dd>ループする再生位置(ループ終端)をミリ秒単位で指定(1～(再生するoggの総再生時間) ＆ loopStartTime + 40 以上)、指定しないなら0</dd>
+<dt>fileLoop(省略可能)</dt>
+<dd>OggファイルがOggループ(RPGツクール用ループ)に対応していて、そのループを使うなら1、使わないなら0<br>
+    ※ 対応していなかったら通常のループになるが、fileLoop が 1 なら loopStartTime, loopEndTime の値は無視される</dd>
+</dl>
+<br>
+<b>【startTime, loopStartTime, loopEndTime の関係】</b><br>
+<img src="../res/rf_01.png" border=1><br>
+<br>
+<br>
+メソッドから設定する以外に、Ymplayerクラスの変数を直接変更する方法もあります。<br>
+変数を変更した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+<ul>
+<li>oggFadeInTime</li>
+<li>oggFadeOutTime</li>
+<li>oggStartTime</li>
+<li>oggLoopStartTime</li>
+<li>oggLoopEndTime</li>
+<li>oggFileLoop</li>
+</ul>
+  <h3>例１</h3>
+  メソッドを使う場合<br>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、起動してから一度midiを再生しないとoggを再生できない
+wait(20);
+$mplayer.stop();
+wait(20);
+oggFadeInTime    = 0;
+oggFadeOutTime   = 0;
+oggStartTime     = 0;
+oggLoopStartTime = 0;
+oggLoopEndTime   = 0;
+oggFileLoop      = 0;
+while (1) {
+  if (getkey(65)  > 0 && oggFadeInTime    > 0) oggFadeInTime    -= 50;     // A:フェードイン－
+  if (getkey(83)  > 0)                         oggFadeInTime    += 50;     // S:フェードイン＋
+  if (getkey(68)  > 0 && oggFadeOutTime   > 0) oggFadeOutTime   -= 50;     // D:フェードアウト－
+  if (getkey(70)  > 0)                         oggFadeOutTime   += 50;     // F:フェードアウト＋
+  if (getkey(71)  > 0 && oggStartTime     > 0) oggStartTime     -= 100;    // G:開始位置－
+  if (getkey(72)  > 0)                         oggStartTime     += 100;    // H:開始位置＋
+  if (getkey(74)  > 0 && oggLoopStartTime > 0) oggLoopStartTime -= 100;    // J:ループ開始位置－
+  if (getkey(75)  > 0)                         oggLoopStartTime += 100;    // K:ループ開始位置＋
+  if (getkey(76)  > 0 && oggLoopEndTime   > 0) oggLoopEndTime   -= 100;    // L:ループ終了位置－
+  if (getkey(187) > 0)                         oggLoopEndTime   += 100;    // ;:ループ終了位置＋
+  if (getkey(186) == 1)                        oggFileLoop = !oggFileLoop; // ::OggループON/OFF
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setStaticEffectOgg</strong>(oggFadeInTime, null, oggStartTime, oggLoopStartTime, oggLoopEndTime, oggFileLoop); // フェードアウト以外を変更
+    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.play("test.ogg", 1);
+  }
+  if (getkey(88)==1) { // X:停止
+    $mplayer.setStaticEffectOgg(null, oggFadeOutTime, null, null); // フェードアウトのみ変更
+    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.stop();
+  }
+  
+  drawText(100,   0, "フェードイン　：" + oggFadeInTime   , $clWhite);
+  drawText(100,  20, "フェードアウト：" + oggFadeOutTime  , $clWhite);
+  drawText(100,  40, "開始位置　　　：" + oggStartTime    , $clWhite);
+  drawText(100,  60, "ループ開始位置：" + oggLoopStartTime, $clWhite);
+  drawText(100,  80, "ループ終了位置：" + oggLoopEndTime  , $clWhite);
+  drawText(100, 100, "Oggループ　　 ：" + oggFileLoop     , $clWhite);
+  update();
+}
+</pre>
+  <h3>例２</h3>
+  変数を直接変更する場合<br>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、起動してから一度midiを再生しないとoggを再生できない
+wait(20);
+$mplayer.stop();
+wait(20);
+while (1) {
+  
+  if (getkey(65)  > 0 && $mplayer.oggFadeInTime    > 0) $mplayer.oggFadeInTime    -= 50;              // D:フェードイン－
+  if (getkey(83)  > 0)                                  $mplayer.oggFadeInTime    += 50;              // F:フェードイン＋
+  if (getkey(68)  > 0 && $mplayer.oggFadeOutTime   > 0) $mplayer.oggFadeOutTime   -= 50;              // A:フェードアウト－
+  if (getkey(70)  > 0)                                  $mplayer.oggFadeOutTime   += 50;              // S:フェードアウト＋
+  if (getkey(71)  > 0 && $mplayer.oggStartTime     > 0) $mplayer.oggStartTime     -= 100;             // J:開始位置－
+  if (getkey(72)  > 0)                                  $mplayer.oggStartTime     += 100;             // K:開始位置＋
+  if (getkey(74)  > 0 && $mplayer.oggLoopStartTime > 0) $mplayer.oggLoopStartTime -= 100;             // G:ループ開始位置－
+  if (getkey(75)  > 0)                                  $mplayer.oggLoopStartTime += 100;             // H:ループ開始位置＋
+  if (getkey(76)  > 0 && $mplayer.oggLoopEndTime   > 0) $mplayer.oggLoopEndTime   -= 100;             // L:ループ終了位置－
+  if (getkey(187) > 0)                                  $mplayer.oggLoopEndTime   += 100;             // ;:ループ終了位置＋
+  if (getkey(186) == 1)                                 $mplayer.oggFileLoop = !$mplayer.oggFileLoop; // ::OggループON/OFF
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.play("test.ogg", 1);
+  }
+  if (getkey(88) == 1) { // X:停止
+    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.stop();
+  }
+  
+  drawText(100,   0, "フェードイン　：" + $mplayer.oggFadeInTime   , $clWhite);
+  drawText(100,  20, "フェードアウト：" + $mplayer.oggFadeOutTime  , $clWhite);
+  drawText(100,  40, "開始位置　　　：" + $mplayer.oggStartTime    , $clWhite);
+  drawText(100,  60, "ループ開始位置：" + $mplayer.oggLoopStartTime, $clWhite);
+  drawText(100,  80, "ループ終了位置：" + $mplayer.oggLoopEndTime  , $clWhite);
+  drawText(100, 100, "Oggループ　　 ：" + $mplayer.oggFileLoop     , $clWhite);
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

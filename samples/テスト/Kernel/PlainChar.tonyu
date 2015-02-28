@@ -1,0 +1,244 @@
+extends classes.scr.Sprite;
+
+native _changeAttr;
+//native _inspect;
+//native _dynamicInspect;
+
+constructor PlainChar(xx,yy){
+ x=xx;
+ y=yy;
+ zOrder=0; 
+ _visible=1;
+ died=0;
+ _generator=0;
+ onCreate();	
+ super();
+}
+
+function onCreate() {
+
+}
+
+function setDefaultProperties(xx,yy) {
+  x=xx;y=yy;
+  changeAttr("x",x);
+  changeAttr("y",y);
+}
+
+function getGenerator() {
+  return _generator;
+}
+function setGenerator(g) {
+  _generator=g;
+  return g;
+}
+
+function inspect () {
+ if ($_design_mode==1 && _generator) {
+  //print("!!!"+_generator);
+  _inspect(_generator);
+  $_inspector_target=this;
+ } else _dynamicInspect();
+}
+
+function changeAttr (an,v) {
+ if (_generator!=0) {
+  _changeAttr (_generator,an,v);
+  onChangeAttr(an,v);
+ }
+}
+
+function onChangeAttr(an,v){
+}
+
+function onMouseDown (xx,yy,lb,rb) {
+}
+function onMouseDownForDesign (xx,yy,lb,rb) {
+}
+
+function mouseDown (xx,yy,lb,rb) {
+ if (!designMode()) onMouseDown (xx,yy,lb,rb);
+ else onMouseDownForDesign (xx,yy,lb,rb);
+ inspect();
+}
+
+function onMouseDrag (sx,sy,dx,dy,lb,rb) {
+}
+function onMouseDragDesign (sx,sy,dx,dy,lb,rb) {
+}
+
+function mouseDrag (sx,sy,dx,dy,lb,rb) {
+ if (!designMode()) onMouseDrag (sx,sy,dx,dy,lb,rb);
+ else onMouseDragDesign (sx,sy,dx,dy,lb,rb);
+ if ($_design_mode==1) {
+  if (lb) {
+   x=x+(dx-sx);
+   y=y+(dy-sy);
+   changeAttr("x",x);
+   changeAttr("y",y);
+  }
+ }
+ inspect();
+}
+
+function getWidth() {
+  return 16;
+}
+function getHeight() {
+  return 16;
+}
+
+function crashTo(pp,xx,yy){
+// 他のオブジェクトと衝突しているかどうかを判定します。<HID=23>
+  if (!pp)return 0;
+  if ( abs(pp.x-(x+xx))*2 < getWidth()+pp.getWidth() ) {
+   return  abs(pp.y-(y+yy))*2 < getHeight()+pp.getHeight() ;
+  }
+  return 0;
+}
+function crashAt(xx,yy){
+  if (abs(xx-x)*2<getWidth()) {
+    return (abs(yy-y)*2<getHeight());
+  }
+  return 0;
+}
+
+function onDraw() {
+// オブジェクトに描画をするときに、特別な処理をする場合にユーザが定義するメソッドです。<HID=90>
+}
+function drawFocus() {
+      var w,h,xx,yy;
+      xx=x;yy=y;
+      w=getWidth()*0.5+4;h=getHeight()*0.5+4;
+      drawSprite(xx-w,yy-h,0);
+      drawSprite(xx+w,yy-h,0);
+      drawSprite(xx-w,yy+h,0);
+      drawSprite(xx+w,yy+h,0);
+}
+
+function draw() {
+/*    if ($_design_mode==1 && $_inspector_target==this ) {
+       drawFocus();
+    }*/
+    onDraw();
+}
+
+function onUpdate() {
+//updateメソッドが呼び出されたときに特別な処理をしたいときにユーザが定義するメソッドです。<HID=28>
+}
+
+function update() {
+//オブジェクトの書き換え処理を行います。<HID=24>
+   if (!_updating) {
+       _updating=1;
+       onUpdate();
+       _updating=0;
+   }   
+   suspend();
+}
+
+function updateEx(time) {
+   while (time>0) {update(); time-=1; }
+}
+
+function onDie() {
+//オブジェクトが死んだときに特別な処理をしたいときにユーザが定義するメソッドです。<HID=52>
+}
+function die() {
+//オブジェクトを殺します。<HID=27>
+  if(!died) {
+    onDie();
+    died=1;
+  }
+}
+function isDied() {
+//オブジェクトが死んでいるかどうかを判定します。<HID=97>
+  return died;
+}
+function isDead() {
+//オブジェクトが死んでいるかどうかを判定します。<HID=97>
+  return died;
+}
+
+
+
+function wait(w) {
+//オブジェクトの動作を一時的に停止し、待機状態にします。<HID=91>
+  if (_pProc) _pProc.wait(w);
+}
+
+function notify() {
+//waitメソッドで待機状態にあるオブジェクトの動作を再開します<HID=92>
+  if (_pProc) _pProc.notify();
+}
+
+function setVisible(v) {
+//オブジェクトの表示・非表示を設定します。<HID=96>
+  _visible=v;
+}
+
+function getVisible(v) {
+//setVisibleメソッドで指定したオブジェクトの表示・非表示状態を取得します。<HID=101>
+  return _visible;
+}
+
+function screenOut(a) {
+//オブジェクトが画面外に出たかどうかを判定します。<HID=116>
+   var r; r=0;
+   if (x<$viewX+a)               r+=$viewX+a-x;
+   if (y<$viewY+a)               r+=$viewY+a-y;
+   if (x>$screenWidth +$viewX-a) r+=x-($screenWidth +$viewX-a);
+   if (y>$screenHeight+$viewY-a) r+=y-($screenHeight+$viewY-a);
+   return r;
+}
+
+function getScreenX(r) {
+//オブジェクトのスクリーン座標を得ます。<HID=114>
+  if (r==null) return x-$viewX;
+  return r-$viewX;
+}
+function getScreenY(r) {
+//オブジェクトのスクリーン座標を得ます。<HID=114>
+  if (r==null) return y-$viewY;
+  return r-$viewY;
+}
+function gotoScreen(xx,yy) {
+//オブジェクトの位置をスクリーン座標を用いて指定します。<HID=114>
+  x=$viewX+xx;
+  y=$viewY+yy;
+}
+function onAppear() {
+}
+
+function waitSelect(prompt,title) {
+   if (!title) $selectBox.open(prompt);
+   else $selectBox.open(prompt,title);
+   while (!$selectBox.getStatus()) update();
+   return $selectBox.getStatus()==1;
+}
+
+function waitInput(title,prompt,default) {
+   $inputBox.open(title,prompt,default);
+   while (!$inputBox.getStatus()) update();
+   return $inputBox.getText();
+}
+function crashToLine(sx,sy,dx,dy,width,xx,yy){
+  var p,q,cx,cy;
+  if (xx==null) {
+    cx=x-sx;cy=y-sy;
+  } else {
+    cx=xx-sx;cy=yy-sy;
+  }
+  sx=dx-sx;
+  sy=dy-sy;
+  dx=sx*sx+sy*sy;
+  p=(  sx*cx +sy*cy)/dx;
+  q=( -sy*cx +sx*cy)/dx*dist(sx,sy);
+  return (p>=0 && p<=1 && abs(q)*2<width ); 
+}
+
+function run() {
+  while(1) update();
+}
+
+wait();

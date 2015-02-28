@@ -1,0 +1,14 @@
+extends CustomResource;
+
+native _n_play;
+function play(ar) {
+   return _n_play (getURL(),ar);
+}
+
+function onInit() {
+  setGlobal(getName(),this);
+  return $_istat_completed; 
+}
+
+function release() {
+}

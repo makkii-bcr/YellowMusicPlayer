@@ -1,0 +1,77 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+ </head>
+ <body>
+  <h1>
+   <img src="res/icon.png" align="top">
+   &nbsp;導入方法&nbsp;
+   <img src="res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>YellowMusicPlayerの導入</h2>
+  ダウンロードしたファイルの「0.Program」フォルダ内に本体が入っています。<br>
+  <img src="res/in_01.png" border=1><br>
+  <br>
+  導入には「Midiplayer2.exe」と「GuruGuruSMF.dll」が必要なので、この２つをコピーしてください。<br>
+  <img src="res/in_02.png" border=1><br>
+  <br>
+  YellowMusicPlayerを導入したいTonyuランタイム版または開発環境版の、Kernelフォルダを開きます。<br>
+  先程の「GuruGuruSMF.dll」と「Midiplayer2.exe」を、Kernelフォルダへ貼り付けしてください。<br>
+  （「Midiplayer2.exe」は上書きしてください）<br>
+  <img src="res/in_03.png" border=1><br>
+  <br>
+  Kernelフォルダ内に「GuruGuruSMF.dll」と「Midiplayer2.exe」が貼り付けられたら導入完了です。<br>
+  <img src="res/in_04.png" border=1><br>
+  <br>
+  <h2>Ymplayer.tonyuの導入</h2>
+  従来のMidiPlayer2のように、Midiの再生・停止だけであれば上記だけで結構ですが、<br>
+  YellowMusicPlayerの機能を使うには、Ymplayer.tonyuも導入してください。<br>
+  また、標準の$mplayerにはバグの原因となるコードがあるので、<br>
+  気になる場合は、Ymplayer.tonyuを導入してください。<br>
+  <br>
+  Ymplayer.tonyuは「0.Program」フォルダ内に入っています。<br>
+  「Ymplayer.tonyu」をコピーします。<br>
+  <img src="res/in_05.png" border=1><br>
+  <br>
+  YellowMusicPlayerの機能を使いたいゲームプロジェクトのフォルダを開きます。<br>
+  <img src="res/in_06.png" border=1><br>
+  <br>
+  「Ymplayer.tonyu」を貼り付けます。<br>
+  <img src="res/in_07.png" border=1><br>
+  <br>
+  Tonyuの開発環境版を開き、先ほどのゲームプロジェクトを開きます。<br>
+  下の画像のように、「オブジェクトを作成する」のチェックをはずし、<br>
+  クラス名の欄に「Ymplayer」と打ち込み、OKを押します。<br>
+  <img src="res/in_08.png" border=1><br>
+  <br>
+  あとは、プログラム内でYmplayerクラスのオブジェクトを生成し、<br>
+  そのオブジェクトからメソッドを使えば、YellowMusicPlayerの機能を使うことができます。<br>
+  <br>
+  オブジェクトを生成する際、「$mplayer = new Ymplayer();」とすると、<br>
+  今まで$mplayerを使っていたプログラムも改変せずにそのまま使えるので便利です。<br>
+  <br>
+  <h2>Ymplayer.tonyuの導入しない場合</h2>
+  従来のMidiPlayer2のように、Midiの再生・停止だけであれば、Ymplayer.tonyuを導入する必要はありません。<br>
+  上記の「YellowMusicPlayerの導入」を行うだけで、すぐにYellowMusicPlayerを使えます。<br>
+  <br>  
+  しかし、従来の$mplayerにはバグの原因となるコードがあるので、<br>
+  Ymplayer.tonyuの導入しない場合は、修正版「MediaPlayer.tonyu」を上書きすることをお勧めします。<br>
+  <br>
+  修正版MediaPlayer.tonyuは「0.Program」フォルダ内に入っています。<br>
+  「MediaPlayer.tonyu」をコピーします。<br>
+  <img src="res/in_09.png" border=1><br>
+  <br>
+  YellowMusicPlayerを導入したTonyuランタイム版、または開発環境版の<br>
+  Kernelフォルダ内のUtilフォルダを開きます。<br>
+  <img src="res/in_10.png" border=1><br>
+  <br>
+  「MediaPlayer.tonyu」を貼り付けて上書きします。<br>
+  <img src="res/in_11.png" border=1><br>
+  <br>
+  <a href="../ReadMe.html">戻る</a>
+  <hr>
+ </body>
+</html>

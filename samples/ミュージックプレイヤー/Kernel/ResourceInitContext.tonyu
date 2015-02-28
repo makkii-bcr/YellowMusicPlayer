@@ -1,0 +1,17 @@
+extends Object;
+
+function wait() {
+  w=w+1;
+}
+
+function completed() {
+  c=c+1;
+}
+
+function progressed() {
+  p=p+1;
+}
+
+function error() {
+  e=e+1;
+}

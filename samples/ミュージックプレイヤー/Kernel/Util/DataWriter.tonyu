@@ -1,0 +1,64 @@
+extends Object;
+
+constructor DataWriter(rr) {
+  r=rr;
+}
+
+function write(d) {
+  return r.write(d);
+}
+
+function writeInt(d) {
+  var m;
+  if (d>=0) {
+   d=trunc(d);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+  } else {
+   d=2147483647+1+trunc(d);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256;  
+   r.write(m);
+   d=trunc((d-m)/256);
+   m=d % 256 + 128;  
+   r.write(m);
+   d=trunc((d-m)/256);
+  }
+}
+
+function writeString(s) {
+  var e,i,l;
+  if (!(s is String)) return;
+  l=s.byteLength();
+  writeInt(l);
+//  if (l==7) print (s+"/len="+l);
+  i=0; 
+  while (i<l) {
+   e=s.byteAt(i);
+   write(e);
+   i+=1;
+  }
+}
+
+function eof() {
+  return r.eof();
+}
+
+function close() {
+  r.close();
+}

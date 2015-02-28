@@ -1,0 +1,32 @@
+extends Object;
+
+function loadPage(s) {
+  if(s) {
+    $_seamLessLoad=1;
+    if ($mplayer is MediaPlayer) {
+      if ($Options.get("sound_stopOnPageLoad") ) $mplayer.stop();
+    } 
+    s.open();
+  }else print(strcat("Cannot load ",s));
+}
+
+native _n_currentPageName;
+function getCurrentPageName() {
+	return _n_currentPageName();
+}
+
+native _n_onSet;
+function set(key,val) {
+   if (val==null) _n_onSet(key,1);
+   else _n_onSet(key,val);  
+}
+
+native _n_onGet;
+function get(key,val) {
+   var r,v;
+   r= _n_onGet(key,val);  
+   v= valueOf(r);
+   if (v!=null) return v;
+   return r;
+}
+

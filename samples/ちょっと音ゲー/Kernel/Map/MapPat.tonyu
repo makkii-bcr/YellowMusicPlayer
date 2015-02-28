@@ -1,0 +1,7 @@
+extends CustomResource;
+
+function onInit() {
+  setGlobal(getName(),this);
+  
+}
+

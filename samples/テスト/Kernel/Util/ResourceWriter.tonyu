@@ -1,0 +1,48 @@
+extends Object;
+
+native _n_init;
+constructor ResourceWriter(r) {
+  if (r is Resource) {
+    $_tmp_rwrt=r;
+    _r=_n_init();
+    _eof=0;
+  }
+}
+
+native _n_writeInt;
+function writeInt(d) {
+  if (_r) {
+   return _n_writeInt(_r,d);
+  }
+}
+
+native _n_write;
+function write(d) {
+  if (_r) {
+   return _n_write(_r,d);
+  }
+}
+
+function eof() {
+  return _eof;
+}
+
+function writeString(s) {
+  var e,i,l;
+  if (!(s is String)) return;
+  l=s.length();
+  writeInt(l);
+  i=0; 
+  while (i<l) {
+   e=s.charAt(i);
+   write(e);
+   i+=1;
+  }
+}
+
+native _n_close;
+function close(){
+  if (_r) {
+    _n_close(_r);
+  }
+}
