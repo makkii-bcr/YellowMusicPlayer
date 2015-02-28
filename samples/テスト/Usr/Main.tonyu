@@ -457,6 +457,7 @@ while(1) {
   }
   drawText(10, $screenHeight-20, "FPS:"+fps, $clWhite);
   
+  if ($mplayer.getPlayerPreparation()) drawText(10, $screenHeight-40, "MusicPlayer €”õ’†c", $clYellow);
   
   update();
 }

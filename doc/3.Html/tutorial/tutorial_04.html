@@ -33,14 +33,14 @@ midiFadeInTime  = 0;
 midiKeyShift    = 0;
 midiStartTick   = 0;
 while (1) {
-  if (getkey(65) > 0)      midiFadeInTime  -= 50;  // A:フェードイン－
-  if (getkey(83) > 0)      midiFadeInTime  += 50;  // S:フェードイン＋
-  if (getkey(68) > 0)      midiFadeOutTime -= 50;  // D:フェードアウト－
-  if (getkey(70) > 0)      midiFadeOutTime += 50;  // F:フェードアウト＋
-  if (getkey(71) > 0)      midiStartTick   -= 100; // G:開始ティック－
-  if (getkey(72) > 0)      midiStartTick   += 100; // H:開始ティック＋
-  if (getkey(74) % 5 == 1) midiKeyShift    --;     // J:キーシフト－
-  if (getkey(75) % 5 == 1) midiKeyShift    ++;     // K:キーシフト＋
+  if (getkey(65) > 0 && midiFadeInTime  > 0) midiFadeInTime  -= 50;  // A:フェードイン－
+  if (getkey(83) > 0)                        midiFadeInTime  += 50;  // S:フェードイン＋
+  if (getkey(68) > 0 && midiFadeOutTime > 0) midiFadeOutTime -= 50;  // D:フェードアウト－
+  if (getkey(70) > 0)                        midiFadeOutTime += 50;  // F:フェードアウト＋
+  if (getkey(71) > 0 && midiStartTick   > 0) midiStartTick   -= 100; // G:開始ティック－
+  if (getkey(72) > 0)                        midiStartTick   += 100; // H:開始ティック＋
+  if (getkey(74) % 5 == 1)                   midiKeyShift    --;     // J:キーシフト－
+  if (getkey(75) % 5 == 1)                   midiKeyShift    ++;     // K:キーシフト＋
   if (getkey(90) == 1) { // Z:再生
     $mplayer.<strong>setMidiFadeInTime</strong>(midiFadeInTime); // フェードイン設定
     $mplayer.<strong>setMidiStartTick</strong>(midiStartTick);   // 開始位置設定（ティック単位）

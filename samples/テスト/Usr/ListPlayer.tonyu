@@ -147,7 +147,7 @@ function run(_midiAry, _oggAry) {
               drawText(300, 110 + 15*i, midiAry.get(idx).getName(), col, 9);
               idxTotalTime = midiAryTotalTime.get(idx);
               if (idxTotalTime != null) {
-                drawText(570, 110 + 15*i, ""+(idxTotalTime/600%6)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
+                drawText(570, 110 + 15*i, ""+trunc(idxTotalTime/600)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
               }
               if (playBgm == 0 && playNo == idx) drawText(284, 110 + 15*i, "≫", col, 9);
             }
@@ -160,7 +160,7 @@ function run(_midiAry, _oggAry) {
               drawText(300, 110 + 15*i, oggAry.get(idx), col, 9);
               idxTotalTime = oggAryTotalTime.get(idx);
               if (idxTotalTime != null) {
-                drawText(570, 110 + 15*i, ""+(idxTotalTime/600%6)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
+                drawText(570, 110 + 15*i, ""+trunc(idxTotalTime/600)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
               }
               if (playBgm == 1 && playNo == idx) drawText(284, 110 + 15*i, "≫", col, 9);
             }
@@ -185,8 +185,8 @@ function run(_midiAry, _oggAry) {
       drawLine(10+barX, 420, 10+barX, 430, color(32 + trunc(223*(barX - trunc(barX))), 32 + trunc(223*(barX - trunc(barX))), trunc(32*(1 - (barX - trunc(barX))))), 7);
       
       
-      drawText(10, 450, ""+(playTime/600%6)+(playTime/60%10)+":"+(playTime/10%6)+(playTime%10)+" / "+
-                           (playTotalTime/600%6)+(playTotalTime/60%10)+":"+(playTotalTime/10%6)+(playTotalTime%10)
+      drawText(10, 450, ""+trunc(playTime/600)+(playTime/60%10)+":"+(playTime/10%6)+(playTime%10)+" / "+
+                           trunc(playTotalTime/600)+(playTotalTime/60%10)+":"+(playTotalTime/10%6)+(playTotalTime%10)
                         , $clWhite, 12);
     }
     
@@ -242,6 +242,7 @@ function playingFunc() {
       $mplayer.setMidiStartTick(0);
       $mplayer.setOggStartTime(0);
       $mplayer.updatePlayingInfomation();
+      playStopCnt = 0;
       playSW ++;
     } else if (playSW == 2) { // 再生開始
       if ((playBgm == 0 && $mplayer.getPlayerMidiStatus() == 0) ||
@@ -249,7 +250,11 @@ function playingFunc() {
       {
         if (!playBgm) $mplayer.play(midiAry.get(playNo));
         else          $mplayer.play(oggAry.get(playNo));
+        playPlayCnt = 0;
         playSW ++;
+      } else {
+        playStopCnt ++;
+        if (playStopCnt >= 20) playSW --;
       }
     } else if (playSW == 3) { // 再生されたか確認
       if ((playBgm == 0 && $mplayer.getPlayerMidiStatus() == 1) ||
@@ -260,6 +265,9 @@ function playingFunc() {
         else          playNo = oggAry.indexOf($mplayer.getPlayerOggPlayName());
         playStopCnt = 0;
         playSW ++;
+      } else {
+        playPlayCnt ++;
+        if (playPlayCnt >= 20) playSW --;
       }
     } else if (playSW == 4) { // 次のBGM再生
       // 経過を記録

@@ -36,12 +36,12 @@ midiTempo  = 1;
 midiPitch  = 0;
 v = 1;
 while (1) {
-  if (getkey(65) > 0) midiVolume --;       // A:音量－
-  if (getkey(83) > 0) midiVolume ++;       // S:音量＋
-  if (getkey(68) > 0) midiTempo  -= 0.125; // D:テンポ－
-  if (getkey(70) > 0) midiTempo  += 0.125; // F:テンポ＋
-  if (getkey(71) > 0) midiPitch  -= 64;    // G:ピッチ－
-  if (getkey(72) > 0) midiPitch  += 64;    // H:ピッチ＋
+  if (getkey(65) > 0 && midiVolume >     0) midiVolume --;       // A:音量－
+  if (getkey(83) > 0 && midiVolume <   127) midiVolume ++;       // S:音量＋
+  if (getkey(68) > 0 && midiTempo  >   0.1) midiTempo  -= 0.125; // D:テンポ－
+  if (getkey(70) > 0 && midiTempo  <   8  ) midiTempo  += 0.125; // F:テンポ＋
+  if (getkey(71) > 0 && midiPitch  > -8192) midiPitch  -= 64;    // G:ピッチ－
+  if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ピッチ＋
   if (v % 6 == 0) { // １秒間に10回更新
     $mplayer.<strong>setMidiVolume</strong>(midiVolume); // 音量設定
     $mplayer.<strong>setMidiTempo</strong>(midiTempo);   // テンポ設定
