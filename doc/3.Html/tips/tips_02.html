@@ -53,8 +53,8 @@
     <dl>
      <dt>0（デフォルトの設定）：</dt>
      <dd>
-      9x系のOS（Windows 98、Me）ではDirectMusicを使いません<br>
-      NT系のOS（Windows 2000、XP、Vista、7など）ではDirectMusicを使います<br>
+      Windows 98、Me、Windows 2000、XPではDirectMusicを使いません<br>
+      Windows Vista、7、8ではDirectMusicを使います<br>
      </dd>
      <dt>1：</dt>
      <dd>全てのOSでDirectMusicを使います</dd>
@@ -63,9 +63,12 @@
     </dl>
     <br>
     <dd>
-     ※ Windows 98SE で動作確認したところ、DirectMusicを使った場合、<br>
+     <s>※ Windows 98SE で動作確認したところ、DirectMusicを使った場合、<br>
      　　YellowMusicPlayerがフリーズしたり、システムがフリーズすることがありました。<br>
-     　　安定性を考慮して、デフォルトの設定では9x系のOSではDirectMusicをOFFにするようにしています。<br>
+     　　安定性を考慮して、デフォルトの設定では9x系のOSではDirectMusicをOFFにするようにしています。</s><br>
+     <font color="#FF0000">※ ver2.34から、Windows XP以前では、デフォルトの設定ではDirectMusicをOFFにするようにしました。<br>
+     　　XP以前では、DirectMusicをONするとOFFにしている時よりも、Midiの音量が小さく聞こえるため<br>
+     　　効果音とのバランスが悪くなると思い、仕様を変更しました。</font><br>
      ※ DirectMusicがOFFで、Midiデバイスに「TiMidity++」を設定している場合、<br>
      　　Midiの音色が全てピアノになることがあります。<br>
      <br>
