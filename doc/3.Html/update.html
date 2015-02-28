@@ -13,6 +13,36 @@
   </h1>
   <hr>
   <br>
+  <h4>【ver 2.33】(13/12/31)</h4>
+  <ul>
+   <li>Tonyuの複数起動に対応（Tonyu終了時のみ対応）</li>
+   <ul>
+    <li>同じ実行ファイル(Tonyu.exe等)を複数開いた場合に、YellowMusicPlayerも複数起動するが、<br>
+        １つのTonyuを終了すると、同じ実行ファイルから起動されたYellowMusicPlayerが全て終了してしまう仕様だった</li>
+    <li>１つずつTonyuを終了すると、YellowMusicPlayerも１つずつ終了するようになった</li>
+    <li>ただし、Tonyu終了時のみの対応でBGMの再生などは対応していない<br>
+        （BGMを再生すると全てのYellowMusicPlayerが反応して、同じBGMを再生してしまうことがある）</li>
+   </ul>
+   <li>Tonyu 1.22以前用をTonyu開発環境版でも動作するように対応</li>
+   <ul>
+    <li>ただし、プロジェクトを変更して開く場合はTonyuを再起動する必要がある。（Tonyu起動時に最初に読み込んだプロジェクトしか参照できないため）</li>
+    <li>今までTonyu 1.22以前用は、ランタイム版では正常に動作するが、開発環境版ではプロセスが残ってしまっていた</li>
+   </ul>
+   <li>起動中にDirectMusicのON/OFFを切り替えると、Midiの音量とテンポが初期値に戻されるバグを修正</li>
+   <li>その他、YellowMusicPlayer内部の細かい仕様変更・バグ修正</li>
+   <ul>
+    <li>YellowMusicPlayerの終了条件を変更</li>
+    <li>PCの処理が重くOggのテンポを速くしているときに、Oggの音飛びが発生しにくいように修正</li>
+    <li>PCをスリープして復帰した後、CPU使用率が高くなるバグをおそらく修正</li>
+    <li>Windows98でOggを再生した後にMidiを再生すると、Oggが停止してしまうバグを修正</li>
+    <li>Windows98でDirectMusicをONにしても、システムが不安定にならなくなった</li>
+   </ul>
+   <li>ReadMeの修正</li>
+   <ul>
+    <li>バージョンアップによる記述の修正や細かい修正</li>
+   </ul>
+  </ul>
+  <br>
   <h4>【ver 2.32】(13/12/09)</h4>
   <ul>
    <li>下記の４つのメソッドで、メソッド名を短くした新しいメソッドを追加<br>

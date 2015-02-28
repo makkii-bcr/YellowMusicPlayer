@@ -44,11 +44,11 @@
    </ul>
    <br>
    <li>Midiはデフォルトの設定では、DirectMusicを使って再生します。（<a href="tips/tips_02.html">設定</a>を変えるとDirectMusicをOFFにできます）</li>
-   <br>&nbsp
+   <br>
    <li>Oggは、DirectSoundを使って再生します。</li>
-   <br>&nbsp
+   <br>
    <li>MidiとOggを同時に鳴らせます。（MidiとOggで１曲ずつなら可能です。Midiを２曲やOggを２曲という組み合わせは不可能です）</li>
-   <br>&nbsp
+   <br>
   </ul>
   <h2>長所</h2>
   <ul>
@@ -70,7 +70,7 @@
   <h3>Midiで使える機能</h3>
   <ul>
    <li>Midiの再生・停止に加え、一時停止・一時停止から再開ができます。</li>
-   <br>&nbsp
+   <br>
    <li>Midiの再生・停止に関しては、以下の操作・エフェクトの設定ができます。</li>
    <ul>
     <li>再生中に変更可能</li>
@@ -98,20 +98,20 @@
    </ul>
   <br>
   <li>音量調節・テンポ調節・フェードアウト停止・一時停止・一時停止からの再開は、TonyuMidiLitestと互換性があります。</li>
-  <br>&nbsp
+  <br>
   <li>現在の演奏時間の取得・Midiファイルの情報取得などもできます。</li>
-  <br>&nbsp
+  <br>
   <li>CC#111のループに対応しています。</li>
-  <br>&nbsp
+  <br>
   <li>起動中にDirectMusicのON/OFFを切り替えることができます。</li>
-  <br>&nbsp
+  <br>
   <li>DirectMusicで使われるDLSファイルを使うことができます。(DirectMusicがONの時)</li>
   <br>
   </ul>
   <h3>Oggで使える機能</h3>
   <ul>
    <li>Oggの再生・停止・一時停止・一時停止から再開ができます。</li>
-   <br>&nbsp
+   <br>
    <li>Oggの再生・停止に関しては、以下の操作・エフェクトの設定ができます。</li>
    <ul>
     <li>再生中に変更可能</li>
@@ -136,16 +136,20 @@
    </ul>
   <br>
   <li>現在の再生時間の取得・Oggファイルの情報取得などもできます。</li>
-  <br>&nbsp
-  <li>Oggループ(RPGツクール用ループ)に対応しています。</li>
+  <br>
+  <li>Oggループ（ループタグによるループ）に対応しています。</li>
   <br>
   </ul>
   <h3>その他の機能</h3>
   <ul>
    <li>コンピュータ内の日付・時刻を取得できる。</li>
-   <br>&nbsp
+   <br>
    <li>ディスプレイの解像度を取得できる。</li>
-   <br>&nbsp
+   <br>
+   <li>Windowsのバージョンを取得できる。</li>
+   <br>
+   <li>ジョイスティックが接続されているか取得できる。</li>
+   <br>
    <li>YellowMusicPlayerが準備中（起動中）かTonyuで検知することができる。</li>
    <ul>
     <li>ランタイム版でのみ動作します。</li>
@@ -160,7 +164,7 @@
   <h2>起動時に設定できる機能</h2>
   以下の詳細は<a href="tips/tips_02.html">ここのページ</a>を参照してください。
   <ul>
-   <li><s>Player.exeのファイル名を変えても、Tonyu強制終了にYellowMusicPlayerが自動終了できるようにします。</s></li>
+   <li><s>Player.exeのファイル名を変えても、Tonyu強制終了にYellowMusicPlayerが自動終了できるようにします。</s><br></li>
        <font color="#FF0000">※ ver2.10より設定を省略しても自動終了できるようになりました</font>
    <li>DirectMusicを使用するかしないか設定できます。</li>
    <li>他のMidi, Ogg プレイヤー の動作を再現できます。</li>
@@ -178,8 +182,8 @@
    <li>DirectX 8 以降</li>
    <li>Tonyu System ver1.17 以降 （ランタイム版・開発環境版どちらでも動作可能）
     <ul>
-     <li>開発環境版の場合、Tonyu 1.22以前ではプロセスが残ってしまうので非推奨です。<br>
-      ランタイム版は問題ありません。</li>
+     <li><s>開発環境版の場合、Tonyu 1.22以前ではプロセスが残ってしまうので非推奨です。</s><br>
+         <font color="#FF0000">※ ver2.33よりTonyu 1.22以前の開発環境版でもほぼ正常に動作します</font></li>
      <li>YellowMusicPlayer単体(Ymplayer.tonyu無し(Midiの再生のみ))だと、Tonyu 1.15以降でも動作します。</li>
     </ul>
    </li>
