@@ -62,10 +62,10 @@ constructor Ymplayer() {
 
 // playメソッドをオーバーライド(再定義)
 function play(s, ar, v) {
-  var f;
+  var f, e;
   
   if ((s is SoundEffect) || (s is BGM)) { // midi再生(サウンドオブジェクトの場合)
-    if (s is BGM) restart(); // 再生したらポーズフラグをリセット
+    if (s is BGM) restart(1); // 再生したらポーズフラグをリセット
     if (!v || (v>=0 && v<=128)) {
       s.play(ar,v);
     } else {
@@ -76,25 +76,27 @@ function play(s, ar, v) {
     f = new FileWriter("ogg_sig.dat");
     f.writeLn(s);
     f.write(ar);
+    e = f.error()*(-1);
     f.close();
-    return f.error()*(-1);
+    return e;
   }
 }
 
 // stopメソッドをオーバーライド(再定義)(ポーズフラグをリセットするため)
 function stop(bgmType) {
-  var f;
+  var f, e;
   
   if (!bgmType || bgmType == 1) {
-    restart(); // 停止したらポーズフラグをリセット
+    restart(1); // 停止したらポーズフラグをリセット
     super.stop(); // 元々のstopメソッドを呼び出す
   }
   if (!bgmType || bgmType == 2) {
     oggPause  = 0;
     f = new FileWriter("ogg_sig.dat");
     f.writeStr("0");
+    e = f.error()*(-1);
     f.close();
-    return f.error()*(-1);
+    return e;
   }
 }
 
@@ -114,8 +116,8 @@ function pause(bgmType) {
     oggPause  = 1;
     f = new FileWriter("ogg_sig.dat");
     f.writeStr("1");
-    f.close();
     e2 = f.error()*(-1);
+    f.close();
   }
   if (e1 || e2) return -1;
   else          return  0;
@@ -132,8 +134,8 @@ function restart(bgmType) {
     oggPause  = 0;
     f = new FileWriter("ogg_sig.dat");
     f.writeStr("2");
-    f.close();
     e2 = f.error()*(-1);
+    f.close();
   }
   if (e1 || e2) return -1;
   else          return  0;
@@ -168,7 +170,6 @@ function updatePlayingInfomation() {
   f.writeLn(oggFileLoop);
   if (f.error()) { f.close(); return -1; }
   f.close();
-  
   return 0;
 }
 function setDynamicEffect(vol, tempo, pitch) {
@@ -339,7 +340,7 @@ function setPlayerConfig(exeName, directMusicSW, playerMode, playerReadSpeed, mi
   return 0;
 }
 function resetPlayer(dm, rs) {
-  var f;
+  var f, e;
   
   getPlayerConfig();
   if (dm != null) playerDirectMusicSW = dm;
@@ -349,6 +350,7 @@ function resetPlayer(dm, rs) {
   f = new FileWriter("YMPPreparation.dat");
   f.writeLn(dm); // DirectMusicの設定値
   f.writeLn(rs); // ファイル読み込み速度
+  e = f.error()*(-1);
   f.close();
-  return f.error()*(-1);
+  return e;
 }

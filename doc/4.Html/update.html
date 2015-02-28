@@ -13,6 +13,28 @@
   </h1>
   <hr>
   <br>
+  <h4>【ver 2.05】</h4>
+  <ul>
+   <li>Windows 98 SE で動作確認して以下のバグを発見したので修正（おそらくWindows XP以前のOSで同様のバグが起きてた可能性がある）</li>
+   <ul>
+    <li>Oggの現在の再生時間が8秒以降になると狂う</li> 
+    <li>サンプリングレートが44100Hz未満のOggで再生速度が速くなる </li>
+    <li>Tonyu終了時に強制終了ダイアログが表示される </li>
+   </ul>
+   <li>DirectMusicのON/OFFを切り替えると、dlsファイルの登録が解除されてしまうバグを修正</li>
+   <li>ReadMeのリファレンスを用途別に別けた</li>
+   <li>YellowMusicPlayer本体のソースファイルは、需要がなさそうなので削除</li>
+  </ul>
+  <br>
+  <h4>【ver 2.04】</h4>
+  <ul>
+   <li>Ymplayer.tonyuにバグがあったので修正</li>
+   <ul>
+    <li>戻り値が常に-1(エラー時の値)のメソッドがあった</li>
+    <li>Midiを再生するとOggの一時停止が解除されてしまう等</li>
+   </ul>
+  </ul>
+  <br>
   <h4>【ver 2.03】</h4>
   <ul>
    <li>ReadMeの文字がChromeで見ると小さくなっていたので修正</li>

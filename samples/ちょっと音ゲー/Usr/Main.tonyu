@@ -2,24 +2,18 @@ extends SecretChar;
 /*
    音とタイミングの合わせ方は、
    MusicPlayerから現在の再生時間を、最初１秒間に10回取得して、
-   しばらくしたら頻度を低くして、１秒間に2回取得するようにします。
+   しばらくしたら頻度を低くして、５秒間に1回取得するようにします。
    さらにシステムタイマー(getTime())も使い
    それをもとに、フレームを早送りor巻き戻しをしてタイミングを合わせています
    
-   MusicPlayerからの再生時間の取得を、１秒間に2回にしている理由は
+   MusicPlayerからの再生時間の取得を、５秒間に1回にしている理由は
    ディスクの書き込み回数を減らしたいからです。(ディスクキャッシュである程度高速に動作はするけど…)
    あと、システムタイマの方が処理が軽く、こちらの方でも正確な時間取得を補えるからです。
    
    じゃあなんでシステムタイマだけで時間を求めないのかと言われると、
    MusicPlayer内部でMidiの再生時間がずれるかもしれないと思ったからです。
    
-   本当にずれるかどうか試すには、$mplayer.setGettingPlayerStatusのカッコ内を0にしてください。
-   最初の１秒だけ更新頻度10回/秒くらいにして、後はシステムタイマのみで時間を求めてもずれなかったりします。
-   逆に、MusicPlayerからの再生時間の取得は、ディスクの読み書きをするので、
-   そのときに、プチフリーズのような現象が起きて反ってタイミングがずれる羽目になることもあります。
-   ここは、各プログラマの判断に任せます！
-   
-   再生時間を１秒間に2回の頻度で取得だと、再生し始めに音がずれやすいので
+   再生時間を５秒間に1回の頻度で取得だと、再生し始めに音がずれやすいので
    再生し始めだけ更新頻度を高くしています。
    
    ちなみに再生時間の取得は、MusicPlayerが再生時間をファイルに書き込み、
@@ -102,17 +96,20 @@ $mplayer.setDynamicEffectOgg(0,null,null); // BGM音量0
 $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
 if      (selectBGM == 1) $mplayer.play($se_Para01);
 else if (selectBGM == 2) $mplayer.play("tam-n13loop.ogg");
-wait(15);
+wait(10);
 $mplayer.stop();
-wait(15);
-$mplayer.stop(); // 念のため２回ストップ
-
+for (i = 0; i < 3; i++) {
+  wait(10);
+  $mplayer.stop(); // 念のため６回ストップ
+}
 
 $mplayer.setDynamicEffect(90,null,null);     // Midi音量変更
 $mplayer.setDynamicEffectOgg(127,null,null); // Ogg音量変更
-$mplayer.setGettingPlayerStatus(6); // 更新頻度を高くする (一秒に10回)
-$mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
-
+$mplayer.setGettingPlayerStatus(1); // 更新頻度を高くする (一秒に10回)
+for (i = 0; i < 3; i++) {
+  $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+  wait(10);
+}
 
 
 while (1) {
@@ -120,10 +117,17 @@ while (1) {
     if      (selectBGM == 1) $mplayer.play($se_Para01);
     else if (selectBGM == 2) $mplayer.play("tam-n13loop.ogg");
   }
-  if (frameCnt >= 200 && $mplayer.bgmGettingPlayerStatus < 10) {
-    // 一定時間たったら更新頻度を低くする
-    $mplayer.setGettingPlayerStatus(33); // 更新頻度１秒間に2回にする
-    $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+  if (frameCnt >= 30) {
+    if (frameCnt <= 50) {
+      $mplayer.setGettingPlayerStatus(1); // 更新頻度１秒間に2回にする
+      $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
+    }else if (frameCnt % 130 == 30) {
+      // 一定時間たったら更新頻度を低くする
+      $mplayer.getPlayerStatus(selectBGM); // 状態取得(Midiの時はMidiの情報だけ,Oggの時はOggの情報だけ)
+    }
+  } else {
+    // 最初は更新頻度を高く
+    $mplayer.getPlayerStatus(selectBGM); // 状態取得(Midiの時はMidiの情報だけ,Oggの時はOggの情報だけ)
   }
   
   
@@ -137,9 +141,6 @@ while (1) {
   
   
   // 時間取得・誤差修正 //////////////////////////////////////////////////
-  
-  // 更新頻度が0より大きかったら、ファイルから情報を読み取る
-  if ($mplayer.bgmGettingPlayerStatus > 0) $mplayer.getPlayerStatus(selectBGM); // 状態取得(Midiの時はMidiの情報だけ,Oggの時はOggの情報だけ)
   
   if (frameCnt > 0) {
     if (selectBGM == 1) {
