@@ -236,7 +236,7 @@ while(1) {
   }
   
   // エフェクト項目セット //
-  if (!bgmOggOn) { // midiのエフェクト・再生オプションをセット
+  if (!bgmOggOn || openListPlayer == 1) { // midiのエフェクト・再生オプションをセット
     $mplayer.setMidiVolume(midiVolume);
     $mplayer.setMidiTempo(midiTempo);
     $mplayer.setMidiPitch(midiPitch);
@@ -253,7 +253,8 @@ while(1) {
     //$mplayer.setDynamicEffect(midiVolume, midiTempo, midiPitch);
     //$mplayer.setStaticEffect(midiFadeInTime, midiFadeOutTime, midiStartTick, midiKeyShift);
     //$mplayer.setPlayingOption(midiSkipBeginning, midiSkipEnding, midiMasterPitch, midiNormalize, midiExclusive);
-  } else { // oggのエフェクトをセット
+  }
+  if (bgmOggOn || openListPlayer == 1){ // oggのエフェクトをセット
     $mplayer.setOggVolume(oggVolume);
     $mplayer.setOggTempo(oggTempo);
     $mplayer.setOggPan(oggPan);

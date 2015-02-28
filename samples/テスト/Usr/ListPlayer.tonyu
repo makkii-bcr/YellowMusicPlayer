@@ -22,14 +22,16 @@ function run(_midiAry, _oggAry) {
   }
   
   // しっかり停止してから
-  while (1) {
+  for (i=0;i<5;i++) {
     $mplayer.stop();
     updateEx(INTARVAL2);
     $mplayer.getPlayerStatus();
-    if ($mplayer.getPlayerMidiStatus() == 0 || $mplayer.getPlayerOggStatus() == 0) break;
+    if ($mplayer.getPlayerMidiStatus() == 0 && $mplayer.getPlayerOggStatus() == 0) break;
   }
   // 途中から再生
   if (playSW != 0) {
+    playPlayCnt = 0;
+    playStopCnt = 0;
     if (playSW == 11 || playSW == 12) playSW = 12; else playSW = 21;
   }
   
@@ -40,6 +42,12 @@ function run(_midiAry, _oggAry) {
     keyStop = 0;
     keyLeft = 0;
     keyRight = 0;
+    if (getkey(65) == 1) {
+      
+    bgm = new BGM();
+    bgm._generator="C:\\test.mid";
+    $mplayer.play(bgm);
+    }
     if (getkey(16) == 1) {
       selectBgm = !selectBgm;
     }
@@ -242,6 +250,7 @@ function playingFunc() {
       $mplayer.setMidiStartTick(0);
       $mplayer.setOggStartTime(0);
       $mplayer.updatePlayingInfomation();
+      playPlayCnt = 0;
       playStopCnt = 0;
       playSW ++;
     } else if (playSW == 2) { // 再生開始
@@ -251,6 +260,7 @@ function playingFunc() {
         if (!playBgm) $mplayer.play(midiAry.get(playNo));
         else          $mplayer.play(oggAry.get(playNo));
         playPlayCnt = 0;
+        playStopCnt = 0;
         playSW ++;
       } else {
         playStopCnt ++;
@@ -263,6 +273,7 @@ function playingFunc() {
         // 再生が確認されたら次のステップへ
         if (!playBgm) playNo = $mplayer.getPlayerMidiPlayNo();
         else          playNo = oggAry.indexOf($mplayer.getPlayerOggPlayName());
+        playPlayCnt = 0;
         playStopCnt = 0;
         playSW ++;
       } else {
@@ -361,11 +372,17 @@ function playingFunc() {
       // ちゃんと再生されるまで繰り返し
       $mplayer.getPlayerStatus();
       if (error == 0) {
-        if ((playBgm == 0 && ($mplayer.getPlayerMidiStatus() == 1 || $mplayer.getPlayerMidiLoopCount() >= 1)) ||
-            (playBgm == 1 && ($mplayer.getPlayerOggStatus()  == 1 || $mplayer.getPlayerOggLoopCount()  >= 1)))
+        if ((playBgm == 0 && ($mplayer.getPlayerMidiStatus() == 1 || ($mplayer.getPlayerMidiStatus() == 0 && playPlayCnt >= 20 && $mplayer.getPlayerMidiLoopCount() >= 1))) ||
+            (playBgm == 1 && ($mplayer.getPlayerOggStatus()  == 1 || ($mplayer.getPlayerOggStatus()  == 0 && playPlayCnt >= 20 && $mplayer.getPlayerOggLoopCount()  >= 1))))
         {
+          if (playCnt >= 20 && (($mplayer.getPlayerMidiStatus() == 0 && $mplayer.getPlayerMidiLoopCount() >= 1) || ($mplayer.getPlayerOggStatus() == 0 && $mplayer.getPlayerOggLoopCount() >= 1))) {
+            $mplayer.setMidiStartTick(0);
+            $mplayer.setOggStartTime(0);
+            $mplayer.updatePlayingInfomation();
+          }
           playSW = 4;
           playPlayCnt = 0;
+          
         }
       }
       

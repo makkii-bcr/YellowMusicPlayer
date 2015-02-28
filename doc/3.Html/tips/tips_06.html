@@ -25,10 +25,6 @@
    <ul>
     <li>YellowMusicPlayerでは反応速度を優先しているため、デフォルトではファイルの読み込み頻度が1秒間に60回と高いです。<br>
         <a href="tips_02.html">YellowMusicPlayerの設定</a>でファイルの読み込み頻度を少なくすると、バグが少なくなる可能性があります。</li>
-    <li>標準の$mplayerのままの場合に発生しやすいです。（バグの原因となるコードがあるため）</li>
-    <li>Ymplayer.tonyuを使用することを勧めます。（バグの発生しにくくなる）<br>
-        または、修正版MediaPlayer.tonyuを上書きすることを勧めます。<br>
-        </li>
     <li>TonyuとMusicPlayerが、１つのファイルを読み書きしてBGMの再生命令を認識するという方法をとっています。<br>
         その仕様上同時アクセスが発生する可能性があるため、このバグを完全に消すことはできません。</li>
    </ul>
@@ -44,7 +40,7 @@
        Midiファイルによっては再生速度が遅くなる場合があります。</li>
    <ul>
     <li>毎秒60回程の頻度で音量・ピッチの値が変化する場合に、再生速度が遅くなるMidiファイルがありました。</li>
-    <li>DirectMusicを使用している場合で起きる現象だと思います。</li>
+    <li>DirectMusicを使用している場合で起きる現象です。</li>
     <li>遅くなる場合は、変化の頻度を少なくしたり、フェードイン・フェードアウトを無効にしたりするほうがいいです。<br>
         または、DirectMusicをOFFにするとこのバグがおきません。</li>
    </ul>
@@ -56,12 +52,6 @@
     <li>DirectMusicがOFFで、Midiデバイスに「TiMidity++」を設定している場合、Midiの音色が全てピアノになることがあります。</li>
    </ul>
    <br>
-   <li>Midiのキャッシュ機能がONのとき、Midiファイルを途中で上書きしても、YellowMusicPlayerでは反映されません。</li>
-   <ul>
-    <li>Midiのキャッシュ機能がONのときは、起動時にMidiファイルをメモリに読み込んで、それ以降はディスクから読まないため、<br>
-        このような現象が起きます。</li>
-    <li>Tonyuの開発環境版でMidiを変更した場合、Tonyuを再起動すると変更後のMidiファイルが適応されます。</li>
-   </ul>
   </ul>
    <ul>
    <li>ＰＣの処理がかなり重くなった時に、Oggの曲が８秒ごとに繰り返される場合があります。</li>
@@ -95,16 +85,6 @@
     <li>MusicPlayerでは、Midiファイルのあるパスを見て、default.tonyuprjのパスが変わったときにリセットという方法をとっています。</li>
    </ul>
    <br>
-   <li>Midiファイルがサブフォルダ３つの中までなら、MusicPlayerはエフェクト情報の取得・MusicPlayerの状態の書き込みができます。</li>
-   <ul>
-    <li>例えば、今開いているプロジェクトのフォルダのパスが「C:\Usr」の場合、<br>
-        Midiファイルのパスが「C:\Usr\sub1\sub2\sub3\bgm01.mid」の場合でも、<br>
-        エフェクト情報「eff_midi.txt」を取得でき、「YMPStatus.dat」を書き込むことができます。</li>
-    <li>「C:\Usr\sub1\sub2\sub3\sub4\bgm01.mid」のようにサブフォルダが４つの場合、<br>
-        Midiは再生されますが、エフェクトが適応されずに演奏されます。<br>
-        また、MusicPlayerの状態取得もできなくなります。</li>
-    <li>演奏されるMidiのパスから、「default.tonyuprj」を探すのでこのような現象が起きます。</li>
-    <li>エフェクトを使わない場合・MusicPlayerの状態取得機能を使わない場合は、この話は無関係です。</li>
    </ul>
   </ul>
   <a href="../tips.html">戻る</a>

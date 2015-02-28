@@ -2,7 +2,7 @@ extends Object;
 // *---------------------------------*
 // *  YellowMusicPlayer用の$mplayer  *
 // *---------------------------------*
-//     YellowMusicPlayer version 2.1用
+//     YellowMusicPlayer version 2.2用
 //     Tonyu System version 1.23以降用
 
 //native _n_freeAllSE;

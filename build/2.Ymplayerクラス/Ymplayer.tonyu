@@ -3,7 +3,6 @@ extends MediaPlayer;
 // *  YellowMusicPlayer用のYmplayer  *
 // *---------------------------------*
 //     YellowMusicPlayer version 2.2用
-//     Tonyu System version 1.23以降用
 
 
 constructor Ymplayer() {
@@ -67,13 +66,13 @@ constructor Ymplayer() {
 function play(s, ar, v) {
   var f, e;
   
-  if ((s is SoundEffect) || (s is BGM)) { // midi再生(サウンドオブジェクトの場合)
-    if (s is BGM) restart(1); // 再生したらポーズフラグをリセット
-    if (!v || (v>=0 && v<=128)) {
-      s.play(ar,v);
-    } else {
-      s.play(ar,128);
-    }
+  if (s is SoundEffect){ // wav再生(サウンドオブジェクトの場合)
+    super.play(s, ar, v); // 親任せ
+    
+  } else if (s is BGM) { // midi再生(サウンドオブジェクトの場合)
+    restart(1); // 再生したらポーズフラグをリセット
+    return super.play(s, ar, v); // 親任せ
+    
   } else if (s is String) { // ogg再生(文字列の場合)
     oggPause  = 0;
     f = new FileWriter("ogg_sig.dat");
@@ -87,20 +86,21 @@ function play(s, ar, v) {
 
 // stopメソッドをオーバーライド(再定義)(ポーズフラグをリセットするため)
 function stop(bgmType) {
-  var f, e;
+  var f, e1, e2;
   
   if (!bgmType || bgmType == 1) {
     restart(1); // 停止したらポーズフラグをリセット
-    super.stop(); // 元々のstopメソッドを呼び出す
+    e1 = super.stop(); // 元々のstopメソッドを呼び出す
   }
   if (!bgmType || bgmType == 2) {
     oggPause  = 0;
     f = new FileWriter("ogg_sig.dat");
     f.writeStr("0");
-    e = f.error()*(-1);
+    e2 = f.error()*(-1);
     f.close();
-    return e;
   }
+  if (e1 == -1 || e2) return -1;
+  else                return  0;
 }
 
 
