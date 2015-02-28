@@ -1,6 +1,6 @@
 #Build Folder
-/Debug
-/Release
+Debug/
+Release/
 
 #Tonyu Temp File
 Temp/
@@ -13,3 +13,11 @@ sig
 eff_midi.txt
 ogg_sig.dat
 YMPStatus.dat
+
+#GuruGuruSMF File
+GuruGuruSMF.chm
+GuruGuruSMFreadme.txt
+
+#Project File
+midiplayer2.vwp
+midiplayer2_2.bdp
