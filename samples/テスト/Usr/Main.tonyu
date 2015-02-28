@@ -1,4 +1,4 @@
-extends SecretChar;
+extends Main2;
 
 if (!$fullScreen) $Window.setDrawMode("A");
 $System.setFrameRate(58, 5);
@@ -53,7 +53,7 @@ if (!$displayMove) {
     $mplayer.getPlayerStatus();
     displayWidth  = $mplayer.getDisplayWidth();
     displayHeight = $mplayer.getDisplayHeight();
-    if (displayWidth || displayHeight) {
+    if (displayWidth && displayHeight) {
       $windowX = displayWidth /2 - $screenWidth /2 - 8;
       $windowY = displayHeight/2 - $screenHeight/2 - 30;
       if ($windowY < 0) $windowY = 0;
@@ -360,92 +360,100 @@ while(1) {
   
   if (textVisible >= 1) {
     if (!bgmOggOn) { // midi
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  0)) drawText(275, 70+20*0, "音量   :" + midiVolume, (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  1)) drawText(275, 70+20*1, "テンポ :" + midiTempo , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  2)) drawText(275, 70+20*2, "ピッチ :" + midiPitch , (!(!midiMasterPitch) && selectEff != 2)*$clWhite + (!(!midiMasterPitch) && selectEff == 2)*$clGreen +
-                                                                                                                     ( (!midiMasterPitch) && selectEff != 2)*$clGray  + ( (!midiMasterPitch) && selectEff == 2)*$clBlackGreen, 16);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  0)) drawText(275, 70+18*0, "音量   :" + midiVolume, (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  1)) drawText(275, 70+18*1, "テンポ :" + midiTempo , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  2)) drawText(275, 70+18*2, "ピッチ :" + midiPitch , (!(!midiMasterPitch) && selectEff != 2)*$clWhite + (!(!midiMasterPitch) && selectEff == 2)*$clGreen +
+                                                                                                                     ( (!midiMasterPitch) && selectEff != 2)*$clGray  + ( (!midiMasterPitch) && selectEff == 2)*$clBlackGreen, 12);
       
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  3)) drawText(275, 70+10+20*3, "フェードイン  :" + midiFadeInTime , (selectEff != 3)*$clWhite + (selectEff == 3)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  4)) drawText(275, 70+10+20*4, "フェードアウト:" + midiFadeOutTime, (selectEff != 4)*$clWhite + (selectEff == 4)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  5)) drawText(275, 70+10+20*5, "開始ティック  :" + midiStartTick  , (selectEff != 5)*$clWhite + (selectEff == 5)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  6)) drawText(275, 70+10+20*6, "キーシフト    :" + midiKeyShift   , (selectEff != 6)*$clWhite + (selectEff == 6)*$clGreen, 16);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  3)) drawText(275, 70+10+18*3, "フェードイン  :" + midiFadeInTime , (selectEff != 3)*$clWhite + (selectEff == 3)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  4)) drawText(275, 70+10+18*4, "フェードアウト:" + midiFadeOutTime, (selectEff != 4)*$clWhite + (selectEff == 4)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  5)) drawText(275, 70+10+18*5, "開始ティック  :" + midiStartTick  , (selectEff != 5)*$clWhite + (selectEff == 5)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  6)) drawText(275, 70+10+18*6, "キーシフト    :" + midiKeyShift   , (selectEff != 6)*$clWhite + (selectEff == 6)*$clGreen, 12);
       
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  7)) drawText(275, 70+10*2+20*7 , "冒頭スキップ    :" + midiSkipBeginning, (selectEff !=  7)*$clWhite + (selectEff ==  7)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  8)) drawText(275, 70+10*2+20*8 , "末尾スキップ    :" + midiSkipEnding   , (selectEff !=  8)*$clWhite + (selectEff ==  8)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  9)) drawText(275, 70+10*2+20*9 , "マスターピッチ  :" + midiMasterPitch  , (selectEff !=  9)*$clWhite + (selectEff ==  9)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff == 10)) drawText(275, 70+10*2+20*10, "ノーマライズ    :" + midiNormalize    , (selectEff != 10)*$clWhite + (selectEff == 10)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff == 11)) drawText(275, 70+10*2+20*11, "エクスクルーシブ:" + midiExclusive    , (selectEff != 11)*$clWhite + (selectEff == 11)*$clGreen, 16);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  7)) drawText(275, 70+10*2+18*7 , "冒頭スキップ    :" + midiSkipBeginning, (selectEff !=  7)*$clWhite + (selectEff ==  7)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  8)) drawText(275, 70+10*2+18*8 , "末尾スキップ    :" + midiSkipEnding   , (selectEff !=  8)*$clWhite + (selectEff ==  8)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  9)) drawText(275, 70+10*2+18*9 , "マスターピッチ  :" + midiMasterPitch  , (selectEff !=  9)*$clWhite + (selectEff ==  9)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff == 10)) drawText(275, 70+10*2+18*10, "ノーマライズ    :" + midiNormalize    , (selectEff != 10)*$clWhite + (selectEff == 10)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff == 11)) drawText(275, 70+10*2+18*11, "エクスクルーシブ:" + midiExclusive    , (selectEff != 11)*$clWhite + (selectEff == 11)*$clGreen, 12);
       
     } else { // ogg
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  0)) drawText(275, 70+20*0, "音量   :" + oggVolume, (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  1)) drawText(275, 70+20*1, "テンポ :" + oggTempo , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  2)) drawText(275, 70+20*2, "パン   :" + oggPan   , (selectEff != 2)*$clWhite + (selectEff == 2)*$clGreen, 16);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  0)) drawText(275, 70+18*0, "音量   :" + oggVolume, (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  1)) drawText(275, 70+18*1, "テンポ :" + oggTempo , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  2)) drawText(275, 70+18*2, "パン   :" + oggPan   , (selectEff != 2)*$clWhite + (selectEff == 2)*$clGreen, 12);
       
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  3)) drawText(275, 70+10+20*3, "フェードイン    :" + oggFadeInTime   , (selectEff != 3)*$clWhite + (selectEff == 3)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  4)) drawText(275, 70+10+20*4, "フェードアウト  :" + oggFadeOutTime  , (selectEff != 4)*$clWhite + (selectEff == 4)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  5)) drawText(275, 70+10+20*5, "再生開始時間    :" + oggStartTime    , (selectEff != 5)*$clWhite + (selectEff == 5)*$clGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  6)) drawText(275, 70+10+20*6, "ループ開始時間  :" + oggLoopStartTime, (!oggFileLoop && selectEff != 6)*$clWhite + (!oggFileLoop && selectEff == 6)*$clGreen +
-                                                                                                                                       ( oggFileLoop && selectEff != 6)*$clGray  + ( oggFileLoop && selectEff == 6)*$clBlackGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  7)) drawText(275, 70+10+20*7, "ループ終了時間  :" + oggLoopEndTime  , (!oggFileLoop && selectEff != 7)*$clWhite + (!oggFileLoop && selectEff == 7)*$clGreen +
-                                                                                                                                       ( oggFileLoop && selectEff != 7)*$clGray  + ( oggFileLoop && selectEff == 7)*$clBlackGreen, 16);
-      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  8)) drawText(275, 70+10+20*8, "Oggループ使用   :" + oggFileLoop     , (selectEff != 8)*$clWhite + (selectEff == 8)*$clGreen, 16);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  3)) drawText(275, 70+10+18*3, "フェードイン    :" + oggFadeInTime   , (selectEff != 3)*$clWhite + (selectEff == 3)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  4)) drawText(275, 70+10+18*4, "フェードアウト  :" + oggFadeOutTime  , (selectEff != 4)*$clWhite + (selectEff == 4)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  5)) drawText(275, 70+10+18*5, "再生開始時間    :" + oggStartTime    , (selectEff != 5)*$clWhite + (selectEff == 5)*$clGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  6)) drawText(275, 70+10+18*6, "ループ開始時間  :" + oggLoopStartTime, (!oggFileLoop && selectEff != 6)*$clWhite + (!oggFileLoop && selectEff == 6)*$clGreen +
+                                                                                                                                       ( oggFileLoop && selectEff != 6)*$clGray  + ( oggFileLoop && selectEff == 6)*$clBlackGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  7)) drawText(275, 70+10+18*7, "ループ終了時間  :" + oggLoopEndTime  , (!oggFileLoop && selectEff != 7)*$clWhite + (!oggFileLoop && selectEff == 7)*$clGreen +
+                                                                                                                                       ( oggFileLoop && selectEff != 7)*$clGray  + ( oggFileLoop && selectEff == 7)*$clBlackGreen, 12);
+      if (textVisible >= 2 || (textVisible >= 1 && selectEff ==  8)) drawText(275, 70+10+18*8, "Oggループ使用   :" + oggFileLoop     , (selectEff != 8)*$clWhite + (selectEff == 8)*$clGreen, 12);
       
     }
     
-    if (textVisible >= 2 || (textVisible >= 1 && selectEff == 12)) drawText(275, 70+10*3+20*12, "MusicPlayer状態取得:" + bgmGettingPlayerStatus, (selectEff != 12)*$clWhite + (selectEff == 12)*$clGreen, 16);
+    if (textVisible >= 2 || (textVisible >= 1 && selectEff == 12)) drawText(275, 70+10*3+18*12, "MusicPlayer状態取得:" + bgmGettingPlayerStatus, (selectEff != 12)*$clWhite + (selectEff == 12)*$clGreen, 12);
     
     if (!(!bgmGettingPlayerStatus)) {
-      if (timeDayOfWeek_old != $mplayer.timeDayOfWeek) {
-        timeDayOfWeek_old = $mplayer.timeDayOfWeek;
-        if      ($mplayer.timeDayOfWeek == 0) timeDayOfWeekText = " (日)";
-        else if ($mplayer.timeDayOfWeek == 1) timeDayOfWeekText = " (月)";
-        else if ($mplayer.timeDayOfWeek == 2) timeDayOfWeekText = " (火)";
-        else if ($mplayer.timeDayOfWeek == 3) timeDayOfWeekText = " (水)";
-        else if ($mplayer.timeDayOfWeek == 4) timeDayOfWeekText = " (木)";
-        else if ($mplayer.timeDayOfWeek == 5) timeDayOfWeekText = " (金)";
-        else if ($mplayer.timeDayOfWeek == 6) timeDayOfWeekText = " (土)";
+      if (timeDayOfWeek_old != $mplayer.getTimeDayOfWeek()) {
+        timeDayOfWeek_old = $mplayer.getTimeDayOfWeek();
+        if      ($mplayer.getTimeDayOfWeek() == 0) timeDayOfWeekText = " (日)";
+        else if ($mplayer.getTimeDayOfWeek() == 1) timeDayOfWeekText = " (月)";
+        else if ($mplayer.getTimeDayOfWeek() == 2) timeDayOfWeekText = " (火)";
+        else if ($mplayer.getTimeDayOfWeek() == 3) timeDayOfWeekText = " (水)";
+        else if ($mplayer.getTimeDayOfWeek() == 4) timeDayOfWeekText = " (木)";
+        else if ($mplayer.getTimeDayOfWeek() == 5) timeDayOfWeekText = " (金)";
+        else if ($mplayer.getTimeDayOfWeek() == 6) timeDayOfWeekText = " (土)";
       }
       
       if (!bgmOggOn) { // Midi
-        drawText(240, 210+12*13, "Midi演奏状態                :" + $mplayer.getPlayerMidiStatus()   , $clWhite, 9);
-        drawText(240, 210+12*14, "再生中のMidi番号            :" + $mplayer.getPlayerMidiPlayNo()   , $clWhite, 9);
-        drawText(240, 210+12*15, "現在のテンポ                :" + $mplayer.getPlayerMidiTempo()    , $clWhite, 9);
-        drawText(240, 210+12*16, "現在のティック              :" + $mplayer.getPlayerMidiTick()     , $clWhite, 9);
-        drawText(240, 210+12*17, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerMidiTime()     , $clWhite, 9);
-        drawText(240, 210+12*18, "再生開始してからのループ回数:" + $mplayer.getPlayerMidiLoopCount(), $clWhite, 9);
+        drawText(240, 210+12*11, "Midi演奏状態                :" + $mplayer.getPlayerMidiStatus()   , $clWhite, 9);
+        drawText(240, 210+12*12, "再生中のMidi番号            :" + $mplayer.getPlayerMidiPlayNo()   , $clWhite, 9);
+        drawText(240, 210+12*13, "現在のテンポ                :" + $mplayer.getPlayerMidiTempo()    , $clWhite, 9);
+        drawText(240, 210+12*14, "現在のティック              :" + $mplayer.getPlayerMidiTick()     , $clWhite, 9);
+        drawText(240, 210+12*15, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerMidiTime()     , $clWhite, 9);
+        drawText(240, 210+12*16, "再生開始してからのループ回数:" + $mplayer.getPlayerMidiLoopCount(), $clWhite, 9);
         
-        drawText(470, 210+12*13, "ベースカウント    :" + $mplayer.getMidiTimeBase()     , $clWhite, 9);
-        drawText(470, 210+12*14, "総ティック        :" + $mplayer.getMidiTotalTick()    , $clWhite, 9);
-        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.getMidiTotalTime()    , $clWhite, 9);
-        drawText(470, 210+12*16, "最初の発音ティック:" + $mplayer.getMidiFirstNoteTick(), $clWhite, 9);
-        drawText(470, 210+12*17, "最初の発音の時間  :" + $mplayer.getMidiFirstNoteTime(), $clWhite, 9);
-        drawText(470, 210+12*18, "最後の発音ティック:" + $mplayer.getMidiLastNoteTick() , $clWhite, 9);
-        drawText(470, 210+12*19, "最後の発音の時間  :" + $mplayer.getMidiLastNoteTime() , $clWhite, 9);
-        drawText(470, 210+12*20, "CC#111のティック  :" + $mplayer.getMidiLoopTick()     , $clWhite, 9);
-        drawText(470, 210+12*21, "CC#111の位置の時間:" + $mplayer.getMidiLoopTime()     , $clWhite, 9);
+        drawText(470, 210+12*11, "ベースカウント    :" + $mplayer.getMidiTimeBase()     , $clWhite, 9);
+        drawText(470, 210+12*12, "総ティック        :" + $mplayer.getMidiTotalTick()    , $clWhite, 9);
+        drawText(470, 210+12*13, "総演奏時間        :" + $mplayer.getMidiTotalTime()    , $clWhite, 9);
+        drawText(470, 210+12*14, "最初の発音ティック:" + $mplayer.getMidiFirstNoteTick(), $clWhite, 9);
+        drawText(470, 210+12*15, "最初の発音の時間  :" + $mplayer.getMidiFirstNoteTime(), $clWhite, 9);
+        drawText(470, 210+12*16, "最後の発音ティック:" + $mplayer.getMidiLastNoteTick() , $clWhite, 9);
+        drawText(470, 210+12*17, "最後の発音の時間  :" + $mplayer.getMidiLastNoteTime() , $clWhite, 9);
+        drawText(470, 210+12*18, "CC#111のティック  :" + $mplayer.getMidiLoopTick()     , $clWhite, 9);
+        drawText(470, 210+12*19, "CC#111の位置の時間:" + $mplayer.getMidiLoopTime()     , $clWhite, 9);
         
         if (midiArySize > 0 && 0 <= $mplayer.getPlayerMidiPlayNo() && $mplayer.getPlayerMidiPlayNo() < midiArySize) {
           drawText(10, 70+20*1-5, "再生曲("+ ($mplayer.getPlayerMidiPlayNo()+1) +"/"+ midiArySize +")："+midiAry.get($mplayer.getPlayerMidiPlayNo()).getName(), $clGreen2, 9);
         }
       } else { // Ogg
-        drawText(240, 210+12*13, "Ogg演奏状態                 :" + $mplayer.getPlayerOggStatus()   , $clWhite, 9);
-        drawText(240, 210+12*14, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerOggTime()     , $clWhite, 9);
-        drawText(240, 210+12*15, "再生開始してからのループ回数:" + $mplayer.getPlayerOggLoopCount(), $clWhite, 9);
-        drawText(470, 210+12*13, "チャンネル数　    :" + $mplayer.getOggChannels()     , $clWhite, 9);
-        drawText(470, 210+12*14, "サンプリングレート:" + $mplayer.getOggSamplingRate() , $clWhite, 9);
-        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.getOggTotalTime()    , $clWhite, 9);
-        drawText(470, 210+12*16, "総サンプル数      :" + $mplayer.getOggTotalSamples() , $clWhite, 9);
-        drawText(470, 210+12*17, "Oggループ開始位置 :" + $mplayer.getOggFileLoopStart(), $clWhite, 9);
-        drawText(470, 210+12*18, "Oggループ終了位置 :" + $mplayer.getOggFileLoopEnd()  , $clWhite, 9);
+        drawText(240, 210+12*11, "Ogg演奏状態                 :" + $mplayer.getPlayerOggStatus()   , $clWhite, 9);
+        drawText(240, 210+12*12, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerOggTime()     , $clWhite, 9);
+        drawText(240, 210+12*13, "再生開始してからのループ回数:" + $mplayer.getPlayerOggLoopCount(), $clWhite, 9);
+        drawText(470, 210+12*11, "チャンネル数　    :" + $mplayer.getOggChannels()     , $clWhite, 9);
+        drawText(470, 210+12*12, "サンプリングレート:" + $mplayer.getOggSamplingRate() , $clWhite, 9);
+        drawText(470, 210+12*13, "総演奏時間        :" + $mplayer.getOggTotalTime()    , $clWhite, 9);
+        drawText(470, 210+12*14, "総サンプル数      :" + $mplayer.getOggTotalSamples() , $clWhite, 9);
+        drawText(470, 210+12*15, "Oggループ開始位置 :" + $mplayer.getOggFileLoopStart(), $clWhite, 9);
+        drawText(470, 210+12*16, "Oggループ終了位置 :" + $mplayer.getOggFileLoopEnd()  , $clWhite, 9);
         
         drawText(10, 70+20*1-5, "再生曲     ："+$mplayer.getPlayerOggPlayName(), $clGreen2, 9);
       }
-      drawText(240, 210+12*20, "現在 : " + $mplayer.getTimeYear() +"/"+ $mplayer.getTimeMonth()  +"/"+ $mplayer.getTimeDay() + timeDayOfWeekText +" "
+      drawText(240, 210+12*18, "現在 : " + $mplayer.getTimeYear() +"/"+ $mplayer.getTimeMonth()  +"/"+ $mplayer.getTimeDay() + timeDayOfWeekText +" "
                                          + $mplayer.getTimeHour() +":"+ ($mplayer.getTimeMinute()/10%10) + ($mplayer.getTimeMinute()%10) +":"
                                          + ($mplayer.getTimeSecond()/10%10) + ($mplayer.getTimeSecond()%10) +"."+ ($mplayer.getTimeMilliSecond()/100%10)
                                          + ($mplayer.getTimeMilliSecond()/10%10) + ($mplayer.getTimeMilliSecond()%10)
                                          , $clWhite, 9);
-      drawText(240, 210+12*21, "解像度 : " + $mplayer.getDisplayWidth() + " * " + $mplayer.getDisplayHeight(), $clWhite, 9);
+      drawText(240, 210+12*19, "解像度 : " + $mplayer.getDisplayWidth() + " * " + $mplayer.getDisplayHeight(), $clWhite, 9);
+      
+      if      ($mplayer.getOSPlatformId() == 1) osPlatformText = "9x";
+      else if ($mplayer.getOSPlatformId() == 2) osPlatformText = "NT";
+      else                                      osPlatformText = "Unknow";
+      drawText(240, 210+12*20, "OS : Windows " + osPlatformText + " " + $mplayer.getOSMajorVersion() + "." + $mplayer.getOSMinorVersion(), $clWhite, 9);
+      
+      drawText(240, 210+12*21, "Joystickあるか？ : ID1=" + $mplayer.getJoystickOn(0) + " ID2=" + $mplayer.getJoystickOn(1), $clWhite, 9);
+      
     }
   }
   
@@ -465,68 +473,4 @@ while(1) {
 
 function onDraw() {
   if (!openOption && !openListPlayer) drawCnt++;
-}
-
-// オプション画面
-function musicPlayerOption() {
-  var selectEff, buttonL, buttonR;
-  var text1, text2, text3;
-  var key79;
-  
-  openOption = 1;
-  
-  // YellowMusicPlayerの設定を読み込む
-  $mplayer.getPlayerConfig();
-  playerDirectMusicSW = $mplayer.getPlayerDirectMusicSW();
-  playerReadSpeed     = $mplayer.getPlayerReadSpeed();
-  
-  key79 = 0;
-  while (1) {
-    if (key79 == 0) { // Oキーを離すまでOキーを無効にする
-      if (getkey(79) == 0) key79 = 1;
-      
-    } else if (key79 == 1) {
-      if (getkey(79) == 2) break; // 設定キャンセル
-      
-    }
-    if (getkey(13) == 1) { // 設定を適応
-      $mplayer.resetPlayer(playerDirectMusicSW, playerReadSpeed);
-      break;
-    }
-    
-    if (getkey(38) == 1 || (getkey(38) > 20 && getkey(38) % 5 == 1)) selectEff --; // ↑:
-    if (getkey(40) == 1 || (getkey(40) > 20 && getkey(40) % 5 == 1)) selectEff ++; // ↓:
-    if (selectEff < 0) selectEff = 1;
-    if (selectEff > 1) selectEff = 0;
-    buttonL = getkey(37); // ←:
-    buttonR = getkey(39); // →:
-    
-    if (selectEff == 0) {
-      if (buttonL == 1 || buttonL > 10) { playerDirectMusicSW -= 1; if (playerDirectMusicSW < 0) playerDirectMusicSW = 0; }
-      if (buttonR == 1 || buttonR > 10) { playerDirectMusicSW += 1; if (playerDirectMusicSW > 2) playerDirectMusicSW = 2; }
-    } else if (selectEff == 1) {
-      if (buttonL == 1 || buttonL > 5) { playerReadSpeed -= 1; if (playerReadSpeed <   0) playerReadSpeed =   0; }
-      if (buttonR == 1 || buttonR > 5) { playerReadSpeed += 1; if (playerReadSpeed > 100) playerReadSpeed = 100; }
-    }
-    
-    if      (playerDirectMusicSW == 0) text1 = "デフォルト設定（NT系OS:ON 9x系OS:OFF）";
-    else if (playerDirectMusicSW == 1) text1 = "ON";
-    else if (playerDirectMusicSW == 2) text1 = "OFF";
-    
-    text2 = ((playerReadSpeed + 1) * 15) + "ミリ秒毎";
-    
-    if (playerDirectMusicSW != $mplayer.getPlayerDirectMusicSW()) text3 = "(Midiデバイスの初期化に時間がかかります)";
-    else                                                     text3 = "";
-    
-    drawText( 10, 100, "YellowMusicPlayerの設定", $clYellow, 20);
-    drawText( 10, 120+20*1, "DirectMusic              : " + text1 , (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 12);
-    drawText( 10, 120+20*2, "ファイル読み込み頻度     : " + text2 , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 12);
-    
-    drawText( 10, 120+20*6, "Enter : 設定を適応 " + text3 , $clYellow2, 12);
-    drawText( 10, 120+20*7, "O     : 設定をキャンセル"    , $clYellow2, 12);
-    
-    update();
-  }
-  
-  openOption = 0;
 }

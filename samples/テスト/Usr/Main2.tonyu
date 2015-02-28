@@ -1,0 +1,66 @@
+extends SecretChar;
+
+
+// オプション画面
+function musicPlayerOption() {
+  var selectEff, buttonL, buttonR;
+  var text1, text2, text3;
+  var key79;
+  
+  openOption = 1;
+  
+  // YellowMusicPlayerの設定を読み込む
+  $mplayer.getPlayerConfig();
+  playerDirectMusicSW = $mplayer.getPlayerDirectMusicSW();
+  playerReadSpeed     = $mplayer.getPlayerReadSpeed();
+  
+  key79 = 0;
+  while (1) {
+    if (key79 == 0) { // Oキーを離すまでOキーを無効にする
+      if (getkey(79) == 0) key79 = 1;
+      
+    } else if (key79 == 1) {
+      if (getkey(79) == 2) break; // 設定キャンセル
+      
+    }
+    if (getkey(13) == 1) { // 設定を適応
+      $mplayer.resetPlayer(playerDirectMusicSW, playerReadSpeed);
+      break;
+    }
+    
+    if (getkey(38) == 1 || (getkey(38) > 20 && getkey(38) % 5 == 1)) selectEff --; // ↑:
+    if (getkey(40) == 1 || (getkey(40) > 20 && getkey(40) % 5 == 1)) selectEff ++; // ↓:
+    if (selectEff < 0) selectEff = 1;
+    if (selectEff > 1) selectEff = 0;
+    buttonL = getkey(37); // ←:
+    buttonR = getkey(39); // →:
+    
+    if (selectEff == 0) {
+      if (buttonL == 1 || buttonL > 10) { playerDirectMusicSW -= 1; if (playerDirectMusicSW < 0) playerDirectMusicSW = 0; }
+      if (buttonR == 1 || buttonR > 10) { playerDirectMusicSW += 1; if (playerDirectMusicSW > 2) playerDirectMusicSW = 2; }
+    } else if (selectEff == 1) {
+      if (buttonL == 1 || buttonL > 5) { playerReadSpeed -= 1; if (playerReadSpeed <   0) playerReadSpeed =   0; }
+      if (buttonR == 1 || buttonR > 5) { playerReadSpeed += 1; if (playerReadSpeed > 100) playerReadSpeed = 100; }
+    }
+    
+    if      (playerDirectMusicSW == 0) text1 = "デフォルト設定（NT系OS:ON 9x系OS:OFF）";
+    else if (playerDirectMusicSW == 1) text1 = "ON";
+    else if (playerDirectMusicSW == 2) text1 = "OFF";
+    
+    text2 = ((playerReadSpeed + 1) * 15) + "ミリ秒毎";
+    
+    if (playerDirectMusicSW != $mplayer.getPlayerDirectMusicSW()) text3 = "(Midiデバイスの初期化に時間がかかります)";
+    else                                                     text3 = "";
+    
+    drawText( 10, 100, "YellowMusicPlayerの設定", $clYellow, 20);
+    drawText( 10, 120+20*1, "DirectMusic              : " + text1 , (selectEff != 0)*$clWhite + (selectEff == 0)*$clGreen, 12);
+    drawText( 10, 120+20*2, "ファイル読み込み頻度     : " + text2 , (selectEff != 1)*$clWhite + (selectEff == 1)*$clGreen, 12);
+    
+    drawText( 10, 120+20*6, "Enter : 設定を適応 " + text3 , $clYellow2, 12);
+    drawText( 10, 120+20*7, "O     : 設定をキャンセル"    , $clYellow2, 12);
+    
+    update();
+  }
+  
+  openOption = 0;
+}

@@ -2,7 +2,7 @@ extends MediaPlayer;
 // *---------------------------------*
 // *  YellowMusicPlayerópÇÃYmplayer  *
 // *---------------------------------*
-//     YellowMusicPlayer version 2.2óp
+//     YellowMusicPlayer version 2.3óp
 
 
 constructor Ymplayer() {
@@ -51,6 +51,13 @@ constructor Ymplayer() {
   
   displayWidth  = 0;
   displayHeight = 0;
+  
+  osPlatformId   = 0;
+  osMajorVersion = 0;
+  osMinorVersion = 0;
+  
+  joystickOnID1 = 0;
+  joystickOnID2 = 0;
   
   playerExeName       = "";
   playerDirectMusicSW = 0;
@@ -251,7 +258,7 @@ function setGettingPlayerStatus(interval) {
   bgmGettingPlayerStatus = interval;
 }
 function getPlayerStatus(scope) {
-  var f;
+  var f, d;
   
   f = new FileReader("YMPStatus.dat");
   if (f.error()) { f.close(); return -1; }
@@ -295,6 +302,16 @@ function getPlayerStatus(scope) {
   if (!scope || scope >= 4) {
     displayWidth  = f.read() + f.read()*256;
     displayHeight = f.read() + f.read()*256;
+  }
+  if (!scope || scope >= 5) {
+    osPlatformId   = f.read();
+    osMajorVersion = f.read();
+    osMinorVersion = f.read();
+  }
+  if (!scope || scope >= 6) {
+    d = f.read();
+    joystickOnID1 = d     % 2;
+    joystickOnID2 = d / 2 % 2;
   }
   if (f.error()) { f.close(); return -1; }
   f.close();
@@ -551,6 +568,22 @@ function getDisplayWidth() {
 }
 function getDisplayHeight() {
   return displayHeight;
+}
+function getOSPlatformId() {
+  return osPlatformId;
+}
+function getOSMajorVersion() {
+  return osMajorVersion;
+}
+function getOSMinorVersion() {
+  return osMinorVersion;
+}
+function getJoystickOn(id) {
+  var r;
+  if      (id == 0) r = joystickOnID1;
+  else if (id == 1) r = joystickOnID2;
+  else r = 0;
+  return r;
 }
 
 // getPlayerConfig()ÇÃçÄñ⁄

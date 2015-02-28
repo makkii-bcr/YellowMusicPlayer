@@ -17,48 +17,48 @@
   下記の手順を、oggが再生できるようになるまで、１つずつ試してください。<br>
   手順を１つずつ試しながらプロジェクトを実行し、再生されたらその先の手順を行う必要はありません。<br>
   <ol>
-   <li class="bold">oggファイルが、現在のプロジェクトにあるか確認する。</li>
+   <li><b>oggファイルが、現在のプロジェクトにあるか確認する。</b></li>
    <br>
    oggファイル自体が、所定の場所に置き忘れていないか確認してください。<br>
    開発環境版では、現在開いているプロジェクトのフォルダ内<br>
    ランタイム版では、Usrフォルダ内にoggファイルが置かれている必要があります。<br>
    <br>
-   <li class="bold">Ymplayer.tonyuが、現在のプロジェクトに登録されているか確認する。</li>
+   <li><b>Ymplayer.tonyuが、現在のプロジェクトに登録されているか確認する。</b></li>
    <br>
    oggを再生するにはYmplayer.tonyuが必要です。<br>
    エディタウィンドウの左側のクラス一覧に、Ymplayerがあるか確認してください。<br>
    <br>
-   <li class="bold">プログラムで、「$mplayer = new Ymplayer();」と上書きしているか確認する。</li>
+   <li><b>プログラムで、「$mplayer = new Ymplayer();」と上書きしているか確認する。</b></li>
    <br>
    この命令が書かれているか、エディタウィンドウの検索を使うなどして調べてください。<br>
    この命令が書かれていたとしても、処理の順番を間違えていて、oggが鳴らない場合もあるかもしれません。<br>
    プログラムの始まりの方で処理されるように、プログラムしてください。<br>
    <br>
-   <li class="bold">「$mplayer.play()」のメソッドが書かれているか確認する。</li>
+   <li><b>「$mplayer.play()」のメソッドが書かれているか確認する。</b></li>
    <br>
    oggを鳴らすための命令「$mplayer.play()」がプログラムに書かれているか確認してください。<br>
    <br>
-   <li class="bold">「$mplayer.play()」の引数が文字列になっているか確認する。</li>
+   <li><b>「$mplayer.play()」の引数が文字列になっているか確認する。</b></li>
    <br>
    oggファイルを鳴らす場合は「$mplayer.play("bgm01.ogg", 1);」のように、第１引数を文字列にしてください。<br>
    「$mplayer($se_bgm01, 1);」は間違いです。注意してください。<br>
    <br>
-   <li class="bold">「$mplayer.play()」の引数で、ファイル名またはパス名が間違えていないか確認する。</li>
+   <li><b>「$mplayer.play()」の引数で、ファイル名またはパス名が間違えていないか確認する。</b></li>
    <br>
    例えば、「$mplayer.play("bgm01.ogg", 1);」の「bgm01.ogg」というファイル名が間違えていると、oggは鳴りません。<br>
    filesフォルダにoggファイルがある場合などは「$mplayer.play("files/bgm01.ogg", 1);」のように書いてください。<br>
    <br>
-   <li class="bold">「$mplayer.play()」の命令が実行されているか、プログラムを見直す。</li>
+   <li><b>「$mplayer.play()」の命令が実行されているか、プログラムを見直す。</b></li>
    <br>
    処理順番や分岐条件などに間違いがあり、この命令が実行されていない可能性もあります。<br>
    一時的に、確実に実行される場所に「$mplayer.play()」の命令を書いて実行してみてください。<br>
    <br>
-   <li class="bold">YellowMusicPlayerを導入しなおす。</li>
+   <li><b>YellowMusicPlayerを導入しなおす。</b></li>
    <br>
    YellowMusicPlayer自体が正しく導入されていない可能性があります。<br>
    Tonyuのバージョンによって、導入するファイルが違うので間違わないように導入してください。<br>
    <br>
-   <li class="bold">Ymplayer.tonyuを導入しなおす。</li>
+   <li><b>Ymplayer.tonyuを導入しなおす。</b></li>
    <br>
    Ymplayer.tonyuのバージョンがYellowMusicPlayer本体と合っていない、<br>
    もしくは、ソースが書き換わってしまった可能性があります。<br>
