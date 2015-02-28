@@ -1,8 +1,0 @@
-extends SpriteChar;
-
-constructor Char(xx,yy,pp,ff) {
-  super(xx,yy,pp,ff);
-
-}
-
-while(1) {update();}

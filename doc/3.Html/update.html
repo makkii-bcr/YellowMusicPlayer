@@ -1,0 +1,96 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="res/icon.png" align="top">
+   &nbsp;更新履歴&nbsp;
+   <img src="res/icon.png" align="top">
+  </h1>
+  <hr>
+  <br>
+  <h4>【ver 2.10】</h4>
+  <ul>
+   <li>Tonyu 1.22以前でも導入できるように、Tonyu 1.22以前用のYellowMusicPlayerを作った</li>
+   <li>set系メソッドを追加</li>
+   <ul>
+    <li>エフェクト関係のメソッドが１つで複数の項目を設定する方式だったものを、１項目ごとにメソッドを新しく作り使いやすくした。<br>
+        今後は新しいメソッドの使用を推奨</li>
+    </ul>
+   <li>get系メソッドを追加</li>
+   <ul>
+    <li>MusicPlayerの情報取得が直接変数を参照する方式だったものを、メソッドから取得できるようにした。<br>
+        今後はメソッドの使用を推奨</li>
+   </ul>
+   <li>Oggを使わない場合でも、起動時にogg_sig.datファイルが生成されて邪魔くさいので、ogg_sig.datファイルがないときは生成しないように修正</li>
+   <li>Player.exeの名前を変えてもファイルを検索して、Tonyuの終了を監視できるようにした
+    <ul>
+     <li>今までPlayer.exeの名前を変えたら、YellowMusicPlayerの設定で実行ファイル名を指定しないと、YellowMusicPlayerのプロセスが残ってしまっていた</li>
+     <li>ファイル検索で実行ファイルを探し出せるようになったので、YellowMusicPlayerの設定をしなくてもプロセス残りしなくなった</li>
+    </ul>
+   </li>
+   <li>ダウンロードパッケージのファイル・フォルダの配置位置を変更</li>
+   <li>サンプル「ミュージックプレイヤー」を削除</li>
+   <li>ReadMe修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.05】</h4>
+  <ul>
+   <li>Windows 98 SE で動作確認して以下のバグを発見したので修正（おそらくWindows XP以前のOSで同様のバグが起きてた可能性がある）</li>
+   <ul>
+    <li>Oggの現在の再生時間が8秒以降になると狂う</li> 
+    <li>サンプリングレートが44100Hz未満のOggで再生速度が速くなる </li>
+    <li>Tonyu終了時に強制終了ダイアログが表示される </li>
+   </ul>
+   <li>DirectMusicのON/OFFを切り替えると、dlsファイルの登録が解除されてしまうバグを修正</li>
+   <li>ReadMeのリファレンスを用途別に別けた</li>
+   <li>YellowMusicPlayer本体のソースファイルは、需要がなさそうなので削除</li>
+  </ul>
+  <br>
+  <h4>【ver 2.04】</h4>
+  <ul>
+   <li>Ymplayer.tonyuにバグがあったので修正</li>
+   <ul>
+    <li>戻り値が常に-1(エラー時の値)のメソッドがあった</li>
+    <li>Midiを再生するとOggの一時停止が解除されてしまう等</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.03】</h4>
+  <ul>
+   <li>ReadMeの文字がChromeで見ると小さくなっていたので修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.02】</h4>
+  <ul>
+   <li>ReadMeなど若干修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.01】</h4>
+  <ul>
+   <li>Oggの初期の音量・テンポが0だったために、「eff_midi.txt」ファイルで音量・テンポを指定していない場合、Oggの音が聞こえないバグを修正</li>
+   <li>MusicPlayer起動時に「eff_midi.txt」ファイルが無い場合、Midiを鳴らさない限り「eff_midi.txt」ファイルを読み込まないため、エフェクトを反映できないバグを修正</li>
+   <li>その他、記述間違いを修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.00】</h4>
+  <ul>
+   <li>MidiとOgg Vorbisが鳴らせるようになった</li>
+   <li>ソフト名を「YellowMusicPlayer」に改変</li>
+  </ul>
+  <br>
+  <h4>【ver 1.00】</h4>
+  <ul>
+   <li>非公開バージョン</li>
+   <li>ソフト名「YellowMidiPlayer」</li>
+   <li>Midiのみ鳴らせるプレイヤー</li>
+  </ul>
+  <br>
+   <a href="../ReadMe.html">戻る</a>
+  <hr>
+ </body>
+</html>

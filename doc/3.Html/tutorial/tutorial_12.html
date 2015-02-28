@@ -1,0 +1,52 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「一時停止」 (Ogg)</h2>
+  一時停止と一時停止からの再開をします。<br>
+  <br>
+  <a href="../reference/rf_pause.html">pause()</a>で一時停止、<a href="../reference/rf_restart.html">restart()</a>で一時停止からの再開ができます。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer(); // $mplayerをYmplayerで上書き
+$mplayer.play($se_test); // Tonyu開発環境版で鳴るようにまずMidiを鳴らしておく
+wait(20);
+$mplayer.stop(); // 停止
+while (1) {
+  if (getkey(90) == 1) $mplayer.play("test.ogg" ,1); // Z:再生
+  if (getkey(88) == 1) $mplayer.stop();              // X:停止
+  if (getkey(67) == 1) $mplayer.<strong>pause</strong>();             // C:一時停止
+  if (getkey(86) == 1) $mplayer.<strong>restart</strong>();           // V:一時停止からの再開
+  
+  update();
+}
+</pre>
+  <br>
+  pause(), restart()と、メソッドを呼び出すだけで使えます。<br>
+  <br>
+  ちなみに、pause(),restart() は MidiとOggの両方に対して、命令が実行されます。<br>
+  pause(2),restart(2) にすると、Oggに対してのみ命令が実行されます。<br>
+  <br>
+  以下のページに詳しい使い方が載っています。<br>
+  <ul>
+   <li><a href="../reference/rf_pause.html">pause()</a></li>
+   <li><a href="../reference/rf_restart.html">restart()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

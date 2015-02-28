@@ -1,0 +1,148 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;Tips・その他&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>YellowMusicPlayerで使用するファイル</h2>
+  以下のファイルはYellowMusicPlayerで使われているファイルなので、<br>
+  同じ名前のファイルを、プロジェクトで使わないようにしてください。<br>
+  filesフォルダ内に置かれるファイルです。<br>
+  <ul>
+   <li>eff_midi.txt  （エフェクト情報・再生オプション などの情報が入ったファイル）</li>
+   <li><font color="#FF0000">midi_sig.dat   （YellowMusicPlayer(Tonyu1.22以前用)の場合は使用）</font></li>
+   <li>ogg_sig.dat   （Oggに対する再生・停止・一時停止などの制御情報が入ったファイル）</li>
+   <li>YMPConfig.txt  （YellowMusicPlayerの設定）</li>
+   <li>YMPStatus.dat  （YellowMusicPlayerの情報取得機能がONのとき、YellowMusicPlayerが書き込むファイル）</li>
+   <li>YMPPreparation.dat  （YellowMusicPlayerが準備中であること知らせるために書き込むファイル）</li>
+  </ul>
+  一見するとファイル数が多いですが、<br>
+  YMPConfig.txtは手動で作成するファイルで、<br>
+  YMPStatus.datはMusicPlayerの状態取得機能を使用した時のみ作成され、<br>
+  YMPPreparation.datは一瞬だけ作成されすぐ削除されるので、<br>
+  常にあるファイルは「eff_midi.txt」<s>「ogg_sig.dat」</s>の最低２つです。<br>
+  <font color="#FF0000">※ ver2.10から「ogg_sig.dat」はYellowMusicPlayer起動中に存在し、終了すると消えます。</font><br>
+  <h3>eff_midi.txtの内容</h3>
+  （テキスト形式）<br>
+<pre>
+Midi音量
+Midiテンポ
+Midiフェードアウト時間
+Midi一時停止フラグ
+Midiピッチ
+Midiフェードイン時間
+Midiキーシフト
+Midiの再生開始位置
+Midiの冒頭の空白をスキップのON/OFF
+Midiの末尾の空白をスキップのON/OFF
+マスターピッチ機能のON/OFF
+ノーマライズ機能のON/OFF
+エクスクルーシブ送信のON/OFF
+MusicPlayerの情報取得機能のON(更新頻度)/OFF
+Ogg音量
+Oggテンポ
+Oggパン
+Oggフェードイン時間
+Oggフェードアウト時間
+Oggの再生開始位置
+Oggのループ後戻る再生位置(Oggループの始端)
+Oggのループする再生位置(Oggループの終端)
+OggファイルのOGGループを使う
+</pre>
+  <br>
+  <h3>ogg_sig.datの内容</h3>
+  （テキスト＆バイナリが混じっている）<br>
+<pre>
+（テキスト形式(改行コードあり)）[Usrフォルダから見た再生したいOggの相対パス(再生) or 0(停止) or 1(一時停止) or 2(一時停止からの再開)]
+ (1バイト) 再生時に再生するOggをループさせるか
+</pre>
+  <br>
+  <h3>YMPConfig.txt の内容</h3>
+  （テキスト形式）<br>
+<pre>
+Player.exeのファイル名が変えられた時のファイル名
+DirectMusicのON/OFF
+MusicPlayerのモード
+ファイル読み込み頻度
+MidiファイルのキャッシュのON/OFF
+</pre>
+  <br>
+  <h3>YMPStatus.dat の内容</h3>
+  （バイナリ形式（リトルエンディアン））<br>
+<pre>
+（1バイト）Midiの状態、停止中:0 再生中:1 一時停止中:2
+（1バイト）再生中のMidi番号
+（4バイト）再生中のMidiの、現在のデータ内のテンポ
+（4バイト）再生中のMidiの、現在のティック
+（4バイト）再生中のMidiの、現在のMidiデータ内での再生時間
+（4バイト）Midiを再生してからのループ回数
+（4バイト）再生中のMidiの、ベースカウント
+（4バイト）再生中のMidiの、総ティック
+（4バイト）再生中のMidiの、総再生時間
+（4バイト）再生中のMidiの、最初の発音ティック
+（4バイト）再生中のMidiの、最初の発音の時間
+（4バイト）再生中のMidiの、最後の発音ティック
+（4バイト）再生中のMidiの、最後の発音の時間
+（4バイト）再生中のMidiの、CC#111の位置
+（4バイト）再生中のMidiの、CC#111の位置の時間
+（1バイト）Oggの状態、停止中:0 再生中:1 一時停止中:2
+（4バイト）再生中のOggの、現在のOggデータ内での再生時間
+（4バイト）Oggを再生してからのループ回数
+（1バイト）再生中のOggの、チャンネル数
+（4バイト）再生中のOggの、サンプリングレート
+（4バイト）再生中のOggの、総再生時間
+（4バイト）再生中のOggの、総サンプル数
+（4バイト）再生中のOggの、Oggファイル中にあるループ始端
+（4バイト）再生中のOggの、Oggファイル中にあるループ終端
+（1バイト）現在の時刻「時」
+（1バイト）現在の時刻「分」
+（1バイト）現在の時刻「秒」
+（2バイト）現在の時刻「ミリ秒」
+（2バイト）現在の日付「年」
+（1バイト）現在の日付「月」
+（1バイト）現在の日付「日」
+（1バイト）現在の日付「曜日」
+</pre>
+  <br>
+  <h3>YMPPreparation.dat の内容</h3>
+  YMPPreparation.dat は、YellowMusicPlayerが起動時に書き込むときは、内容は空です。<br>
+  TonyuからYmplayerクラスのresetPlayer()メソッドが呼び出された場合は、以下の内容が書かれています。<br>
+  <br>
+  （テキスト形式）<br>
+<pre>
+DirectMusicのON/OFF
+ファイル読み込み頻度
+</pre>
+  <h2>TonyuMidiLitestモードで使用するファイル</h2>
+  TonyuMidiLitestモードにすると、次のファイルを使用します。<br>
+  <ul>
+   <li>eff_midi.txt</li>
+  </ul>
+  <h2>MidiOggPlayerモードで使用するファイル</h2>
+  MidiOggPlayerモードにすると、次のファイルを使用します。<br>
+  <ul>
+   <li>bgm_config.dat</li>
+   <li>midi_sig.dat</li>
+   <li>ogg_sig.dat</li>
+   <li>realtime.dat</li>
+  </ul>
+  <h2>TonyuでOgg Vorbisを鳴らすサンプルモードで使用するファイル</h2>
+  TonyuでOgg Vorbisを鳴らすサンプルモードにすると、次のファイルを使用します。<br>
+  <ul>
+   <li>temp.txt</li>
+   <li>loop.txt</li>
+   <li>volume.txt</li>
+   <li>fade_s.txt</li>
+  </ul>
+  <a href="../tips.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setOggLoopEndTime</h2>
+  Oggのループする再生位置(ループ終端)を変更します。<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setOggLoopEndTime(loopEndTime)
+</pre>
+<dl>
+<dt>loopEndTime</dt>
+<dd>ループする再生位置(ループ終端)をミリ秒単位で指定(1～(再生するoggの総再生時間) ＆ loopStartTime + 40 以上)、指定しないなら0</dd>
+</dl>
+  <br>
+  <b>【startTime, loopStartTime, loopEndTime の関係】</b><br>
+  <img src="../res/rf_01.png" border=1><br>
+  <br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

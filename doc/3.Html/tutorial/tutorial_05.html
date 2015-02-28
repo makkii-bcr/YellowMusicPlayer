@@ -1,0 +1,77 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「再生オプション」 (Midi)</h2>
+    これらの設定は、演奏前に設定します。<br>
+  <br>
+  <a href="../reference/rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a>でMidiの冒頭の空白スキップ、<br>
+  <a href="../reference/rf_setMidiSkipEnding.html">setMidiSkipEnding()</a>でMidiの末尾の空白スキップ、<br>
+  <a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>でMidiのマスターピッチ機能のON/OFF、<br>
+  <a href="../reference/rf_setMidiNormalize.html">setMidiNormalize()</a>でMidiのノーマライズ機能のON/OFF、<br>
+  <a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a>でMidiデータ中のエクスクルーシブ送信のON/OFFを、設定できます。<br>
+
+  <br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+midiSkipBeginning = 1;
+midiSkipEnding    = 0;
+midiMasterPitch   = 0;
+midiNormalize     = 0;
+midiExclusive     = 0;
+while (1) {
+  if (getkey(65) == 1) midiSkipBeginning = !midiSkipBeginning; // A:冒頭の空白スキップ
+  if (getkey(83) == 1) midiSkipEnding    = !midiSkipEnding;    // S:末尾の空白スキップ
+  if (getkey(68) == 1) midiMasterPitch   = !midiMasterPitch;   // D:マスターピッチ機能
+  if (getkey(70) == 1) midiNormalize     = !midiNormalize;     // F:ノーマライズ機能
+  if (getkey(71) == 1) midiExclusive     = !midiExclusive;     // G:エクスクルーシブ送信
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setMidiSkipBeginning</strong>(midiSkipBeginning); // Midiの冒頭の空白スキップを設定
+    $mplayer.<strong>setMidiSkipEnding</strong>(midiSkipEnding);       // Midiの末尾の空白スキップを設定
+    $mplayer.<strong>setMidiMasterPitch</strong>(midiMasterPitch);     // Midiのマスターピッチ機能のON/OFFを設定
+    $mplayer.<strong>setMidiNormalize</strong>(midiNormalize);         // Midiのノーマライズ機能のON/OFFを設定
+    $mplayer.<strong>setMidiExclusive</strong>(midiExclusive);         // Midiデータ中のエクスクルーシブ送信のON/OFFを設定
+    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.play($se_test, 1);
+  }
+  if (getkey(88) == 1) { // X:停止
+    $mplayer.stop();
+  }
+  
+  drawText(100,  0, "冒頭の空白スキップ　：" + midiSkipBeginning, $clWhite);
+  drawText(100, 20, "末尾の空白スキップ　：" + midiSkipEnding   , $clWhite);
+  drawText(100, 40, "マスターピッチ機能　：" + midiMasterPitch  , $clWhite);
+  drawText(100, 60, "ノーマライズ機能　　：" + midiNormalize    , $clWhite);
+  drawText(100, 80, "エクスクルーシブ送信：" + midiExclusive    , $clWhite);
+  update();
+}
+</pre>
+  <br>
+  メソッドの詳細<br>
+  <ul>
+   <li><a href="../reference/rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a></li>
+   <li><a href="../reference/rf_setMidiSkipEnding.html">setMidiSkipEnding()</a></li>
+   <li><a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a></li>
+   <li><a href="../reference/rf_setMidiNormalize.html">setMidiNormalize()</a></li>
+   <li><a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

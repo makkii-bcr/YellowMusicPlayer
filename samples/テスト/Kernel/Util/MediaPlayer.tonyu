@@ -1,4 +1,9 @@
 extends Object;
+// *---------------------------------*
+// *  YellowMusicPlayer—p‚Ì$mplayer  *
+// *---------------------------------*
+//     YellowMusicPlayer version 2.1—p
+//     Tonyu System version 1.23ˆÈ~—p
 
 //native _n_freeAllSE;
 
@@ -37,7 +42,7 @@ function freeAllSE() {
 
 function play( s,ar,v) {
   if ( s) {
-    if (s is BGM) stop();
+    //if (s is BGM) stop();
     if (!v || (v>=0 && v<=128)) {
       s.play(ar,v);
     } else {

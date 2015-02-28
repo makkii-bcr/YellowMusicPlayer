@@ -1,0 +1,93 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setDynamicEffectOgg</h2>
+  Oggの再生中に動的に変更できるエフェクト項目をセットします<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+setDynamicEffectOgg(vol, tempo, pan)
+</pre>
+<dl>
+<dt>vol(省略可能)</dt>
+<dd>Oggの音量(0～127)</dd>
+
+<dt>tempo(省略可能)</dt>
+<dd>Oggのテンポ(0.001～8)<br>
+1で等速、2で２倍のテンポ、0.5で半分のテンポになります<br>
+Oggの場合はテンポを変えるとピッチも変化します（音声ファイルであるため）<br>
+<br>
+※ 実際にテンポを変更できる範囲は、0.001～8倍の範囲よりも小さくなる場合があります。<br>
+　　MusicPlayer内部の仕様（DirectSoundの仕様）で、100000Hzより高い周波数で再生できないOSがあるそうです。<br>
+　　つまり、サンプリングレートが44100HzのOggは、約2.267倍速までしかテンポを上げれません。<br>
+　　<br>
+　　作者のPC(win7)では、対応している周波数が100Hz～200000Hzまででした。<br>
+　　この環境でサンプリングレートが44100HzのOggを再生すると、有効なテンポは約0.002～4.535倍速までです。</dd>
+
+<dt>pan(省略可能)</dt>
+<dd>Oggのパン（左右のスピーカーの音量バランス）(-1.0～1.0)<br>
+-1.0で左スピーカーだけ鳴り、1.0で右スピーカーだけ鳴り、<br>
+0で左右のスピーカーの音量が同じになります<br>
+小数を指定すると、滑らかに右か左に音量が移っていくような演出ができます<br>
+</dd>
+</dl>
+<br>
+<font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+<ul>
+<li><a href="rf_setOggVolume.html">oggVolume</a></li>
+<li><a href="rf_setOggTempo.html">oggTempo</a></li>
+<li><a href="rf_setOggPan.html">oggPan</a></li>
+</ul>
+  <h3>例</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.updatePlayingInfomation(); // 更新
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、プロジェクトを開いてから一度midiを再生しないとoggを再生できない
+wait(20);
+$mplayer.stop();
+wait(20);
+$mplayer.play("test.ogg", 1); // 再生
+oggVolume = 127;
+oggTempo  = 1;
+oggPan    = 0;
+v = 1;
+while (1) {
+  if (getkey(65) > 0 && oggVolume >      0) oggVolume --;        // A:音量－
+  if (getkey(83) > 0 && oggVolume <    127) oggVolume ++;        // S:音量＋
+  if (getkey(68) > 0 && oggTempo  >  0.001) oggTempo  -= 0.125;  // D:テンポ－
+  if (getkey(70) > 0 && oggTempo  <  8    ) oggTempo  += 0.125;  // F:テンポ＋
+  if (getkey(71) > 0 && oggPan    >   -1.0) oggPan    -= 1 / 64; // G:パン－
+  if (getkey(72) > 0 && oggPan    <    1.0) oggPan    += 1 / 64; // H:パン＋
+  if (v % 6 == 0) { // １秒間に10回更新
+    $mplayer.<strong>setDynamicEffectOgg</strong>(oggVolume, oggTempo, oggPan); // エフェクト設定
+    $mplayer.updatePlayingInfomation(); // 更新
+  }
+  drawText(100,  0, "音量　：" + oggVolume, $clWhite);
+  drawText(100, 20, "テンポ：" + oggTempo , $clWhite);
+  drawText(100, 40, "パン　：" + oggPan   , $clWhite);
+  v++;
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

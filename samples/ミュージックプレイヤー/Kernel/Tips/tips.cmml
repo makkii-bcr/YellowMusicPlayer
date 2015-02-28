@@ -1,6 +1,0 @@
-<resourcelist name="helptips">
- <HelpTips name="ht00001">
-  <resinst type="string" name="keyword" value="die"/>
-  <resinst type="string" name="summary" value="dieメソッド: オブジェクトを消去します"/>
- </HelpTips>
-</resourcelist>

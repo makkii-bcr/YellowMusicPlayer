@@ -1,0 +1,95 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「フェードイン再生・フェードアウト停止・再生開始位置指定・ループ始端指定・ループ終端指定・Oggループ使用」 (Ogg)</h2>
+  これらの設定は、再生前・停止前に設定します。<br>
+  <br>
+  <a href="../reference/rf_setOggFadeInTime.html">setOggFadeInTime()</a>でフェードイン、<br>
+  <a href="../reference/rf_setOggFadeOutTime.html">setOggFadeOutTime()</a>でフェードアウト、<br>
+  <a href="../reference/rf_setOggStartTime.html">setOggStartTime()</a>で再生開始位置、<br>
+  <a href="../reference/rf_setOggLoopStartTime.html">setOggLoopStartTime()</a>でループした後に戻る再生位置(ループ始端)、<br>
+  <a href="../reference/rf_setOggLoopEndTime.html">setOggLoopEndTime()</a>でループする再生位置(ループ終端)、<br>
+  <a href="../reference/rf_setOggFileLoop.html">setOggFileLoop()</a>でOggループを使用するかON/OFFを、設定できます。<br>
+
+  <br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+// 開発環境版 でOggを鳴らすための処理 ////
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、起動してから一度midiを再生しないとoggを再生できない
+wait(20);
+$mplayer.stop();
+wait(20);
+//////////////////////////////////////////
+oggFadeInTime    = 0;
+oggFadeOutTime   = 0;
+oggStartTime     = 0;
+oggLoopStartTime = 0;
+oggLoopEndTime   = 0;
+oggFileLoop      = 0;
+while (1) {
+  if (getkey(65)  > 0)  oggFadeInTime    -= 50;     // A:フェードイン－
+  if (getkey(83)  > 0)  oggFadeInTime    += 50;     // S:フェードイン＋
+  if (getkey(68)  > 0)  oggFadeOutTime   -= 50;     // D:フェードアウト－
+  if (getkey(70)  > 0)  oggFadeOutTime   += 50;     // F:フェードアウト＋
+  if (getkey(71)  > 0)  oggStartTime     -= 100;    // G:開始位置－
+  if (getkey(72)  > 0)  oggStartTime     += 100;    // H:開始位置＋
+  if (getkey(74)  > 0)  oggLoopStartTime -= 100;    // J:ループ開始位置－
+  if (getkey(75)  > 0)  oggLoopStartTime += 100;    // K:ループ開始位置＋
+  if (getkey(76)  > 0)  oggLoopEndTime   -= 100;    // L:ループ終了位置－
+  if (getkey(187) > 0)  oggLoopEndTime   += 100;    // ;:ループ終了位置＋
+  if (getkey(186) == 1) oggFileLoop = !oggFileLoop; // ::OggループON/OFF
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setOggFadeInTime</strong>(oggFadeInTime);       // フェードイン設定
+    $mplayer.<strong>setOggStartTime</strong>(oggStartTime);         // 再生開始位置設定
+    $mplayer.<strong>setOggLoopStartTime</strong>(oggLoopStartTime); // ループ始端設定
+    $mplayer.<strong>setOggLoopEndTime</strong>(oggLoopEndTime);     // ループ終端設定
+    $mplayer.<strong>setOggFileLoop</strong>(oggFileLoop);           // Oggループを使用するかON/OFFを設定
+    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.play("test.ogg", 1);
+  }
+  if (getkey(88)==1) { // X:停止
+    $mplayer.<strong>setOggFadeOutTime</strong>(oggFadeOutTime); // フェードアウト設定
+    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.stop();
+  }
+  
+  drawText(100,   0, "フェードイン　：" + oggFadeInTime   , $clWhite);
+  drawText(100,  20, "フェードアウト：" + oggFadeOutTime  , $clWhite);
+  drawText(100,  40, "開始位置　　　：" + oggStartTime    , $clWhite);
+  drawText(100,  60, "ループ開始位置：" + oggLoopStartTime, $clWhite);
+  drawText(100,  80, "ループ終了位置：" + oggLoopEndTime  , $clWhite);
+  drawText(100, 100, "Oggループ　　 ：" + oggFileLoop     , $clWhite);
+  update();
+}
+</pre>
+  <br>
+  メソッドの詳細<br>
+  <ul>
+   <li><a href="../reference/rf_setOggFadeInTime.html">setOggFadeInTime()</a></li>
+   <li><a href="../reference/rf_setOggFadeOutTime.html">setOggFadeOutTime()</a></li>
+   <li><a href="../reference/rf_setOggStartTime.html">setOggStartTime()</a></li>
+   <li><a href="../reference/rf_setOggLoopStartTime.html">setOggLoopStartTime()</a></li>
+   <li><a href="../reference/rf_setOggLoopEndTime.html">setOggLoopEndTime()</a></li>
+   <li><a href="../reference/rf_setOggFileLoop.html">setOggFileLoop()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

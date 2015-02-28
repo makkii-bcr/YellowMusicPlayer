@@ -1,8 +1,9 @@
 extends MediaPlayer;
-// *--------------------------------*
-// *  YellowMidiPlayer用の$mplayer  *
-// *--------------------------------*
-//                     version 2.0用
+// *---------------------------------*
+// *  YellowMusicPlayer用のYmplayer  *
+// *---------------------------------*
+//     YellowMusicPlayer version 2.1用
+//     Tonyu System version 1.23以降用
 
 
 constructor Ymplayer() {
@@ -172,6 +173,8 @@ function updatePlayingInfomation() {
   f.close();
   return 0;
 }
+
+///////////////////////////////
 function setDynamicEffect(vol, tempo, pitch) {
   if (vol   != null) midiVolume = vol;
   if (tempo != null) midiTempo  = tempo;
@@ -353,4 +356,197 @@ function resetPlayer(dm, rs) {
   e = f.error()*(-1);
   f.close();
   return e;
+}
+
+// セッター /////////////
+
+// setDynamicEffect()の項目
+function setMidiVolume(vol) {
+  if (vol != null) midiVolume = vol;
+}
+function setMidiTempo(tempo) {
+  if (tempo != null) midiTempo = tempo;
+}
+function setMidiPitch(pitch) {
+  if (pitch != null) midiPitch = pitch;
+}
+
+// setDynamicEffectOgg()の項目
+function setOggVolume(vol) {
+  if (vol != null) oggVolume = vol;
+}
+function setOggTempo(tempo) {
+  if (tempo != null) oggTempo = tempo;
+}
+function setOggPan(pan) {
+  if (pan != null) oggPan = pan;
+}
+
+// setStaticEffect()の項目
+function setMidiFadeInTime(fadeInTime) {
+  if (fadeInTime != null) midiFadeInTime = fadeInTime;
+}
+function setMidiFadeOutTime(fadeOutTime) {
+  if (fadeOutTime != null) midiFadeOutTime = fadeOutTime;
+}
+function setMidiStartTick(startTick) {
+  if (startTick != null) midiStartTick = startTick;
+}
+function setMidiKeyShift(keyShift) {
+  if (keyShift != null) midiKeyShift = keyShift;
+}
+
+// setStaticEffectOgg()の項目
+function setOggFadeInTime(fadeInTime) {
+  if (fadeInTime != null) oggFadeInTime = fadeInTime;
+}
+function setOggFadeOutTime(fadeOutTime) {
+  if (fadeOutTime != null) oggFadeOutTime = fadeOutTime;
+}
+function setOggStartTime(startTime) {
+  if (startTime != null) oggStartTime = startTime;
+}
+function setOggLoopStartTime(loopStartTime) {
+  if (loopStartTime != null) oggLoopStartTime = loopStartTime;
+}
+function setOggLoopEndTime(loopEndTime) {
+  if (loopEndTime != null) oggLoopEndTime = loopEndTime;
+}
+function setOggFileLoop(fileLoop) {
+  if (fileLoop != null) oggFileLoop = fileLoop;
+}
+
+// setPlayingOption()の項目
+function setMidiSkipBeginning(skipBeginning) {
+  if (skipBeginning != null) midiSkipBeginning = skipBeginning;
+}
+function setMidiSkipEnding(skipEnding) {
+  if (skipEnding != null) midiSkipEnding = skipEnding;
+}
+function setMidiMasterPitch(masterPitch) {
+  if (masterPitch != null) midiMasterPitch = masterPitch;
+}
+function setMidiNormalize(normalize) {
+  if (normalize != null) midiNormalize = normalize;
+}
+function setMidiExclusive(exclusive) {
+  if (exclusive != null) midiExclusive = exclusive;
+}
+
+
+// ゲッター /////////////
+
+// getPlayerStatus()の項目
+function getPlayerMidiStatus() {
+  return playerMidiStatus;
+}
+function getPlayerMidiPlayNo() {
+  return playerMidiPlayNo;
+}
+function getPlayerMidiTempo() {
+  return playerMidiTempo;
+}
+function getPlayerMidiTick() {
+  return playerMidiTick;
+}
+function getPlayerMidiTime() {
+  return playerMidiTime;
+}
+function getPlayerMidiLoopCount() {
+  return playerMidiLoopCount;
+}
+function getMidiTimeBase() {
+  return midiTimeBase;
+}
+function getMidiTotalTick() {
+  return midiTotalTick;
+}
+function getMidiTotalTime() {
+  return midiTotalTime;
+}
+function getMidiFirstNoteTick() {
+  return midiFirstNoteTick;
+}
+function getMidiFirstNoteTime() {
+  return midiFirstNoteTime;
+}
+function getMidiLastNoteTick() {
+  return midiLastNoteTick;
+}
+function getMidiLastNoteTime() {
+  return midiLastNoteTime;
+}
+function getMidiLoopTick() {
+  return midiLoopTick;
+}
+function getMidiLoopTime() {
+  return midiLoopTime;
+}
+function getPlayerOggStatus() {
+  return playerOggStatus;
+}
+function getPlayerOggTime() {
+  return playerOggTime;
+}
+function getPlayerOggLoopCount() {
+  return playerOggLoopCount;
+}
+function getOggChannels() {
+  return oggChannels;
+}
+function getOggSamplingRate() {
+  return oggSamplingRate;
+}
+function getOggTotalTime() {
+  return oggTotalTime;
+}
+function getOggTotalSamples() {
+  return oggTotalSamples;
+}
+function getOggFileLoopStart() {
+  return oggFileLoopStart;
+}
+function getOggFileLoopEnd() {
+  return oggFileLoopEnd;
+}
+function getTimeHour() {
+  return timeHour;
+}
+function getTimeMinute() {
+  return timeMinute;
+}
+function getTimeSecond() {
+  return timeSecond;
+}
+function getTimeMilliSecond() {
+  return timeMilliSecond;
+}
+function getTimeYear() {
+  return timeYear;
+}
+function getTimeMonth() {
+  return timeMonth;
+}
+function getTimeDay() {
+  return timeDay;
+}
+function getTimeDayOfWeek() {
+  return timeDayOfWeek;
+}
+
+// getPlayerConfig()の項目
+function getPlayerExeName() {
+  return playerExeName;
+}
+function getPlayerDirectMusicSW() {
+  return playerDirectMusicSW;
+}
+function getPlayerMode() {
+  return playerMode;
+}
+function getPlayerReadSpeed() {
+  return playerReadSpeed;
+}
+function getPlayerMidiCache() {
+  return playerMidiCache;
 }

@@ -1,0 +1,37 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setMidiPitch</h2>
+  Midiのピッチを調節します。<br>
+  演奏中に動的に変化させることができます。<br>
+  <br>
+  使用する場合は<a href="rf_setPlayingOption.html">setPlayingOption()</a>でマスターピッチ機能をONにしてください。<br>
+  ※ マスターピッチ機能をONにすると、ピッチベンドが送信されているMidiでは、音が変になるMidiがあります<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setMidiPitch(pitch)
+</pre>
+<dl>
+<dt>pitch</dt>
+<dd>Midiのピッチ（音の高低）(-8192～8191)<br>
+-8192で１オクターブ下がり、8191で１オクターブ上がります<br>
+ マスターピッチ機能がONのとき有効です</dd>
+</dl>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -5,11 +5,11 @@
  <resourcelist name="params">
   <param name="commentID" value="39726855"/>
   <param name="sound_stopOnPageLoad" value="1"/>
-  <param name="savedVersion" value="1260"/>
+  <param name="savedVersion" value="1180"/>
   <param name="mainPage" value="$page_index"/>
   <param name="title" value="YellowMusicPlayerテスト"/>
   <param name="author" value="マッキー"/>
-  <param name="version" value="2.05"/>
+  <param name="version" value="2.10"/>
   <param name="mail" value=""/>
   <param name="web" value=""/>
   <param name="cond" value="再配布、改造ともに無断で許可"/>
@@ -32,12 +32,16 @@
  </resourcelist>
  <resourcelist name="filelist">
 <Page name="r_0" src="index.cmml"/>
-<Page name="r_1" src="main.tonyu"/>
-<Page name="r_2" src="bgm0.mid"/>
-<Page name="r_3" src="16.mid"/>
-<Page name="r_4" src="F0.mid"/>
+<Page name="r_1" src="Main.tonyu"/>
+<Page name="r_2" src="Ymplayer.tonyu"/>
+<Page name="r_3" src="hy_joe.mid"/>
+<Page name="r_4" src="kuma.mid"/>
 <Page name="r_5" src="Once_Upon_A_Time.mid"/>
-<Page name="r_6" src="bos.mid"/>
-<Page name="r_7" src="syuting7.mid"/>
+<Page name="r_6" src="Para01.mid"/>
+<Page name="r_7" src="syuBoss.mid"/>
+<Page name="r_8" src="syuFast.mid"/>
+<Page name="r_9" src="tam-n11l.mid"/>
+<Page name="r_10" src="tam-n13l.mid"/>
+<Page name="r_11" src="tamco03l.mid"/>
  </resourcelist>
 </resourcelist>

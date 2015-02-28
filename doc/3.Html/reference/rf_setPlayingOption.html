@@ -1,0 +1,102 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setPlayingOption</h2>
+  Midiの再生オプションを設定します<br>
+  ※ 再生前にあらかじめ設定しておく項目です<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+setPlayingOption(skipBeginning, skipEnding, masterPitch, normalize, exclusive)
+</pre>
+<dl>
+<dt>skipBeginning(省略可能)</dt>
+<dd>Midiの冒頭の空白をスキップするなら1、しないなら0</dd>
+
+<dt>skipEnding(省略可能)</dt>
+<dd>Midiの末尾の空白をスキップするなら1、しないなら0</dd>
+
+<dt>masterPitch(省略可能)</dt>
+<dd>マスターピッチ機能をONにするなら1、OFFにするなら0<br>
+再生中にピッチ（音の高低）を変えたい場合は、1にしてください<br>
+1にすると、<a href="rf_setDynamicEffect.html">setDynamicEffect()</a>のpitchが使えるようになります。<br>
+ただし、ピッチベンドが送信されているMidiでは、1にすると音が変になることがあります。<br>
+使う場合は、うまく使い分けてください</dd>
+
+<dt>normalize(省略可能)</dt>
+<dd>ノーマライズ機能をONにするなら1、OFFにするなら0<br>
+Midiデータの音量が最大(127)になっていない場合、<br>
+全体的に音量を最大に上げる機能です<br>
+音割れするときは、<a href="rf_setDynamicEffect.html">setDynamicEffect()</a>で音量を調節できます<br>
+</dd>
+
+<dt>exclusive(省略可能)</dt>
+<dd>Midiデータ中のエクスクルーシブを送信するなら1、送信しないなら0<br>
+複数リズムパートを使っているMidiなどに有効らしいです<br>
+ただし、この機能を有効にしてもリセットメッセージと、<br>
+マスターボリュームメッセージは送りません<br>
+（ライブラリで提供されていた機能をとりあえず導入。作者は使用用途をわかっていません(^^;)）<br>
+使いたい方以外は、0で構いません
+</dd>
+</dl>
+<br>
+<font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+<ul>
+<li><a href="rf_setMidiSkipBeginning.html">setMidiSkipBeginning</a></li>
+<li><a href="rf_setMidiSkipEnding.html">setMidiSkipEnding</a></li>
+<li><a href="rf_setMidiMasterPitch.html">setMidiMasterPitch</a></li>
+<li><a href="rf_setMidiNormalize.html">setMidiNormalize</a></li>
+<li><a href="rf_setMidiExclusive.html">setMidiExclusive</a></li>
+</ul>
+  <h3>例</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+midiSkipBeginning = 1;
+midiSkipEnding    = 0;
+midiMasterPitch   = 0;
+midiNormalize     = 0;
+midiExclusive     = 0;
+while (1) {
+  if (getkey(65) == 1) midiSkipBeginning = !midiSkipBeginning; // A:冒頭の空白スキップ
+  if (getkey(83) == 1) midiSkipEnding    = !midiSkipEnding;    // S:末尾の空白スキップ
+  if (getkey(68) == 1) midiMasterPitch   = !midiMasterPitch;   // D:マスターピッチ機能
+  if (getkey(70) == 1) midiNormalize     = !midiNormalize;     // F:ノーマライズ機能
+  if (getkey(71) == 1) midiExclusive     = !midiExclusive;     // G:エクスクルーシブ送信
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setPlayingOption</strong>(midiSkipBeginning, midiSkipEnding, midiMasterPitch, midiNormalize, midiExclusive); // 再生オプション設定
+    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.play($se_test, 1);
+  }
+  if (getkey(88) == 1) { // X:停止
+    $mplayer.stop();
+  }
+  
+  drawText(100,  0, "冒頭の空白スキップ　：" + midiSkipBeginning, $clWhite);
+  drawText(100, 20, "末尾の空白スキップ　：" + midiSkipEnding   , $clWhite);
+  drawText(100, 40, "マスターピッチ機能　：" + midiMasterPitch  , $clWhite);
+  drawText(100, 60, "ノーマライズ機能　　：" + midiNormalize    , $clWhite);
+  drawText(100, 80, "エクスクルーシブ送信：" + midiExclusive    , $clWhite);
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,73 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.updatePlayingInfomation</h2>
+
+<ul>
+<li><a href="rf_setMidiVolume.html">setMidiVolume()</a></li>
+<li><a href="rf_setMidiTempo.html">setMidiTempo()</a></li>
+<li><a href="rf_setMidiPitch.html">setMidiPitch()</a></li>
+<li><a href="rf_setMidiFadeInTime.html">setMidiFadeInTime()</a></li>
+<li><a href="rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a></li>
+<li><a href="rf_setMidiStartTick.html">setMidiStartTick()</a></li>
+<li><a href="rf_setMidiKeyShift.html">setMidiKeyShift()</a></li>
+<li><a href="rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a></li>
+<li><a href="rf_setMidiSkipEnding.html">setMidiSkipEnding()</a></li>
+<li><a href="rf_setMidiMasterPitch.html">setMidiMasterPitch()</a></li>
+<li><a href="rf_setMidiNormalize.html">setMidiNormalize()</a></li>
+<li><a href="rf_setMidiExclusive.html">setMidiExclusive()</a></li>
+<li><a href="rf_setOggVolume.html">setOggVolume()</a></li>
+<li><a href="rf_setOggTempo.html">setOggTempo()</a></li>
+<li><a href="rf_setOggPan.html">setOggPan()</a></li>
+<li><a href="rf_setOggFadeInTime.html">setOggFadeInTime()</a></li>
+<li><a href="rf_setOggFadeOutTime.html">setOggFadeOutTime()</a></li>
+<li><a href="rf_setOggStartTime.html">setOggStartTime()</a></li>
+<li><a href="rf_setOggLoopStartTime.html">setOggLoopStartTime()</a></li>
+<li><a href="rf_setOggLoopEndTime.html">setOggLoopEndTime()</a></li>
+<li><a href="rf_setOggFileLoop.html">setOggFileLoop()</a></li>
+<li><a href="rf_setDynamicEffect.html">setDynamicEffect()</a></li>
+<li><a href="rf_setStaticEffect.html">setStaticEffect()</a></li>
+<li><a href="rf_setPlayingOption.html">setPlayingOption()</a></li>
+<li><a href="rf_setDynamicEffectOgg.html">setDynamicEffectOgg()</a></li>
+<li><a href="rf_setStaticEffectOgg.html">setStaticEffectOgg()</a></li>
+<li><a href="rf_initDynamicEffect.html">initDynamicEffect()</a></li>
+<li><a href="rf_initStaticEffect.html">initStaticEffect()</a></li>
+<li><a href="rf_initPlayingOption.html">initPlayingOption()</a></li>
+<li><a href="rf_initDynamicEffectOgg.html">initDynamicEffectOgg()</a></li>
+<li><a href="rf_initStaticEffectOgg.html">initStaticEffectOgg()</a></li>
+<li><a href="rf_initAllPlayingInfomation.html">initAllPlayingInfomation()</a></li>
+<li><a href="rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a></li>
+</ul>
+上記のメソッドでエフェクト・再生オプションを設定した後、<br>
+その設定をMusicPlayerに反映するには、このメソッドを使います。<br>
+<br>
+このメソッドは、MusicPlayerがエフェクトなどの設定を読み取るために必要なファイルを、書き込むメソッドです。<br>
+filesフォルダに、「eff_midi.txt」というファイルが書き込まれます。<br>
+
+  <h3>書式</h3>
+<pre>
+updatePlayingInfomation()
+</pre>
+
+  <h3>戻り値</h3>
+  「eff_midi.txt」を書き込めたら0<br>
+  書き込めなかったら-1
+
+  <h3>例</h3>
+  上記のメソッドを参照<br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

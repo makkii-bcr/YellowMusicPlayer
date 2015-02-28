@@ -1,9 +1,9 @@
 extends DxChar;
 
-if (!$fullScreen) $Window.setDrawMode("A");
-$System.setFrameRate(58, 5);
+//if (!$fullScreen) $Window.setDrawMode("A");
+//$System.setFrameRate(58, 5);
 $Options.set("sleep_time", 1);
-$mplayer.setDelay(2400);
+//$mplayer.setDelay(2400);
 $screenWidth  = 640;
 $screenHeight = 480;
 
@@ -199,12 +199,35 @@ while(1) {
   
   // エフェクト項目セット //
   if (!bgmOggOn) { // midiのエフェクト・再生オプションをセット
-    $mplayer.setDynamicEffect(midiVolume, midiTempo, midiPitch);
-    $mplayer.setStaticEffect(midiFadeInTime, midiFadeOutTime, midiStartTick, midiKeyShift);
-    $mplayer.setPlayingOption(midiSkipBeginning, midiSkipEnding, midiMasterPitch, midiNormalize, midiExclusive);
+    $mplayer.setMidiVolume(midiVolume);
+    $mplayer.setMidiTempo(midiTempo);
+    $mplayer.setMidiPitch(midiPitch);
+    $mplayer.setMidiFadeInTime(midiFadeInTime);
+    $mplayer.setMidiFadeOutTime(midiFadeOutTime);
+    $mplayer.setMidiStartTick(midiStartTick);
+    $mplayer.setMidiKeyShift(midiKeyShift);
+    $mplayer.setMidiSkipBeginning(midiSkipBeginning);
+    $mplayer.setMidiSkipEnding(midiSkipEnding);
+    $mplayer.setMidiMasterPitch(midiMasterPitch);
+    $mplayer.setMidiNormalize(midiNormalize);
+    $mplayer.setMidiExclusive(midiExclusive);
+    // ↓ver2.05までの呼び方↓
+    //$mplayer.setDynamicEffect(midiVolume, midiTempo, midiPitch);
+    //$mplayer.setStaticEffect(midiFadeInTime, midiFadeOutTime, midiStartTick, midiKeyShift);
+    //$mplayer.setPlayingOption(midiSkipBeginning, midiSkipEnding, midiMasterPitch, midiNormalize, midiExclusive);
   } else { // oggのエフェクトをセット
-    $mplayer.setDynamicEffectOgg(oggVolume, oggTempo, oggPan);
-    $mplayer.setStaticEffectOgg(oggFadeInTime, oggFadeOutTime, oggStartTime, oggLoopStartTime, oggLoopEndTime, oggFileLoop);
+    $mplayer.setOggVolume(oggVolume);
+    $mplayer.setOggTempo(oggTempo);
+    $mplayer.setOggPan(oggPan);
+    $mplayer.setOggFadeInTime(oggFadeInTime);
+    $mplayer.setOggFadeOutTime(oggFadeOutTime);
+    $mplayer.setOggStartTime(oggStartTime);
+    $mplayer.setOggLoopStartTime(oggLoopStartTime);
+    $mplayer.setOggLoopEndTime(oggLoopEndTime);
+    $mplayer.setOggFileLoop(oggFileLoop);
+    // ↓ver2.05までの呼び方↓
+    //$mplayer.setDynamicEffectOgg(oggVolume, oggTempo, oggPan);
+    //$mplayer.setStaticEffectOgg(oggFadeInTime, oggFadeOutTime, oggStartTime, oggLoopStartTime, oggLoopEndTime, oggFileLoop);
   }
   // ここでエフェクト設定がMidiPlayerに反映される↓
   if (buttonL > 0 || buttonR > 0) $mplayer.updatePlayingInfomation();
@@ -355,40 +378,40 @@ while(1) {
       }
       
       if (!bgmOggOn) { // Midi
-        drawText(240, 210+12*13, "Midi演奏状態                :" + $mplayer.playerMidiStatus   , $clWhite, 9);
-        drawText(240, 210+12*14, "再生中のMidi番号            :" + $mplayer.playerMidiPlayNo   , $clWhite, 9);
-        drawText(240, 210+12*15, "現在のテンポ                :" + $mplayer.playerMidiTempo    , $clWhite, 9);
-        drawText(240, 210+12*16, "現在のティック              :" + $mplayer.playerMidiTick     , $clWhite, 9);
-        drawText(240, 210+12*17, "現在のデータ内での演奏時間  :" + $mplayer.playerMidiTime     , $clWhite, 9);
-        drawText(240, 210+12*18, "再生開始してからのループ回数:" + $mplayer.playerMidiLoopCount, $clWhite, 9);
+        drawText(240, 210+12*13, "Midi演奏状態                :" + $mplayer.getPlayerMidiStatus()   , $clWhite, 9);
+        drawText(240, 210+12*14, "再生中のMidi番号            :" + $mplayer.getPlayerMidiPlayNo()   , $clWhite, 9);
+        drawText(240, 210+12*15, "現在のテンポ                :" + $mplayer.getPlayerMidiTempo()    , $clWhite, 9);
+        drawText(240, 210+12*16, "現在のティック              :" + $mplayer.getPlayerMidiTick()     , $clWhite, 9);
+        drawText(240, 210+12*17, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerMidiTime()     , $clWhite, 9);
+        drawText(240, 210+12*18, "再生開始してからのループ回数:" + $mplayer.getPlayerMidiLoopCount(), $clWhite, 9);
         
-        drawText(470, 210+12*13, "ベースカウント    :" + $mplayer.midiTimeBase     , $clWhite, 9);
-        drawText(470, 210+12*14, "総ティック        :" + $mplayer.midiTotalTick    , $clWhite, 9);
-        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.midiTotalTime    , $clWhite, 9);
-        drawText(470, 210+12*16, "最初の発音ティック:" + $mplayer.midiFirstNoteTick, $clWhite, 9);
-        drawText(470, 210+12*17, "最初の発音の時間  :" + $mplayer.midiFirstNoteTime, $clWhite, 9);
-        drawText(470, 210+12*18, "最後の発音ティック:" + $mplayer.midiLastNoteTick , $clWhite, 9);
-        drawText(470, 210+12*19, "最後の発音の時間  :" + $mplayer.midiLastNoteTime , $clWhite, 9);
-        drawText(470, 210+12*20, "CC#111のティック  :" + $mplayer.midiLoopTick     , $clWhite, 9);
-        drawText(470, 210+12*21, "CC#111の位置の時間:" + $mplayer.midiLoopTime     , $clWhite, 9);
+        drawText(470, 210+12*13, "ベースカウント    :" + $mplayer.getMidiTimeBase()     , $clWhite, 9);
+        drawText(470, 210+12*14, "総ティック        :" + $mplayer.getMidiTotalTick()    , $clWhite, 9);
+        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.getMidiTotalTime()    , $clWhite, 9);
+        drawText(470, 210+12*16, "最初の発音ティック:" + $mplayer.getMidiFirstNoteTick(), $clWhite, 9);
+        drawText(470, 210+12*17, "最初の発音の時間  :" + $mplayer.getMidiFirstNoteTime(), $clWhite, 9);
+        drawText(470, 210+12*18, "最後の発音ティック:" + $mplayer.getMidiLastNoteTick() , $clWhite, 9);
+        drawText(470, 210+12*19, "最後の発音の時間  :" + $mplayer.getMidiLastNoteTime() , $clWhite, 9);
+        drawText(470, 210+12*20, "CC#111のティック  :" + $mplayer.getMidiLoopTick()     , $clWhite, 9);
+        drawText(470, 210+12*21, "CC#111の位置の時間:" + $mplayer.getMidiLoopTime()     , $clWhite, 9);
         
-        if (midiArySize > 0 && 0 <= $mplayer.playerMidiPlayNo && $mplayer.playerMidiPlayNo < midiArySize) {
-          drawText(10, 70+20*1-5, "再生曲("+ ($mplayer.playerMidiPlayNo+1) +"/"+ midiArySize +")："+midiAry.get($mplayer.playerMidiPlayNo).getName(), $clGreen2, 9);
+        if (midiArySize > 0 && 0 <= $mplayer.getPlayerMidiPlayNo() && $mplayer.getPlayerMidiPlayNo() < midiArySize) {
+          drawText(10, 70+20*1-5, "再生曲("+ ($mplayer.getPlayerMidiPlayNo()+1) +"/"+ midiArySize +")："+midiAry.get($mplayer.getPlayerMidiPlayNo()).getName(), $clGreen2, 9);
         }
       } else { // Ogg
-        drawText(240, 210+12*13, "Ogg演奏状態                 :" + $mplayer.playerOggStatus   , $clWhite, 9);
-        drawText(240, 210+12*14, "現在のデータ内での演奏時間  :" + $mplayer.playerOggTime     , $clWhite, 9);
-        drawText(240, 210+12*15, "再生開始してからのループ回数:" + $mplayer.playerOggLoopCount, $clWhite, 9);
-        drawText(470, 210+12*13, "チャンネル数　    :" + $mplayer.oggChannels     , $clWhite, 9);
-        drawText(470, 210+12*14, "サンプリングレート:" + $mplayer.oggSamplingRate , $clWhite, 9);
-        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.oggTotalTime    , $clWhite, 9);
-        drawText(470, 210+12*16, "総サンプル数      :" + $mplayer.oggTotalSamples , $clWhite, 9);
-        drawText(470, 210+12*17, "Oggループ開始位置 :" + $mplayer.oggFileLoopStart, $clWhite, 9);
-        drawText(470, 210+12*18, "Oggループ終了位置 :" + $mplayer.oggFileLoopEnd  , $clWhite, 9);
+        drawText(240, 210+12*13, "Ogg演奏状態                 :" + $mplayer.getPlayerOggStatus()   , $clWhite, 9);
+        drawText(240, 210+12*14, "現在のデータ内での演奏時間  :" + $mplayer.getPlayerOggTime()     , $clWhite, 9);
+        drawText(240, 210+12*15, "再生開始してからのループ回数:" + $mplayer.getPlayerOggLoopCount(), $clWhite, 9);
+        drawText(470, 210+12*13, "チャンネル数　    :" + $mplayer.getOggChannels()     , $clWhite, 9);
+        drawText(470, 210+12*14, "サンプリングレート:" + $mplayer.getOggSamplingRate() , $clWhite, 9);
+        drawText(470, 210+12*15, "総演奏時間        :" + $mplayer.getOggTotalTime()    , $clWhite, 9);
+        drawText(470, 210+12*16, "総サンプル数      :" + $mplayer.getOggTotalSamples() , $clWhite, 9);
+        drawText(470, 210+12*17, "Oggループ開始位置 :" + $mplayer.getOggFileLoopStart(), $clWhite, 9);
+        drawText(470, 210+12*18, "Oggループ終了位置 :" + $mplayer.getOggFileLoopEnd()  , $clWhite, 9);
         
       }
-      drawText(240, 210+12*20, "日付 : " + $mplayer.timeYear +"/"+ $mplayer.timeMonth  +"/"+ $mplayer.timeDay        + timeDayOfWeekText       , $clWhite, 9);
-      drawText(240, 210+12*21, "時刻 : " + $mplayer.timeHour +":"+ $mplayer.timeMinute +":"+ $mplayer.timeSecond +"."+ ($mplayer.timeMilliSecond/100%10) + ($mplayer.timeMilliSecond/10%10) + ($mplayer.timeMilliSecond%10), $clWhite, 9);
+      drawText(240, 210+12*20, "日付 : " + $mplayer.getTimeYear() +"/"+ $mplayer.getTimeMonth()  +"/"+ $mplayer.getTimeDay()        + timeDayOfWeekText       , $clWhite, 9);
+      drawText(240, 210+12*21, "時刻 : " + $mplayer.getTimeHour() +":"+ $mplayer.getTimeMinute() +":"+ $mplayer.getTimeSecond() +"."+ ($mplayer.getTimeMilliSecond()/100%10) + ($mplayer.getTimeMilliSecond()/10%10) + ($mplayer.getTimeMilliSecond()%10), $clWhite, 9);
     }
   }
   
@@ -422,8 +445,8 @@ function musicPlayerOption() {
   
   // YellowMusicPlayerの設定を読み込む
   $mplayer.getPlayerConfig();
-  playerDirectMusicSW = $mplayer.playerDirectMusicSW;
-  playerReadSpeed     = $mplayer.playerReadSpeed;
+  playerDirectMusicSW = $mplayer.getPlayerDirectMusicSW();
+  playerReadSpeed     = $mplayer.getPlayerReadSpeed();
   
   key79 = 0;
   while (1) {
@@ -460,7 +483,7 @@ function musicPlayerOption() {
     
     text2 = ((playerReadSpeed + 1) * 15) + "ミリ秒毎";
     
-    if (playerDirectMusicSW != $mplayer.playerDirectMusicSW) text3 = "(Midiデバイスの初期化に時間がかかります)";
+    if (playerDirectMusicSW != $mplayer.getPlayerDirectMusicSW()) text3 = "(Midiデバイスの初期化に時間がかかります)";
     else                                                     text3 = "";
     
     drawText( 10, 100, "YellowMusicPlayerの設定", $clYellow, 20);

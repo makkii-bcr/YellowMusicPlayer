@@ -1,0 +1,72 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「音量調節・テンポ調節・パン調節」 (Ogg)</h2>
+  これらの設定は、再生中に動的に変えることができます。<br>
+  <br>
+  <a href="../reference/rf_setOggVolume.html">setOggVolume()</a>で音量、<br>
+  <a href="../reference/rf_setOggTempo.html">setOggTempo()</a>でテンポ、<br>
+  <a href="../reference/rf_setOggPan.html">setOggPan()</a>でパン（左右のスピーカーの音量バランス）を、調節できます。<br>
+  <br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+// 開発環境版 でOggを鳴らすための処理 ////
+$mplayer.updatePlayingInfomation(); // 更新
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、プロジェクトを開いてから一度midiを再生しないとoggを再生できない
+wait(20);
+$mplayer.stop();
+wait(20);
+//////////////////////////////////////////
+$mplayer.play("test.ogg", 1); // 再生
+oggVolume = 127;
+oggTempo  = 1;
+oggPan    = 0;
+v = 1;
+while (1) {
+  if (getkey(65) > 0) oggVolume --;        // A:音量－
+  if (getkey(83) > 0) oggVolume ++;        // S:音量＋
+  if (getkey(68) > 0) oggTempo  -= 0.125;  // D:テンポ－
+  if (getkey(70) > 0) oggTempo  += 0.125;  // F:テンポ＋
+  if (getkey(71) > 0) oggPan    -= 1 / 64; // G:パン－
+  if (getkey(72) > 0) oggPan    += 1 / 64; // H:パン＋
+  if (v % 6 == 0) { // １秒間に10回更新
+    $mplayer.<strong>setOggVolume</strong>(oggVolume); // 音量設定
+    $mplayer.<strong>setOggTempo</strong>(oggTempo);   // テンポ設定
+    $mplayer.<strong>setOggPan</strong>(oggPan);       // パン設定
+    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+  }
+  drawText(100,  0, "音量　：" + oggVolume, $clWhite);
+  drawText(100, 20, "テンポ：" + oggTempo , $clWhite);
+  drawText(100, 40, "パン　：" + oggPan   , $clWhite);
+  v++;
+  update();
+}
+</pre>
+  <br>
+  メソッドの詳細<br>
+  <ul>
+   <li><a href="../reference/rf_setOggVolume.html">setOggVolume()</a></li>
+   <li><a href="../reference/rf_setOggTempo.html">setOggTempo()</a></li>
+   <li><a href="../reference/rf_setOggPan.html">setOggPan()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

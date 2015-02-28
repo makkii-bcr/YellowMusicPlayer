@@ -1,0 +1,194 @@
+extends Object;
+// *---------------------------------*
+// *  YellowMusicPlayer用の$mplayer  *
+// *---------------------------------*
+//     YellowMusicPlayer version 2.1用
+//     Tonyu System version 1.22以前用
+
+//native _n_freeAllSE;
+
+constructor MediaPlayer() {
+   _stopOnPageLoad  = 1; 
+   prevFc=null;
+   soundInterval=trunc(44100*16/1000);
+   soundDelay   =1000;
+   timeLag=2000;
+   soundNextTime=null;
+   frameOffset=0;
+   playPosOffset=0;
+   bsize=6000;
+}
+function setFrameRate(r) {
+  soundInterval=trunc(44100*trunc(r)/1000);
+}
+function soundsPath() {
+   return "project.sounds";
+}
+
+function init() {
+   initResource(soundsPath());
+}
+
+function freeAllSE() {
+   var a,r,soundsAry,s;
+   r=getResource(soundsPath());
+   if (!r) return;
+   r=r.getSubRes();
+   for (a in r) {
+      a.release();
+   }
+  
+  // 無理やりYellowMusicPlayerを起動させる
+  if ($_YMPstarting == null) {
+    // BGM,効果音の入った配列を返す
+    soundsAry = getResource(soundsPath()).getSubRes();
+    for (s in soundsAry) {
+      if (s is BGM) {
+        if (!_isMzo(s.getURL())) { // mzoではない → midiである
+          s.play(0); // Tonyu1.22以前ではMidiを鳴らすとMidiPlayerが起動される
+          break;
+        }
+      }
+    }
+    $_YMPstarting = 1;
+  }
+//  _n_freeAllSE();	
+}
+
+
+function _isMzo(name) {
+  var i, k, temp, s;
+  if (name is String) {
+    for (i=name.length() - 1; i>=1; i--) {
+      if (name.subString(i, i+1) == ".") {
+        k = name.subString(i+1, name.length());
+        s = k.length();
+        if (s == 3) {
+          temp = k.subString(0, 1);
+          if (temp != "M" && temp !="m") break;
+          temp = k.subString(1, 2);
+          if (temp != "Z" && temp !="z") break;
+          temp = k.subString(2, 3);
+          if (temp != "O" && temp !="o") break;
+          return 1;
+        }
+        break;
+      }
+    }
+  }
+  return 0;
+}
+
+function play(s, ar, v) {
+  var f, e, r;
+  
+  if (s is SoundEffect) { // wav再生(サウンドオブジェクトの場合)
+    if (!v || (v>=0 && v<=128)) {
+      s.play(ar,v);
+    } else {
+      s.play(ar,128);
+    }
+  } else if (s is BGM) { // midi再生(サウンドオブジェクトの場合)
+    if (!_isMzo(s.getURL())) {
+      f = new FileWriter("midi_sig.dat");
+      if (ar) r = "R"; else r = "P";
+      f.writeLn(r);
+      f.writeLn(s.getURL());
+      e = f.error()*(-1);
+      f.close();
+      return e;
+    } else {
+      if (!v || (v>=0 && v<=128)) {
+        s.play(ar,v);
+      } else {
+        s.play(ar,128);
+      }
+    }
+  }
+}
+
+native _n_stop;
+function stop() {
+  var f, e;
+  
+  _n_stop(); // 元々のstopメソッドも呼び出す
+  
+  f = new FileWriter("midi_sig.dat");
+  f.writeLn("S");
+  e = f.error()*(-1);
+  f.close();
+  return e;
+}
+
+native _n_setEnable;
+function setEnable(t) {
+  _n_setEnable(t);
+}
+
+function setStopOnPageLoad(t) { _stopOnPageLoad=t;}
+function stopOnPageLoad() { return _stopOnPageLoad;}
+
+native _n_setVolume;
+function setVolume(s) {
+  _n_setVolume(s);
+}
+native _n_sound;
+function sound(ch,typ,val,time) {
+  _n_sound(ch,typ,val,time);
+}
+function setSoundDelay(d) {
+  soundDelay=d;
+}
+function soundTone(ch,val) {
+  sound(ch,1,trunc(val*97391),calcTime());
+}
+function soundVolume(ch,val) {
+  sound(ch,2,val,calcTime());
+}
+
+function calcTime() {
+  var r,p;
+  r=playPosOffset+($frameCount-frameOffset)*soundInterval;
+  p=getPlayPos()+bsize;
+  if (abs(r-p)>3000) {
+    frameOffset   = $frameCount;
+    playPosOffset = p;
+    if (r>p) soundInterval--;
+    else soundInterval++;
+    //print (r+" "+p+" "+soundInterval+" "+$frameCount);
+    return p;
+  }
+  return r;
+}
+native _n_setDelay;
+function setDelay(d) {
+   _n_setDelay(d);
+}
+native _n_setBSize;
+function setBSize(sz) {
+  _n_setBSize(sz);
+  bsize=sz;
+}
+native _n_getPlayPos;
+function getPlayPos(type) {
+  return _n_getPlayPos(type);
+}
+function getLastWriteStartPos () {
+  return getPlayPos(1);
+}
+function getLastWriteEndPos () {
+  return getPlayPos(2);
+}
+function getBufferUnderrun () {
+  return getPlayPos(3);
+}
+native _n_start;
+function start(ch,typ,val,time) {
+  _n_start();
+}
+
+native _n_calibration;
+function calibration(len,lag) {
+  timeLag=lag;
+  _n_calibration(len,lag);
+}

@@ -1,0 +1,36 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setMidiMasterPitch</h2>
+  Midiのマスターピッチ機能のON/OFFを設定します。<br>
+  <br>
+  ONにすると、<a href="rf_setMidiPitch.html">setMidiPitch()</a>が使えるようになります。<br>
+  再生中にピッチ（音の高低）を変えたい場合は、再生前にこのメソッドを使いONにしてください<br>
+  ただし、ピッチベンドが送信されているMidiでは、1にすると音が変になることがあります。<br>
+  使う場合は、うまく使い分けてください<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setMidiMasterPitch(masterPitch)
+</pre>
+<dl>
+<dt>masterPitch</dt>
+<dd>マスターピッチ機能をONにするなら1、OFFにするなら0</dd>
+</dl>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

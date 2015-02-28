@@ -1,0 +1,81 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setDynamicEffect</h2>
+  Midiの再生中に動的に変更できるエフェクト項目をセットします<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+setDynamicEffect(vol, tempo, pitch)
+</pre>
+<dl>
+<dt>vol(省略可能)</dt>
+<dd>Midiの音量(0～127)</dd>
+
+<dt>tempo(省略可能)</dt>
+<dd>Midiのテンポ(0.1～8)<br>
+1で等速、2で２倍のテンポ、0.5で半分のテンポになります</dd>
+
+<dt>pitch(省略可能)</dt>
+<dd>Midiのピッチ（音の高低）(-8192～8191)<br>
+-8192で１オクターブ下がり、8191で１オクターブ上がります<br>
+マスターピッチ機能がONのとき有効です<br>
+<a href="rf_setPlayingOption.html">setPlayingOption()</a>でマスターピッチ機能をONにできます<br>
+※ マスターピッチ機能をONにすると、ピッチベンドが送信されているMidiでは、音が変になるMidiがあります</dd>
+</dl>
+<br>
+<font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+<ul>
+<li><a href="rf_setMidiVolume.html">setMidiVolume</a></li>
+<li><a href="rf_setMidiTempo.html">setMidiTempo</a></li>
+<li><a href="rf_setMidiPitch.html">setMidiPitch</a></li>
+</ul>
+  <h3>例</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.setPlayingOption(null, null, 1, null, null); // マスターピッチ機能をONにする
+$mplayer.updatePlayingInfomation(); // 更新
+$mplayer.play($se_test, 1); // 再生
+midiVolume = 127;
+midiTempo  = 1;
+midiPitch  = 0;
+v = 1;
+while (1) {
+  if (getkey(65) > 0 && midiVolume >     0) midiVolume --;       // A:音量－
+  if (getkey(83) > 0 && midiVolume <   127) midiVolume ++;       // S:音量＋
+  if (getkey(68) > 0 && midiTempo  >   0.1) midiTempo  -= 0.125; // D:テンポ－
+  if (getkey(70) > 0 && midiTempo  <   8  ) midiTempo  += 0.125; // F:テンポ＋
+  if (getkey(71) > 0 && midiPitch  > -8192) midiPitch  -= 64;    // G:ピッチ－
+  if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ピッチ＋
+  if (v % 6 == 0) { // １秒間に10回更新
+    $mplayer.<strong>setDynamicEffect</strong>(midiVolume, midiTempo, midiPitch); // エフェクト設定
+    $mplayer.updatePlayingInfomation(); // 更新
+  }
+  drawText(100,  0, "音量　：" + midiVolume, $clWhite);
+  drawText(100, 20, "テンポ：" + midiTempo , $clWhite);
+  drawText(100, 40, "ピッチ：" + midiPitch , $clWhite);
+  v ++;
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

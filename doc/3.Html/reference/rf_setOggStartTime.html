@@ -1,0 +1,38 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setOggStartTime</h2>
+  Oggの再生開始位置を変更します。<br>
+  Oggを最初からでなく、特定の時間から再生したいときに使います。<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setOggStartTime(startTimestartTime)
+</pre>
+<dl>
+<dt>startTime</dt>
+<dd>再生開始する時間をミリ秒単位で指定(1～(再生するoggの総再生時間-1))、指定しないなら0<br>
+ ※ <a href="rf_setOggLoopEndTime.html">setOggLoopEndTime()</a>で0以外を設定した時は、値を指定できる範囲は(1～loopEndTime)になります</dd>
+</dl>
+  <br>
+  <b>【startTime, loopStartTime, loopEndTime の関係】</b><br>
+  <img src="../res/rf_01.png" border=1><br>
+  <br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>
