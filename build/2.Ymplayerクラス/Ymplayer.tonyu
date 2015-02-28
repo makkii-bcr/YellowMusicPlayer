@@ -315,6 +315,8 @@ function getPlayerStatus(scope) {
   }
   if (f.error()) { f.close(); return -1; }
   f.close();
+  
+  return 0;
 }
 function getPlayerPreparation() {
   return fileExists("YMPPreparation.dat");
