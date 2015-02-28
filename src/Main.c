@@ -1,5 +1,5 @@
 /*
-  YellowMusicPlayer 2.02  -  Copyright (C) 2012 マッキー
+  YellowMusicPlayer 2.03  -  Copyright (C) 2012 マッキー
   
   このソースコードは自由に改変してコンパイルして構いません。
   生成したものを配布する場合は、ソースコードを改造して作り出したことをReadMe等に記述してください。

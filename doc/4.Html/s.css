@@ -1,8 +1,8 @@
 body {
   background-color:#FFFFFF;
   color:#000000;
-  font-family:"メイリオ",Verdana,Arial,Helvetica,sans-serif; 
-  font-size:x-small;
+  font-family:"メイリオ",Arial,Helvetica,sans-serif; 
+  font-size:14px;
   line-height:120%;
 }
 
@@ -15,14 +15,14 @@ h2 {
 }
 
 table {
-  font-size:x-small;
+  font-size:14px;
   line-height:120%;
 
 }
 
 strong {
   color:#FF0000;
-  font-weight:normal;
+  font-weight:13px;
 }
 
 pre {
@@ -33,7 +33,7 @@ pre {
   margin-bottom:5px;
   padding:5px;
   background-color:#EEFFEE;
-  font-size:x-small;
+  font-size:13px;
 }
 
 .green {
