@@ -19,30 +19,29 @@ YMPConfig.txt は、MusicPlayer起動時にのみ読み込まれ設定されるので、<br>
 このメソッドを使うことはあまりないと思います。<br>
   <h3>書式</h3>
 <pre>
-setPlayerConfig(exeName, directMusicSW, playerMode, playerReadSpeed, midiCache)
+setPlayerConfig(exeName, directMusicSW, playerMode, playerReadSpeed)
 </pre>
 <br>
 <dl>
-<dt>exeName</dt>
+<dt>exeName(省略可能)</dt>
 <dd>実行ファイル名</dd>
-<dt>directMusicSW</dt>
+<dt>directMusicSW(省略可能)</dt>
 <dd>DirectMusicのON/OFF<br>
     0 : 自動(NT系OS:ON 9x系OS:OFF)<br>
     1 : ON<br>
     2 : OFF<br>
 </dd>
-<dt>playerMode</dt>
+<dt>playerMode(省略可能)</dt>
 <dd>他のプレイヤーのモード<br>
     0 : YellowMusicPlayer (通常モード)<br>
     1 : Tonyu Midi Litest<br>
     2 : MidiOggPlayer<br>
     3 : TonyuでOgg Vorbisを鳴らすサンプル<br>
 </dd>
-<dt>playerReadSpeed</dt>
+<dt>playerReadSpeed(省略可能)</dt>
 <dd>ファイルの読み込み頻度(0～100)</dd>
-<dt>midiCache</dt>
-<dd>MidiファイルのキャッシュのON/OFF</dd>
 </dl>
+※ 変更のない項目は、引数を省略するかnullを入れてください。<br>
 <br>
 詳しくは、<a href="../tips/tips_02.html">MusicPlayerの設定</a>を参照してください。<br>
 <br>
@@ -56,11 +55,10 @@ $mplayer = new Ymplayer();
 $mplayer.<strong>setPlayerConfig</strong>("シューティング.exe", 2, 0, 5, 0); // 設定書き込み
 $mplayer.getPlayerConfig(); // 設定読み込み
 while (1) {
-  drawText(80, 11* 0 , "実行ファイル名                   : " + $mplayer.getPlayerExeName()      , $clWhite, 9);
-  drawText(80, 11* 1 , "DirectMusicのON/OFF              : " + $mplayer.getPlayerDirectMusicSW(), $clWhite, 9);
-  drawText(80, 11* 2 , "他のプレイヤーのモード           : " + $mplayer.getPlayerMode()         , $clWhite, 9);
-  drawText(80, 11* 3 , "ファイルの読み込み頻度           : " + $mplayer.getPlayerReadSpeed()    , $clWhite, 9);
-  drawText(80, 11* 4 , "MidiファイルのキャッシュのON/OFF : " + $mplayer.getPlayerMidiCache()    , $clWhite, 9);
+  drawText(80, 11* 0 , "実行ファイル名         : " + $mplayer.getPlayerExeName()      , $clWhite, 9);
+  drawText(80, 11* 1 , "DirectMusicのON/OFF    : " + $mplayer.getPlayerDirectMusicSW(), $clWhite, 9);
+  drawText(80, 11* 2 , "他のプレイヤーのモード : " + $mplayer.getPlayerMode()         , $clWhite, 9);
+  drawText(80, 11* 3 , "ファイルの読み込み頻度 : " + $mplayer.getPlayerReadSpeed()    , $clWhite, 9);
   
   update();
 }

@@ -2,7 +2,7 @@ extends MediaPlayer;
 // *---------------------------------*
 // *  YellowMusicPlayer用のYmplayer  *
 // *---------------------------------*
-//     YellowMusicPlayer version 2.1用
+//     YellowMusicPlayer version 2.2用
 //     Tonyu System version 1.23以降用
 
 
@@ -30,16 +30,8 @@ constructor Ymplayer() {
   midiLoopTick      = 0;
   midiLoopTime      = 0;
   
-  timeHour        = 0;
-  timeMinute      = 0;
-  timeSecond      = 0;
-  timeMilliSecond = 0;
-  timeYear        = 0;
-  timeMonth       = 0;
-  timeDay         = 0;
-  timeDayOfWeek   = 0;
-  
   playerOggStatus    = 0;
+  playerOggPlayName  = "";
   playerOggTime      = 0;
   playerOggLoopCount = 0;
   oggTotalTime       = 0;
@@ -49,6 +41,18 @@ constructor Ymplayer() {
   oggFileLoopStart   = 0;
   oggFileLoopEnd     = 0;
   
+  timeHour        = 0;
+  timeMinute      = 0;
+  timeSecond      = 0;
+  timeMilliSecond = 0;
+  timeYear        = 0;
+  timeMonth       = 0;
+  timeDay         = 0;
+  timeDayOfWeek   = 0;
+  
+  displayWidth  = 0;
+  displayHeight = 0;
+  
   playerExeName       = "";
   playerDirectMusicSW = 0;
   playerMode          = 0;
@@ -57,8 +61,6 @@ constructor Ymplayer() {
   
   
   initAllPlayingInfomation();
-  
-  deleteFile("YMPStatus.dat");
 }
 
 // playメソッドをオーバーライド(再定義)
@@ -254,7 +256,7 @@ function getPlayerStatus(scope) {
   f = new FileReader("YMPStatus.dat");
   if (f.error()) { f.close(); return -1; }
   playerMidiStatus    = f.read();
-  playerMidiPlayNo    = f.read();
+  playerMidiPlayNo    = f.read() + f.read()*256;
   playerMidiTempo     = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
   playerMidiTick      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
   playerMidiTime      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
@@ -268,8 +270,9 @@ function getPlayerStatus(scope) {
   midiLastNoteTime    = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
   midiLoopTick        = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
   midiLoopTime        = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
-  if (scope == 0 || scope >= 2) {
+  if (!scope || scope >= 2) {
     playerOggStatus    = f.read();
+    playerOggPlayName  = f.readLn();
     playerOggTime      = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
     playerOggLoopCount = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
     oggChannels        = f.read();
@@ -279,7 +282,7 @@ function getPlayerStatus(scope) {
     oggFileLoopStart   = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
     oggFileLoopEnd     = f.read() + f.read()*256 + f.read()*65536 + f.read()*16777216;
   }
-  if (scope == 0 || scope >= 3) {
+  if (!scope || scope >= 3) {
     timeHour        = f.read();
     timeMinute      = f.read();
     timeSecond      = f.read();
@@ -288,6 +291,10 @@ function getPlayerStatus(scope) {
     timeMonth       = f.read();
     timeDay         = f.read();
     timeDayOfWeek   = f.read();
+  }
+  if (!scope || scope >= 4) {
+    displayWidth  = f.read() + f.read()*256;
+    displayHeight = f.read() + f.read()*256;
   }
   if (f.error()) { f.close(); return -1; }
   f.close();
@@ -321,22 +328,25 @@ function getPlayerConfig() {
   val = f.readLn(); if (val != null && val != "") playerDirectMusicSW = valueOf(val);
   val = f.readLn(); if (val != null && val != "") playerMode          = valueOf(val);
   val = f.readLn(); if (val != null && val != "") playerReadSpeed     = valueOf(val);
-  val = f.readLn(); if (val != null && val != "") playerMidiCache     = valueOf(val);
   if (f.error()) { f.close(); return -1; }
   f.close();
   
   return 0;
 }
-function setPlayerConfig(exeName, directMusicSW, playerMode, playerReadSpeed, midiCache) {
+function setPlayerConfig(_exeName, _directMusicSW, _playerMode, _playerReadSpeed) {
   var f;
   
+  if (_exeName         != null) playerExeName       = _exeName;
+  if (_directMusicSW   != null) playerDirectMusicSW = _directMusicSW;
+  if (_playerMode      != null) playerMode          = _playerMode;
+  if (_playerReadSpeed != null) playerReadSpeed     = _playerReadSpeed;
+
   f = new FileWriter("YMPConfig.txt");
   if (f.error()) { f.close(); return -1; }
-  f.writeLn(exeName);
-  f.writeLn(directMusicSW);
+  f.writeLn(playerExeName);
+  f.writeLn(playerDirectMusicSW);
   f.writeLn(playerMode);
   f.writeLn(playerReadSpeed);
-  f.writeLn(midiCache);
   if (f.error()) { f.close(); return -1; }
   f.close();
   
@@ -348,7 +358,7 @@ function resetPlayer(dm, rs) {
   getPlayerConfig();
   if (dm != null) playerDirectMusicSW = dm;
   if (rs != null) playerReadSpeed     = rs;
-  setPlayerConfig(playerExeName, playerDirectMusicSW, playerMode, playerReadSpeed, playerMidiCache);
+  setPlayerConfig(playerExeName, playerDirectMusicSW, playerMode, playerReadSpeed);
   
   f = new FileWriter("YMPPreparation.dat");
   f.writeLn(dm); // DirectMusicの設定値
@@ -485,6 +495,9 @@ function getMidiLoopTime() {
 function getPlayerOggStatus() {
   return playerOggStatus;
 }
+function getPlayerOggPlayName() {
+  return playerOggPlayName;
+}
 function getPlayerOggTime() {
   return playerOggTime;
 }
@@ -532,6 +545,12 @@ function getTimeDay() {
 }
 function getTimeDayOfWeek() {
   return timeDayOfWeek;
+}
+function getDisplayWidth() {
+  return displayWidth;
+}
+function getDisplayHeight() {
+  return displayHeight;
 }
 
 // getPlayerConfig()の項目

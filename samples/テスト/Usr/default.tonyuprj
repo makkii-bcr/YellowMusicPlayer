@@ -5,11 +5,11 @@
  <resourcelist name="params">
   <param name="commentID" value="39726855"/>
   <param name="sound_stopOnPageLoad" value="1"/>
-  <param name="savedVersion" value="1180"/>
+  <param name="savedVersion" value="1260"/>
   <param name="mainPage" value="$page_index"/>
   <param name="title" value="YellowMusicPlayerテスト"/>
   <param name="author" value="マッキー"/>
-  <param name="version" value="2.10"/>
+  <param name="version" value="2.20"/>
   <param name="mail" value=""/>
   <param name="web" value=""/>
   <param name="cond" value="再配布、改造ともに無断で許可"/>
@@ -18,6 +18,7 @@
  <resourcelist name="classes">
   <class name="Main" src="Main.tonyu" category=""/>
   <class name="Ymplayer" src="Ymplayer.tonyu" category=""/>
+  <class name="ListPlayer" src="ListPlayer.tonyu" category=""/>
  </resourcelist>
  <resourcelist name="sounds">
 <BGM name="$se_hy_joe" src="hy_joe.mid"/>

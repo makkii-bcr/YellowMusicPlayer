@@ -1,0 +1,372 @@
+extends SecretChar;
+
+function run(_midiAry, _oggAry) {
+  midiAry = _midiAry;
+  oggAry  = _oggAry;
+  if (!listPlayerInit) init();
+  
+  $mplayer.initAllPlayingInfomation();       // 初期化
+  $mplayer.setMidiSkipBeginning(0);          // 冒頭スキップなし
+  $mplayer.setGettingPlayerStatus(INTARVAL); // 情報取得機能ON
+  $mplayer.updatePlayingInfomation();        // 反映
+  $mplayer.getPlayerStatus();                // 情報取得
+  
+  $mplayer.getPlayerConfig();    // 設定取得
+  if ($mplayer.getPlayerReadSpeed() != 0) {
+    $mplayer.resetPlayer(null, 0); // 読み込みスピードが最速でなければ最速にする
+  }
+  
+  // 準備ができているか
+  while ($mplayer.getPlayerPreparation()) {
+    update();
+  }
+  
+  // しっかり停止してから
+  while (1) {
+    $mplayer.stop();
+    updateEx(INTARVAL2);
+    $mplayer.getPlayerStatus();
+    if ($mplayer.getPlayerMidiStatus() == 0 || $mplayer.getPlayerOggStatus() == 0) break;
+  }
+  // 途中から再生
+  if (playSW != 0) {
+    if (playSW == 11 || playSW == 12) playSW = 12; else playSW = 21;
+  }
+  
+  while (1) {
+    if (cnt % INTARVAL == 0) $mplayer.getPlayerStatus();
+    
+    keyPlay = 0;
+    keyStop = 0;
+    keyLeft = 0;
+    keyRight = 0;
+    if (getkey(16) == 1) {
+      selectBgm = !selectBgm;
+    }
+    if (getkey(90) == 1) {
+      playLoop = (playLoop + 1) % 3;
+    }
+    if (getkey(67) == 1 || getkey(32) == 1) {
+      keyPlay = 1;
+      if ((selectBgm == 0 && playBgm == 0 && playNo == selectMidiNo) ||
+          (selectBgm == 1 && playBgm == 1 && playNo == selectOggNo ))
+      {
+        if      (playSW ==  4)                 playSW  = 11; // 再生 → 一時停止
+        else if (playSW == 12 || playSW == 11) playSW  = 21; // 一時停止 → 再開
+        else if (playSW != 21)                 playSW  =  1; // 再生
+      } else {
+        playSW  =  1; // 再生
+      }
+      playBgm = selectBgm;
+      if (selectBgm == 0) playNo = selectMidiNo;
+      else                playNo = selectOggNo;
+    }
+    if (getkey(66) == 1) {
+      keyStop = 1;
+      playSW = 0;
+      $mplayer.stop();
+    }
+    if (getkey(38) == 1 || getkey(38) > 10 || getkey(88) == 1 || getkey(88) > 10) {
+      keyLeft = 1;
+      if (selectBgm == 0) selectMidiNo --; else selectOggNo --;
+    }
+    if (getkey(40) == 1 || getkey(40) > 10 || getkey(86) == 1 || getkey(86) > 10) {
+      keyRight = 1;
+      if (selectBgm == 0) selectMidiNo ++; else selectOggNo ++;
+    }
+    if (getkey(80) == 1) {
+      textVisible = (textVisible + 1) % 3; // P:表示切替
+      if (textVisible == 0) { // 非表示の時は更新頻度を低く
+        $mplayer.setGettingPlayerStatus(INTARVAL2);
+      } else {
+        $mplayer.setGettingPlayerStatus(INTARVAL);
+      }
+      $mplayer.updatePlayingInfomation();
+    }
+    
+    
+    // 選択範囲制限
+    if (selectBgm == 0) {
+      if (selectMidiNo < 0) { selectMidiNo = midiAry.size() - 1; selectMidiScroll = midiAry.size() - LIST_LENGTH; }
+      if (selectMidiNo >= midiAry.size()) { selectMidiNo = 0; selectMidiScroll = 0; }
+      if (LIST_LENGTH / 2 <= selectMidiNo && selectMidiNo <= midiAry.size() - LIST_LENGTH / 2) {
+        selectMidiScroll = trunc(selectMidiNo - LIST_LENGTH / 2);
+      }
+    } else {
+      if (selectOggNo < 0) { selectOggNo = oggAry.size() - 1; selectOggScroll = oggAry.size() - LIST_LENGTH; }
+      if (selectOggNo >= oggAry.size()) { selectOggNo = 0; selectOggScroll = 0; }
+      if (LIST_LENGTH / 2 <= selectOggNo && selectOggNo <= oggAry.size() - LIST_LENGTH / 2) {
+        selectOggScroll = trunc(selectOggNo - LIST_LENGTH / 2);
+      }
+    }
+    // スクロール制限
+    if (midiAry.size() <= LIST_LENGTH) selectMidiScroll = 0;
+    if ( oggAry.size() <= LIST_LENGTH) selectOggScroll = 0;
+    
+    
+    
+    // 再生処理
+    //print(playSW +" "+ $mplayer.getPlayerMidiStatus() +" "+ $mplayer.getPlayerOggStatus());
+    playingFunc();
+    
+    
+    
+    // 表示
+    if (textVisible) {
+      if (textVisible == 1) {
+        drawText(10,  50, "リストプレイヤーモード", $clWhite, 16);
+        
+        if (selectBgm == 0) drawText(10, 110 + 20*0, "Midi         : Shift", $clWhite, 16);
+        else                drawText(10, 110 + 20*0, "Ogg          : Shift", $clWhite, 16);
+        if      (playLoop == 0) loopText = "リピート無し";
+        else if (playLoop == 1) loopText = "全リピート  ";
+        else if (playLoop == 2) loopText = "１曲リピート";
+        else if (playLoop == 3) loopText = "ランダム再生";
+        else if (playLoop == 4) loopText = "ランダム全リピート";
+        drawText(10, 110 + 20*1, loopText + " : Z", $clWhite, 16);
+        drawText(10, 110 + 20*2, "選曲－       : X,↑", $clWhite*(keyLeft==0) + $clGreen*(keyLeft==1), 16);
+        if (playSW == 4) {
+          if ((playBgm == 0 && selectBgm == 0 && selectMidiNo == playNo) || (playBgm == 1 && selectBgm == 1 && selectOggNo == playNo)) {
+            drawText(10, 110 + 20*3, "一時停止     : C,Spase", $clWhite*(keyPlay==0) + $clGreen*(keyPlay==1), 16);
+          } else {
+            drawText(10, 110 + 20*3, "再生         : C,Spase", $clWhite*(keyPlay==0) + $clGreen*(keyPlay==1), 16);
+          }
+        } else if (playSW == 12) { 
+          drawText(10, 110 + 20*3, "再開         : C,Spase", $clWhite*(keyPlay==0) + $clGreen*(keyPlay==1), 16);
+        } else {
+          drawText(10, 110 + 20*3, "再生         : C,Spase", $clWhite*(keyPlay==0) + $clGreen*(keyPlay==1), 16);
+        }
+        drawText(10, 110 + 20*4, "選曲＋       : V,↓", $clWhite*(keyRight==0) + $clGreen*(keyRight==1), 16);
+        drawText(10, 110 + 20*5, "停止         : B", $clWhite*(keyStop==0)  + $clGreen*(keyStop==1), 16);
+        
+        if (selectBgm == 0) {
+          for (i = 0; i < LIST_LENGTH; i++) {
+            idx = selectMidiScroll + i;
+            if (0 <= idx && idx < midiAry.size()) {
+              if (selectMidiNo == idx) col = $clGreen; else col = $clWhite;
+              drawText(300, 110 + 15*i, midiAry.get(idx).getName(), col, 9);
+              idxTotalTime = midiAryTotalTime.get(idx);
+              if (idxTotalTime != null) {
+                drawText(570, 110 + 15*i, ""+(idxTotalTime/600%6)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
+              }
+              if (playBgm == 0 && playNo == idx) drawText(284, 110 + 15*i, "≫", col, 9);
+            }
+          }
+        } else {
+          for (i = 0; i < LIST_LENGTH; i++) {
+            idx = selectOggScroll + i;
+            if (0 <= idx && idx < oggAry.size()) {
+              if (selectOggNo == idx) col = $clGreen; else col = $clWhite;
+              drawText(300, 110 + 15*i, oggAry.get(idx), col, 9);
+              idxTotalTime = oggAryTotalTime.get(idx);
+              if (idxTotalTime != null) {
+                drawText(570, 110 + 15*i, ""+(idxTotalTime/600%6)+(idxTotalTime/60%10)+":"+(idxTotalTime/10%6)+(idxTotalTime%10), col, 9);
+              }
+              if (playBgm == 1 && playNo == idx) drawText(284, 110 + 15*i, "≫", col, 9);
+            }
+          }
+        }
+        
+        drawRect(280- 4, 110-4, 630, 110+15*LIST_LENGTH+2, color(128, 128, 128), 10);
+        drawLine(630-16, 110-4, 630-16, 110-4+(15*LIST_LENGTH+6), color(128, 128, 128), 10);
+        
+        if (selectBgm == 0 && midiAry.size() > LIST_LENGTH) {
+          fillRect(630-16, 110-4+(15*LIST_LENGTH+6)*(selectMidiScroll / midiAry.size()), 630, 110-4+(15*LIST_LENGTH+6)*(selectMidiScroll / midiAry.size())+(15*LIST_LENGTH+6)*(LIST_LENGTH / midiAry.size()), color(192, 192, 192), 11);
+        } else if (selectBgm == 1 && oggAry.size() > LIST_LENGTH) {
+          fillRect(630-16, 110-4+(15*LIST_LENGTH+6)*(selectOggScroll  /  oggAry.size()), 630, 110-4+(15*LIST_LENGTH+6)*(selectOggScroll  /  oggAry.size())+(15*LIST_LENGTH+6)*(LIST_LENGTH /  oggAry.size()), color(192, 192, 192), 11);
+        }
+      }
+      
+      
+      if (playBgm == 0) drawText(10, 390, midiAry.get(playNo).getName(), $clWhite, 12);
+      else              drawText(10, 390, oggAry.get(playNo), $clWhite, 12);
+      fillRect(10, 420, 10+($screenWidth-20), 430, color(32, 32, 32), 9);
+      fillRect(10, 420, 10+barX, 430, $clYellow, 8);
+      drawLine(10+barX, 420, 10+barX, 430, color(32 + trunc(223*(barX - trunc(barX))), 32 + trunc(223*(barX - trunc(barX))), trunc(32*(1 - (barX - trunc(barX))))), 7);
+      
+      
+      drawText(10, 450, ""+(playTime/600%6)+(playTime/60%10)+":"+(playTime/10%6)+(playTime%10)+" / "+
+                           (playTotalTime/600%6)+(playTotalTime/60%10)+":"+(playTotalTime/10%6)+(playTotalTime%10)
+                        , $clWhite, 12);
+    }
+    
+    cnt ++;
+    update();
+    if (getkey(13) == 1) break;
+  }
+  
+  // 終了処理
+  $mplayer.stop();
+  
+}
+
+function init() {
+  cnt = 0;
+  selectBgm   = 0;
+  selectMidiNo = 0;
+  selectOggNo  = 0;
+  selectMidiScroll = 0;
+  selectOggScroll  = 0;
+  playSW      = 0;
+  playStopCnt = 0;
+  playPlayCnt = 0;
+  playBgm     = 0;
+  playBgmNo   = 0;
+  playBgmTimeSwap = 0;
+  playTime      = 0;
+  playTotalTime = 0;
+  playLoop = 0;
+  textVisible = 1;
+  
+  keyPlay = 0;
+  keyStop = 0;
+  keyLeft = 0;
+  keyRight = 0;
+  
+  LIST_LENGTH = 20;
+  INTARVAL    = 1;
+  INTARVAL2   = 3;
+  
+  midiAryTotalTime = new Array();
+  for (i=0; i<midiAry.size(); i++) midiAryTotalTime.add(null);
+  oggAryTotalTime = new Array();
+  for (i=0; i<oggAry.size(); i++) oggAryTotalTime.add(null);
+  
+  listPlayerInit = 1;
+}
+
+function playingFunc() {
+  if (playSW) {
+    if (playSW == 1) { // 再生開始準備
+      $mplayer.stop();
+      $mplayer.setMidiStartTick(0);
+      $mplayer.setOggStartTime(0);
+      $mplayer.updatePlayingInfomation();
+      playSW ++;
+    } else if (playSW == 2) { // 再生開始
+      if ((playBgm == 0 && $mplayer.getPlayerMidiStatus() == 0) ||
+          (playBgm == 1 && $mplayer.getPlayerOggStatus()  == 0))
+      {
+        if (!playBgm) $mplayer.play(midiAry.get(playNo));
+        else          $mplayer.play(oggAry.get(playNo));
+        playSW ++;
+      }
+    } else if (playSW == 3) { // 再生されたか確認
+      if ((playBgm == 0 && $mplayer.getPlayerMidiStatus() == 1) ||
+          (playBgm == 1 && $mplayer.getPlayerOggStatus()  == 1))
+      {
+        // 再生が確認されたら次のステップへ
+        if (!playBgm) playNo = $mplayer.getPlayerMidiPlayNo();
+        else          playNo = oggAry.indexOf($mplayer.getPlayerOggPlayName());
+        playStopCnt = 0;
+        playSW ++;
+      }
+    } else if (playSW == 4) { // 次のBGM再生
+      // 経過を記録
+      if (playBgm == 0) playBgmTimeSwap = $mplayer.getPlayerMidiTick();
+      if (playBgm == 1) playBgmTimeSwap = $mplayer.getPlayerOggTime();
+      
+      // バー計算・再生時間
+      if (playSW != 0) {
+        if (playBgm == 0) {
+          barPoint = $mplayer.getPlayerMidiTick();
+          barMax   = $mplayer.getMidiTotalTick();
+          if (barMax != 0) barRate  = barPoint / barMax; else barMax = 0;
+          barX = ($screenWidth-20) * barRate;
+          
+          playTime = $mplayer.getPlayerMidiTime() / 1000;
+          playTotalTime = $mplayer.getMidiTotalTime() / 1000;
+          midiAryTotalTime.set(playNo, playTotalTime);
+        } else {
+          barPoint = $mplayer.getPlayerOggTime();
+          barMax   = $mplayer.getOggTotalTime();
+          if (barMax != 0) barRate  = barPoint / barMax; else barMax = 0;
+          barX = ($screenWidth-20) * barRate;
+          
+          playTime = $mplayer.getPlayerOggTime() / 1000;
+          playTotalTime = $mplayer.getOggTotalTime() / 1000;
+          oggAryTotalTime.set(playNo, playTotalTime);
+        }
+      }
+      
+      // 停止したか監視
+      if ((playBgm == 0 && $mplayer.getPlayerMidiStatus() == 0) ||
+          (playBgm == 1 && $mplayer.getPlayerOggStatus()  == 0))
+      {
+        playStopCnt ++;
+      }
+      if (playStopCnt >= 1) {
+        playStopCnt = 0;
+        
+        if (playLoop != 2) { // １曲リピート以外なら次の曲へ
+          if (playBgm == 0 && playNo == selectMidiNo) selectMidiNo ++;
+          if (playBgm == 1 && playNo == selectOggNo ) selectOggNo  ++;
+          playNo ++;
+        }
+        // リストの最後までいった
+        if ((playBgm == 0 && playNo >= midiAry.size()) || (playBgm == 1 && playNo >= oggAry.size())) {
+          // 選択を先頭へ
+          if (playBgm == 0) {
+            if (playNo == selectMidiNo) {
+              selectMidiNo = 0;
+              selectMidiScroll = 0;
+            }
+          } else {
+            if (playNo == selectOggNo) {
+              selectOggNo = 0;
+              selectOggScroll = 0;
+            }
+          }
+          if (playLoop == 0) { // リピートなし
+            $mplayer.stop();
+            playNo = 0;
+            playSW = 0;
+          } else if (playLoop == 1) { // 全リピート
+            playNo = 0;
+            playSW = 1;
+          }
+        } else {
+          playSW = 1;
+        }
+      }
+      
+    } else if (playSW == 11) { // 一時停止
+      $mplayer.stop();
+      playSW ++;
+      
+    } else if (playSW == 12) { // 一時停止の待機
+      
+    } else if (playSW == 21) { // 再開
+      if (playPlayCnt % INTARVAL2 == 0) {
+        if (playBgm == 0) {
+          $mplayer.setMidiStartTick(playBgmTimeSwap);
+          error = $mplayer.updatePlayingInfomation();
+          if (playSW == 11 || playSW == 12) break; else $mplayer.play(midiAry.get(playNo));
+        }
+        if (playBgm == 1) {
+          $mplayer.setOggStartTime(playBgmTimeSwap);
+          error = $mplayer.updatePlayingInfomation();
+          if (playSW == 11 || playSW == 12) break; else $mplayer.play(oggAry.get(playNo));
+        }
+      }
+      playPlayCnt ++;
+      // ちゃんと再生されるまで繰り返し
+      $mplayer.getPlayerStatus();
+      if (error == 0) {
+        if ((playBgm == 0 && ($mplayer.getPlayerMidiStatus() == 1 || $mplayer.getPlayerMidiLoopCount() >= 1)) ||
+            (playBgm == 1 && ($mplayer.getPlayerOggStatus()  == 1 || $mplayer.getPlayerOggLoopCount()  >= 1)))
+        {
+          playSW = 4;
+          playPlayCnt = 0;
+        }
+      }
+      
+    }
+  } else {
+    // バーを初期化
+    barMax   = 1;
+    barPoint = 0;
+    barRate  = 0;
+    barX     = 0;
+  }
+}

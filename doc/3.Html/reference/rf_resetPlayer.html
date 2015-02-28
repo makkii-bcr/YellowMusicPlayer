@@ -19,7 +19,7 @@
   この項目は本来MusicPlayerが起動時に、設定される項目ですが、<br>
   「DirectMusicのON/OFF」と「ファイルの読み込み頻度」は起動後でも変更可能です。<br>
   <br>
-  現在のMusicPlayerのDirectMusicのON/OFFと、dmの値とを見比べ、<br>
+  現在のMusicPlayerのDirectMusicのON/OFFと、dm(引数)の値とを見比べ、<br>
   ON/OFFを切り替える必要がある場合、MusicPlayerはMidiデバイスの初期化を行います。<br>
   <br>
   Midiデバイスの初期化をすると、Midiの演奏が停止します。<br>
@@ -43,14 +43,16 @@
 resetPlayer(dm, rs)
 </pre>
 <dl>
-<dt>dm</dt>
+<dt>dm(省略可能)</dt>
 <dd>DirectMusicのON/OFF<br>
     0 : 自動(NT系OS:ON 9x系OS:OFF)<br>
     1 : ON<br>
     2 : OFF<br>
-<dt>rs</dt>
+<dt>rs(省略可能)</dt>
 <dd>ファイルの読み込み頻度(0～100)</dd>
 </dl>
+※ 変更のない項目は、引数を省略するかnullを入れてください。<br>
+<br>
 詳しくは、<a href="../tips/tips_02.html">MusicPlayerの設定</a>を参照してください。<br>
   <br>
   <h3>例１</h3>

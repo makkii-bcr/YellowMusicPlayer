@@ -4,7 +4,7 @@
  <resourcelist name="classes">
  </resourcelist>
  <resourcelist name="gen">
-<generator className="Main" name="$Main" inst_x="50" inst_y="50" inst_angle="0" inst_alpha="255" inst_scalex="1" inst_p="-1"/>
+<generator className="Main" name="$Main" inst_x="50" inst_y="50" inst_angle="0" inst_alpha="255" inst_scalex="1" inst_p="-1" inst_pat="-1"/>
  </resourcelist>
  <resourcelist name="global">
   <globalvalue name="$screenWidth" value="640"/>

@@ -27,7 +27,6 @@ getPlayerConfig()
   <li><a href="rf_getPlayerDirectMusicSW.html">getPlayerDirectMusicSW()</a>　　　(DirectMusicのON/OFF)</li>
   <li><a href="rf_getPlayerMode.html">getPlayerMode()</a>　　　(他のプレイヤーのモード)</li>
   <li><a href="rf_getPlayerReadSpeed.html">getPlayerReadSpeed()</a>　　　(ファイルの読み込み頻度)</li>
-  <li><a href="rf_getPlayerMidiCache.html">getPlayerMidiCache()</a>　　　(MidiファイルのキャッシュのON/OFF)</li>
 </ul>
 <br>
 詳しくは、<a href="../tips/tips_02.html">MusicPlayerの設定</a>を参照してください。<br>
@@ -41,11 +40,10 @@ $mplayer = new Ymplayer();
 $mplayer.<strong>getPlayerConfig</strong>();
 while (1) {
   
-  drawText(80, 11* 0 , "実行ファイル名                   : " + $mplayer.<strong2>getPlayerExeName</strong2>()      , $clWhite, 9);
-  drawText(80, 11* 1 , "DirectMusicのON/OFF              : " + $mplayer.<strong2>getPlayerDirectMusicSW</strong2>(), $clWhite, 9);
-  drawText(80, 11* 2 , "他のプレイヤーのモード           : " + $mplayer.<strong2>getPlayerMode</strong2>()         , $clWhite, 9);
-  drawText(80, 11* 3 , "ファイルの読み込み頻度           : " + $mplayer.<strong2>getPlayerReadSpeed</strong2>()    , $clWhite, 9);
-  drawText(80, 11* 4 , "MidiファイルのキャッシュのON/OFF : " + $mplayer.<strong2>getPlayerMidiCache</strong2>()    , $clWhite, 9);
+  drawText(80, 11* 0 , "実行ファイル名         : " + $mplayer.<strong2>getPlayerExeName</strong2>()      , $clWhite, 9);
+  drawText(80, 11* 1 , "DirectMusicのON/OFF    : " + $mplayer.<strong2>getPlayerDirectMusicSW</strong2>(), $clWhite, 9);
+  drawText(80, 11* 2 , "他のプレイヤーのモード : " + $mplayer.<strong2>getPlayerMode</strong2>()         , $clWhite, 9);
+  drawText(80, 11* 3 , "ファイルの読み込み頻度 : " + $mplayer.<strong2>getPlayerReadSpeed</strong2>()    , $clWhite, 9);
   
   update();
 }

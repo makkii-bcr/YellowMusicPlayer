@@ -34,14 +34,15 @@
    <ul>
     <li>Tonyuが正常終了した場合は、必ず自動的に終了できます。</li>
     <li>Tonyuの実行ファイル名がTonyu.exeまたはPlayer.exeの場合は、設定を弄る必要はありません。</li>
-    <li>Tonyuの実行ファイル名を変えた場合は、<a href="tips/tips_02.html">設定</a>をすることでTonyuが強制終了しても自動的に終了できます。</li>
+    <li>Tonyuの実行ファイル名を変えた場合は、<s><a href="tips/tips_02.html">設定</a>をすることでTonyuが強制終了しても自動的に終了できます。</s><br>
+        <font color="#FF0000">ver 2.10より、設定をしなくても自動的に終了できるようになりました。</font></li>
    </ul>
    <br>
    <li>Windows98以降で動作します。</li>
    <ul>
     <li>NT系のOS(2000,XP,Vista,7など)では、DirectMusicを使います。
     <li>9x系のOS(98,Me)では、Windowsで設定されたMidiデバイスを使います。(システムを不安定にしないため)</li>
-    <li>Widows98ではDirectMusicを使うと、システムが不安定になりフリーズすることがあったので、自動でOFFになるようにしました。</li>
+    <li>Widows98ではDirectMusicを使うと、システムが不安定になりフリーズすることがあったので、自動でOFFになるようにしました。
     <br>※ 上記はデフォルトの設定時の動作で、<a href="tips/tips_02.html">設定</a>を変えることもできます。</li>
    </ul>
    <br>
@@ -55,7 +56,7 @@
   <h2>長所</h2>
   <ul>
    <li>標準Midiデバイスよりも、音がきれいです（DirectMusicがONの場合）</li>
-   <li>反応が速いです (同じBGMを再生する場合、２回目以降の再生はさらに反応が速くなります)</li>
+   <li>反応が速いです</li>
    <li>BGMの切り換えがスムーズに行われます（BGM切換時に無音になる時間が少ない）</li>
    <li>Windows 7, Vistaでは標準Midiデバイスを使っている場合、リズムパートがならない不具合が解消されます。</li>
    <li>どの環境でも同じ音源で鳴らせます。（98,Meはデフォルト設定ではDirectMusicを使わないため例外）</li>
@@ -164,7 +165,8 @@
    <li>DirectMusicを使用するかしないか設定できます。</li>
    <li>他のMidi, Ogg プレイヤー の動作を再現できます。</li>
    <li>ファイルの読み込み頻度を調節できます。</li>
-   <li>読み込んだMidiファイルをメモリに保持するかしないか設定できます。</li>
+   <li><s>読み込んだMidiファイルをメモリに保持するかしないか設定できます。</s><br>
+       <font color="#FF0000">※ ver2.20よりこの機能は廃止</font></li>
   </ul>
   以下の詳細は<a href="tips/tips_05.html">ここのページ</a>を参照してください。
   <ul>
@@ -178,6 +180,7 @@
     <ul>
      <li>開発環境版の場合、Tonyu 1.22以前ではプロセスが残ってしまうので非推奨です。<br>
       ランタイム版は問題ありません。</li>
+     <li>YellowMusicPlayer単体(Ymplayer.tonyu無し(Midiの再生のみ))だと、Tonyu 1.15以降でも動作します。</li>
     </ul>
    </li>
    <li>（推奨）ＰＣ内部のHDDまたはSSDからの起動（リアルタイム性の高い記憶媒体）</li>

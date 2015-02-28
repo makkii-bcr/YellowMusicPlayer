@@ -133,50 +133,49 @@
   <td><img src="res/new.gif"><a href="reference/rf_setOggFileLoop.html"><b>setOggFileLoop</b></a></td>
   <td>OggファイルのOggループを使用するかON/OFF</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_setDynamicEffect.html"><b>setDynamicEffect</b></a></td>
   <td>Midiの再生中に動的に変更できるエフェクト項目をセットする</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_setStaticEffect.html"><b>setStaticEffect</b></a></td>
   <td>Midiの再生前・停止前にあらかじめ設定するエフェクト項目をセットする</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_setPlayingOption.html"><b>setPlayingOption</b></a></td>
   <td>Midiの再生オプションを設定する</td>
  </tr>
- <tr bgcolor="#eeffff">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_setDynamicEffectOgg.html"><b>setDynamicEffectOgg</b></a></td>
   <td>Oggの再生中に動的に変更できるエフェクト項目をセットする</td>
  </tr>
- <tr bgcolor="#eeffff">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_setStaticEffectOgg.html"><b>setStaticEffectOgg</b></a></td>
   <td>Oggの再生前・停止前にあらかじめ設定するエフェクト項目をセットする</td>
  </tr>
 </table>
-<font color="#FF0000">※ setDynamicEffect・setStaticEffect・setPlayingOption・setDynamicEffectOgg・setStaticEffectOgg<br>
-　 この５つのメソッドの使用は非推奨になりました。<br>
-　 今後は新しく追加された(NEWの付いた)メソッドを使ってください。</font><br>
+<font color="#FF0000">※ 灰色の欄は非推奨になったメソッドです。<br>
+　 今後は新しく追加された(2.1の付いた)メソッドを使ってください。</font><br>
 <br>
 <b>【初期化関係】</b><br>
 <table border=1>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_initDynamicEffect.html"><b>initDynamicEffect</b></a></td>
   <td>Midiの再生中に動的に変更できる各エフェクト項目をデフォルト値に戻す</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_initStaticEffect.html"><b>initStaticEffect</b></a></td>
   <td>Midiの再生前・停止前にあらかじめ設定する各エフェクト項目をデフォルト値に戻す</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_initPlayingOption.html"><b>initPlayingOption</b></a></td>
   <td>Midiの各再生オプションをデフォルト値に戻す</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_initDynamicEffectOgg.html"><b>initDynamicEffectOgg</b></a></td>
   <td>Oggの再生中に動的に変更できる各エフェクト項目をデフォルト値に戻す</td>
  </tr>
- <tr bgcolor="#ffffee">
+ <tr bgcolor="#999999">
   <td><a href="reference/rf_initStaticEffectOgg.html"><b>initStaticEffectOgg</b></a></td>
   <td>Oggの再生前・停止前にあらかじめ設定する各エフェクト項目をデフォルト値に戻す</td>
  </tr>
@@ -185,6 +184,7 @@
   <td>Midi,Oggのエフェクト設定・再生オプションの全てをデフォルト値に戻す</td>
  </tr>
 </table>
+<font color="#FF0000">※ 灰色の欄は非推奨になったメソッドです。</font><br>
 <br>
 <b>【情報取得関係】</b><br>
 <table border=1>
@@ -261,6 +261,10 @@
   <td>Oggの再生状態を取得する</td>
  </tr>
  <tr bgcolor="#ffffee">
+  <td><img src="res/new2_2.gif"><a href="reference/rf_getPlayerOggPlayName.html"><b>getPlayerOggPlayName</b></a></td>
+  <td>再生中のOggのファイル名を取得する</td>
+ </tr>
+ <tr bgcolor="#ffffee">
   <td><img src="res/new.gif"><a href="reference/rf_getPlayerOggTime.html"><b>getPlayerOggTime</b></a></td>
   <td>Oggデータ内での現在の再生時間を取得する</td>
  </tr>
@@ -325,12 +329,20 @@
   <td>現在の日付「曜日」を取得する</td>
  </tr>
  <tr bgcolor="#eeffff">
+  <td><img src="res/new2_2.gif"><a href="reference/rf_getDisplayWidth.html"><b>getDisplayWidth</b></a></td>
+  <td>ディスプレイの解像度「幅」を取得する</td>
+ </tr>
+ <tr bgcolor="#eeffff">
+  <td><img src="res/new2_2.gif"><a href="reference/rf_getDisplayHeight.html"><b>getDisplayHeight</b></a></td>
+  <td>ディスプレイの解像度「高さ」を取得する</td>
+ </tr>
+ <tr bgcolor="#ffffee">
   <td><a href="reference/rf_getPlayerPreparation.html"><b>getPlayerPreparation</b></a></td>
   <td>MusicPlayerが準備中(起動中)かを取得する</td>
  </tr>
 </table>
 <font color="#FF0000">※ getPlayerStatusで情報を取得する場合、変数を直接参照する方法は非推奨になりました。<br>
-　 今後は新しく追加された(NEWの付いた)メソッドを使ってください。</font><br>
+　 今後は新しく追加された(2.1の付いた)メソッドを使ってください。</font><br>
 <br>
 <b>【その他】</b><br>
 <table border=1>
@@ -358,9 +370,9 @@
   <td><img src="res/new.gif"><a href="reference/rf_getPlayerReadSpeed.html"><b>getPlayerReadSpeed</b></a></td>
   <td>MusicPlayerの設定の４行目の内容（ファイルの読み込み頻度）を取得する</td>
  </tr>
- <tr bgcolor="#eeffff">
-  <td><img src="res/new.gif"><a href="reference/rf_getPlayerMidiCache.html"><b>getPlayerMidiCache</b></a></td>
-  <td>MusicPlayerの設定の５行目の内容（MidiファイルのキャッシュのON/OFF）を取得する</td>
+ <tr bgcolor="#999999">
+  <td><img src="res/new.gif"><a href="reference/rf_getPlayerMidiCache.html"><b><s>getPlayerMidiCache</s></b></a></td>
+  <td><s>MusicPlayerの設定の５行目の内容（MidiファイルのキャッシュのON/OFF）を取得する</s></td>
  </tr>
  <tr bgcolor="#ffffee">
   <td><a href="reference/rf_setPlayerConfig.html"><b>setPlayerConfig</b></a></td>
@@ -380,7 +392,9 @@
  </tr>
 </table>
 <font color="#FF0000">※ getPlayerConfigで情報を取得する場合、変数を直接参照する方法は非推奨になりました。<br>
-　 今後は新しく追加された(NEWの付いた)メソッドを使ってください。</font><br>
+　 今後は新しく追加された(2.1の付いた)メソッドを使ってください。<br>
+※ ver2.20より、getPlayerMidiCacheは意味を持たなくなりました。(Midiキャッシュ機能が廃止されたため)<br>
+※ Midiキャッシュ機能の廃止により、setPlayerConfigの引数が１つ減りました。</font><br>
 <br>
   <h3>変数一覧</h3>
   <a href="reference2.html">⇒変数一覧</a><br>

@@ -13,6 +13,29 @@
   </h1>
   <hr>
   <br>
+  <h4>【ver 2.20】</h4>
+  <ul>
+   <li>
+    ディスプレイの解像度を取得できるようにした
+    <ul>
+     <li><a href="reference/rf_getDisplayWidth.html">getDisplayWidth()</a>, <a href="reference/rf_getDisplayHeight.html">getDisplayHeight()</a>を追加</li>
+    </ul>
+   </li>
+   <li>
+    再生中のOggのファイル名を取得できるようにした
+    <ul>
+     <li><a href="reference/rf_getPlayerOggPlayName.html">getPlayerOggPlayName()</a>を追加</li>
+    </ul>
+   </li>
+   <li><a href="reference/rf_getPlayerMidiPlayNo.html">getPlayerMidiPlayNo()</a>の戻り値が0～255までだったのを0～65535に変更</li>
+   <li><a href="tips/tips_02.html">YellowMusicPlayerの設定</a>にある、Midiキャッシュ機能（Midiファイルをメモリに保持する機能）を廃止した</li>
+   <li>Midiの演奏状態が、演奏開始時に一瞬0(停止状態)になる仕様を0にならないように変更</li>
+   <li>サンプル「テスト」にリストプレイヤーモードを追加（登録されたMidi, Oggを順に再生していきます）</li>
+   <li>サンプル「ちょっと音ゲー」の画面速度を遅くした</li>
+   <li>ReadMeの修正</li>
+   <li>その他細かいバグ修正・仕様変更</li>
+  </ul>
+  <br>
   <h4>【ver 2.11】</h4>
   <ul>
    <li>一部ファイルを消し忘れていたので削除</li>

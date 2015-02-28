@@ -22,7 +22,8 @@
    <li>DirectMusicの ON / OFF を設定</li>
    <li>他のMidiPlayer, OggPlayer の動作を再現</li>
    <li>ファイルの読み込み頻度の調節</li>
-   <li>Midiファイルをメモリに保持するかしないか設定</li>
+   <li><s>Midiファイルをメモリに保持するかしないか設定</s><br>
+       <font color="#FF0000">※ ver2.20よりこの機能は廃止</font></li>
   </ul>
   ※ Tonyu開発環境版に導入したYellowMusicPlayerの設定を変える場合は、<br>
   　　Tonyu.exeが入っているフォルダのUsrフォルダに、filesフォルダを作り<br>
@@ -191,28 +192,8 @@
      <dd>(15 * (４行目の値 + 1))ミリ秒ごとにファイルを読み込みます。</dd>
     </dl>
    </dd>
-   <dt>５行目(省略可能)</dt>
-   <dd>読み込んだMidiファイルを、YellowMusicPlayerがキャッシュするかしないかを設定できます。<br>
-       通常はOFFのままでいいです。（YellowMusicPlayerの開発中に仕様変更したのでその残骸となった機能です）<br>
-       <br>
-       キャッシュをONにすると、YellowMusicPlayerが起動時にプロジェクトに登録されているMidiを全てメモリに読み込みます。<br>
-       255個までメモリに読み込んで置けます。それ以上はディスクからMidi再生時に読み込みます。<br>
-       （Tonyu開発環境版では、Midiを再生時にUsrフォルダのパスが変わっていた場合に読み込みます）<br>
-       <br>
-       ただし、Midiはサイズが小さく読み込みにもあまり時間がかからないので、<br>
-       キャッシュがONでもOFFでもあまり変わらないと思います。<br>
-       キャッシュをONにすると、反ってメモリ使用量が増えてしまうのでOFFのほうがいいかもしれません。<br>
-       最近のPCの場合は、搭載メモリが十分にあるのでONにしてもいいかもしれません。<br>
-       （キャッシュをONにした場合、あくまで目安ですが使用メモリは約10MB～50MBくらいになります）
-       
-    <dl>
-     <dt>0（デフォルトの設定）：</dt>
-     <dd>MidiのキャッシュをOFFにします。</dd>
-     <dt>1：</dt>
-     <dd>MidiのキャッシュをONにします。</dd>
-    </dl>
-   </dd>
   </dl>
+  <br>
   <h3>例１</h3>
   [YMPConfig.txt]<br>
 <pre>
@@ -220,11 +201,9 @@
 2
 1
 2
-1
 </pre>
   DirectMusicをOFFにして、TonyuMidiLitestモードで動作します。<br>
   ファイルの読み込み頻度は、(15 * (2 + 1)) = 45ミリ秒ごとになります。<br>
-  MidiのキャッシュはONになります。<br>
   <br>
   <h3>例２</h3>
   [YMPConfig.txt]<br>
@@ -235,7 +214,6 @@
 </pre>
   DirectMusicのON/OFFはデフォルト設定で、MidiOggPlayerモードで動作します。<br>
   ファイルの読み込み頻度は、(省略したので)15ミリ秒ごとになります。<br>
-  MidiのキャッシュはOFFになります。<br>
   <br>
   <h3>例３</h3>
   [YMPConfig.txt]<br>
@@ -247,7 +225,6 @@
 </pre>
   DirectMusicのON/OFFはデフォルト設定で、YellowMusicPlayerモード（通常のモード）で動作します。<br>
   ファイルの読み込み頻度は、(15 * (9 + 1)) = 150ミリ秒ごとになります。<br>
-  MidiのキャッシュはOFFになります。<br>
   <br>
   <h3>例４</h3>
   [YMPConfig.txt]<br>
@@ -255,13 +232,11 @@
 
 
 
-
 1
 </pre>
-  空の行はデフォルト設定として認識されます。（「1」と書いているのは５行目です）<br>
+  空の行はデフォルト設定として認識されます。（「1」と書いているのは４行目です）<br>
   DirectMusicのON/OFFはデフォルト設定で、YellowMusicPlayerモード（通常のモード）で動作します。<br>
-  ファイルの読み込み頻度は、(省略したので)15ミリ秒ごとになります。<br>
-  MidiのキャッシュはONになります。<br>
+  ファイルの読み込み頻度は、(15 * (1 + 1)) = 30ミリ秒ごとになります。<br>
   <br>
   <h3>例５</h3>
   [YMPConfig.txt]<br>
@@ -274,7 +249,6 @@
   実行ファイル名が「シューティング.exe」であることを認識し、Tonyuが強制終了してもYellowMusicPlayerは自動終了できます。<br>
   DirectMusicのON/OFFはデフォルト設定で、TonyuでOgg Vorbisを鳴らすサンプルモードで動作します。<br>
   ファイルの読み込み頻度は、(15 * (16 + 1)) = 255ミリ秒ごとになります。<br>
-  MidiのキャッシュはOFFになります。<br>
   <br>
   <a href="../tips.html">戻る</a>
   <hr>

@@ -23,7 +23,8 @@
     <li>演奏中のMidi番号（MusicPlayerで割り振られた番号）</li>
     <ul>
      <li>↑プロジェクトでMidiを登録した順番に、0から番号が割り振られます。<br>
-         256個(255番)まで正常に割り振られますが、257個(256番)以降は全て255番になります。</li>
+         <s>256個(255番)まで正常に割り振られますが、257個(256番)以降は全て255番になります。</s><br>
+         <font color="#FF0000">65536個(65535番)まで正常に割り振られますが、65537個(65536番)以降は全て65535番になります。(ver2.20から変更)</font></li>
     </ul>
     <li>演奏中のMidiの、現在のデータ内のテンポ</li>
     <li>演奏中のMidiの、現在のティック</li>
@@ -68,13 +69,20 @@
     <li>現在の日付「日」</li>
     <li>現在の日付「曜日」(0:日,1:月,2:火,…,6:土)</li>
    </ul>
+   <li>ディスプレイの解像度</li>
+   <ul>
+    <li>ディスプレイの解像度「幅」</li>
+    <li>ディスプレイの解像度「高さ」</li>
+   </ul>
   </ul>
-  MusicPlayerの状態を取得するには、まず<a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>で、<br>
-  MusicPlayerの状態取得機能をONにします。<br>
-  次に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>で、状態取得機能をONにしたことを、MusicPlayerに反映させます。<br>
-  後は、<a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a>で実際に情報を取得します。<br>
-  <br>
-  ※ MusicPlayerの状態取得機能をONにすると、MusicPlayerがファイルの書き込みをします。<br>
+  MusicPlayerの状態を取得する手順：
+  <ol>
+   <li><a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>で、MusicPlayerの状態取得機能をONにします。</li>
+   <li><a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>で、状態取得機能をONにしたことをMusicPlayerに反映させます。</li>
+   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a>でMusicPlayerから情報をTonyu側で受け取ります。<br>
+   ※ MusicPlayerの状態取得機能をONにすると、MusicPlayerがファイルの書き込みをします。</li>
+   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()のページ</a>にある、get～()を使うと実際に情報が取得できます。</li>
+  </ol>
   <br>
   使い方は、以下のページを参照してください。<br>
   <ul>
