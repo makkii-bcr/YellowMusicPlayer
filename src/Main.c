@@ -1,8 +1,8 @@
 /*
-  YellowMusicPlayer 2.0  -  Copyright (C) 2012 マッキー
+  YellowMusicPlayer 2.01  -  Copyright (C) 2012 マッキー
   
   このソースコードは自由に改変してコンパイルして構いません。
-  生成したものを配布する場合は、著作権表示をお願いします。
+  生成したものを配布する場合は、ソースコードを改造して作り出したことをReadMe等に記述してください。
   
   DirectX の2004くらいのバージョンをインストールが必要です。
   （インクルードファイルが無いため）
@@ -56,9 +56,9 @@ int   playerMode;
 int   playerSpeedMode;
 int   playerCacheMode;
 
-int    oggVolume    = 0;
-double oggTempo     = 0;
-double oggPan       = 0;
+int    oggVolume    = 127;
+double oggTempo     = 1.0;
+double oggPan       = 0.0;
 
 int    oggFadeInTime  = 0;
 int    oggFadeOutTime = 0;
@@ -87,9 +87,9 @@ DWORD    hdError;
 DWORD    fileReadSize, fileReadSize2;
 BOOL     eff_midiDirChangeFlag = 0;
 
-char     bgmStr[_MAX_PATH], bgmStr_old[FILEPATH_SIZE];
+char     bgmStr[_MAX_PATH], bgmStr_old[_MAX_PATH];
 char     playedBgmStr[FILEPATH_SIZE];
-char     oggBgmStr[FILEPATH_SIZE], oggBgmStr_old[FILEPATH_SIZE];
+char     oggBgmStr[_MAX_PATH], oggBgmStr_old[_MAX_PATH];
 char     playedOggBgmStr[FILEPATH_SIZE];
 char     eff_midiAddr[FILEPATH_SIZE];
 char     eff_midiDir[FILEPATH_SIZE], eff_midiDir_old[FILEPATH_SIZE];
@@ -445,7 +445,12 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	// eff_midi.txt があればアドレスをセットして、エフェクトファイルを監視するようにする
 	// 再生する時にチェック
-	if ((playFlag == 1 || playFlag == 2) && playerMode != 2) {
+	if (((playFlag == 1 || playFlag == 2) && playerMode != 2) || (midiEffectFlag == 0 && PathFileExists(eff_midiAddr))) {
+		
+		if (midiEffectFlag == 0 && PathFileExists(eff_midiAddr)) { // Midiが鳴らされずeff_midi.txtだけ生成されたら
+			memset(bgmStr, 0, sizeof(bgmStr));
+			memcpy(bgmStr, eff_midiDir, sizeof(bgmStr) - 1);
+		}
 		
 		// eff_midi.txt の場所を調べる
 		// eff_midiAddr, eff_midiDir が更新される
@@ -908,7 +913,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		playerStatusCnt = 0;
 		playFlag = 0;
 		playingFlag = 1;
-		bgmType = 1;
+		//bgmType = 1;
 		//fileDeleteFlag = 1;
 	}
 	
@@ -1067,11 +1072,6 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 				}
 			}
 			
-			if (playerMode == 0) {
-				bgmType = 2;
-				midiPause = 0;
-				playingFlag = 1; // BGM再生中
-			}
 		}
 		
 		
@@ -1214,7 +1214,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 				timeStartSW  = 0;
 			}
 			*/
-			
+			/*
 			sprintf(testStr, "oggPoint:[%d] %d\r\n書き込み[%d] oggFlag:%d %u %u %f\r\noggAllWriteFlag:%d\r\noggLoopCnt:%d oggBufLoopCnt:%d\r\noggFadeCnt:%f oggFadeInTime:%d oggFadeOutTime:%d oggVolume:%d \r\n%d BufSize:%d BufWriteSpeed:%d ov_time_tell:%f\r\noggLoopSeek:%f oggLoopEndSeek:%f oggFileLoop:%d\r\n%f %f %d %f %f %f   %d %f",
 			        oggPoint, oggPoint / oggSectSize, oggSectSize * oggFlag, oggFlag, AB1, AB2, (double)DSBufferDesc.dwBufferBytes / oggSect, oggAllWriteFlag,
 			        oggLoopCnt, oggBufLoopCnt,
@@ -1230,7 +1230,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	                oggPlayingTimeInt2, (ov_time_tell(&ovf) - oggPlayingTime - oggPlayTime)
 			        );
 			SetWindowText(hStatic, testStr);
-			
+			*/
 			/*
 			sprintf(testStr, "ogg3VolumeCnt:%f ogg3VolumeVariation:%d ogg3VolumeWk:%f oggVolume:%d",
 			        ogg3VolumeCnt, ogg3VolumeVariation, ogg3VolumeWk, oggVolume);
@@ -1319,8 +1319,8 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	#if DEBUG
 	if (cnt % 60 == 0) {
-		/*
-		sprintf(testStr, "%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」 %s:「%d」 %s:「%d」 %s:「%s」 %s:「%d」 %s:「%d」",
+		
+		sprintf(testStr, "%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」\r\n%s:「%s」 %s:「%d」 %s:「%d」 %s:「%s」 %s:「%d」 %s:「%d」\r\n%s:「%d」",
 		                 "bgmStr                 ",bgmStr,
 		                 "oggBgmStr              ",oggBgmStr,
 		                 "usrFolderAddr          ",usrFolderAddr,
@@ -1334,9 +1334,10 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                 "dwProcessId"            ,dwProcessId,
 		                 "playerExeName"          ,playerExeName,
 		                 "cnt"                    ,cnt,
-		                 "processExist"           ,processExist(playerExeName, osPlatformId, dwProcessId)
+		                 "processExist"           ,processExist(playerExeName, osPlatformId, dwProcessId),
+		                 "midiEffectFlag"         ,midiEffectFlag
 		                 );
-		*/
+		
 		//sprintf(testStr, "bgmType:%d\r\nplayingFlag:%d\r\oggAllWriteFlag:%d\r\noggPlayingTime:%f", bgmType, playingFlag, oggAllWriteFlag, oggPlayingTime);
 		//sprintf(testStr, "", bgmType, playingFlag, oggAllWriteFlag, oggPlayingTime);
 		SetWindowText(hStatic, testStr);

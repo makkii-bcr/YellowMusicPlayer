@@ -128,7 +128,7 @@ while (1) {
     }
     $mplayer.midiStartTick = playerMidiTick;
     
-    tempValue = trunc(( playerMidiTick / $mplayer.midiTotalTick ) * $mplayer.midiTotalTime);
+    if ($mplayer.midiTotalTick != 0) tempValue = trunc(( playerMidiTick / $mplayer.midiTotalTick ) * $mplayer.midiTotalTime);
     playerMidiTime          = tempValue; // 
     $mplayer.playerMidiTime = $mplayer.midiTotalTime; // 現在の再生時間を無理やり代入（巻き戻しした時の時間が一瞬反映前のが表示されるため）
     

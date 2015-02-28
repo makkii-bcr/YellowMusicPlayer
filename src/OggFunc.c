@@ -302,6 +302,7 @@ BOOL oggPlay(char *fileName, BOOL loop, BOOL fileLoop, double startSeek, double 
 		IDirectSoundBuffer_Play(pDSBuffer, 0, 0, DSBPLAY_LOOPING);
 		oggPlayerStatus = STATUS_PLAY;
 	}
+	
 	return TRUE;
 }
 

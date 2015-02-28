@@ -10,8 +10,8 @@ IDI_ICON_1  ICON "mainIcon.ico"
 
 // バージョン情報
 VS_VERSION_INFO		VERSIONINFO
- FILEVERSION		2,0,0,0
- PRODUCTVERSION		2,0,0,0
+ FILEVERSION		2,0,1,0
+ PRODUCTVERSION		2,0,1,0
  FILEFLAGSMASK		0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -27,11 +27,11 @@ BEGIN
         BLOCK "041104b0"
         BEGIN
             VALUE "FileDescription"		, "YellowMusicPlayer\0"
-            VALUE "FileVersion"			, "2,0,0,0\0"
+            VALUE "FileVersion"			, "2,0,1,0\0"
             VALUE "LegalCopyright"		, "Copyright (C) 2012 マッキー\0"
             VALUE "OriginalFilename"	, "Midiplayer2.exe\0"
             VALUE "ProductName"			, "YellowMusicPlayer\0"
-            VALUE "ProductVersion"		, "2.00\0"
+            VALUE "ProductVersion"		, "2.01\0"
         END
     END
     BLOCK "VarFileInfo"

@@ -115,7 +115,6 @@ $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
 
 
 
-
 while (1) {
   if (frameCnt == 0) {
     if      (selectBGM == 1) $mplayer.play($se_Para01);
@@ -140,7 +139,7 @@ while (1) {
   // 時間取得・誤差修正 //////////////////////////////////////////////////
   
   // 更新頻度が0より大きかったら、ファイルから情報を読み取る
-  if ($mplayer.bgmGettingPlayerStatus > 0) $mplayer.getPlayerStatus(); // 状態取得
+  if ($mplayer.bgmGettingPlayerStatus > 0) $mplayer.getPlayerStatus(selectBGM); // 状態取得(Midiの時はMidiの情報だけ,Oggの時はOggの情報だけ)
   
   if (frameCnt > 0) {
     if (selectBGM == 1) {

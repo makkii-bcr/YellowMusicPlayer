@@ -80,9 +80,9 @@ extern DWORD    hdError;
 extern DWORD    fileReadSize, fileReadSize2;
 extern BOOL     eff_midiDirChangeFlag;
 
-extern char     bgmStr[_MAX_PATH], bgmStr_old[FILEPATH_SIZE];
+extern char     bgmStr[_MAX_PATH], bgmStr_old[_MAX_PATH];
 extern char     playedBgmStr[FILEPATH_SIZE];
-extern char     oggBgmStr[FILEPATH_SIZE], oggBgmStr_old[FILEPATH_SIZE];
+extern char     oggBgmStr[_MAX_PATH], oggBgmStr_old[_MAX_PATH];
 extern char     playedOggBgmStr[FILEPATH_SIZE];
 extern char     eff_midiAddr[FILEPATH_SIZE];
 extern char     eff_midiDir[FILEPATH_SIZE], eff_midiDir_old[FILEPATH_SIZE];
