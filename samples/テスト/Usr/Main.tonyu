@@ -4,6 +4,7 @@ if (!$fullScreen) $Window.setDrawMode("A");
 $System.setFrameRate(58, 5);
 $Options.set("sleep_time", 1);
 $mplayer.setDelay(2400);
+$mplayer.setBSize(8000);
 $screenWidth  = 640;
 $screenHeight = 480;
 

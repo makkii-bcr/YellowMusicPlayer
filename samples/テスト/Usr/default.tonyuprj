@@ -5,11 +5,11 @@
  <resourcelist name="params">
   <param name="commentID" value="39726855"/>
   <param name="sound_stopOnPageLoad" value="1"/>
-  <param name="savedVersion" value="1260"/>
+  <param name="savedVersion" value="1270"/>
   <param name="mainPage" value="$page_index"/>
   <param name="title" value="YellowMusicPlayerテスト"/>
   <param name="author" value="マッキー"/>
-  <param name="version" value="2.34"/>
+  <param name="version" value="2.35"/>
   <param name="mail" value=""/>
   <param name="web" value=""/>
   <param name="cond" value="再配布、改造ともに無断で許可"/>
@@ -31,6 +31,12 @@
 <BGM name="$se_tamn11l" src="tam-n11l.mid"/>
 <BGM name="$se_tamn13l" src="tam-n13l.mid"/>
 <BGM name="$se_tamco03l" src="tamco03l.mid"/>
+<BGM name="$se_mzo_araara" src="mzo_araara.mzo"/>
+<BGM name="$se_mzo_GA1" src="mzo_GA1.mzo"/>
+<BGM name="$se_mzo_noroi" src="mzo_noroi.mzo"/>
+<BGM name="$se_mzo_obake" src="mzo_obake.mzo"/>
+<BGM name="$se_mzo_SG_subayaku" src="mzo_SG_subayaku.mzo"/>
+<BGM name="$se_mzo_TESUTO1" src="mzo_TESUTO1.mzo"/>
  </resourcelist>
  <resourcelist name="filelist">
 <Page name="r_0" src="index.cmml"/>

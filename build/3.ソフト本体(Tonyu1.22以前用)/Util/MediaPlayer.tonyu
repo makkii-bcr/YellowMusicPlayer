@@ -2,7 +2,7 @@ extends Object;
 // *---------------------------------*
 // *  YellowMusicPlayer用の$mplayer  *
 // *---------------------------------*
-//     YellowMusicPlayer version 2.2用
+//     YellowMusicPlayer version 2.3用
 //     Tonyu System version 1.22以前用
 
 //native _n_freeAllSE;
@@ -89,6 +89,7 @@ function play(s, ar, v) {
       s.play(ar,128);
     }
   } else if (s is BGM) { // midi再生(サウンドオブジェクトの場合)
+    stop(1);
     if (!_isMzo(s.getURL())) {
       f = new FileWriter("midi_sig.dat");
       if (ar) r = "R"; else r = "P";

@@ -43,6 +43,10 @@ Usrフォルダに再生したいOggを置くと再生されます。
 「Para01.mid」                  zxcさん
 「syuBoss.mid」「syuFast.mid」  自作
 
+「mzo_araara.mzo」「mzo_GA1.mzo」「mzo_noroi.mzo」
+「mzo_obake.mzo」「mzo_SG_subayaku.mzo」「mzo_TESUTO1.mzo」
+        自作
+
 「BGM022.ogg」「BGM036.ogg」「BGM094.ogg」
         Pianos DauGeさん  http://pianosdauge.org/
 
@@ -52,6 +56,8 @@ Usrフォルダに再生したいOggを置くと再生されます。
 
 
 
-付属の TAM Music Factoryさんの Midi, Ogg は、全てRPGツクール用のループに対応しています。
-YellowMusicPlayerでも、RPGツクール用のループが使えます。
-OggでRPGツクール用ループをする場合は、「Oggループ使用:」を1にしてから再生してください。
+付属の TAM Music Factoryさんの Midi, Ogg は、全て特殊なループ再生に対応しています。
+MidiはCC#111のループに、Oggはループタグによるループに対応しています。
+
+YellowMusicPlayerでも、MidiのCC#111によるループ、Oggのループタグによるループに対応しています。
+Oggでループタグによるループをする場合は、「Oggループ使用:」を1にしてから再生してください。
