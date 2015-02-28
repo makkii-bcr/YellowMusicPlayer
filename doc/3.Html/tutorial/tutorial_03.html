@@ -19,7 +19,7 @@
   <a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a>でテンポ、<br>
   <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>でピッチを調節できます。<br>
   <br>
-  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>を使うと、設定がMusicPlayerに反映されます。<br>
   <br>
   ※ <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>を使うときは、<a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>でマスターピッチ機能をONにしてから再生してください。<br>
   <br>
@@ -29,7 +29,7 @@ extends SpriteChar;
 
 $mplayer = new Ymplayer();
 $mplayer.<strong2>setMidiMasterPitch</strong2>(1); // マスターピッチ機能をONにする(setMidiPitch()を使うため)
-$mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+$mplayer.<strong>updatePlayInfo</strong>(); // 更新
 $mplayer.play($se_test, 1); // 再生
 midiVolume = 127;
 midiTempo  = 1;
@@ -46,7 +46,7 @@ while (1) {
     $mplayer.<strong>setMidiVolume</strong>(midiVolume); // 音量設定
     $mplayer.<strong>setMidiTempo</strong>(midiTempo);   // テンポ設定
     $mplayer.<strong>setMidiPitch</strong>(midiPitch);   // ピッチ設定
-    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
   }
   drawText(100,  0, "音量　：" + midiVolume, $clWhite);
   drawText(100, 20, "テンポ：" + midiTempo , $clWhite);
@@ -61,7 +61,6 @@ while (1) {
    <li><a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a></li>
    <li><a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a></li>
    <li><a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a></li>
-   <li><a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a></li>
   </ul>
   <br>
   <a href="../tutorial.html">戻る</a>

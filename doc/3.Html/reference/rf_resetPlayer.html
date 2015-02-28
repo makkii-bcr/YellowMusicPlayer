@@ -29,7 +29,7 @@
   初期化が終わるとOggは本来の再生位置へ戻りますが、初期化する時はOggを停止した方がよいでしょう。<br>
   <br>
   このメソッドを呼び出すと、「YMPPreparation.dat」が書き込まれます。<br>
-  その結果、このメソッドを呼び出した後に、<a href="rf_getPlayerPreparation.html">getPlayerPreparation()</a>でMusicPlayerが準備できたかどうかを調べることができます。<br>
+  その結果、このメソッドを呼び出した後に、<a href="rf_getPlayerPreparation.html">getPlayerReady()</a>でMusicPlayerが準備できたかどうかを調べることができます。<br>
   <br>
   また、このメソッドを呼び出すと、「YMPConfig.txt」の内容が書きかえられます。<br>
   つまり、ここの設定が次回起動時でも使用されることになります。<br>
@@ -85,7 +85,7 @@ while (1) {
   
   drawText( 80, 100, "DirectMusic          : " + text1 , $clWhite, 12);
   drawText( 80, 130, "ファイル読み込み頻度 : " + text2 , $clWhite, 12);
-  if ($mplayer.getPlayerPreparation()) drawText( 80, 160, "MusicPlayer準備中…", $clYellow, 12);
+  if ($mplayer.getPlayerReady()) drawText( 80, 160, "MusicPlayer準備中…", $clYellow, 12);
   
   update();
 }

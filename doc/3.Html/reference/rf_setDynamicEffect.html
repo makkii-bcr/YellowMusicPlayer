@@ -15,7 +15,7 @@
   <h2>Ymplayer.setDynamicEffect</h2>
   Midiの再生中に動的に変更できるエフェクト項目をセットします<br><br>
   変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
-  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   <h3>書式</h3>
 <pre>
 setDynamicEffect(vol, tempo, pitch)
@@ -37,7 +37,7 @@ setDynamicEffect(vol, tempo, pitch)
 </dl>
 <br>
 <font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
-下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出さないとMusicPlayerに反映されません。<br>
 <ul>
 <li><a href="rf_setMidiVolume.html">setMidiVolume</a></li>
 <li><a href="rf_setMidiTempo.html">setMidiTempo</a></li>
@@ -50,7 +50,7 @@ extends SpriteChar;
 
 $mplayer = new Ymplayer();
 $mplayer.setPlayingOption(null, null, 1, null, null); // マスターピッチ機能をONにする
-$mplayer.updatePlayingInfomation(); // 更新
+$mplayer.updatePlayInfo(); // 更新
 $mplayer.play($se_test, 1); // 再生
 midiVolume = 127;
 midiTempo  = 1;
@@ -65,7 +65,7 @@ while (1) {
   if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ピッチ＋
   if (v % 6 == 0) { // １秒間に10回更新
     $mplayer.<strong>setDynamicEffect</strong>(midiVolume, midiTempo, midiPitch); // エフェクト設定
-    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.updatePlayInfo(); // 更新
   }
   drawText(100,  0, "音量　：" + midiVolume, $clWhite);
   drawText(100, 20, "テンポ：" + midiTempo , $clWhite);

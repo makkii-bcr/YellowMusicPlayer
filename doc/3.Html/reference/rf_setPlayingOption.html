@@ -16,7 +16,7 @@
   Midiの再生オプションを設定します<br>
   ※ 再生前にあらかじめ設定しておく項目です<br><br>
   変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
-  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   <h3>書式</h3>
 <pre>
 setPlayingOption(skipBeginning, skipEnding, masterPitch, normalize, exclusive)
@@ -53,7 +53,7 @@ Midiデータの音量が最大(127)になっていない場合、<br>
 </dl>
 <br>
 <font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
-下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出さないとMusicPlayerに反映されません。<br>
 <ul>
 <li><a href="rf_setMidiSkipBeginning.html">setMidiSkipBeginning</a></li>
 <li><a href="rf_setMidiSkipEnding.html">setMidiSkipEnding</a></li>
@@ -80,7 +80,7 @@ while (1) {
   if (getkey(71) == 1) midiExclusive     = !midiExclusive;     // G:エクスクルーシブ送信
   if (getkey(90) == 1) { // Z:再生
     $mplayer.<strong>setPlayingOption</strong>(midiSkipBeginning, midiSkipEnding, midiMasterPitch, midiNormalize, midiExclusive); // 再生オプション設定
-    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.updatePlayInfo(); // 更新
     $mplayer.play($se_test, 1);
   }
   if (getkey(88) == 1) { // X:停止

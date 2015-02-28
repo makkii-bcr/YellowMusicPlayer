@@ -46,8 +46,8 @@ if (bgmArySize == 0) {
     update();
   }
 }
-$mplayer.setGettingPlayerStatus(1000); // 情報取得機能ON(定期的更新なし)
-$mplayer.updatePlayingInfomation();    // 更新
+$mplayer.setGetMode(1000); // 情報取得機能ON(定期的更新なし)
+$mplayer.updatePlayInfo(); // 更新
 while (1) {
   if (getkey(90) == 1) $mplayer.play(bgmAry.get(selectBgm), 1); // Z:繰り返し再生
   if (getkey(88) == 1) $mplayer.stop();                         // X:停止

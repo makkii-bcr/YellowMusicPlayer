@@ -13,6 +13,7 @@
   </h1>
   <hr>
   <h2>Ymplayer.getPlayerPreparation</h2>
+  <h2>Ymplayer.getPlayerReady</h2>
   MusicPlayerが準備中(起動中)かを取得します <br>
   ※ Tonyuのランタイム版のみで動作します<br>
   <br>
@@ -28,6 +29,9 @@
 <pre>
 getPlayerPreparation()
 </pre>
+<pre>
+getPlayerReady()
+</pre>
   <h3>戻り値</h3>
   準備中なら1、準備完了なら0を返します<br>
   <h3>例</h3>
@@ -38,7 +42,7 @@ extends SpriteChar;
 
 $mplayer = new Ymplayer();
 while (1) {
-  if ($mplayer.<strong>getPlayerPreparation()</strong> == 1) {
+  if ($mplayer.<strong>getPlayerReady()</strong> == 1) {
     drawText(100,0,"MusicPlayer準備中…",$clWhite);
   } else {
     drawText(100,0,"MusicPlayer準備完了",$clWhite);

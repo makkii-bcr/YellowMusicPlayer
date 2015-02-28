@@ -151,6 +151,9 @@ function restart(bgmType) {
   else          return  0;
 }
 function updatePlayingInfomation() {
+  return updatePlayInfo();
+}
+function updatePlayInfo() {
   var f;
   
   f = new FileWriter("eff_midi.txt");
@@ -248,13 +251,20 @@ function initPlayingOption() {
   midiExclusive     = 0;
 }
 function initAllPlayingInfomation() {
+  initAllPlayInfo();
+}
+function initAllPlayInfo() {
   initDynamicEffect();
   initDynamicEffectOgg();
   initStaticEffect();
   initStaticEffectOgg();
   initPlayingOption();
 }
+
 function setGettingPlayerStatus(interval) {
+  setGetMode(interval);
+}
+function setGetMode(interval) {
   bgmGettingPlayerStatus = interval;
 }
 function getPlayerStatus(scope) {
@@ -319,6 +329,9 @@ function getPlayerStatus(scope) {
   return 0;
 }
 function getPlayerPreparation() {
+  return getPlayerReady();
+}
+function getPlayerReady() {
   return fileExists("YMPPreparation.dat");
 }
 function getMidiList() {

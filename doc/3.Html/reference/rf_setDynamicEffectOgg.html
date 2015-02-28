@@ -15,7 +15,7 @@
   <h2>Ymplayer.setDynamicEffectOgg</h2>
   Oggの再生中に動的に変更できるエフェクト項目をセットします<br><br>
   変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
-  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   <h3>書式</h3>
 <pre>
 setDynamicEffectOgg(vol, tempo, pan)
@@ -45,7 +45,7 @@ Oggの場合はテンポを変えるとピッチも変化します（音声ファイルであるため）<br>
 </dl>
 <br>
 <font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
-下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を呼び出さないとMusicPlayerに反映されません。<br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出さないとMusicPlayerに反映されません。<br>
 <ul>
 <li><a href="rf_setOggVolume.html">oggVolume</a></li>
 <li><a href="rf_setOggTempo.html">oggTempo</a></li>
@@ -58,7 +58,7 @@ Oggの場合はテンポを変えるとピッチも変化します（音声ファイルであるため）<br>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
-$mplayer.updatePlayingInfomation(); // 更新
+$mplayer.updatePlayInfo(); // 更新
 $mplayer.play($se_test, 0); // Tonyu開発環境版では、プロジェクトを開いてから一度midiを再生しないとoggを再生できない
 wait(20);
 $mplayer.stop();
@@ -77,7 +77,7 @@ while (1) {
   if (getkey(72) > 0 && oggPan    <    1.0) oggPan    += 1 / 64; // H:パン＋
   if (v % 6 == 0) { // １秒間に10回更新
     $mplayer.<strong>setDynamicEffectOgg</strong>(oggVolume, oggTempo, oggPan); // エフェクト設定
-    $mplayer.updatePlayingInfomation(); // 更新
+    $mplayer.updatePlayInfo(); // 更新
   }
   drawText(100,  0, "音量　：" + oggVolume, $clWhite);
   drawText(100, 20, "テンポ：" + oggTempo , $clWhite);

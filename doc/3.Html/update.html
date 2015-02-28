@@ -13,7 +13,23 @@
   </h1>
   <hr>
   <br>
-  <h4>【ver 2.31】</h4>
+  <h4>【ver 2.32】(13/12/09)</h4>
+  <ul>
+   <li>下記の４つのメソッドで、メソッド名を短くした新しいメソッドを追加<br>
+       （動作は旧メソッドと全く同じです。新しいメソッド、旧メソッド、どちらを使用してもかまいません）</li>
+   <ul>
+    <li><a href="reference\rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>　→　updatePlayInfo()</li>
+    <li><a href="reference\rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>　→　setGetMode()</li>
+    <li><a href="reference\rf_getPlayerPreparation.html">getPlayerPreparation()</a>　→　getPlayerReady()</li>
+    <li><a href="reference\rf_initAllPlayingInfomation.html">initAllPlayingInfomation()</a>　→　initAllPlayInfo()</li>
+   </ul>
+   <li>ReadMeの修正</li>
+   <ul>
+    <li>命令リファレンスなどで、新しいメソッドを使用するように記述を変更</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.31】(13/09/12)</h4>
   <ul>
    <li>ジョイスティックの接続状態の更新間隔を調整</li>
    <li><a href="reference\rf_getPlayerStatus.html">getPlayerStatus()</a>の修正</li>
@@ -26,7 +42,7 @@
    </ul>
   </ul>
   <br>
-  <h4>【ver 2.30】</h4>
+  <h4>【ver 2.30】(13/09/05)</h4>
   <ul>
    <li>OSの種類・バージョンを取得できるようにした</li>
    <ul>
@@ -40,13 +56,13 @@
    <li>ReadMeの修正</li>
   </ul>
   <br>
-  <h4>【ver 2.23】</h4>
+  <h4>【ver 2.23】(13/08/12)</h4>
   <ul>
    <li>サンプル「テスト」のリストプレイヤーモードで、Midiデータ内のテンポが変わるMidiを再生すると、Midi再生時間のバーの位置がずれてしまうのを修正</li>
    <li>ReadMeに「トラブルシューティング」のページを追加</li>
   </ul>
   <br>
-  <h4>【ver 2.22】</h4>
+  <h4>【ver 2.22】(13/06/30)</h4>
   <ul>
    <li>起動時にeff_midi.txtファイルが無い場合、Midiの番号がずれるバグを修正</li>
    <li>Ymplayer.tonyuを使っている場合、1.23以降で作られたプロジェクトを、Tonyu 1.22以前の開発環境版から実行すると<br>
@@ -58,13 +74,13 @@
    <li>ReadMe若干修正</li>
   </ul>
   <br>
-  <h4>【ver 2.21】</h4>
+  <h4>【ver 2.21】(13/06/25)</h4>
   <ul>
    <li>サンプル「テスト」のリストプレイヤーモードで演奏が途中で止まることがあるバグを修正</li>
    <li>ReadMe若干修正</li>
   </ul>
   <br>
-  <h4>【ver 2.20】</h4>
+  <h4>【ver 2.20】(13/06/23)</h4>
   <ul>
    <li>
     ディスプレイの解像度を取得できるようにした
@@ -87,12 +103,12 @@
    <li>その他細かいバグ修正・仕様変更</li>
   </ul>
   <br>
-  <h4>【ver 2.11】</h4>
+  <h4>【ver 2.11】(13/06/17)</h4>
   <ul>
    <li>一部ファイルを消し忘れていたので削除</li>
   </ul>
   <br>
-  <h4>【ver 2.10】</h4>
+  <h4>【ver 2.10】(13/06/17)</h4>
   <ul>
    <li>Tonyu 1.22以前でも導入できるように、Tonyu 1.22以前用のYellowMusicPlayerを作った</li>
    <li>set系メソッドを追加</li>
@@ -117,7 +133,7 @@
    <li>ReadMe修正</li>
   </ul>
   <br>
-  <h4>【ver 2.05】</h4>
+  <h4>【ver 2.05】(13/01/04)</h4>
   <ul>
    <li>Windows 98 SE で動作確認して以下のバグを発見したので修正（おそらくWindows XP以前のOSで同様のバグが起きてた可能性がある）</li>
    <ul>
@@ -130,7 +146,7 @@
    <li>YellowMusicPlayer本体のソースファイルは、需要がなさそうなので削除</li>
   </ul>
   <br>
-  <h4>【ver 2.04】</h4>
+  <h4>【ver 2.04】(12/11/03)</h4>
   <ul>
    <li>Ymplayer.tonyuにバグがあったので修正</li>
    <ul>
@@ -139,24 +155,24 @@
    </ul>
   </ul>
   <br>
-  <h4>【ver 2.03】</h4>
+  <h4>【ver 2.03】(12/10/07)</h4>
   <ul>
    <li>ReadMeの文字がChromeで見ると小さくなっていたので修正</li>
   </ul>
   <br>
-  <h4>【ver 2.02】</h4>
+  <h4>【ver 2.02】(12/10/07)</h4>
   <ul>
    <li>ReadMeなど若干修正</li>
   </ul>
   <br>
-  <h4>【ver 2.01】</h4>
+  <h4>【ver 2.01】(12/09/30)</h4>
   <ul>
    <li>Oggの初期の音量・テンポが0だったために、「eff_midi.txt」ファイルで音量・テンポを指定していない場合、Oggの音が聞こえないバグを修正</li>
    <li>MusicPlayer起動時に「eff_midi.txt」ファイルが無い場合、Midiを鳴らさない限り「eff_midi.txt」ファイルを読み込まないため、エフェクトを反映できないバグを修正</li>
    <li>その他、記述間違いを修正</li>
   </ul>
   <br>
-  <h4>【ver 2.00】</h4>
+  <h4>【ver 2.00】(12/09/30)</h4>
   <ul>
    <li>MidiとOgg Vorbisが鳴らせるようになった</li>
    <li>ソフト名を「YellowMusicPlayer」に改変</li>

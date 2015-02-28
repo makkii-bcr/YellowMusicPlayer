@@ -22,7 +22,7 @@
   <a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a>でMidiデータ中のエクスクルーシブ送信のON/OFFを、設定できます。<br>
 
   <br>
-  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>を使うと、設定がMusicPlayerに反映されます。<br>
   <br>
   [Main.tonyu]<br>
 <pre>
@@ -46,7 +46,7 @@ while (1) {
     $mplayer.<strong>setMidiMasterPitch</strong>(midiMasterPitch);     // Midiのマスターピッチ機能のON/OFFを設定
     $mplayer.<strong>setMidiNormalize</strong>(midiNormalize);         // Midiのノーマライズ機能のON/OFFを設定
     $mplayer.<strong>setMidiExclusive</strong>(midiExclusive);         // Midiデータ中のエクスクルーシブ送信のON/OFFを設定
-    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
     $mplayer.play($se_test, 1);
   }
   if (getkey(88) == 1) { // X:停止

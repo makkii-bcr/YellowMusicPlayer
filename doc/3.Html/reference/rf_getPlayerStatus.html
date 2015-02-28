@@ -19,10 +19,10 @@
   <br>
   情報取得する手順を簡単に表すと、<br>
   「<a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a> → 
-  <a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a> → 
+  <a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a> → 
   <a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a> → 
   下記のメソッド」です。<br>
-  ※ 「updatePlayingInfomation() → getPlayerStatus()」の間はMusicPlayerに反映される時間が必要なので、１フレーム以上時間を置く必要があります。<br>
+  ※ 「updatePlayInfo() → getPlayerStatus()」の間はMusicPlayerに反映される時間が必要なので、１フレーム以上時間を置く必要があります。<br>
   <br>
   状態取得機能は、MusicPlayerがfilesフォルダに「YMPStatus.dat」を書き込み、<br>
   そのファイルを読み取ることで行っています。<br>
@@ -130,8 +130,8 @@ $mplayer = new Ymplayer();
 x = -99; y = -99; // 邪魔くさいので画面外へ移動
 
 interval = 1; // 更新頻度
-$mplayer.<strong2>setGettingPlayerStatus</strong2>(interval); // 更新頻度調節
-$mplayer.<strong2>updatePlayingInfomation</strong2>();        // 更新
+$mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+$mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
 
 while (1) {
   // 「Shift + キー」でOgg、ShiftなしでMidi に対して命令する
@@ -147,14 +147,14 @@ while (1) {
   if ((getkey(37)==1 || getkey(37)>5) && interval > 0) { // ←:頻度上げる・無効
     interval -= 1 + (getkey(37)>60)*19;
     if (interval < 0) interval = 0;
-    $mplayer.<strong2>setGettingPlayerStatus</strong2>(interval); // 更新頻度調節
-    $mplayer.<strong2>updatePlayingInfomation</strong2>();        // 更新
+    $mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+    $mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
   }
   if ((getkey(39)==1 || getkey(39)>5) && interval < 1000) { // →:頻度下げる・有効
     interval += 1 + (getkey(39)>60)*19;
     if (interval > 1000) interval = 1000;
-    $mplayer.<strong2>setGettingPlayerStatus</strong2>(interval); // 更新頻度調節
-    $mplayer.<strong2>updatePlayingInfomation</strong2>();        // 更新
+    $mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+    $mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
   }
 
   $mplayer.<strong>getPlayerStatus</strong>(); // 状態取得

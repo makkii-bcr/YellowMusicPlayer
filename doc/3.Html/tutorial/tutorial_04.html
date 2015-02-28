@@ -21,7 +21,7 @@
   <a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a>でキーシフト（移調）を設定できます。<br>
 
   <br>
-  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>を使うと、設定がMusicPlayerに反映されます。<br>
   <br>
   [Main.tonyu]<br>
 <pre>
@@ -45,12 +45,12 @@ while (1) {
     $mplayer.<strong>setMidiFadeInTime</strong>(midiFadeInTime); // フェードイン設定
     $mplayer.<strong>setMidiStartTick</strong>(midiStartTick);   // 開始位置設定（ティック単位）
     $mplayer.<strong>setMidiKeyShift</strong>(midiKeyShift);     // キーシフト設定
-    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
     $mplayer.play($se_test, 1);
   }
   if (getkey(88) == 1) { // X:停止
     $mplayer.<strong>setMidiFadeOutTime</strong>(midiFadeOutTime); // フェードアウト設定
-    $mplayer.<strong>updatePlayingInfomation</strong>(); // 更新
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
     $mplayer.stop();
   }
   
