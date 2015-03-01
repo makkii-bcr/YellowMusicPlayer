@@ -1,5 +1,5 @@
 # YellowMusicPlayer
 
-BGM Player plug-in for Tonyu System.
+BGM Player plug-in software for Tonyu System.
 
-It is possible to play Midi and Ogg Vorbis.
+It is possible to play Ogg Vorbis and Midi.
