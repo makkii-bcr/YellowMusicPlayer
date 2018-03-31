@@ -1317,7 +1317,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 				timeStartSW  = 0;
 			}
 			*/
-			/*
+			
 			sprintf(testStr, 
 			        "oggPoint:[%d] %d oggSect:%d oggSectSize:%d\r\n"
 			        "書き込み[%d] oggFlag:%d %u %u %f\r\n"
@@ -1345,7 +1345,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	                (ov_time_tell(&ovf) - oggPlayingTime - oggPlayTime), (oggFlag - (oggPoint / oggSectSize)) + (1 - oggAllWriteFlag) * oggSect >= 0x80000000
 			        );
 			SetWindowText(hStatic, testStr);
-			*/
+			
 			/*
 			sprintf(testStr, "%d %d %d", oggPoint2, oggPoint2_old, oggBufLoopCnt);
 			SetWindowText(hStatic, testStr);
@@ -1511,7 +1511,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                 dwProcessId,
 		                 playerExeName,
 		                 cnt,
-		                 processExist(playerExeName, osPlatformId, dwProcessId),
+		                 processExist(dwProcessId),
 		                 midiEffectFlag,
 		                 rpsTime - rpsTimeOld
 		                 );
@@ -1603,7 +1603,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	
 	#if DEBUG
-		
+		/*
 		wsprintf(testStr, _T("処理時間 : %d\n１周期の時間 : %d\nコールバック呼び出し間隔 : %d\nたまっている処理数 : %d\nexitCheckFlag : %d\nexitFlag : %d\ncnt : %d"),
 		                timeGetTime() - nowTime, 
 		                timeGetTime() - oldTime, 
@@ -1613,7 +1613,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                exitFlag,
 		                cnt);
 		SetWindowText(hStatic, testStr);
-		
+		*/
 	#endif
 	
 	if (exitFlag) {

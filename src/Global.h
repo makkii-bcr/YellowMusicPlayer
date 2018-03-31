@@ -1,7 +1,7 @@
 /********************************/ #ifndef GLOBAL_H /*****************************/
 #define GLOBAL_H
 
-// Unicodeアプリケーションにするか
+// Unicodeアプリケーションにするか(ONにしても文字コード変換してないのでエラーになる)
 //#define UNICODE
 #include <errno.h>
 #include <tchar.h>
