@@ -1,5 +1,5 @@
 /*
-  YellowMusicPlayer 2.34  -  Copyright (C) 2012 - 2014 マッキー
+  YellowMusicPlayer 2.36  -  Copyright (C) 2012 - 2018 マッキー
 */
 
 #include "Define.h"
@@ -15,6 +15,7 @@ DWORD  timeInst; // 計測
 DWORD  rpsTimeOld = 0;
 DWORD  rpsTime;
 #endif
+TCHAR  testStr[BUF_SIZE_M];
 
 HWND  hWnd;
 DWORD dwTimer = 0;
@@ -179,6 +180,7 @@ unsigned char joistickOnIdAll = 0;
 //double frameSkip_d = 1.0;
 int frameSkipCnt = 0;
 DWORD nowTime, oldTime;
+int timerThreadRestartCnt = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -192,12 +194,16 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 LRESULT CALLBACK WndProc(HWND hWnd , UINT msg , WPARAM wp , LPARAM lp);
 static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dwNo1, DWORD dwNo2);
 //static DWORD WINAPI musicThread(LPVOID hWnd);
-
+#if DEBUG
+static void RPSOutput(void);
+#endif
 
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
 	MSG msg;
 	WNDCLASS winc;
+	TIMECAPS timeCaps;
+	MMRESULT timerCapsResult;
 	//TCHAR teesssttooo[999];
 	
 	winc.style         = (CS_HREDRAW | CS_VREDRAW)*0;
@@ -248,12 +254,17 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 		return 0;
 	}
 	
-	//timeBeginPeriod(1);
+	// タイマー分解能の精度を高める
+	timerCapsResult = timeGetDevCaps(&timeCaps, sizeof(TIMECAPS));
+	if (timerCapsResult == TIMERR_NOERROR) {
+		timeBeginPeriod(timeCaps.wPeriodMin);
+	}
 	
 	// スレッド関係の初期化
 	if (mainInit()) {
 		// 初期化できたらスレッドを実行
-		dwTimer = timeSetEvent(15, 15, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
+		oldTime = timeGetTime();
+		dwTimer = timeSetEvent(15, 0, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
 		//hMusicThread = CreateThread(NULL, 0, musicThread, hWnd, 0, &dwMusicThreadParam);
 	}
 	while (GetMessage(&msg, NULL, 0, 0) > 0){
@@ -261,7 +272,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 		DispatchMessage(&msg);
 	}
 	
-	//timeEndPeriod(1);
+	// タイマー分解能の精度を元に戻す
+	if (timerCapsResult == TIMERR_NOERROR) {
+		timeEndPeriod(timeCaps.wPeriodMin);
+	}
 	
 	return msg.wParam;
 }
@@ -340,12 +354,44 @@ LRESULT CALLBACK WndProc(HWND hWnd , UINT msg , WPARAM wp , LPARAM lp) {
 
 //static DWORD WINAPI musicThread(LPVOID hWnd) {
 static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dwNo1, DWORD dwNo2) {
-	
+	//StopProc();
 	if (threadClose) return ;
 	
 	nowTime = timeGetTime();
 	if (oldTime / 15 == nowTime / 15) frameSkipCnt ++; else frameSkipCnt = 0;
-	if (frameSkipCnt > 2) { Sleep(1); return ; } // 処理されすぎないように制御
+	
+	// PCのスリープ対策
+	if (nowTime - oldTime >= 60000) { // 1分
+		oldTime = nowTime;
+		timeKillEvent(dwTimer);
+		
+		// Midiデバイスを閉じる
+		GGS4CloseDevice();
+		// Midiデバイスを開き直す
+		// Midiデバイスを開く //
+		if (playerDirectMusicMode) {
+			errorFlag = GGS4OpenDevice(GGSDEVICE_DIRECTMUSIC, hWnd); // DirectMusic
+			if (errorFlag != GGSERROR_NOERROR) playerDirectMusicMode = 0; // エラーならDirectMusicをOFFにして再試行
+		}
+		if (playerDirectMusicMode == 0) errorFlag = GGS4OpenDevice(-1, hWnd); // MIDI_MAPPER
+		// 今まで再生していたものを再生する
+		playFlag = 1;
+		if (playerMode == 0 || playerMode == 3) loopFlag = 0;
+		fileDeleteFlag = 0;
+		
+		dwTimer = timeSetEvent(15, 15, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
+		timerThreadRestartCnt ++;
+		return ;
+	}
+	
+	// 処理されすぎないように制御
+	if (frameSkipCnt >= 1) {
+		Sleep(1);
+		#if DEBUG
+		RPSOutput();
+		#endif
+		return ;
+	}
 	
 	//while (windowClose == 0) {
 	
@@ -534,14 +580,14 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		// eff_midi.txt の場所を調べる
 		// eff_midiAddr, eff_midiDir が更新される
 		midiEffectFlag = setEffectFileAddr(bgmStr, 
-                                           eff_midiAddr           , sizeof(eff_midiAddr),
-                                           eff_midiDir            , sizeof(eff_midiDir),
-                                           ogg_sigAddr            , sizeof(ogg_sigAddr),
-                                           defaultTonyuprjFileAddr, sizeof(defaultTonyuprjFileAddr),
-                                           usrFolderAddr          , sizeof(usrFolderAddr),
-                                           midiPlayerStatusAddr   , sizeof(midiPlayerStatusAddr),
+		                                   eff_midiAddr           , sizeof(eff_midiAddr),
+		                                   eff_midiDir            , sizeof(eff_midiDir),
+		                                   ogg_sigAddr            , sizeof(ogg_sigAddr),
+		                                   defaultTonyuprjFileAddr, sizeof(defaultTonyuprjFileAddr),
+		                                   usrFolderAddr          , sizeof(usrFolderAddr),
+		                                   midiPlayerStatusAddr   , sizeof(midiPlayerStatusAddr),
 		                                   YMPPreparationAddr     , sizeof(YMPPreparationAddr)
-                                           );
+		                                   );
 		
 		// eff_midi.txt のディレクトリの位置が変わったらエフェクトを初期化
 		if (memicmp(eff_midiDir_old, eff_midiDir, sizeof(eff_midiDir_old)) != 0) {
@@ -557,7 +603,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		
 		// eff_midiのディレクトリがチェンジしたとき
 		if (eff_midiDirChangeFlag) {
-            
+			
 			// default.tonyuprj を読み込みMidiのパス名を知る or Midiを読み込む
 			beforeReadMidi(usrFolderAddr, defaultTonyuprjFileAddr, midiFileAddrList, &midiFileAddrListLength);
 			
@@ -997,6 +1043,11 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                     GGSPLAY_EXCLUSIVE     * midiExclusive
 		                     ,i, midiStartTick_temp, midiFadeInTime, midiKeyShift);
 		
+		if (errorFlag != 0) {
+			sprintf(testStr, "GGS4Play errorFlag=%d", errorFlag);
+			MessageBox(0,testStr,0,0);
+		}
+		
 		if (errorFlag != 0) goto playEndLabel;
 		
 		playerStatusCnt = 0;
@@ -1190,10 +1241,10 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		if (oggPlayerStatus == STATUS_PLAY) {
 			
 			// バッファ書き込み速度を制御
-			if (oggBufWriteSpeed) k = (int)oggSect / 4;
+			if (oggBufWriteSpeed) k = (int)oggSect / 2;
 			else {
-				if (oggTempo < 1.0) k = 3;                   // テンポが1未満ならスピード = 1
-				else                k = (int)(3 * oggTempo); // テンポが1以上ならスピード = (int)oggTempo
+				if (oggTempo < 1.0) k = 25;                   // テンポが1未満ならスピード = 1
+				else                k = (int)(25 * oggTempo); // テンポが1以上ならスピード = (int)oggTempo
 			}
 			
 			
@@ -1317,7 +1368,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 				timeStartSW  = 0;
 			}
 			*/
-			
+			/*
 			sprintf(testStr, 
 			        "oggPoint:[%d] %d oggSect:%d oggSectSize:%d\r\n"
 			        "書き込み[%d] oggFlag:%d %u %u %f\r\n"
@@ -1336,16 +1387,16 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 			        (oggFlag - (oggPoint / oggSectSize)) + (1 - oggAllWriteFlag) * oggSect, DSBufferDesc.dwBufferBytes, oggBufWriteSpeed, ov_time_tell(&ovf),
 			        oggLoopSeek, oggLoopEndSeek, oggFileLoop,
 			        (double) oggPoint / (waveFormat.nSamplesPerSec * waveFormat.nBlockAlign),
-	                oggStartSeek,                                    // 
-	                oggBufLoopCnt * oggPlayTime,                     // バッファの時間
-	                oggLoopSeek   * oggLoopCnt,                      // ループ始端
-	                - (oggLoopEndSeek == 0.0) * (oggTotalTime * oggLoopCnt),      // ループ終端がない
-	                - (oggLoopEndSeek >  0.0) * ((oggLoopEndSeek) * oggLoopCnt), // ループ終端がある
-	                oggPlayingTimeInt2,
-	                (ov_time_tell(&ovf) - oggPlayingTime - oggPlayTime), (oggFlag - (oggPoint / oggSectSize)) + (1 - oggAllWriteFlag) * oggSect >= 0x80000000
+			        oggStartSeek,                                    // 
+			        oggBufLoopCnt * oggPlayTime,                     // バッファの時間
+			        oggLoopSeek   * oggLoopCnt,                      // ループ始端
+			        - (oggLoopEndSeek == 0.0) * (oggTotalTime * oggLoopCnt),      // ループ終端がない
+			        - (oggLoopEndSeek >  0.0) * ((oggLoopEndSeek) * oggLoopCnt), // ループ終端がある
+			        oggPlayingTimeInt2,
+			        (ov_time_tell(&ovf) - oggPlayingTime - oggPlayTime), (oggFlag - (oggPoint / oggSectSize)) + (1 - oggAllWriteFlag) * oggSect >= 0x80000000
 			        );
 			SetWindowText(hStatic, testStr);
-			
+			*/
 			/*
 			sprintf(testStr, "%d %d %d", oggPoint2, oggPoint2_old, oggBufLoopCnt);
 			SetWindowText(hStatic, testStr);
@@ -1601,21 +1652,6 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	if (exitCheckFlag > 0) exitCheckFlag --; // プロセスチェック中の残り時間を減らす
 	
-	
-	#if DEBUG
-		/*
-		wsprintf(testStr, _T("処理時間 : %d\n１周期の時間 : %d\nコールバック呼び出し間隔 : %d\nたまっている処理数 : %d\nexitCheckFlag : %d\nexitFlag : %d\ncnt : %d"),
-		                timeGetTime() - nowTime, 
-		                timeGetTime() - oldTime, 
-		                nowTime - oldTime, 
-		                frameSkipCnt, 
-		                exitCheckFlag,
-		                exitFlag,
-		                cnt);
-		SetWindowText(hStatic, testStr);
-		*/
-	#endif
-	
 	if (exitFlag) {
 		GGS4Stop(0);
 		oggStop(0);
@@ -1667,6 +1703,14 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 			//if (frameSkip_d > 10.0) frameSkip_d = 10.0;Sleep(1);
 	}*/
 	
+	
+	#if DEBUG
+		
+		RPSOutput();
+		
+	#endif
+	
+	
 	oldTime = nowTime;
 	
 	//}
@@ -1674,4 +1718,20 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	return ;
 }
+
+
+#if DEBUG
+static void RPSOutput(void) {
+	wsprintf(testStr, _T("処理時間 : %d\n１周期の時間 : %d\nコールバック呼び出し間隔 : %d\nたまっている処理数 : %d\nexitCheckFlag : %d\nexitFlag : %d\ncnt : %d\ntimerThreadRestartCnt : %d"),
+	                timeGetTime() - nowTime, 
+	                timeGetTime() - oldTime, 
+	                nowTime - oldTime, 
+	                frameSkipCnt, 
+	                exitCheckFlag,
+	                exitFlag,
+	                cnt,
+	                timerThreadRestartCnt);
+	SetWindowText(hStatic, testStr);
+}
+#endif
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
