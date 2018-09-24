@@ -13,9 +13,9 @@
   </h1>
   <hr>
   <br>
-  YellowMusicPlayerとは、Tonyu付属のMidiPlayerよりも高機能・高性能のMidi,Oggのプレイヤーです。<br>
-  TonyuでMidiとOggの音楽を鳴らすことができます。<br>
-  標準のMidiPlayerよりも、反応も速いです。
+  YellowMusicPlayerとは、Tonyu1用のMidi,Oggプレイヤーです。<br>
+  Tonyu1付属のMidiPlayerよりも、高速で多機能です。<br>
+  Tonyu1でMidiとOgg Vorgisの音楽を鳴らすことができます。<br>
   <h2>特徴</h2>
   <ul>
    <li>MidiとOgg Vorbisが鳴らせます。</li>
@@ -24,7 +24,7 @@
         MP3は特許問題を懸念して、あえて対応させていません。</li>
    </ul>
    <br>
-   <li>YellowMusicPlayerはTonyuの開発環境版・ランタイム版どちらでも導入できます。</li>
+   <li>YellowMusicPlayerはTonyu1の開発環境版・ランタイム版どちらでも導入できます。</li>
    <ul>
     <li>Tonyu開発環境版でOggを鳴らす場合は、Midiを鳴らした後にOggを鳴らすと鳴ります。<br>
         （Midiを鳴らすとプロジェクトの場所(パス)を取得できるため）</li>
@@ -55,13 +55,13 @@
    <li>標準Midiデバイスよりも、音がきれいです（DirectMusicがONの場合）</li>
    <li>反応が速いです</li>
    <li>BGMの切り換えがスムーズに行われます（BGM切換時に無音になる時間が少ない）</li>
-   <li>Windows 7, Vistaでは標準Midiデバイスを使っている場合、リズムパートがならない不具合が解消されます。</li>
+   <li>Windows Vista以降では標準Midiデバイスを使っている場合、リズムパートがならない不具合が解消されます。</li>
    <li>どの環境でも同じ音源で鳴らせます。（XP以前のOSはデフォルト設定ではDirectMusicを使わないため例外）</li>
    <li>標準のMidiプレイヤーや他のMidi,Ogg プレイヤーよりも多彩な表現が可能になります。</li>
   </ul>
   <h2>短所</h2>
   <ul>
-   <li>DirectMusicがONの場合、Windows Vista, 7 では、YellowMusicPlayerの起動に時間がかかるＰＣがあります。<br>
+   <li>DirectMusicがONの場合、Windows Vista以降では、YellowMusicPlayerの起動に時間がかかるＰＣがあります。<br>
        (<a href="tips/tips_02.html">設定</a>でDirectMusicをOFFにすると、起動が速くなります)<br>
        (win7では、Tonyuが起動して大体１～３秒後にBGMが鳴らせるようになるＰＣもあれば、すぐにBGMを鳴らせるＰＣもありました)</li>
    <li>DirectMusicを設定でOFFにした時に、MidiデバイスにTimidity++を使用している場合は、たまにMidiの音色が全てピアノになる場合があります。</li>
@@ -196,11 +196,14 @@
    <li>統合環境：Visual Windows for BC++ (by 安江正樹さん)</li>
    <li>言語：C</li>
    <li>使用したライブラリ等：GuruGuruSMF ver.4.0.6 (by 卯如さん)<br>
-   　　　　　　　　　　：Ogg Vorbis のライブラリ (by Xiph.org Foundation) <a href="copyright_page.html">著作権表示</a></li>
+   　　　　　　　　　　：libogg, libvorbis (by Xiph.org Foundation) <a href="copyright_page.html">著作権表示</a></li>
   </ul>
   <h2>動作確認</h2>
   <ul>
+   <li>Windows 10</li>
+   <li>Windows 8.1</li>
    <li>Windows 7</li>
+   <li>Windows XP</li>
    <li>Windows 2000</li>
    <li>Windows 98 Second Edition</li>
   </ul>

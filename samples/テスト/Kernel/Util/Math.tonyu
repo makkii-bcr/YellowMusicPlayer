@@ -106,6 +106,8 @@ function sign(n){
   return 0;
 }
 
+
+
 function isOdd(n){
   if(!isInt(n)) return null;
   return n%2;
@@ -132,3 +134,74 @@ function randBetweenFloat(i,a){
   if(a==i) return a;
   return i+rnd()*(a-i);
 }
+
+
+//----------w”‘Î”ŠÖ”
+function e() {
+    return 2.718281828459045;
+}
+
+function exp01(x) {  //  0<=x<=1
+    // exp_m(x)= sum i=0..m  (1/i! * x^i)
+    var i, fi,xi,sum;
+    i=0;fi=1; xi=1; sum=0;
+    while (1) {
+        sum+= fi*xi;
+        if (fi*xi<0.000000000000001) break;
+        i++;
+        fi=fi/i;
+        xi=xi*x;
+    }
+    return sum;
+}
+function expP(x) {  // x>0
+    var i,f,res,_e;
+    if (x<=1) return exp01(x);
+    _e=e();
+    i=trunc(x);
+    f=x-i;
+    res=1;
+    while(i>0) {
+        res=res*_e;
+        i--;
+    }
+    return res*exp01(f);
+}
+function exp(x) {
+    if (x>=0) return expP(x);
+    return 1/expP(-x);
+}
+function pow(a,x) {
+    var res;
+    //  a^x   = e^(  ? )     ?=log(a^x) = x log a
+    if (trunc(x)==x) {
+	    res=1;
+	    if (x>0) {
+		    while(x>0) {
+		        res=res*a;
+		        x--;
+		    }
+	    } else {
+		    while(x<0) {
+		        res=res/a;
+		        x++;
+		    }
+	    }
+	    return res;
+    }
+    return exp( x* log(a));
+}
+
+function log(x) {
+    var res,f,m,n;
+    res=0;m=(x-1)/(x+1);f=m;n=1;
+    
+    while(1) {
+        res+=f/n;
+        if (f/n<0.000000000000001) break;
+        f=f*m*m;
+        n+=2;
+    }
+    return res*2;
+}
+

@@ -5,13 +5,13 @@
  <resourcelist name="params">
   <param name="commentID" value="10703150"/>
   <param name="sound_stopOnPageLoad" value="1"/>
-  <param name="savedVersion" value="1260"/>
+  <param name="savedVersion" value="1270"/>
   <param name="sleep_time" value="0"/>
   <param name="mainPage" value="$page_index"/>
   <param name="cond" value="再配布、改造ともに無断で許可"/>
   <param name="title" value="ちょっと音ゲー"/>
   <param name="author" value="マッキー"/>
-  <param name="version" value="1.1"/>
+  <param name="version" value="1.3"/>
   <param name="mail" value=""/>
   <param name="web" value=""/>
  </resourcelist>

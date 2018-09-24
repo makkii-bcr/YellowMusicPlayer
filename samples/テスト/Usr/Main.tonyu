@@ -2,9 +2,9 @@ extends Main2;
 
 if (!$fullScreen) $Window.setDrawMode("A");
 $System.setFrameRate(58, 5);
-$Options.set("sleep_time", 1);
-$mplayer.setDelay(2400);
-$mplayer.setBSize(8000);
+$Options.set("sleep_time", 0);
+$mplayer.setDelay(2500);
+//$mplayer.setBSize(8000);
 $screenWidth  = 640;
 $screenHeight = 480;
 
@@ -393,7 +393,10 @@ while(1) {
       
     }
     
-    if (textVisible >= 2 || (textVisible >= 1 && selectEff == 12)) drawText(275, 70+10*3+18*12, "MusicPlayeró‘Ôæ“¾:" + bgmGettingPlayerStatus, (selectEff != 12)*$clWhite + (selectEff == 12)*$clGreen, 12);
+    if (textVisible >= 2 || (textVisible >= 1 && selectEff == 12)) {
+      if (bgmGettingPlayerStatus == 0) drawText(275, 70+10*3+18*12, "MusicPlayeró‘Ôæ“¾:" + bgmGettingPlayerStatus, (selectEff != 12)*$clWhite + (selectEff == 12)*$clGreen, 12);
+      else                             drawText(275, 70+10*3+18*12, "MusicPlayeró‘Ôæ“¾:" + bgmGettingPlayerStatus + " (" + (bgmGettingPlayerStatus*15) + "ƒ~ƒŠ•b–ˆæ“¾)", (selectEff != 12)*$clWhite + (selectEff == 12)*$clGreen, 12);
+    }
     
     if (!(!bgmGettingPlayerStatus)) {
       if (timeDayOfWeek_old != $mplayer.getTimeDayOfWeek()) {

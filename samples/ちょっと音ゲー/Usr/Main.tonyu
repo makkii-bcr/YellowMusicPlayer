@@ -28,7 +28,7 @@ $screenWidth  = 600;
 $screenHeight = 400;
 $bgcolor = 0;
 $Options.set("sleep_time", 0);
-$mplayer.setDelay(2200);
+$mplayer.setDelay(3000);
 
 // Midi,Ogg関係
 $mplayer = new Ymplayer();
@@ -86,8 +86,8 @@ score = 0;
 noteGetCnt = 0;
 combo = 0;
 
-auto = 0;
-otonasi = 1;
+auto = 1;
+otonasi = 0;
 
 
 // 同じBGMは２回目以降反応が速くなるので、わざと音量0で再生して停める
@@ -105,7 +105,7 @@ for (i = 0; i < 3; i++) {
 
 $mplayer.setDynamicEffect(90,null,null);     // Midi音量変更
 $mplayer.setDynamicEffectOgg(127,null,null); // Ogg音量変更
-$mplayer.setGettingPlayerStatus(1); // 更新頻度を高くする (一秒に10回)
+$mplayer.setGettingPlayerStatus(1); // 更新頻度を高くする (15ミリ秒に１回)
 for (i = 0; i < 3; i++) {
   $mplayer.updatePlayingInfomation(); // エフェクト設定を書き込む
   wait(10);
@@ -132,7 +132,7 @@ while (1) {
   
   
   // 入力関係 ////////////////////////////////////////////////////////////
-  if (getkey(32)==1) auto = !auto;
+  if (getkey(32)==1) {auto = !auto; otonasi=(auto==0); }
   if (getkey(90)==1) btnZ = 1; else btnZ = 0;
   if (getkey(88)==1) btnX = 1; else btnX = 0;
   if (getkey(13)==1) { $projectManager.loadPage($page_index); update(); }
@@ -158,15 +158,15 @@ while (1) {
         //if (frameCnt < playerMidiTime-60) frameCnt +=40;
         //if (frameCnt < playerMidiTime-30) frameCnt +=20;
         //if (frameCnt < playerMidiTime- 8) frameCnt ++;
-        if (frameCnt < playerMidiTime- 6) frameCnt ++;
-        if (frameCnt > playerMidiTime- 5) frameCnt --;
+        if (frameCnt < playerMidiTime- 5) frameCnt ++;
+        if (frameCnt > playerMidiTime- 4) frameCnt --;
         if (frameCnt > playerMidiTime+55) frameCnt -=30;
       } else {
         //if (frameCnt < playerMidiTime-60) frameCnt +=35;
         //if (frameCnt < playerMidiTime-30) frameCnt +=15;
         //if (frameCnt < playerMidiTime-12) frameCnt ++;
-        if (frameCnt < playerMidiTime-11) frameCnt ++;
-        if (frameCnt > playerMidiTime-10) frameCnt --;
+        if (frameCnt < playerMidiTime- 9) frameCnt ++;
+        if (frameCnt > playerMidiTime- 8) frameCnt --;
         if (frameCnt > playerMidiTime+55) frameCnt -=30;
       }
     } else if (selectBGM == 2) {
