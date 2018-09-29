@@ -5,9 +5,9 @@
 
 char *cmdLineStr;
 
-IDirectSound8       *pDS8;
+IDirectSound        *pDS;
 IDirectSoundBuffer  *ptmpBuf   = 0;
-IDirectSoundBuffer8 *pDSBuffer = 0;
+IDirectSoundBuffer  *pDSBuffer = 0;
 DSBUFFERDESC         DSBufferDesc;
 DSCAPS               DSCaps;
 OggVorbis_File       ovf;
@@ -63,18 +63,18 @@ DWORD  oggSect     = 50;
 HANDLE g_hNotificationEvent = NULL;
 DWORD  g_dwNotifyThreadID = 0;
 HANDLE g_hNotifyThread = NULL;
-LPDIRECTSOUNDNOTIFY pDSNotify = NULL;
-DSBPOSITIONNOTIFY   aPosNotify[1];
+//LPDIRECTSOUNDNOTIFY pDSNotify = NULL;
+//DSBPOSITIONNOTIFY   aPosNotify[1];
 HRESULT             hr;
 
 
 static void CALLBACK TimerThreadOgg(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dwNo1, DWORD dwNo2);
 
-BOOL createDS(IDirectSound8 **ppDS8, HWND hWnd);
+BOOL createDS(IDirectSound **ppDS, HWND hWnd);
 BOOL openOggFile(TCHAR *fileName, OggVorbis_File *pOvf, vorbis_info *pOggInfo, WAVEFORMATEX *pWaveFormat);
 BOOL createDSBuffer(DSBUFFERDESC *pDSBufferDesc, WAVEFORMATEX *pWaveFormat,
-                    IDirectSound8 *pDS8, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer8 **ppDSBuffer, int oggPlayTime);
-BOOL InitLock(IDirectSoundBuffer8 *pDSBuffer);
+                    IDirectSound *pDS, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer **ppDSBuffer, int oggPlayTime);
+BOOL InitLock(IDirectSoundBuffer *pDSBuffer);
 
 BOOL oggPlay(TCHAR *fileName, BOOL loop, BOOL fileLoop, double startSeek, double loopSeek, double loopEndSeek, int fadeInTime);
 BOOL oggStop(int fadeOutTime);
@@ -97,10 +97,10 @@ DWORD WINAPI NotificationProc(LPVOID lpParameter);
 
 
 
-BOOL createDS(IDirectSound8 **ppDS8, HWND hWnd) {
+BOOL createDS(IDirectSound **ppDS, HWND hWnd) {
     // DirectSoundの作成
-    if (DirectSoundCreate8(NULL, ppDS8, NULL) != S_OK) return FALSE;
-    if (IDirectSound_SetCooperativeLevel(*ppDS8, hWnd, DSSCL_PRIORITY) != S_OK) return FALSE;
+    if (DirectSoundCreate(NULL, ppDS, NULL) != S_OK) return FALSE;
+    if (IDirectSound_SetCooperativeLevel(*ppDS, hWnd, DSSCL_PRIORITY) != S_OK) return FALSE;
 	
     return TRUE;
 }
@@ -152,7 +152,7 @@ BOOL openOggFile(TCHAR *fileName, OggVorbis_File *pOvf, vorbis_info *pOggInfo, W
 }
 
 BOOL createDSBuffer(DSBUFFERDESC *pDSBufferDesc, WAVEFORMATEX *pWaveFormat,
-                    IDirectSound8 *pDS8, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer8 **ppDSBuffer, int oggPlayTime) {
+                    IDirectSound *pDS, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer **ppDSBuffer, int oggPlayTime) {
 	
     // DirectSoundBuffer情報
     pDSBufferDesc->dwSize          = sizeof(DSBUFFERDESC);
@@ -164,7 +164,7 @@ BOOL createDSBuffer(DSBUFFERDESC *pDSBufferDesc, WAVEFORMATEX *pWaveFormat,
     pDSBufferDesc->guid3DAlgorithm = GUID_NULL;
 	
     // セカンダリバッファ作成
-    if (IDirectSound_CreateSoundBuffer(pDS8, pDSBufferDesc, pptmpBuf, NULL) == DS_OK) {
+    if (IDirectSound_CreateSoundBuffer(pDS, pDSBufferDesc, pptmpBuf, NULL) == DS_OK) {
         IDirectSoundBuffer_QueryInterface(ptmpBuf, &IID_IDirectSoundBuffer, (void**)ppDSBuffer);
     } else {
         return FALSE;
@@ -181,7 +181,7 @@ BOOL createDSBuffer(DSBUFFERDESC *pDSBufferDesc, WAVEFORMATEX *pWaveFormat,
     return TRUE;
 }
 
-BOOL InitLock(IDirectSoundBuffer8 *pDSBuffer) {
+BOOL InitLock(IDirectSoundBuffer *pDSBuffer) {
 	void* AP1 = 0, *AP2 = 0;
 	DWORD AB1 = 0, AB2  = 0;
     
@@ -232,7 +232,7 @@ BOOL oggPlay(TCHAR *fileName, BOOL loop, BOOL fileLoop, double startSeek, double
 		oggFileClear(); // ファイルデータクリア
 		if (!openOggFile(fileName, &ovf, oggInfo, &waveFormat)) return FALSE;    // ファイルオープン
 		if (pDSBuffer) { IDirectSoundBuffer_Release(pDSBuffer); pDSBuffer = 0; } // セカンダリバッファを解放
-		if (!createDSBuffer(&DSBufferDesc, &waveFormat, pDS8, &ptmpBuf, &pDSBuffer, oggPlayTime)) return FALSE; // セカンダリバッファ作成
+		if (!createDSBuffer(&DSBufferDesc, &waveFormat, pDS, &ptmpBuf, &pDSBuffer, oggPlayTime)) return FALSE; // セカンダリバッファ作成
 		oggSectSize = DSBufferDesc.dwBufferBytes / oggSect;
 	} else { // 前のデータが残っているか
 		if (!oggFileRead) return FALSE;

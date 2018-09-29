@@ -58,7 +58,7 @@ BOOL mainInit() {
 	midiPlayerOK = 1;
 	
 	// DirectSoundを初期化
-	if (!createDS(&pDS8, hWnd)) {
+	if (!createDS(&pDS, hWnd)) {
 		deletePreparationFile(); // 準備中であることをTonyuに知らせるファイルを消す
 		PostMessage(hWnd, WM_CLOSE, 0, 0); // 初期化に失敗したら終了
 		return FALSE;

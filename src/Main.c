@@ -1,5 +1,5 @@
 /*
-  YellowMusicPlayer 2.36  -  Copyright (C) 2012 - 2018 マッキー
+  YellowMusicPlayer 2.37  -  Copyright (C) 2012 - 2018 マッキー
 */
 
 #include "Define.h"
@@ -305,7 +305,7 @@ LRESULT CALLBACK WndProc(HWND hWnd , UINT msg , WPARAM wp , LPARAM lp) {
 		if (midiPlayerOK) GGS4Free(); // ダイナミックリンク
 		//if (pDSNotify) IDirectSoundNotify_Release(pDSNotify);
     	if (pDSBuffer) IDirectSoundBuffer_Release(pDSBuffer);
-    	if (pDS8) IDirectSoundBuffer_Release(pDS8);
+    	if (pDS) IDirectSoundBuffer_Release(pDS);
     	oggFileClear();
 		
 		/*

@@ -17,10 +17,10 @@ extern BOOL  windowClose;
 extern BOOL  threadClose;
 extern char *cmdLineStr;
 
-extern IDirectSound8       *pDS8;
+extern IDirectSound        *pDS;
 extern IDirectSoundBuffer  *ptmpBuf;
-extern IDirectSoundBuffer8 *pDSBuffer;
-extern IDirectSoundBuffer8 *pDSBuffer2;
+extern IDirectSoundBuffer  *pDSBuffer;
+extern IDirectSoundBuffer  *pDSBuffer2;
 extern DSBUFFERDESC         DSBufferDesc;
 extern OggVorbis_File       ovf;
 extern vorbis_info         *oggInfo;
@@ -73,8 +73,8 @@ extern int    ogg3FadeOutTime;
 extern HANDLE g_hNotificationEvent;
 extern DWORD  g_dwNotifyThreadID;
 extern HANDLE g_hNotifyThread;
-extern LPDIRECTSOUNDNOTIFY pDSNotify;
-extern DSBPOSITIONNOTIFY   aPosNotify[1];
+//extern LPDIRECTSOUNDNOTIFY pDSNotify;
+//extern DSBPOSITIONNOTIFY   aPosNotify[1];
 extern HRESULT             hr;
 extern BOOL oggDSLoopCnt, oggDSLoopCnt_old;
 
@@ -86,11 +86,11 @@ typedef enum {
 
 
 
-BOOL createDS(IDirectSound8 **ppDS8, HWND hWnd);
+BOOL createDS(IDirectSound **ppDS, HWND hWnd);
 BOOL openOggFile(TCHAR *fileName, OggVorbis_File *pOvf, vorbis_info *pOggInfo, WAVEFORMATEX *pWaveFormat);
 BOOL createDSBuffer(DSBUFFERDESC *pDSBufferDesc, WAVEFORMATEX *pWaveFormat,
-                    IDirectSound8 *pDS8, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer8 **ppDSBuffer, int oggPlayTime);
-BOOL InitLock(IDirectSoundBuffer8 *pDSBuffer);
+                    IDirectSound *pDS, IDirectSoundBuffer **pptmpBuf, IDirectSoundBuffer **ppDSBuffer, int oggPlayTime);
+BOOL InitLock(IDirectSoundBuffer *pDSBuffer);
 BOOL oggPlay(TCHAR *fileName, BOOL loop, BOOL fileLoop, double startSeek, double loopSeek, double loopEndSeek, int fadeInTime);
 BOOL oggStop(int fadeOutTime);
 BOOL oggPause(void);
