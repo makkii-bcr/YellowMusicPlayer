@@ -1,0 +1,34 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.initDynamicEffect</h2>
+  Midiの再生中に動的に変更できる各エフェクト項目をデフォルト値に戻します<br>
+  <br>
+  Ymplayerクラスを new で生成したときに、このメソッドが自動的に呼び出されます<br>
+  (コンストラクタで呼び出しているため)<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+initDynamicEffect()
+</pre>
+下記のように変数がデフォルト値になります<br>
+<ul>
+<li>midiVolume = 127;</li>
+<li>midiTempo  = 1;</li>
+<li>midiPitch  = 0;</li>
+</ul>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

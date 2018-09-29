@@ -1,0 +1,253 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="res/icon.png" align="top">
+   &nbsp;更新履歴&nbsp;
+   <img src="res/icon.png" align="top">
+  </h1>
+  <hr>
+  <br>
+  <h4>【ver 2.36】(18/09/15)</h4>
+  <ul>
+   <li><a href="reference\rf_getOSMajorVersion.html">getOSMajorVersion()</a>, <a href="reference\rf_getOSMinorVersion.html">getOSMinorVersion()</a>でWindows 8.1 と Windows 10 を認識できるように対応</li>
+   <li>Ogg再生時の内部の処理を微修正（かなり古いPC(2000年以前あたり)で少し処理負担が減るかもしれない）</li>
+   <li>YellowMusicPlayerが起動中、タイマー分解能を最高精度にするよう変更</li>
+   <li>「2.サンプル」の「ちょっと音ゲー」をプレイする時、オートプレイの状態で始まるようにした</li>
+  </ul>
+  <br>
+  <h4>【ver 2.35】(14/03/22)</h4>
+  <ul>
+   <li>MzoとMidiを再生すると同時に再生され、どちらか一方が停止できなくなるバグを修正</li>
+   <ul>
+   <li>MzoとMidiを同時に再生できないようにした</li>
+   <li>MidiとOgg、MzoとOggの組み合わせでは同時に再生できる</li>
+   </ul>
+  <li>「2.サンプル」の「テスト」にMzo(M-Tow)音楽を追加</li>
+   <ul>
+   <li>※ Mzo音楽の再生状態の取得はできません</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.34】(14/01/20)</h4>
+  <ul>
+   <li>Windows 8.1でプロセス残りが起きるらしいので、プロセス残りが起きないように修正</li>
+   <li>デフォルトでは、NT系OSでDirectMusicがONになるのを、Vista以降からONになるように仕様変更</li>
+   <ul>
+    <li>XP以前でDirectMusicをONにすると音量が小さく聞こえるため</li>
+   </ul>
+   <li>DirectMusicがONの状態でMidiデバイスが開かない場合、OFFにして再試行する仕様に変更</li>
+   <li>Midiデバイスが開けなかった場合はYellowMusicPlayerを終了していたのを、終了しないように変更</li>
+  </ul>
+  <br>
+  <h4>【ver 2.33】(13/12/31)</h4>
+  <ul>
+   <li>Tonyuの複数起動に対応（Tonyu終了時のみ対応）</li>
+   <ul>
+    <li>同じ実行ファイル(Tonyu.exe等)を複数開いた場合に、YellowMusicPlayerも複数起動するが、<br>
+        １つのTonyuを終了すると、同じ実行ファイルから起動されたYellowMusicPlayerが全て終了してしまう仕様だった</li>
+    <li>１つずつTonyuを終了すると、YellowMusicPlayerも１つずつ終了するようになった</li>
+    <li>ただし、Tonyu終了時のみの対応でBGMの再生などは対応していない<br>
+        （BGMを再生すると全てのYellowMusicPlayerが反応して、同じBGMを再生してしまうことがある）</li>
+   </ul>
+   <li>Tonyu 1.22以前用をTonyu開発環境版でも動作するように対応</li>
+   <ul>
+    <li>ただし、プロジェクトを変更して開く場合はTonyuを再起動する必要がある。（Tonyu起動時に最初に読み込んだプロジェクトしか参照できないため）</li>
+    <li>今までTonyu 1.22以前用は、ランタイム版では正常に動作するが、開発環境版ではプロセスが残ってしまっていた</li>
+   </ul>
+   <li>起動中にDirectMusicのON/OFFを切り替えると、Midiの音量とテンポが初期値に戻されるバグを修正</li>
+   <li>その他、YellowMusicPlayer内部の細かい仕様変更・バグ修正</li>
+   <ul>
+    <li>YellowMusicPlayerの終了条件を変更</li>
+    <li>PCの処理が重くOggのテンポを速くしているときに、Oggの音飛びが発生しにくいように修正</li>
+    <li>PCをスリープして復帰した後、CPU使用率が高くなるバグをおそらく修正</li>
+    <li>Windows98でOggを再生した後にMidiを再生すると、Oggが停止してしまうバグを修正</li>
+    <li>Windows98でDirectMusicをONにしても、システムが不安定にならなくなった</li>
+   </ul>
+   <li>ReadMeの修正</li>
+   <ul>
+    <li>バージョンアップによる記述の修正や細かい修正</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.32】(13/12/09)</h4>
+  <ul>
+   <li>下記の４つのメソッドで、メソッド名を短くした新しいメソッドを追加<br>
+       （動作は旧メソッドと全く同じです。新しいメソッド、旧メソッド、どちらを使用してもかまいません）</li>
+   <ul>
+    <li><a href="reference\rf_updatePlayingInfomation.html">updatePlayingInfomation()</a>　→　updatePlayInfo()</li>
+    <li><a href="reference\rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>　→　setGetMode()</li>
+    <li><a href="reference\rf_getPlayerPreparation.html">getPlayerPreparation()</a>　→　getPlayerReady()</li>
+    <li><a href="reference\rf_initAllPlayingInfomation.html">initAllPlayingInfomation()</a>　→　initAllPlayInfo()</li>
+   </ul>
+   <li>ReadMeの修正</li>
+   <ul>
+    <li>命令リファレンスなどで、新しいメソッドを使用するように記述を変更</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.31】(13/09/12)</h4>
+  <ul>
+   <li>ジョイスティックの接続状態の更新間隔を調整</li>
+   <li><a href="reference\rf_getPlayerStatus.html">getPlayerStatus()</a>の修正</li>
+   <ul>
+    <li><a href="reference\rf_getPlayerStatus.html">getPlayerStatus()</a>の処理が正常に行われたときに、返ってくる戻り値を設定していなかったので修正</li>
+   </ul>
+   <li>ReadMeの修正</li>
+   <ul>
+    <li><a href="reference\rf_getPlayerStatus.html">getPlayerStatus()</a>の説明で、戻り値を書いていなかったのを修正</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.30】(13/09/05)</h4>
+  <ul>
+   <li>OSの種類・バージョンを取得できるようにした</li>
+   <ul>
+    <li><a href="reference\rf_getOSPlatformId.html">getOSPlatformId()</a>, <a href="reference\rf_getOSMajorVersion.html">getOSMajorVersion()</a>, <a href="reference\rf_getOSMinorVersion.html">getOSMinorVersion()</a>を追加</li>
+   </ul>
+   <li>ジョイスティックの接続状態を取得できるようにした</li>
+   <ul>
+    <li><a href="reference\rf_getJoystickOn.html">getJoystickOn()</a>を追加</li>
+   </ul>
+   <li>default.tonyuprjファイルのサイズが大きいと、<a href="reference\rf_getPlayerMidiPlayNo.html">getPlayerMidiPlayNo()</a>の値が狂うバグを修正</li>
+   <li>ReadMeの修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.23】(13/08/12)</h4>
+  <ul>
+   <li>サンプル「テスト」のリストプレイヤーモードで、Midiデータ内のテンポが変わるMidiを再生すると、Midi再生時間のバーの位置がずれてしまうのを修正</li>
+   <li>ReadMeに「トラブルシューティング」のページを追加</li>
+  </ul>
+  <br>
+  <h4>【ver 2.22】(13/06/30)</h4>
+  <ul>
+   <li>起動時にeff_midi.txtファイルが無い場合、Midiの番号がずれるバグを修正</li>
+   <li>Ymplayer.tonyuを使っている場合、1.23以降で作られたプロジェクトを、Tonyu 1.22以前の開発環境版から実行すると<br>
+       MidiPlayerが複数起動されてしまうバグを修正</li>
+   <li>Tonyu 1.22以前用のYmplayer.tonyuでOggが停止できないことがあるバグを修正</li>
+   <li>Ymplayer.tonyuをTonyu 1.23以降と1.22以前で分けていたのを１つにした</li>
+   <li>上記により導入方法が少し変更された</li>
+   <li>サンプル「テスト」の細かいバグ修正</li>
+   <li>ReadMe若干修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.21】(13/06/25)</h4>
+  <ul>
+   <li>サンプル「テスト」のリストプレイヤーモードで演奏が途中で止まることがあるバグを修正</li>
+   <li>ReadMe若干修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.20】(13/06/23)</h4>
+  <ul>
+   <li>
+    ディスプレイの解像度を取得できるようにした
+    <ul>
+     <li><a href="reference/rf_getDisplayWidth.html">getDisplayWidth()</a>, <a href="reference/rf_getDisplayHeight.html">getDisplayHeight()</a>を追加</li>
+    </ul>
+   </li>
+   <li>
+    再生中のOggのファイル名を取得できるようにした
+    <ul>
+     <li><a href="reference/rf_getPlayerOggPlayName.html">getPlayerOggPlayName()</a>を追加</li>
+    </ul>
+   </li>
+   <li><a href="reference/rf_getPlayerMidiPlayNo.html">getPlayerMidiPlayNo()</a>の戻り値が0～255までだったのを0～65535に変更</li>
+   <li><a href="tips/tips_02.html">YellowMusicPlayerの設定</a>にある、Midiキャッシュ機能（Midiファイルをメモリに保持する機能）を廃止した</li>
+   <li>Midiの演奏状態が、演奏開始時に一瞬0(停止状態)になる仕様を0にならないように変更</li>
+   <li>サンプル「テスト」にリストプレイヤーモードを追加（登録されたMidi, Oggを順に再生していきます）</li>
+   <li>サンプル「ちょっと音ゲー」の画面速度を遅くした</li>
+   <li>ReadMeの修正</li>
+   <li>その他細かいバグ修正・仕様変更</li>
+  </ul>
+  <br>
+  <h4>【ver 2.11】(13/06/17)</h4>
+  <ul>
+   <li>一部ファイルを消し忘れていたので削除</li>
+  </ul>
+  <br>
+  <h4>【ver 2.10】(13/06/17)</h4>
+  <ul>
+   <li>Tonyu 1.22以前でも導入できるように、Tonyu 1.22以前用のYellowMusicPlayerを作った</li>
+   <li>set系メソッドを追加</li>
+   <ul>
+    <li>エフェクト関係のメソッドが１つで複数の項目を設定する方式だったものを、１項目ごとにメソッドを新しく作り使いやすくした。<br>
+        今後は新しいメソッドの使用を推奨</li>
+    </ul>
+   <li>get系メソッドを追加</li>
+   <ul>
+    <li>MusicPlayerの情報取得が直接変数を参照する方式だったものを、メソッドから取得できるようにした。<br>
+        今後はメソッドの使用を推奨</li>
+   </ul>
+   <li>Oggを使わない場合でも、起動時にogg_sig.datファイルが生成されて邪魔くさいので、ogg_sig.datファイルがないときは生成しないように修正</li>
+   <li>Player.exeの名前を変えてもファイルを検索して、Tonyuの終了を監視できるようにした
+    <ul>
+     <li>今までPlayer.exeの名前を変えたら、YellowMusicPlayerの設定で実行ファイル名を指定しないと、YellowMusicPlayerのプロセスが残ってしまっていた</li>
+     <li>ファイル検索で実行ファイルを探し出せるようになったので、YellowMusicPlayerの設定をしなくてもプロセス残りしなくなった</li>
+    </ul>
+   </li>
+   <li>ダウンロードパッケージのファイル・フォルダの配置位置を変更</li>
+   <li>サンプル「ミュージックプレイヤー」を削除</li>
+   <li>ReadMe修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.05】(13/01/04)</h4>
+  <ul>
+   <li>Windows 98 SE で動作確認して以下のバグを発見したので修正（おそらくWindows XP以前のOSで同様のバグが起きてた可能性がある）</li>
+   <ul>
+    <li>Oggの現在の再生時間が8秒以降になると狂う</li> 
+    <li>サンプリングレートが44100Hz未満のOggで再生速度が速くなる </li>
+    <li>Tonyu終了時に強制終了ダイアログが表示される </li>
+   </ul>
+   <li>DirectMusicのON/OFFを切り替えると、dlsファイルの登録が解除されてしまうバグを修正</li>
+   <li>ReadMeのリファレンスを用途別に別けた</li>
+   <li>YellowMusicPlayer本体のソースファイルは、需要がなさそうなので削除</li>
+  </ul>
+  <br>
+  <h4>【ver 2.04】(12/11/03)</h4>
+  <ul>
+   <li>Ymplayer.tonyuにバグがあったので修正</li>
+   <ul>
+    <li>戻り値が常に-1(エラー時の値)のメソッドがあった</li>
+    <li>Midiを再生するとOggの一時停止が解除されてしまう等</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.03】(12/10/07)</h4>
+  <ul>
+   <li>ReadMeの文字がChromeで見ると小さくなっていたので修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.02】(12/10/07)</h4>
+  <ul>
+   <li>ReadMeなど若干修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.01】(12/09/30)</h4>
+  <ul>
+   <li>Oggの初期の音量・テンポが0だったために、「eff_midi.txt」ファイルで音量・テンポを指定していない場合、Oggの音が聞こえないバグを修正</li>
+   <li>MusicPlayer起動時に「eff_midi.txt」ファイルが無い場合、Midiを鳴らさない限り「eff_midi.txt」ファイルを読み込まないため、エフェクトを反映できないバグを修正</li>
+   <li>その他、記述間違いを修正</li>
+  </ul>
+  <br>
+  <h4>【ver 2.00】(12/09/30)</h4>
+  <ul>
+   <li>MidiとOgg Vorbisが鳴らせるようになった</li>
+   <li>ソフト名を「YellowMusicPlayer」に改変</li>
+  </ul>
+  <br>
+  <h4>【ver 1.00】</h4>
+  <ul>
+   <li>非公開バージョン</li>
+   <li>ソフト名「YellowMidiPlayer」</li>
+   <li>Midiのみ鳴らせるプレイヤー</li>
+  </ul>
+  <br>
+   <a href="../ReadMe.html">戻る</a>
+  <hr>
+ </body>
+</html>

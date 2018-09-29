@@ -1,0 +1,69 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「音量調節・テンポ調節・ピッチ調節」 (Midi)</h2>
+  これらの設定は、演奏中に動的に変えることができます。<br>
+  <br>
+  <a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a>で音量、<br>
+  <a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a>でテンポ、<br>
+  <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>でピッチを調節できます。<br>
+  <br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  <br>
+  ※ <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>を使うときは、<a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>でマスターピッチ機能をONにしてから再生してください。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.<strong2>setMidiMasterPitch</strong2>(1); // マスターピッチ機能をONにする(setMidiPitch()を使うため)
+$mplayer.<strong>updatePlayInfo</strong>(); // 更新
+$mplayer.play($se_test, 1); // 再生
+midiVolume = 127;
+midiTempo  = 1;
+midiPitch  = 0;
+v = 1;
+while (1) {
+  if (getkey(65) > 0 && midiVolume >     0) midiVolume --;       // A:音量－
+  if (getkey(83) > 0 && midiVolume <   127) midiVolume ++;       // S:音量＋
+  if (getkey(68) > 0 && midiTempo  >   0.1) midiTempo  -= 0.125; // D:テンポ－
+  if (getkey(70) > 0 && midiTempo  <   8  ) midiTempo  += 0.125; // F:テンポ＋
+  if (getkey(71) > 0 && midiPitch  > -8192) midiPitch  -= 64;    // G:ピッチ－
+  if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ピッチ＋
+  if (v % 6 == 0) { // １秒間に10回更新
+    $mplayer.<strong>setMidiVolume</strong>(midiVolume); // 音量設定
+    $mplayer.<strong>setMidiTempo</strong>(midiTempo);   // テンポ設定
+    $mplayer.<strong>setMidiPitch</strong>(midiPitch);   // ピッチ設定
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
+  }
+  drawText(100,  0, "音量　：" + midiVolume, $clWhite);
+  drawText(100, 20, "テンポ：" + midiTempo , $clWhite);
+  drawText(100, 40, "ピッチ：" + midiPitch , $clWhite);
+  v ++;
+  update();
+}
+</pre>
+  <br>
+  メソッドの詳細<br>
+  <ul>
+   <li><a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a></li>
+   <li><a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a></li>
+   <li><a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

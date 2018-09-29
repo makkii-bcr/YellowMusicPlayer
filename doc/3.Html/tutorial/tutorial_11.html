@@ -1,0 +1,56 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「再生・停止」 (Ogg)</h2>
+  ※ 「test.mid」と「test.ogg」を用意して、「test.mid」はあらかじめTonyuで登録しておいてください。<br>
+  　　「test.ogg」はプロジェクトのフォルダに置いてください。（default.tonyuprjがあるフォルダ）<br>
+  　　Tonyu開発環境版では、プロジェクトを開いてから一度でもMidiを鳴らさないと、Oggが鳴りません。<br>
+  　　Tonyuランタイム版では、Oggから再生しても鳴ります。<br>
+  <br>
+  Ymplayerを使ってOggの再生・停止をします。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer(); // $mplayerをYmplayerで上書き
+$mplayer.play($se_test); // Tonyu開発環境版で鳴るようにまずMidiを鳴らしておく
+wait(20);
+$mplayer.stop(); // 停止
+while (1) {
+  if (getkey(90) == 1) $mplayer.<strong>play</strong>("test.ogg" ,1); // Z:再生
+  if (getkey(88) == 1) $mplayer.<strong>stop</strong>();              // X:停止
+  
+  update();
+}
+</pre>
+  <br>
+  Midiと違うのは、play() の１番目の引数が文字列(ファイル名)になったことです。<br>
+  play() の内部では、サウンドオブジェクト($se_testなど) か 文字列 かを判断して、<br>
+  サウンドオブジェクトだったらMidiと判断し、文字列だったらOggと判断します。<br>
+  <br>
+  ※ 「$mplayer.play("test.mid");」のような使い方はできません。<br>
+  <br>
+  stop() は MidiとOggの両方に対して、命令が実行されます。<br>
+  stop(2) にすると、Oggに対してのみ命令が実行されます。<br>
+  <br>
+  以下のページに詳しい使い方が載っています。<br>
+  <ul>
+   <li><a href="../reference/rf_play.html">play()</a></li>
+   <li><a href="../reference/rf_stop.html">stop()</a></li>
+  </ul>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

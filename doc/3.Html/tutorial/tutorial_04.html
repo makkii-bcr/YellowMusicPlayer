@@ -1,0 +1,76 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;チュートリアル&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>使ってみる「フェードイン再生・フェードアウト停止・演奏開始位置指定・キーシフト」 (Midi)</h2>
+  これらの設定は、演奏前・停止前に設定します。<br>
+  <br>
+  <a href="../reference/rf_setMidiFadeInTime.html">setMidiFadeInTime()</a>でフェードイン、<br>
+  <a href="../reference/rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a>でフェードアウト、<br>
+  <a href="../reference/rf_setMidiStartTick.html">setMidiStartTick()</a>で演奏開始位置、<br>
+  <a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a>でキーシフト（移調）を設定できます。<br>
+
+  <br>
+  上記のメソッドを使った後に、<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>を使うと、設定がMusicPlayerに反映されます。<br>
+  <br>
+  [Main.tonyu]<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+midiFadeOutTime = 0;
+midiFadeInTime  = 0;
+midiKeyShift    = 0;
+midiStartTick   = 0;
+while (1) {
+  if (getkey(65) > 0 && midiFadeInTime  > 0) midiFadeInTime  -= 50;  // A:フェードイン－
+  if (getkey(83) > 0)                        midiFadeInTime  += 50;  // S:フェードイン＋
+  if (getkey(68) > 0 && midiFadeOutTime > 0) midiFadeOutTime -= 50;  // D:フェードアウト－
+  if (getkey(70) > 0)                        midiFadeOutTime += 50;  // F:フェードアウト＋
+  if (getkey(71) > 0 && midiStartTick   > 0) midiStartTick   -= 100; // G:開始ティック－
+  if (getkey(72) > 0)                        midiStartTick   += 100; // H:開始ティック＋
+  if (getkey(74) % 5 == 1)                   midiKeyShift    --;     // J:キーシフト－
+  if (getkey(75) % 5 == 1)                   midiKeyShift    ++;     // K:キーシフト＋
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setMidiFadeInTime</strong>(midiFadeInTime); // フェードイン設定
+    $mplayer.<strong>setMidiStartTick</strong>(midiStartTick);   // 開始位置設定（ティック単位）
+    $mplayer.<strong>setMidiKeyShift</strong>(midiKeyShift);     // キーシフト設定
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
+    $mplayer.play($se_test, 1);
+  }
+  if (getkey(88) == 1) { // X:停止
+    $mplayer.<strong>setMidiFadeOutTime</strong>(midiFadeOutTime); // フェードアウト設定
+    $mplayer.<strong>updatePlayInfo</strong>(); // 更新
+    $mplayer.stop();
+  }
+  
+  drawText(100,  0, "フェードイン　：" + midiFadeInTime , $clWhite);
+  drawText(100, 20, "フェードアウト：" + midiFadeOutTime, $clWhite);
+  drawText(100, 40, "開始位置　　　：" + midiStartTick  , $clWhite);
+  drawText(100, 60, "キーシフト　　：" + midiKeyShift   , $clWhite);
+  update();
+}
+</pre>
+  <br>
+  メソッドの詳細<br>
+  <ul>
+   <li><a href="../reference/rf_setMidiFadeInTime.html">setMidiFadeInTime()</a></li>
+   <li><a href="../reference/rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a></li>
+   <li><a href="../reference/rf_setMidiStartTick.html">setMidiStartTick()</a></li>
+   <li><a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a></li>
+  </ul>
+  <br>
+  <a href="../tutorial.html">戻る</a>
+  <hr>
+ </body>
+</html>

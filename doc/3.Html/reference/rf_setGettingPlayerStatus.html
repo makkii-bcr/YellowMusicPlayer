@@ -1,0 +1,53 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setGettingPlayerStatus</h2>
+  <h2>Ymplayer.setGetMode</h2>
+  MusicPlayerの状態取得機能を有効・無効にします<br>
+  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を使う場合に、有効にします<br>
+  <br>
+  有効にするとMusicPlayerが書き込み処理を行います<br>
+  filesフォルダに「YMPStatus.dat」が書き込まれます<br>
+  <br>
+  書き込むタイミングは、Midi, Ogg の再生・停止・一時停止・一時停止から再開が行われた場合と、<br>
+  下記の引数intervalを1～999にしたときは、定期的に書き込むようになります<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
+<pre>
+setGettingPlayerStatus(interval)
+</pre>
+<pre>
+setGetMode(interval)
+</pre>
+<dl>
+<dt>interval</dt>
+<dd>0にすると無効、<br>
+<br>
+1～999にすると有効で、MusicPlayerが定期的に情報を書き込みます<br>
+値が小さいほど、書き込みの頻度が多くなります<br>
+※ 66.66 / interval を計算すると、一秒間に書き込みが行われる回数 <br>
+　　interval / 66.66 を計算すると、書き込みを行う間隔（秒単位）がわかります <br>
+　　1で15ミリ秒毎、2で30ミリ秒毎、…、の頻度で書き込みを行います<br>
+<br>
+1000にすると有効ですが、定期的な書き込みは行われません<br>
+Midi, Ogg の再生・停止・一時停止・一時停止から再開の時のみ、書き込みが行われます</dd>
+</dl>
+  <h3>例</h3>
+  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を参照<br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

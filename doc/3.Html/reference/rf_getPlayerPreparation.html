@@ -1,0 +1,57 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.getPlayerPreparation</h2>
+  <h2>Ymplayer.getPlayerReady</h2>
+  MusicPlayerが準備中(起動中)かを取得します <br>
+  ※ Tonyuのランタイム版のみで動作します<br>
+  <br>
+  DirectMusic がONの場合は、Windows Vista以降のOSで、ＰＣによってはDirectMusicの準備に時間がかかる場合があります。<br>
+  つまり、Tonyuが起動しても、すぐにMidi,Oggを再生できない場合があるので、この機能を入れました。<br>
+  <br>
+  準備中であることを知らせるためのファイルを、書き込むようにしています。<br>
+  準備中の場合、filesフォルダに「YMPPreparation.dat」が書き込まれます。<br>
+  準備が完了したときに、MusicPlayerが「YMPPreparation.dat」を削除します。<br>
+  <br>
+  ※ 起動自体を早くしたいのなら<a href="../tips/tips_02.html">設定</a>でDirectMusicをOFFにしてください。<br>
+  <h3>書式</h3>
+<pre>
+getPlayerPreparation()
+</pre>
+<pre>
+getPlayerReady()
+</pre>
+  <h3>戻り値</h3>
+  準備中なら1、準備完了なら0を返します<br>
+  <h3>例</h3>
+※ ランタイム版でしか動作しません。<br>
+　 準備がすぐに終わってしまう環境もあります<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+while (1) {
+  if ($mplayer.<strong>getPlayerReady()</strong> == 1) {
+    drawText(100,0,"MusicPlayer準備中…",$clWhite);
+  } else {
+    drawText(100,0,"MusicPlayer準備完了",$clWhite);
+  }
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

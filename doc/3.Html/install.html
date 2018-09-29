@@ -1,0 +1,59 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="res/icon.png" align="top">
+   &nbsp;導入方法&nbsp;
+   <img src="res/icon.png" align="top">
+  </h1>
+  <hr>
+  <br>
+  Midiの再生・停止だけ使う場合は<strong2>「YellowMusicPlayerの導入」</strong2>のみ行ってください。<br>
+  YellowMusicPlayer独自の機能を使う場合は<strong2>「YellowMusicPlayerの導入」</strong2>と<strong2>「Ymplayer.tonyuの導入」</strong2>を行ってください。<br>
+  <font color="#FF0000">Tonyuのバージョンによって導入するファイルが異なります。</font>間違えないように気を付けてください。<br>
+  <br>
+  <h2>YellowMusicPlayerの導入</h2>
+  <ol>
+   <li>「1.必要なファイル」→「1.ソフト本体(Tonyu1.23以降用)」フォルダを開く<br>
+   <font color="666666">※ Tonyu 1.22以前に導入する場合は「3.ソフト本体(Tonyu1.22以前用)」フォルダを開く</font></li><br>
+   <img src="res/in_01.png" alt="フォルダを開く" width="1000" height="200"><br><br><br>
+   <li>３つの項目があるので、すべてを選択してコピーする</li><br>
+   <img src="res/in_02.png" alt="コピー" width="300" height="200"><br><br><br>
+   <li>YellowMusicPlayerを導入したいTonyuランタイム版または開発環境版のKernelフォルダを開き、そこへ貼り付ける<br>
+       （上書き・統合はすべて「はい」）</li><br>
+   <img src="res/in_03.png" alt="貼り付け" width="1002" height="240"><br><br>
+   「MidiPlayer2.exe」のアイコンが黄色に変わればＯＫ<br>
+   <font color="666666">Tonyu 1.22以前では「MidiPlay.exe」のアイコンが黄色に変わればＯＫ</font><br>
+    ※　右クリックする場合、フォルダを選択した状態で貼り付けしないように注意！（選択したフォルダ内に貼り付けされてしまいます）<br>
+  </ol>
+  <br>
+  <h2>Ymplayer.tonyuの導入</h2>
+  <ol>
+   <li>「1.必要なファイル」→「2.Ymplayerクラス」フォルダを開く</li><br>
+   <img src="res/in_11.png" alt="フォルダを開く" width="1000" height="200"><br><br><br>
+   <li>「Ymplayer.tonyu」ファイルがあるのでコピーする</li><br>
+   <img src="res/in_12.png" alt="コピー" width="300" height="200"><br><br><br>
+   <li>YellowMusicPlayerの機能を使いたいゲームプロジェクトのフォルダを開き、そこへ貼り付ける</li><br>
+   <img src="res/in_13.png" alt="貼り付け" width="1000" height="240"><br>
+   ※　画像はTonyuのサンプル「Ribbon」に導入する例です<br><br><br>
+   <li>先ほどのゲームプロジェクトをTonyuの開発環境版で開く</li><br>
+   <li>「オブジェクト」→「新規」を開く</li><br>
+   <img src="res/in_14.png" alt="新規オブジェクト" width="289" height="232"><br><br><br>
+   <li>「オブジェクトを作成する」のチェックをはずし、クラス名の欄に「Ymplayer」と打ち込み、OKを押す</li><br>
+   <img src="res/in_15.png" alt="新規オブジェクトウィンドウ" width="306" height="302"><br><br><br>
+  </ol>
+  あとは、プログラム内でYmplayerクラスのオブジェクトを生成し、<br>
+  そのオブジェクトからメソッドを使えば、YellowMusicPlayerの機能を使うことができます。<br>
+  <br>
+  オブジェクトを生成する際、「$mplayer = new Ymplayer();」とすると、<br>
+  今まで$mplayerを使っていたプログラムも改変せずにそのまま使えるので便利です。<br>
+  <br>
+  <a href="../ReadMe.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setMidiKeyShift</h2>
+  Midiをキーシフト（移調）します。<br>
+  Midiの音の高さが変化します。<br>
+  <br>
+  ピッチと似ていますが、再生中に変更はできず、半音単位でしか音の高低を変えることはできません<br>
+  しかし、ピッチでは音が変になる場合があるのに対し、こちらは音が変になることはありません<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setMidiKeyShift(keyShift)
+</pre>
+<dl>
+<dt>keyShift</dt>
+<dd>キーシフト（移調）するなら0以外の数値(1で半音、12で1オクターブ移調)、しないなら0</dd>
+</dl>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,238 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.getPlayerStatus</h2>
+  MusicPlayerから、「Midi,Oggの状態」「再生中のMidi,Oggの情報」「コンピュータ内の日付と時刻」<br>
+  「ディスプレイの解像度」「OSのバージョン」「ジョイスティックの接続状態」が取得できます。<br>
+  ※ このメソッドを使う前に<a href="rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a>で、MusicPlayerの状態取得機能を有効にする必要があります<br>
+  <br>
+  情報取得する手順を簡単に表すと、<br>
+  「<a href="../reference/rf_setGettingPlayerStatus.html">setGettingPlayerStatus()</a> → 
+  <a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a> → 
+  <a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a> → 
+  下記のメソッド」です。<br>
+  ※ 「updatePlayInfo() → getPlayerStatus()」の間はMusicPlayerに反映される時間が必要なので、１フレーム以上時間を置く必要があります。<br>
+  <br>
+  状態取得機能は、MusicPlayerがfilesフォルダに「YMPStatus.dat」を書き込み、<br>
+  そのファイルを読み取ることで行っています。<br>
+  このメソッドを呼び出すと、「YMPStatus.dat」を読み込みます<br>
+  <br>
+  ※ 状態取得した情報は、ファイル読み書きのタイムラグにより少し遅れることがあります。<br>
+  　　setGettingPlayerStatus()の引数を大きい値にすると、その分タイムラグが大きくなります<br>
+  <br>
+  情報は下記の<strong2>メソッド</strong2>から取得してください<br>
+  <font color="FF0000">ver2.10から、変数を直接参照する方法は非推奨になりました</font><br>
+  <br>
+  <h3>書式</h3>
+<pre>
+getPlayerStatus(scope)
+</pre>
+<dl>
+<dt>scope</dt>
+<dd>情報取得する項目の範囲<br>
+0やnullを設定、または省略すると、すべての項目を取得します<br>
+<br>
+scope が 1以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getPlayerMidiStatus.html">getPlayerMidiStatus()</a>　　　(Midiは再生中か(0:停止中 1:再生中 2:一時停止中))</li>
+  <li><a href="rf_getPlayerMidiPlayNo.html">getPlayerMidiPlayNo()</a>　　　(再生中のMidi番号)</li>
+  <li><a href="rf_getPlayerMidiTempo.html">getPlayerMidiTempo()</a>　　　(現在のMidiのテンポ)</li>
+  <li><a href="rf_getPlayerMidiTick.html">getPlayerMidiTick()</a>　　　(現在のMidiのティック)</li>
+  <li><a href="rf_getPlayerMidiTime.html">getPlayerMidiTime()</a>　　　(Midiデータ内での現在の演奏時間)</li>
+  <li><a href="rf_getPlayerMidiLoopCount.html">getPlayerMidiLoopCount()</a>　　　(Midiを再生してからのループ回数)</li>
+  <li><a href="rf_getMidiTimeBase.html">getMidiTimeBase()</a>　　　(演奏中のMidiの、ベースカウント)</li>
+  <li><a href="rf_getMidiTotalTick.html">getMidiTotalTick()</a>　　　(演奏中のMidiの、総ティック)</li>
+  <li><a href="rf_getMidiTotalTime.html">getMidiTotalTime()</a>　　　(演奏中のMidiの、総演奏時間(ミリ秒))</li>
+  <li><a href="rf_getMidiFirstNoteTick.html">getMidiFirstNoteTick()</a>　　　(演奏中のMidiの、最初の発音ティック)</li>
+  <li><a href="rf_getMidiFirstNoteTime.html">getMidiFirstNoteTime()</a>　　　(演奏中のMidiの、最初の発音の時間(ミリ秒))</li>
+  <li><a href="rf_getMidiLastNoteTick.html">getMidiLastNoteTick()</a>　　　(演奏中のMidiの、最後の発音ティック)</li>
+  <li><a href="rf_getMidiLastNoteTime.html">getMidiLastNoteTime()</a>　　　(演奏中のMidiの、最後の発音の時間(ミリ秒))</li>
+  <li><a href="rf_getMidiLoopTick.html">getMidiLoopTick()</a>　　　(演奏中のMidiの、CC#111のティック)</li>
+  <li><a href="rf_getMidiLoopTime.html">getMidiLoopTime()</a>　　　(演奏中のMidiの、CC#111の位置(ミリ秒))</li>
+</ul>
+<br>
+scope が 2以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getPlayerOggStatus.html">getPlayerOggStatus()</a>　　　(Oggは再生中か(0:停止中 1:再生中 2:一時停止中))</li>
+  <li><a href="rf_getPlayerOggPlayName.html">getPlayerOggPlayName()</a>　　　(再生中のOggのファイル名)</li>
+  <li><a href="rf_getPlayerOggTime.html">getPlayerOggTime()</a>　　　(Oggデータ内での現在の再生時間(ミリ秒))</li>
+  <li><a href="rf_getPlayerOggLoopCount.html">getPlayerOggLoopCount()</a>　　　(Oggを再生してからのループ回数)</li>
+  <li><a href="rf_getOggChannels.html">getOggChannels()</a>　　　(再生中のOggの、チャンネル数)</li>
+  <li><a href="rf_getOggSamplingRate.html">getOggSamplingRate()</a>　　　(再生中のOggの、サンプリングレート)</li>
+  <li><a href="rf_getOggTotalTime.html">getOggTotalTime()</a>　　　(再生中のOggの、総再生時間(ミリ秒))</li>
+  <li><a href="rf_getOggTotalSamples.html">getOggTotalSamples()</a>　　　(再生中のOggの、総サンプリング数)</li>
+  <li><a href="rf_getOggFileLoopStart.html">getOggFileLoopStart()</a>　　　(再生中のOggの、Oggファイル中にあるループ始端)</li>
+  <li><a href="rf_getOggFileLoopEnd.html">getOggFileLoopEnd()</a>　　　(再生中のOggの、Oggファイル中にあるループ終端)</li>
+</ul>
+<br>
+scope が 3以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getTimeHour.html">getTimeHour()</a>　　　(現在の時刻「時」)</li>
+  <li><a href="rf_getTimeMinute.html">getTimeMinute()</a>　　　(現在の時刻「分」)</li>
+  <li><a href="rf_getTimeSecond.html">getTimeSecond()</a>　　　(現在の時刻「秒」)</li>
+  <li><a href="rf_getTimeMilliSecond.html">getTimeMilliSecond()</a>　　　(現在の時刻「ミリ秒」)</li>
+  <li><a href="rf_getTimeYear.html">getTimeYear()</a>　　　(現在の日付「年」)</li>
+  <li><a href="rf_getTimeMonth.html">getTimeMonth()</a>　　　(現在の日付「月」)</li>
+  <li><a href="rf_getTimeDay.html">getTimeDay()</a>　　　(現在の日付「日」)</li>
+  <li><a href="rf_getTimeDayOfWeek.html">getTimeDayOfWeek()</a>　　　(現在の日付「曜日」（0:日,1:月,2:火,…,6:土）)</li>
+</ul>
+<br>
+scope が 4以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getDisplayWidth.html">getDisplayWidth()</a>　　　(ディスプレイの解像度「幅」)</li>
+  <li><a href="rf_getDisplayHeight.html">getDisplayHeight()</a>　　　(ディスプレイの解像度「高さ」)</li>
+</ul>
+<br>
+scope が 5以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getOSPlatformId.html">getOSPlatformId()</a>　　　(OSの種類（NT系か9x系か）)</li>
+  <li><a href="rf_getOSMajorVersion.html">getOSMajorVersion()</a>　　　(OSの「メジャーバージョン」)</li>
+  <li><a href="rf_getOSMinorVersion.html">getOSMinorVersion()</a>　　　(OSの「マイナーバージョン」)</li>
+</ul>
+<br>
+scope が 6以上 のとき取得する項目<br>
+<ul>
+  <li><a href="rf_getJoystickOn.html">getJoystickOn()</a>　　　(ジョイスティックの接続状態)</li>
+</ul>
+<br>
+</dd>
+</dl>
+  <h3>戻り値</h3>
+  情報取得に成功したら0<br>
+  失敗したら-1<br>
+<br>
+<br>
+  例１を実際に実行するとわかりやすいと思います。<br>
+  <br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+  （全ての項目を表示するためプログラムが長くなってしまいましたが、長いだけなので、そこまで難しくありません）<br>
+  ←・→キーで更新頻度を調節すると、情報が取得できます<br>
+  Z, X, C, V キー：Midiの 再生, 停止, 一時停止, 再開、　Shiftキーを押しながらだとOggに対して命令する。<br>
+<pre>
+extends SpriteChar;
+
+setFont("ＭＳ ゴシック"); // 文字をそろえやすくなる
+$mplayer = new Ymplayer();
+
+x = -99; y = -99; // 邪魔くさいので画面外へ移動
+
+interval = 1; // 更新頻度
+$mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+$mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
+
+while (1) {
+  // 「Shift + キー」でOgg、ShiftなしでMidi に対して命令する
+  if (getkey(16) > 0) bgmType = 2; else bgmType = 1;
+  if (getkey(90) == 1) {
+    if (bgmType == 1) $mplayer.play($se_test  , 1); // Z:繰り返し再生
+    else              $mplayer.play("test.ogg", 1); // 
+  }
+  if (getkey(88) == 1) $mplayer.stop(bgmType);      // X:停止
+  if (getkey(67) == 1) $mplayer.pause(bgmType);     // C:一時停止
+  if (getkey(86) == 1) $mplayer.restart(bgmType);   // V:一時停止から再開
+
+  if ((getkey(37)==1 || getkey(37)>5) && interval > 0) { // ←:頻度上げる・無効
+    interval -= 1 + (getkey(37)>60)*19;
+    if (interval < 0) interval = 0;
+    $mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+    $mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
+  }
+  if ((getkey(39)==1 || getkey(39)>5) && interval < 1000) { // →:頻度下げる・有効
+    interval += 1 + (getkey(39)>60)*19;
+    if (interval > 1000) interval = 1000;
+    $mplayer.<strong2>setGetMode</strong2>(interval); // 更新頻度調節
+    $mplayer.<strong2>updatePlayInfo</strong2>();     // 更新
+  }
+
+  $mplayer.<strong>getPlayerStatus</strong>(); // 状態取得
+  // ↑毎回呼び出す必要はありません
+  // ５フレームに１回など読み込み頻度を少なくすることを勧めます
+
+  drawText(0, 11* 0 , "Midi演奏状態                            ：" + $mplayer.<strong2>getPlayerMidiStatus</strong2>()   , $clWhite, 9);
+  drawText(0, 11* 1 , "再生中のMidi番号                        ：" + $mplayer.<strong2>getPlayerMidiPlayNo</strong2>()   , $clWhite, 9);
+  drawText(0, 11* 2 , "Midiデータ内のテンポ                    ：" + $mplayer.<strong2>getPlayerMidiTempo</strong2>()    , $clWhite, 9);
+  drawText(0, 11* 3 , "現在のMidiのティック                    ：" + $mplayer.<strong2>getPlayerMidiTick</strong2>()     , $clWhite, 9);
+  drawText(0, 11* 4 , "Midiデータ内での現在の演奏時間(ミリ秒)  ：" + $mplayer.<strong2>getPlayerMidiTime</strong2>()     , $clWhite, 9);
+  drawText(0, 11* 5 , "Midiを再生してからのループ回数          ：" + $mplayer.<strong2>getPlayerMidiLoopCount</strong2>(), $clWhite, 9);
+  drawText(0, 11* 6 , "演奏中のMidiの、ベースカウント          ：" + $mplayer.<strong2>getMidiTimeBase</strong2>()       , $clWhite, 9);
+  drawText(0, 11* 7 , "演奏中のMidiの、総ティック              ：" + $mplayer.<strong2>getMidiTotalTick</strong2>()      , $clWhite, 9);
+  drawText(0, 11* 8 , "演奏中のMidiの、総演奏時間(ミリ秒)      ：" + $mplayer.<strong2>getMidiTotalTime</strong2>()      , $clWhite, 9);
+  drawText(0, 11* 9 , "演奏中のMidiの、最初の発音ティック      ：" + $mplayer.<strong2>getMidiFirstNoteTick</strong2>()  , $clWhite, 9);
+  drawText(0, 11*10 , "演奏中のMidiの、最初の発音の時間(ミリ秒)：" + $mplayer.<strong2>getMidiFirstNoteTime</strong2>()  , $clWhite, 9);
+  drawText(0, 11*11 , "演奏中のMidiの、最後の発音ティック      ：" + $mplayer.<strong2>getMidiLastNoteTick</strong2>()   , $clWhite, 9);
+  drawText(0, 11*12 , "演奏中のMidiの、最後の発音の時間(ミリ秒)：" + $mplayer.<strong2>getMidiLastNoteTime</strong2>()   , $clWhite, 9);
+  drawText(0, 11*13 , "演奏中のMidiの、CC#111のティック        ：" + $mplayer.<strong2>getMidiLoopTick</strong2>()       , $clWhite, 9);
+  drawText(0, 11*14 , "演奏中のMidiの、CC#111の位置(ミリ秒)    ：" + $mplayer.<strong2>getMidiLoopTime</strong2>()       , $clWhite, 9);
+
+  drawText(0, 11*16, "Ogg演奏状態                          ：" + $mplayer.<strong2>getPlayerOggStatus</strong2>()   , $clWhite, 9);
+  drawText(0, 11*17, "再生中のOggのファイル名              ：" + $mplayer.<strong2>getPlayerOggPlayName</strong2>() , $clWhite, 9);
+  drawText(0, 11*18, "Oggデータ内での現在の再生時間(ミリ秒)：" + $mplayer.<strong2>getPlayerOggTime</strong2>()     , $clWhite, 9);
+  drawText(0, 11*19, "Oggを再生してからのループ回数        ：" + $mplayer.<strong2>getPlayerOggLoopCount</strong2>(), $clWhite, 9);
+  drawText(0, 11*20, "再生中のOggの、チャンネル数          ：" + $mplayer.<strong2>getOggChannels</strong2>()       , $clWhite, 9);
+  drawText(0, 11*21, "再生中のOggの、サンプリングレート    ：" + $mplayer.<strong2>getOggSamplingRate</strong2>()   , $clWhite, 9);
+  drawText(0, 11*22, "再生中のOggの、総再生時間(ミリ秒)    ：" + $mplayer.<strong2>getOggTotalTime</strong2>()      , $clWhite, 9);
+  drawText(0, 11*23, "再生中のOggの、総サンプリング数      ：" + $mplayer.<strong2>getOggTotalSamples</strong2>()   , $clWhite, 9);
+  drawText(0, 11*24, "再生中のOggの、Oggループ開始位置     ：" + $mplayer.<strong2>getOggFileLoopStart</strong2>()  , $clWhite, 9);
+  drawText(0, 11*25, "再生中のOggの、Oggループ終了位置     ：" + $mplayer.<strong2>getOggFileLoopEnd</strong2>()    , $clWhite, 9);
+
+  if      ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 0) timeDayOfWeekText = " (日)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 1) timeDayOfWeekText = " (月)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 2) timeDayOfWeekText = " (火)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 3) timeDayOfWeekText = " (水)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 4) timeDayOfWeekText = " (木)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 5) timeDayOfWeekText = " (金)";
+  else if ($mplayer.<strong2>getTimeDayOfWeek</strong2>() == 6) timeDayOfWeekText = " (土)";
+
+  drawText(0, 11*27, "日付 : " + $mplayer.<strong2>getTimeYear</strong2>()
+                           +"/"+ $mplayer.<strong2>getTimeMonth</strong2>()
+                           +"/"+ $mplayer.<strong2>getTimeDay</strong2>()
+                               + timeDayOfWeekText
+                               , $clWhite, 9);
+  drawText(0, 11*28, "時刻 : " + $mplayer.<strong2>getTimeHour</strong2>()
+                           +":"+ $mplayer.<strong2>getTimeMinute</strong2>()
+                           +":"+ $mplayer.<strong2>getTimeSecond</strong2>()
+                           +"."+ ($mplayer.<strong2>getTimeMilliSecond</strong2>() / 100 % 10)
+                               + ($mplayer.<strong2>getTimeMilliSecond</strong2>() / 10  % 10)
+                               + ($mplayer.<strong2>getTimeMilliSecond</strong2>()       % 10)
+                               , $clWhite, 9);
+
+  drawText(0, 11*29, "ディスプレイの解像度の幅             ：" + $mplayer.<strong2>getDisplayWidth</strong2>()    , $clWhite, 9);
+  drawText(0, 11*30, "ディスプレイの解像度の高さ           ：" + $mplayer.<strong2>getDisplayHeight</strong2>()    , $clWhite, 9);
+
+  if      ($mplayer.<strong2>getOSPlatformId</strong2>() == 1) osPlatformNameText = "Windows 9x";
+  else if ($mplayer.<strong2>getOSPlatformId</strong2>() == 2) osPlatformNameText = "Windows NT";
+  else                                      osPlatformNameText = "不明";
+
+  drawText(320, 11*0, "OSの種類              ：" + osPlatformNameText          , $clWhite, 9);
+  drawText(320, 11*1, "OSのメジャーバージョン：" + $mplayer.<strong2>getOSMajorVersion</strong2>(), $clWhite, 9);
+  drawText(320, 11*2, "OSのマイナーバージョン：" + $mplayer.<strong2>getOSMinorVersion</strong2>(), $clWhite, 9);
+
+  if ($mplayer.<strong2>getJoystickOn</strong2>(0) == 1) joystick1_OnText = "ある"; else joystick1_OnText = "ない";
+  if ($mplayer.<strong2>getJoystickOn</strong2>(1) == 1) joystick2_OnText = "ある"; else joystick2_OnText = "ない";
+  drawText(320, 11*4, "ジョイスティックID1：" + joystick1_OnText, $clWhite, 9);
+  drawText(320, 11*5, "ジョイスティックID2：" + joystick2_OnText, $clWhite, 9);
+
+  drawText(0, 11*32 , "更新頻度：" + interval, $clWhite, 12);
+  drawText(0, 11*33, "← →：更新頻度を調節" , $clYellow, 12, 1);
+
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>
