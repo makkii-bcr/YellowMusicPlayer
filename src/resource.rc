@@ -14,8 +14,8 @@ MIDIPLAYER2_MANIFEST RT_MANIFEST "midiplayer2.manifest"
 
 // バージョン情報
 VS_VERSION_INFO		VERSIONINFO
- FILEVERSION		2,3,6,0
- PRODUCTVERSION		2,3,6,0
+ FILEVERSION		2,3,7,0
+ PRODUCTVERSION		2,3,7,0
  FILEFLAGSMASK		0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -39,9 +39,9 @@ BEGIN
             VALUE "OriginalFilename"	, "MidiPlay.exe\0"
             VALUE "ProductName"			, "YellowMusicPlayer (Tonyu1.22以前用)\0"
 #endif
-            VALUE "FileVersion"			, "2,3,6,0\0"
+            VALUE "FileVersion"			, "2,3,7,0\0"
             VALUE "LegalCopyright"		, "Copyright (C) 2012 - 2018 マッキー\0"
-            VALUE "ProductVersion"		, "2.36\0"
+            VALUE "ProductVersion"		, "2.37\0"
         END
     END
     BLOCK "VarFileInfo"
