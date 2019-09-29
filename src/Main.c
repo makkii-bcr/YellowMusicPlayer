@@ -148,6 +148,7 @@ GGS4PLAYERSTATUS midiStatus;
 
 TCHAR crDir[FILEPATH_SIZE];
 TCHAR playerExeName[FILEPATH_SIZE];
+TCHAR myselfExePath[FILEPATH_SIZE];
 BOOL  processCheckFlag;
 DWORD dwProcessId;
 DWORD osPlatformId = 0;
@@ -181,6 +182,7 @@ unsigned char joistickOnIdAll = 0;
 int frameSkipCnt = 0;
 DWORD nowTime, oldTime;
 int timerThreadRestartCnt = 0;
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -243,13 +245,23 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	// GuruGuruSMF4を初期化
 	if (GGS4Initialize() != GGSERROR_NOERROR) {
 		MessageBox(0, 
+#if !CREATE_TONYU_OLD
 			_T(
 				"YellowMusicPlayerに必要なdllがない、または読み込めないため\n"
 				"BGMを演奏することができません\n"
 				"\n"
-				"「MidiPlayer2.exe」があるフォルダに\n"
+				"「Midiplayer2.exe」があるフォルダに\n"
 				"「GuruGuruSMF4.dll」を置いてください"
 			)
+#else
+			_T(
+				"YellowMusicPlayerに必要なdllがない、または読み込めないため\n"
+				"BGMを演奏することができません\n"
+				"\n"
+				"「MidiPlay.exe」があるフォルダに\n"
+				"「GuruGuruSMF4.dll」を置いてください"
+			)
+#endif
 			, _T("YellowMusicPlayer エラー"), MB_ICONERROR);
 		return 0;
 	}
@@ -361,27 +373,18 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	if (oldTime / 15 == nowTime / 15) frameSkipCnt ++; else frameSkipCnt = 0;
 	
 	// PCのスリープ対策
-	if (nowTime - oldTime >= 60000) { // 1分
-		oldTime = nowTime;
-		timeKillEvent(dwTimer);
-		
-		// Midiデバイスを閉じる
-		GGS4CloseDevice();
-		// Midiデバイスを開き直す
-		// Midiデバイスを開く //
-		if (playerDirectMusicMode) {
-			errorFlag = GGS4OpenDevice(GGSDEVICE_DIRECTMUSIC, hWnd); // DirectMusic
-			if (errorFlag != GGSERROR_NOERROR) playerDirectMusicMode = 0; // エラーならDirectMusicをOFFにして再試行
+	//if (nowTime - oldTime >= 60000 && cnt >= 5) { // 1分
+	if (GetAsyncKeyState(65) && cnt >= 5) {
+		STARTUPINFO si;
+		PROCESS_INFORMATION pi;
+		memset(&si, 0, sizeof(STARTUPINFO));
+		si.dwFlags = STARTF_USESHOWWINDOW; // ウィンドウ表示方法を指定する
+		si.wShowWindow = SW_HIDE; // ウィンドウ非表示起動
+		if (CreateProcess(NULL, myselfExePath, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi)) {
+			// 子プロセス起動成功
+			savePlayingInfo(&oggBgmName);
+			exitFlag = 1;
 		}
-		if (playerDirectMusicMode == 0) errorFlag = GGS4OpenDevice(-1, hWnd); // MIDI_MAPPER
-		// 今まで再生していたものを再生する
-		playFlag = 1;
-		if (playerMode == 0 || playerMode == 3) loopFlag = 0;
-		fileDeleteFlag = 0;
-		
-		dwTimer = timeSetEvent(15, 15, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
-		timerThreadRestartCnt ++;
-		return ;
 	}
 	
 	// 処理されすぎないように制御
@@ -1527,7 +1530,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	
 	#if DEBUG
-	/*
+	
 	if (cnt % 60 == 0) {
 		
 		rpsTime = timeGetTime();
@@ -1540,10 +1543,11 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                 "eff_midiDir            :「%s」\r\n"
 		                 "eff_midiAddr           :「%s」\r\n"
 		                 "midiPlayerStatusAddr   :「%s」\r\n"
-		                 "YMPPreparationAddr:「%s」 "
+		                 "YMPPreparationAddr     :「%s」\r\n"
+		                 "playerExeName          :「%s」\r\n"
+		                 "myselfExePath          :「%s」\r\n"
 		                 "processCheckFlag:「%d」 "
 		                 "dwProcessId:「%d」 "
-		                 "playerExeName:「%s」 "
 		                 "cnt:「%d」 "
 		                 "processExist:「%d」\r\n"
 		                 "midiEffectFlag:「%d」"
@@ -1558,9 +1562,10 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		                 eff_midiAddr,
 		                 midiPlayerStatusAddr,
 		                 YMPPreparationAddr,
+		                 playerExeName,
+		                 myselfExePath,
 		                 processCheckFlag,
 		                 dwProcessId,
-		                 playerExeName,
 		                 cnt,
 		                 processExist(dwProcessId),
 		                 midiEffectFlag,
@@ -1576,7 +1581,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		
 		
 	}
-	*/
+	
 	#endif
 	
 	
@@ -1722,6 +1727,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 
 #if DEBUG
 static void RPSOutput(void) {
+	/*
 	wsprintf(testStr, _T("処理時間 : %d\n１周期の時間 : %d\nコールバック呼び出し間隔 : %d\nたまっている処理数 : %d\nexitCheckFlag : %d\nexitFlag : %d\ncnt : %d\ntimerThreadRestartCnt : %d"),
 	                timeGetTime() - nowTime, 
 	                timeGetTime() - oldTime, 
@@ -1732,6 +1738,7 @@ static void RPSOutput(void) {
 	                cnt,
 	                timerThreadRestartCnt);
 	SetWindowText(hStatic, testStr);
+	*/
 }
 #endif
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

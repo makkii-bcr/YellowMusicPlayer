@@ -144,6 +144,7 @@ extern GGS4PLAYERSTATUS midiStatus;
 
 extern TCHAR crDir[FILEPATH_SIZE];
 extern TCHAR playerExeName[FILEPATH_SIZE];
+extern TCHAR myselfExePath[FILEPATH_SIZE];
 extern BOOL  processCheckFlag;
 extern DWORD dwProcessId;
 extern DWORD osPlatformId;
@@ -196,5 +197,6 @@ DWORD  searchProcess(LPTSTR lpszFile, DWORD osPlatformId);
 BOOL   processExist(DWORD dwProcessId);
 void   getOggPlayingTime(void);
 //BOOL   playerRestart(void);
+BOOL savePlayingInfo(TCHAR *oggBgmName);
 
 /*************************************/ #endif /**********************************/

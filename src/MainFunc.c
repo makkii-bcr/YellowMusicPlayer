@@ -35,6 +35,10 @@ BOOL mainInit() {
 	memset(crDir, 0, sizeof(crDir));
 	GetCurrentDirectory(sizeof(crDir), crDir);
 	
+	// YellowMusicPlayer自身のファイルパスを取得
+	memset(myselfExePath, 0, sizeof(myselfExePath));
+	lstrcat(myselfExePath, GetCommandLine());
+	
 	// YellowMusicPlayerの設定を読み込む
 	memset(playerExeName, 0, sizeof(playerExeName));
 	#if !CREATE_TONYU_OLD
@@ -171,13 +175,17 @@ void initMidiParam() {
 
 
 void createPreparationFile() {
-	HANDLE   hFile;
+	HANDLE   hFile = INVALID_HANDLE_VALUE;
 	
 	// 準備中であることをTonyuに知らせる
 	#if !CREATE_TONYU_OLD
-		hFile = CreateFile(_T(".\\Usr\\files\\YMPPreparation.dat"), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (PathFileExists(_T(".\\Usr\\files\\YMPPreparation.dat"))) {
+			hFile = CreateFile(_T(".\\Usr\\files\\YMPPreparation.dat"), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		}
 	#else
-		hFile = CreateFile(_T(".\\files\\YMPPreparation.dat"), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (PathFileExists(_T(".\\files\\YMPPreparation.dat"))) {
+			hFile = CreateFile(_T(".\\files\\YMPPreparation.dat"), GENERIC_WRITE, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		}
 	#endif
 	if (hFile != INVALID_HANDLE_VALUE) {
 		CloseHandle(hFile);
@@ -1151,3 +1159,36 @@ BOOL playerRestart() {
 	return !!CreateProcess(myExeName, NULL, NULL, NULL, FALSE, 0, NULL, NULL, &si, &ps);
 }
 */
+
+
+BOOL savePlayingInfo(TCHAR *oggBgmName) {
+	int i;
+	GGS4PLAYERSTATUS midiStatus;
+	char tempStr[BUF_SIZE_M];
+	
+	memset(tempStr, 0, sizeof(tempStr));
+	i = 0;
+	// midi再生時間取得 //
+	GGS4GetPlayerStatus(&midiStatus);
+	
+	if (midiStatus.State != 0) {
+		
+	}
+	memcpy(tempStr+i, &midiStatus.Tick, sizeof(int)); i += sizeof(int);
+	
+	// ogg再生時間計算 //
+	if (pDSBuffer) {
+		oggBufLoopCnt = oggBufLoopCnt_thread; // スレッド切替で再生時間計算中に値が変更されないようにする
+		IDirectSoundBuffer_GetCurrentPosition(pDSBuffer, &oggPoint, 0);
+		if (oggPlayerStatus != STATUS_STOP) getOggPlayingTime();
+	}
+	memcpy(tempStr+i, &oggPlayerStatus          , sizeof(BYTE));  i += sizeof(BYTE); // 
+	memcpy(tempStr+i, oggBgmName                , lstrlen(oggBgmName)); i += lstrlen(oggBgmName); // Oggファイル名
+	memcpy(tempStr+i, _T("\r\n")                , 2);             i += lstrlen(_T("\r\n")); // 改行コード
+	memcpy(tempStr+i, &oggPlayingTimeInt        , sizeof(int));   i += sizeof(int);  // 
+	memcpy(tempStr+i, &oggLoopCnt               , sizeof(int));   i += sizeof(int);  // 
+	
+	hdError = writeFile_C(midiPlayerStatusAddr, tempStr, i, 0);
+	if (hdError != 0) playerStatusCnt = midiGettingPlayerStatus;
+}
+
