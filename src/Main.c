@@ -361,28 +361,28 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	if (oldTime / 15 == nowTime / 15) frameSkipCnt ++; else frameSkipCnt = 0;
 	
 	// PCのスリープ対策
-	if (nowTime - oldTime >= 60000) { // 1分
-		oldTime = nowTime;
-		timeKillEvent(dwTimer);
-		
-		// Midiデバイスを閉じる
-		GGS4CloseDevice();
-		// Midiデバイスを開き直す
-		// Midiデバイスを開く //
-		if (playerDirectMusicMode) {
-			errorFlag = GGS4OpenDevice(GGSDEVICE_DIRECTMUSIC, hWnd); // DirectMusic
-			if (errorFlag != GGSERROR_NOERROR) playerDirectMusicMode = 0; // エラーならDirectMusicをOFFにして再試行
-		}
-		if (playerDirectMusicMode == 0) errorFlag = GGS4OpenDevice(-1, hWnd); // MIDI_MAPPER
-		// 今まで再生していたものを再生する
-		playFlag = 1;
-		if (playerMode == 0 || playerMode == 3) loopFlag = 0;
-		fileDeleteFlag = 0;
-		
-		dwTimer = timeSetEvent(15, 15, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
-		timerThreadRestartCnt ++;
-		return ;
-	}
+//	if (nowTime - oldTime >= 60000) { // 1分
+//		oldTime = nowTime;
+//		timeKillEvent(dwTimer);
+//		
+//		// Midiデバイスを閉じる
+//		GGS4CloseDevice();
+//		// Midiデバイスを開き直す
+//		// Midiデバイスを開く //
+//		if (playerDirectMusicMode) {
+//			errorFlag = GGS4OpenDevice(GGSDEVICE_DIRECTMUSIC, hWnd); // DirectMusic
+//			if (errorFlag != GGSERROR_NOERROR) playerDirectMusicMode = 0; // エラーならDirectMusicをOFFにして再試行
+//		}
+//		if (playerDirectMusicMode == 0) errorFlag = GGS4OpenDevice(-1, hWnd); // MIDI_MAPPER
+//		// 今まで再生していたものを再生する
+//		playFlag = 1;
+//		if (playerMode == 0 || playerMode == 3) loopFlag = 0;
+//		fileDeleteFlag = 0;
+//		
+//		dwTimer = timeSetEvent(15, 15, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
+//		timerThreadRestartCnt ++;
+//		return ;
+//	}
 	
 	// 処理されすぎないように制御
 	if (frameSkipCnt >= 1) {
