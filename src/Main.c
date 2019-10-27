@@ -1,5 +1,5 @@
 /*
-  YellowMusicPlayer 2.37  -  Copyright (C) 2012 - 2018 マッキー
+  YellowMusicPlayer 2.39  -  Copyright (C) 2012 - 2019 マッキー
 */
 
 #include "Define.h"
@@ -209,7 +209,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	winc.style         = (CS_HREDRAW | CS_VREDRAW)*0;
 	winc.lpfnWndProc   = WndProc;
 	winc.cbClsExtra    = 0;
-	winc.cbWndExtra	   = 0;
+	winc.cbWndExtra    = 0;
 	winc.hInstance     = hInstance;
 	winc.hIcon         = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON_1));
 	winc.hCursor       = LoadCursor(NULL, IDC_ARROW);
@@ -304,9 +304,9 @@ LRESULT CALLBACK WndProc(HWND hWnd , UINT msg , WPARAM wp , LPARAM lp) {
 		*/
 		if (midiPlayerOK) GGS4Free(); // ダイナミックリンク
 		//if (pDSNotify) IDirectSoundNotify_Release(pDSNotify);
-    	if (pDSBuffer) IDirectSoundBuffer_Release(pDSBuffer);
-    	if (pDS) IDirectSoundBuffer_Release(pDS);
-    	oggFileClear();
+		if (pDSBuffer) IDirectSoundBuffer_Release(pDSBuffer);
+		if (pDS) IDirectSoundBuffer_Release(pDS);
+		oggFileClear();
 		
 		/*
 		if (g_hNotifyThread) {
@@ -1252,7 +1252,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 			for (i = 0; i < k; i++) {
 				oggBufLoopCnt = oggBufLoopCnt_thread; // スレッド切替で値が計算途中で変えられないようにする
 				oggAllWriteFlag = oggAllWriteFlag_thread; // スレッド切替で値が計算途中で変えられないようにする
-	    		IDirectSoundBuffer_GetCurrentPosition(pDSBuffer, &oggPoint, 0);
+				IDirectSoundBuffer_GetCurrentPosition(pDSBuffer, &oggPoint, 0);
 				
 				// 再生時間計算 //
 				getOggPlayingTime();
@@ -1451,9 +1451,9 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 			memcpy(tempStr+i, &midiInfo.LoopTime     , sizeof(int));  i += sizeof(int);
 			
 			// ogg再生時間計算 //
-    		if (pDSBuffer) {
-    			oggBufLoopCnt = oggBufLoopCnt_thread; // スレッド切替で再生時間計算中に値が変更されないようにする
-    			IDirectSoundBuffer_GetCurrentPosition(pDSBuffer, &oggPoint, 0);
+			if (pDSBuffer) {
+				oggBufLoopCnt = oggBufLoopCnt_thread; // スレッド切替で再生時間計算中に値が変更されないようにする
+				IDirectSoundBuffer_GetCurrentPosition(pDSBuffer, &oggPoint, 0);
 				if (oggPlayerStatus != STATUS_STOP) getOggPlayingTime();
 			}
 			memcpy(tempStr+i, &oggPlayerStatus          , sizeof(BYTE));  i += sizeof(BYTE); // 
@@ -1509,7 +1509,7 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 	
 	
 	// ファイル削除
-	if (fileDeleteFlag > 0 && cnt % (playerSpeedMode+1) == 0) {	// 削除頻度調節
+	if (fileDeleteFlag > 0 && cnt % (playerSpeedMode+1) == 0) { // 削除頻度調節
 		// MidiOggPlayerモード以外はファイルをnullにする
 		fileDeleteFlag --;
 		if (fileDeleteFlag <= 0) {
