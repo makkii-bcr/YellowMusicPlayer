@@ -43,7 +43,7 @@ function musicPlayerOption() {
       if (buttonR == 1 || buttonR > 5) { playerReadSpeed += 1; if (playerReadSpeed > 100) playerReadSpeed = 100; }
     }
     
-    if      (playerDirectMusicSW == 0) text1 = "デフォルト設定（NT系OS:ON 9x系OS:OFF）";
+    if      (playerDirectMusicSW == 0) text1 = "デフォルト設定（Windows Vista以降:ON XP以前:OFF）";
     else if (playerDirectMusicSW == 1) text1 = "ON";
     else if (playerDirectMusicSW == 2) text1 = "OFF";
     

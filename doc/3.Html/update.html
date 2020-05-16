@@ -13,6 +13,25 @@
   </h1>
   <hr>
   <br>
+  <h4>【ver 2.38】(19/10/27)</h4>
+  <ul>
+   <li>PCをスリープ（１分以上）した後、復帰するとMidiが勝手に再生されるバグを修正</li>
+   <ul>
+    <li>ver 2.37のみでこのバグが発生する</li>
+    <li>ver 2.36以前ではこのバグは無い</li>
+   </ul>
+  </ul>
+  <br>
+  <h4>【ver 2.37】(19/09/30)</h4>
+  <ul>
+   <li>YellowMusicPlayerの動作条件をDirectX8以降からDirectX1以降でも動くようにした</li>
+   <ul>
+    <li>Tonyu1が動く環境（DirectX6以降）ならYellowMusicPlayerも動作するようになった</li>
+    <li>Windows 98 Second Edition 以降ならＯＳインストール直後でも動作可能（別途ソフトのインストール等は不要）</li>
+    <li>DirectMusicの動作にはDirectX8以降が必要（DirectMusicが動作しなくてもMidi,Oggどちらも再生できる）</li>
+   </ul>
+  </ul>
+  <br>
   <h4>【ver 2.36】(18/09/15)</h4>
   <ul>
    <li><a href="reference\rf_getOSMajorVersion.html">getOSMajorVersion()</a>, <a href="reference\rf_getOSMinorVersion.html">getOSMinorVersion()</a>でWindows 8.1 と Windows 10 を認識できるように対応</li>
@@ -25,8 +44,8 @@
   <ul>
    <li>MzoとMidiを再生すると同時に再生され、どちらか一方が停止できなくなるバグを修正</li>
    <ul>
-   <li>MzoとMidiを同時に再生できないようにした</li>
-   <li>MidiとOgg、MzoとOggの組み合わせでは同時に再生できる</li>
+    <li>MzoとMidiを同時に再生できないようにした</li>
+    <li>MidiとOgg、MzoとOggの組み合わせでは同時に再生できる</li>
    </ul>
   <li>「2.サンプル」の「テスト」にMzo(M-Tow)音楽を追加</li>
    <ul>

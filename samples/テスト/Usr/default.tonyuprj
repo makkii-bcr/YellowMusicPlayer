@@ -9,7 +9,7 @@
   <param name="mainPage" value="$page_index"/>
   <param name="title" value="YellowMusicPlayerテスト"/>
   <param name="author" value="マッキー"/>
-  <param name="version" value="2.36"/>
+  <param name="version" value="2.37"/>
   <param name="mail" value=""/>
   <param name="web" value=""/>
   <param name="cond" value="再配布、改造ともに無断で許可"/>
