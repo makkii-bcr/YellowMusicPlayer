@@ -29,15 +29,15 @@ MIDIファイル、Ogg Vorbisファイルが再生できます。
 |IDE（ビルドに使う）|BCC Developer または Visual Windows for BC++|
 |OS|Windows 10 / 7|
 
-## ビルド方法
+## ビルド方法 (ファイル等準備中)
 
 Tonyu1の動作環境(Windows95以降・DirectX6以降)に合わせるため、古いBCC55でビルドしています。
 
-（Visual Studio 等ではビルドできません）
+（Visual Studio ではビルドできません）
 
-Visual Windows for BC++ をダウンロードすると、BCC55もインストールされるので一番手っ取り早いです。
+Visual Windows for BC++ をインストールすると、BCC55もインストールされるので一番手っ取り早いです。
 
-### Visual Windows for BC++のインストール
+### Visual Windows for BC++でのビルド
 
 http://phys.cool.coocan.jp/physjpn/bccwin.htm
 
@@ -66,7 +66,7 @@ BCC55では、影付きアイコンに対応していないため、影なしア
 
 Resource Hackerでアイコンを再度設定すると、影付きアイコンになります。
 
-### BCC Developer
+### BCC Developerでのビルド
 
 現在はBCC Developerでビルドしています。
 
