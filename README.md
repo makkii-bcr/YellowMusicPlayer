@@ -4,7 +4,9 @@ Tonyu System 1（Tonyu1）用のBGM再生ソフトです。
 
 MIDIファイル、Ogg Vorbisファイルが再生できます。
 
-[プロジェクトボードのページ](https://www.tonyu.jp/project/viewProject.cgi?mainkey=667&)
+[プロジェクトボードのYellowMusicPlayerのページ](https://www.tonyu.jp/project/viewProject.cgi?mainkey=667&)
+
+（長いので、略してYMPlayerと書いたりしています）
 
 ## 動作環境
 
@@ -29,13 +31,36 @@ MIDIファイル、Ogg Vorbisファイルが再生できます。
 |IDE（ビルドに使う）|BCC Developer または Visual Windows for BC++|
 |OS|Windows 10 / 7|
 
-## ビルド方法 (ファイル等準備中)
+## ビルド概要
 
-Tonyu1の動作環境(Windows95以降・DirectX6以降)に合わせるため、古いBCC55でビルドしています。
+Tonyu1の動作環境（Windows95以降・DirectX6以降）に合わせるため、古いBCC55でビルドしています。
 
 （Visual Studio ではビルドできません）
 
 Visual Windows for BC++ をインストールすると、BCC55もインストールされるので一番手っ取り早いです。
+
+（現在BCC55は公式からダウンロードできないので、代わりに上記に付属しているBCC55を使います）
+
+## ビルド方法
+
+最低限下記が必要です。
+- DirectX SDK 2004 のダウンロード
+- BCC55 のインストール（Visual Windows for BC++ に付属している）
+- Visual Windows for BC++ のインストール
+
+リリース版のYMPlayerに合わせるには、下記も行います。
+- アイコンの適用（Resource Hackerを使用）
+- BCC Developer でのビルド
+
+### DirectX SDK のダウンロード
+
+DirectX SDK 2004 あたりのIncludeフォルダが必要です。
+
+（現在Microsoft公式からダウンロードできなくなっているので、代わりに下記からダウンロードします）
+
+https://archive.org/download/dxsdk_dec2004
+
+のdxsdk_dec2004.exeをダウンロードして実行し、フォルダを解凍します。
 
 ### Visual Windows for BC++でのビルド
 
