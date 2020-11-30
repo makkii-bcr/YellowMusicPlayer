@@ -22,6 +22,7 @@ MIDIファイル、Ogg Vorbisファイルが再生できます。
 |API|Win32API|
 ||DirectSound|
 ||DirectMusic|
+|ライブラリ|GuruGuruSMF|
 
 ## 開発環境
 
