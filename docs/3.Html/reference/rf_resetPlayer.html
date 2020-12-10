@@ -1,0 +1,97 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.resetPlayer</h2>
+  「DirectMusicのON/OFF」と「ファイルの読み込み頻度」をMusicPlayer起動中に変更します。<br>
+  「DirectMusicのON/OFF」と「ファイルの読み込み頻度」を、ゲーム上から変更したい場合などで使えると思います。<br>
+  <br>
+  この項目は本来MusicPlayerが起動時に、設定される項目ですが、<br>
+  「DirectMusicのON/OFF」と「ファイルの読み込み頻度」は起動後でも変更可能です。<br>
+  <br>
+  現在のMusicPlayerのDirectMusicのON/OFFと、dm(引数)の値とを見比べ、<br>
+  ON/OFFを切り替える必要がある場合、MusicPlayerはMidiデバイスの初期化を行います。<br>
+  <br>
+  Midiデバイスの初期化をすると、Midiの演奏が停止します。<br>
+  また、初期化中はMusicPlayerは反応しません。<br>
+  Oggを再生したまま初期化すると、Oggは鳴り続けますが、<br>
+  初期化に時間がかかる場合、Oggのテンポが1の時は８秒以上経過するとOggの音が繰り返されてしまいます。<br>
+  初期化が終わるとOggは本来の再生位置へ戻りますが、初期化する時はOggを停止した方がよいでしょう。<br>
+  <br>
+  このメソッドを呼び出すと、「YMPPreparation.dat」が書き込まれます。<br>
+  その結果、このメソッドを呼び出した後に、<a href="rf_getPlayerPreparation.html">getPlayerReady()</a>でMusicPlayerが準備できたかどうかを調べることができます。<br>
+  <br>
+  また、このメソッドを呼び出すと、「YMPConfig.txt」の内容が書きかえられます。<br>
+  つまり、ここの設定が次回起動時でも使用されることになります。<br>
+  <br>
+  ※ MusicPlayerは「YMPPreparation.dat」を１秒に2回の頻度で監視しているので、<br>
+  　　このメソッドが呼び出されてからMusicPlayerが反応するのは少し遅れます。<br>
+  　　この設定は頻繁に変えないと思うので、ファイルの監視頻度は低くてもいいかなと思っています。<br>
+  <br>
+  <h3>書式</h3>
+<pre>
+resetPlayer(dm, rs)
+</pre>
+<dl>
+<dt>dm(省略可能)</dt>
+<dd>DirectMusicのON/OFF<br>
+    0 : 自動(NT系OS:ON 9x系OS:OFF)<br>
+    1 : ON<br>
+    2 : OFF<br>
+<dt>rs(省略可能)</dt>
+<dd>ファイルの読み込み頻度(0～100)</dd>
+</dl>
+※ 変更のない項目は、引数を省略するかnullを入れてください。<br>
+<br>
+詳しくは、<a href="../tips/tips_02.html">MusicPlayerの設定</a>を参照してください。<br>
+  <br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+A, S, D, F キーで設定を変更、Enterキーで設定を反映します。<br>
+Z, X キーでMidiの再生・停止ができます。<br>
+<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+$mplayer.getPlayerConfig(); // ファイル読み込み(今までの設定内容がわかる)
+dm = $mplayer.getPlayerDirectMusicSW(); // 読み込んだ情報を変数へ代入
+rs = $mplayer.getPlayerReadSpeed();     // 
+while (1) {
+  // 設定を適応
+  if (getkey(13) == 1) $mplayer.<strong>resetPlayer</strong>(dm, rs);      // Enter:設定を適応
+  if (getkey(90) == 1) $mplayer.play($se_test);           // Z:再生
+  if (getkey(88) == 1) $mplayer.stop();                   // X:停止
+  if (getkey(65) == 1) { dm --; if (dm < 0) dm = 0; }     // A:DirectMusicのON/OFF －
+  if (getkey(83) == 1) { dm ++; if (dm > 2) dm = 2; }     // S:DirectMusicのON/OFF ＋
+  if (getkey(68)  > 0) { rs --; if (rs <   0) rs =   0; } // D:ファイル読み込み頻度 －
+  if (getkey(70)  > 0) { rs ++; if (rs > 100) rs = 100; } // F:ファイル読み込み頻度 ＋
+  
+  if      (dm == 0) text1 = "デフォルト設定（NT系OS:ON 9x系OS:OFF）";
+  else if (dm == 1) text1 = "ON";
+  else if (dm == 2) text1 = "OFF";
+  
+  text2 = ((rs + 1) * 15) + "ミリ秒毎";
+  
+  drawText( 80, 100, "DirectMusic          : " + text1 , $clWhite, 12);
+  drawText( 80, 130, "ファイル読み込み頻度 : " + text2 , $clWhite, 12);
+  if ($mplayer.getPlayerReady()) drawText( 80, 160, "MusicPlayer準備中…", $clYellow, 12);
+  
+  update();
+}
+</pre>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

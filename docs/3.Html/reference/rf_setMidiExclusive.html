@@ -1,0 +1,36 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setMidiExclusive</h2>
+   Midiデータ中のエクスクルーシブ送信のON/OFFを設定します。<br>
+  <br>
+  複数リズムパートを使っているMidiなどに有効らしいです。<br>
+  ただし、この機能を有効にしてもリセットメッセージとマスターボリュームメッセージは送りません<br>
+  （ライブラリで提供されていた機能をとりあえず導入。作者は使用用途をわかっていません(^^;)）<br>
+  使いたい方以外は、OFFで構いません<br>
+  <br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  
+  <h3>書式</h3>
+<pre>
+setMidiExclusive(exclusive)
+</pre>
+<dl>
+<dt>exclusive</dt>
+<dd>Midiデータ中のエクスクルーシブを送信するなら1、送信しないなら0</dd>
+</dl>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

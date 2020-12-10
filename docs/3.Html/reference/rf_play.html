@@ -1,0 +1,74 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.play</h2>
+  指定された Midi, Ogg, Wav, Mzo を再生します<br>
+
+  <h3>書式</h3>
+<pre>
+play(s, ar, v)
+</pre>
+<dl>
+ <dt>s</dt>
+ <dd>
+  <dl>
+  <dt>Midi, Wav, Mzo の再生：</dt>
+  <dd>演奏するサウンドオブジェクト(例：$se_xxxなど)</dd>
+  <dt>Ogg の再生：</dt>
+  <dd>再生するOggのファイル名(文字列)<br>
+      <br>
+      ※ サブフォルダにOggがある場合は、開いているプロジェクトから見た相対パスで指定します<br>
+      　　（例： $mplayer.play("files/test.ogg"); ）<br>
+      ※ プロジェクトのフォルダよりも、上の階層のフォルダは指定できません<br>
+      　　Tonyuランタイム版でいうUsrフォルダより上にあるOggファイルは参照できません<br>
+      　　（例： $mplayer.play("../test.ogg"); のように「../」を使うことはできません）</dd>
+  </dl>
+ </dd>
+
+ <dt>ar(省略可能)</dt>
+ <dd>Midi, Ogg, Wav を繰り返す場合は1</dd>
+ <dt>r(省略可能)</dt>
+ <dd>Wavの音量(0～128)<br>
+ ※ Midi, Ogg, Mzo の音量は関係ない</dd>
+</dl>
+  <h3>戻り値</h3>
+  Oggの再生をした場合に限り、戻り値を返します<br>
+  MusicPlayerに命令を知らせるファイル(ogg_sig.dat)を書き込めたら0、<br>
+  エラーが起きたら-1を返します<br>
+<br>
+  <h3>例１</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+（予め test.ogg をプロジェクトのフォルダに置いてください）<br>
+（Tonyu開発環境版ではプロジェクトを開いてから、一度Midiを演奏させないとOggが再生できません）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer();
+while (1) {
+  if (getkey(90) == 1) $mplayer.<strong>play</strong>($se_test);      // Z:Midi１回だけ再生
+  if (getkey(88) == 1) $mplayer.<strong>play</strong>($se_test, 1);   // X:Midi繰り返し再生
+  if (getkey(67) == 1) $mplayer.<strong>play</strong>("test.ogg");    // C:Ogg１回だけ再生
+  if (getkey(86) == 1) $mplayer.<strong>play</strong>("test.ogg", 1); // V:Ogg繰り返し再生
+  if (getkey(66) == 1) $mplayer.stop();              // B:すべて停止
+  update();
+}
+</pre>
+  ※ Tonyu開発環境版では、プロジェクトを開いてから一度でもMidiを演奏しないと、Oggを鳴らすことができません。<br>
+  　　（Midiを演奏すると、今開いているプロジェクトの場所(パス)がわかるため）<br>
+  　　Tonyuランタイム版では、すぐにOggを鳴らせます。<br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

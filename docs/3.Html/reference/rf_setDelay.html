@@ -1,0 +1,36 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.setDelay</h2>
+  効果音(Wav)を鳴らす際の待機時間を調整します<br>
+  <a href="http://hoge1e3.sakura.ne.jp/tonyu/wiki/index.php?%24mplayer.setDelay">($mplayer.setDelayと同じです(Tonyuヘルプページ))</a><br>
+
+  <h3>書式</h3>
+<pre>
+setDelay(time)
+</pre>
+<dl>
+<dt>time</dt>
+<dd>待機時間（サンプル数:1秒＝44100）</dd>
+</dl>
+<ul>
+<li>効果音(wav)の最初が途切れる場合は、この値を大きめにしてください。</li>
+<li>Windows XP 以前ではこの値の規定値は1000、Windows Vista 以降では9000に設定されています。<br>
+    ただし9000では効果音が遅れて聞こえるため、2400～にすることをお勧めします。</li>
+</ul>
+</dl>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,58 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.getPlayerConfig</h2>
+MusicPlayerの設定値（YMPConfig.txtに書かれている内容）を取得します。<br>
+<br>
+結果は下記のメソッドから取得してください。<br>
+<font color="#FF0000">ver2.10から、変数を直接参照する方法は非推奨になりました。</font><br>
+  <h3>書式</h3>
+<pre>
+getPlayerConfig()
+</pre>
+<br>
+<ul>
+  <li><a href="rf_getPlayerExeName.html">getPlayerExeName()</a>　　　(実行ファイル名)</li>
+  <li><a href="rf_getPlayerDirectMusicSW.html">getPlayerDirectMusicSW()</a>　　　(DirectMusicのON/OFF)</li>
+  <li><a href="rf_getPlayerMode.html">getPlayerMode()</a>　　　(他のプレイヤーのモード)</li>
+  <li><a href="rf_getPlayerReadSpeed.html">getPlayerReadSpeed()</a>　　　(ファイルの読み込み頻度)</li>
+</ul>
+<br>
+詳しくは、<a href="../tips/tips_02.html">MusicPlayerの設定</a>を参照してください。<br>
+<br>
+  <h3>例１</h3>
+<pre>
+extends SpriteChar;
+
+setFont("ＭＳ ゴシック"); // 文字をそろえやすくなる
+$mplayer = new Ymplayer();
+$mplayer.<strong>getPlayerConfig</strong>();
+while (1) {
+  
+  drawText(80, 11* 0 , "実行ファイル名         : " + $mplayer.<strong2>getPlayerExeName</strong2>()      , $clWhite, 9);
+  drawText(80, 11* 1 , "DirectMusicのON/OFF    : " + $mplayer.<strong2>getPlayerDirectMusicSW</strong2>(), $clWhite, 9);
+  drawText(80, 11* 2 , "他のプレイヤーのモード : " + $mplayer.<strong2>getPlayerMode</strong2>()         , $clWhite, 9);
+  drawText(80, 11* 3 , "ファイルの読み込み頻度 : " + $mplayer.<strong2>getPlayerReadSpeed</strong2>()    , $clWhite, 9);
+  
+  update();
+}
+</pre>
+YMPConfig.txtに書かれている内容をそのまま表示しています。<br>
+空白の行は、その行に対応する変数はデフォルト値になります。<br>
+ファイルが無い場合も、変数はデフォルト値になります。<br>
+<br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>

@@ -1,0 +1,67 @@
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <title>YellowMusicPlayer</title>
+  <link rel="stylesheet" type="text/css" href="../s.css">
+ </head>
+ <body>
+  <h1>
+   <img src="../res/icon.png" align="top">
+   &nbsp;命令リファレンス&nbsp;
+   <img src="../res/icon.png" align="top">
+  </h1>
+  <hr>
+  <h2>Ymplayer.getJoystickOn</h2>
+  ジョイスティックが接続されているか調べます。<br>
+  <br>
+  ※ このメソッドを使う前に、<a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を呼び出してください。<br>
+  
+  <h3>書式</h3>
+<pre>
+getJoystickOn(id)
+</pre>
+<dl>
+<dt>id</dt>
+<dd>IDが1のジョイスティックを調べるなら0、IDが2のジョイスティックを調べるなら1<br>
+    ※ 引数は(0～1)なので注意<br>
+    　 Tonyuでは２つ目のジョイスティックまでしか認識しないため、<br>
+    　 YellowMusicPlayerも２つ目までしか取得できないように限定しています。</dd>
+</dl>
+  <h3>戻り値</h3>
+  ジョイスティックが接続されているなら1、非接続ならなら0<br>
+
+  <h3>仕様</h3>
+ジョイスティックの接続状態は、約５秒(正確には4875ミリ秒)の間隔で更新されるようになっています。<br>
+<a href="rf_setGettingPlayerStatus.html">setGetMode()</a>で更新頻度を高くしても、<br>
+ジョイスティック接続状態の更新頻度は、５秒以上間隔を空ける仕様にしています。<br>
+<br>
+  <h3>例</h3>
+（予め test.mid をTonyuに登録しておいてください）<br>
+<pre>
+extends SpriteChar;
+
+$mplayer = new Ymplayer(); // $mplayerをYmplayerで上書き
+$mplayer.play($se_test); // Tonyu開発環境版で状態取得できるようにMidiを鳴らしておく
+wait(20);
+$mplayer.stop(); // 停止
+
+$mplayer.<strong2>setGetMode</strong2>(30);   // 更新頻度調節
+$mplayer.<strong2>updatePlayInfo</strong2>(); // 更新
+
+updateEx(10); // とりあえず10フレーム待つ
+
+while (1) {
+  $mplayer.<strong2>getPlayerStatus</strong2>(); // 状態取得
+  drawText(50, 100, "Joystick (ID 1) = " + $mplayer.<strong>getJoystickOn</strong>(0), $clWhite, 20);
+  drawText(50, 130, "Joystick (ID 2) = " + $mplayer.<strong>getJoystickOn</strong>(1), $clWhite, 20);
+  update();
+}
+</pre>
+  <br>
+  <br>
+  <br>
+  <a href="../reference.html">戻る</a>
+  <hr>
+ </body>
+</html>
