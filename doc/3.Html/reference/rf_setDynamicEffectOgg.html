@@ -8,86 +8,86 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setDynamicEffectOgg</h2>
-  Ogg�̍Đ����ɓ��I�ɕύX�ł���G�t�F�N�g���ڂ��Z�b�g���܂�<br><br>
-  �ύX�������Ȃ����ڂ́A������null�ɂ�����A�ȗ������肵�Ă�������<br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
-  <h3>����</h3>
+  Oggの再生中に動的に変更できるエフェクト項目をセットします<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
 <pre>
 setDynamicEffectOgg(vol, tempo, pan)
 </pre>
 <dl>
-<dt>vol(�ȗ��\)</dt>
-<dd>Ogg�̉���(0�`127)</dd>
+<dt>vol(省略可能)</dt>
+<dd>Oggの音量(0～127)</dd>
 
-<dt>tempo(�ȗ��\)</dt>
-<dd>Ogg�̃e���|(0.001�`8)<br>
-1�œ����A2�łQ�{�̃e���|�A0.5�Ŕ����̃e���|�ɂȂ�܂�<br>
-Ogg�̏ꍇ�̓e���|��ς���ƃs�b�`���ω����܂��i�����t�@�C���ł��邽�߁j<br>
+<dt>tempo(省略可能)</dt>
+<dd>Oggのテンポ(0.001～8)<br>
+1で等速、2で２倍のテンポ、0.5で半分のテンポになります<br>
+Oggの場合はテンポを変えるとピッチも変化します（音声ファイルであるため）<br>
 <br>
-�� ���ۂɃe���|��ύX�ł���͈͂́A0.001�`8�{�͈̔͂����������Ȃ�ꍇ������܂��B<br>
-�@�@MusicPlayer�����̎d�l�iDirectSound�̎d�l�j�ŁA100000Hz��荂�����g���ōĐ��ł��Ȃ�OS�����邻���ł��B<br>
-�@�@�܂�A�T���v�����O���[�g��44100Hz��Ogg�́A��2.267�{���܂ł����e���|���グ��܂���B<br>
-�@�@<br>
-�@�@��҂�PC(win7)�ł́A�Ή����Ă�����g����100Hz�`200000Hz�܂łł����B<br>
-�@�@���̊��ŃT���v�����O���[�g��44100Hz��Ogg���Đ�����ƁA�L���ȃe���|�͖�0.002�`4.535�{���܂łł��B</dd>
+※ 実際にテンポを変更できる範囲は、0.001～8倍の範囲よりも小さくなる場合があります。<br>
+　　MusicPlayer内部の仕様（DirectSoundの仕様）で、100000Hzより高い周波数で再生できないOSがあるそうです。<br>
+　　つまり、サンプリングレートが44100HzのOggは、約2.267倍速までしかテンポを上げれません。<br>
+　　<br>
+　　作者のPC(win7)では、対応している周波数が100Hz～200000Hzまででした。<br>
+　　この環境でサンプリングレートが44100HzのOggを再生すると、有効なテンポは約0.002～4.535倍速までです。</dd>
 
-<dt>pan(�ȗ��\)</dt>
-<dd>Ogg�̃p���i���E�̃X�s�[�J�[�̉��ʃo�����X�j(-1.0�`1.0)<br>
--1.0�ō��X�s�[�J�[������A1.0�ŉE�X�s�[�J�[������A<br>
-0�ō��E�̃X�s�[�J�[�̉��ʂ������ɂȂ�܂�<br>
-�������w�肷��ƁA���炩�ɉE�����ɉ��ʂ��ڂ��Ă����悤�ȉ��o���ł��܂�<br>
+<dt>pan(省略可能)</dt>
+<dd>Oggのパン（左右のスピーカーの音量バランス）(-1.0～1.0)<br>
+-1.0で左スピーカーだけ鳴り、1.0で右スピーカーだけ鳴り、<br>
+0で左右のスピーカーの音量が同じになります<br>
+小数を指定すると、滑らかに右か左に音量が移っていくような演出ができます<br>
 </dd>
 </dl>
 <br>
-<font color="#FF0000">���̃��\�b�h���g�����A���L�̃��\�b�h���g�����Ƃ𐄏����܂�</font><br>
-���L�̃��\�b�h���g�p������ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo���Ȃ���MusicPlayer�ɔ��f����܂���B<br>
+<font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出さないとMusicPlayerに反映されません。<br>
 <ul>
 <li><a href="rf_setOggVolume.html">oggVolume</a></li>
 <li><a href="rf_setOggTempo.html">oggTempo</a></li>
 <li><a href="rf_setOggPan.html">oggPan</a></li>
 </ul>
-  <h3>��</h3>
-  �i�\�� test.mid ��Tonyu�ɓo�^���Ă����Ă��������j<br>
-  �i�\�� test.ogg ���v���W�F�N�g�̃t�H���_�ɒu���Ă��������j<br>
+  <h3>例</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
 <pre>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
-$mplayer.updatePlayInfo(); // �X�V
-$mplayer.play($se_test, 0); // Tonyu�J�����łł́A�v���W�F�N�g���J���Ă����xmidi���Đ����Ȃ���ogg���Đ��ł��Ȃ�
+$mplayer.updatePlayInfo(); // 更新
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、プロジェクトを開いてから一度midiを再生しないとoggを再生できない
 wait(20);
 $mplayer.stop();
 wait(20);
-$mplayer.play("test.ogg", 1); // �Đ�
+$mplayer.play("test.ogg", 1); // 再生
 oggVolume = 127;
 oggTempo  = 1;
 oggPan    = 0;
 v = 1;
 while (1) {
-  if (getkey(65) > 0 && oggVolume >      0) oggVolume --;        // A:���ʁ|
-  if (getkey(83) > 0 && oggVolume <    127) oggVolume ++;        // S:���ʁ{
-  if (getkey(68) > 0 && oggTempo  >  0.001) oggTempo  -= 0.125;  // D:�e���|�|
-  if (getkey(70) > 0 && oggTempo  <  8    ) oggTempo  += 0.125;  // F:�e���|�{
-  if (getkey(71) > 0 && oggPan    >   -1.0) oggPan    -= 1 / 64; // G:�p���|
-  if (getkey(72) > 0 && oggPan    <    1.0) oggPan    += 1 / 64; // H:�p���{
-  if (v % 6 == 0) { // �P�b�Ԃ�10��X�V
-    $mplayer.<strong>setDynamicEffectOgg</strong>(oggVolume, oggTempo, oggPan); // �G�t�F�N�g�ݒ�
-    $mplayer.updatePlayInfo(); // �X�V
+  if (getkey(65) > 0 && oggVolume >      0) oggVolume --;        // A:音量－
+  if (getkey(83) > 0 && oggVolume <    127) oggVolume ++;        // S:音量＋
+  if (getkey(68) > 0 && oggTempo  >  0.001) oggTempo  -= 0.125;  // D:テンポ－
+  if (getkey(70) > 0 && oggTempo  <  8    ) oggTempo  += 0.125;  // F:テンポ＋
+  if (getkey(71) > 0 && oggPan    >   -1.0) oggPan    -= 1 / 64; // G:パン－
+  if (getkey(72) > 0 && oggPan    <    1.0) oggPan    += 1 / 64; // H:パン＋
+  if (v % 6 == 0) { // １秒間に10回更新
+    $mplayer.<strong>setDynamicEffectOgg</strong>(oggVolume, oggTempo, oggPan); // エフェクト設定
+    $mplayer.updatePlayInfo(); // 更新
   }
-  drawText(100,  0, "���ʁ@�F" + oggVolume, $clWhite);
-  drawText(100, 20, "�e���|�F" + oggTempo , $clWhite);
-  drawText(100, 40, "�p���@�F" + oggPan   , $clWhite);
+  drawText(100,  0, "音量　：" + oggVolume, $clWhite);
+  drawText(100, 20, "テンポ：" + oggTempo , $clWhite);
+  drawText(100, 40, "パン　：" + oggPan   , $clWhite);
   v++;
   update();
 }
 </pre>
   <br>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

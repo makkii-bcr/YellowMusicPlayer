@@ -8,37 +8,37 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éu•W€‚Ì‹@”\v (Midi)</h2>
-  ¦ utest.midv‚ğ—pˆÓ‚µ‚ÄA‚ ‚ç‚©‚¶‚ßTonyu‚Å“o˜^‚µ‚Ä‚¨‚¢‚Ä‚­‚¾‚³‚¢B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€Œæ¨™æº–ã®æ©Ÿèƒ½ã€ (Midi)</h2>
+  â€» ã€Œtest.midã€ã‚’ç”¨æ„ã—ã¦ã€ã‚ã‚‰ã‹ã˜ã‚Tonyuã§ç™»éŒ²ã—ã¦ãŠã„ã¦ãã ã•ã„ã€‚<br>
   <br>
   <br>
-  ]—ˆ‚Ì$mplayer‚Ì‹@”\‚ğg‚Á‚Ä‚İ‚Ü‚·B<br>
+  å¾“æ¥ã®$mplayerã®æ©Ÿèƒ½ã‚’ä½¿ã£ã¦ã¿ã¾ã™ã€‚<br>
   <br>
-  ‚Ü‚¸‚ÍA]—ˆ‚Ì$mplayer‚©‚ç‚»‚Ì‚Ü‚Üƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ä‚İ‚Ü‚µ‚å‚¤B<br>
+  ã¾ãšã¯ã€å¾“æ¥ã®$mplayerã‹ã‚‰ãã®ã¾ã¾ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦ã¿ã¾ã—ã‚‡ã†ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
 while (1) {
-  if (getkey(90) == 1) $mplayer.play($se_test ,1); // Z:Ä¶
-  if (getkey(88) == 1) $mplayer.stop();            // X:’â~
+  if (getkey(90) == 1) $mplayer.play($se_test ,1); // Z:å†ç”Ÿ
+  if (getkey(88) == 1) $mplayer.stop();            // X:åœæ­¢
   
   update();
 }
 </pre>
   <br>
-  Ÿ‚ÉAYmplayer‚©‚çƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ä‚İ‚Ü‚·B<br>
+  æ¬¡ã«ã€Ymplayerã‹ã‚‰ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦ã¿ã¾ã™ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
-<strong>$mplayer = new Ymplayer();</strong> // $mplayer‚ğYmplayer‚Åã‘‚«
+<strong>$mplayer = new Ymplayer();</strong> // $mplayerã‚’Ymplayerã§ä¸Šæ›¸ã
 while (1) {
   if (getkey(90) == 1) $mplayer.<strong>play</strong>($se_test ,1); // Z
   if (getkey(88) == 1) $mplayer.<strong>stop</strong>();            // X
@@ -47,22 +47,22 @@ while (1) {
 }
 </pre>
   <br>
-  ]—ˆ‚Æ‚Ü‚Á‚½‚­“¯‚¶•û–@‚Åg‚¦‚Ü‚·B<br>
-  ‚Ü‚½A]—ˆ‚Æ“¯‚¶‚­midiˆÈŠO‚É‚àAwav‚âmzo‚àÄ¶‚Å‚«‚Ü‚·B<br>
+  å¾“æ¥ã¨ã¾ã£ãŸãåŒã˜æ–¹æ³•ã§ä½¿ãˆã¾ã™ã€‚<br>
+  ã¾ãŸã€å¾“æ¥ã¨åŒã˜ãmidiä»¥å¤–ã«ã‚‚ã€wavã‚„mzoã‚‚å†ç”Ÿã§ãã¾ã™ã€‚<br>
   <br>
-  ‚¿‚È‚İ‚ÉAstop() ‚Í Midi‚ÆOgg‚Ì—¼•û‚É‘Î‚µ‚ÄA–½—ß‚ªÀs‚³‚ê‚Ü‚·B<br>
-  stop(1) ‚É‚·‚é‚ÆAMidi‚É‘Î‚µ‚Ä‚Ì‚İ–½—ß‚ªÀs‚³‚ê‚Ü‚·B<br>
+  ã¡ãªã¿ã«ã€stop() ã¯ Midiã¨Oggã®ä¸¡æ–¹ã«å¯¾ã—ã¦ã€å‘½ä»¤ãŒå®Ÿè¡Œã•ã‚Œã¾ã™ã€‚<br>
+  stop(1) ã«ã™ã‚‹ã¨ã€Midiã«å¯¾ã—ã¦ã®ã¿å‘½ä»¤ãŒå®Ÿè¡Œã•ã‚Œã¾ã™ã€‚<br>
   <br>
-  Ymplayer‚Ì play(), stop() ‚Íogg‚É‚à‘Î‰‚·‚é‚½‚ß‚ÉA<br>
-  ]—ˆ‚Ì play(), stop() ‚É‰ü—Ç‚ª‰Á‚¦‚ç‚ê‚Ä‚¢‚Ü‚·B<br>
+  Ymplayerã® play(), stop() ã¯oggã«ã‚‚å¯¾å¿œã™ã‚‹ãŸã‚ã«ã€<br>
+  å¾“æ¥ã® play(), stop() ã«æ”¹è‰¯ãŒåŠ ãˆã‚‰ã‚Œã¦ã„ã¾ã™ã€‚<br>
   <br>
-  ˆÈ‰º‚Ìƒy[ƒW‚ÉÚ‚µ‚¢g‚¢•û‚ªÚ‚Á‚Ä‚¢‚Ü‚·B<br>
+  ä»¥ä¸‹ã®ãƒšãƒ¼ã‚¸ã«è©³ã—ã„ä½¿ã„æ–¹ãŒè¼‰ã£ã¦ã„ã¾ã™ã€‚<br>
   <ul>
    <li><a href="../reference/rf_play.html">play()</a></li>
    <li><a href="../reference/rf_stop.html">stop()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

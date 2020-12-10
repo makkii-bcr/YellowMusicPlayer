@@ -8,30 +8,30 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setMidiStartTick</h2>
-  Midi�̉��t�J�n�ʒu��ύX���܂��B<br>
-  Midi���ŏ�����łȂ��A����̎��Ԃ��牉�t�������Ƃ��Ɏg���܂��B<br>
+  Midiの演奏開始位置を変更します。<br>
+  Midiを最初からでなく、特定の時間から演奏したいときに使います。<br>
   <br>
-  �J�n�ʒu�w��̒P�ʂ́A�b�ł͂Ȃ��e�B�b�N�ł��B<br>
-  �e�B�b�N�Ƃ́AMidi�t�@�C���̎��Ԃ̒P�ʂł��B�x�[�X�J�E���g��e���|�ɂ���Ď��Ԃ̒��������܂�܂��B<br>
-  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>���g���A<a href="rf_getPlayerMidiTick.html">getPlayerMidiTick()</a>��<a href="rf_getMidiTotalTime.html">getMidiTotalTime()</a>�Ńe�B�b�N�𒲂ׂ邱�Ƃ��ł��܂��B<br>
+  開始位置指定の単位は、秒ではなくティックです。<br>
+  ティックとは、Midiファイルの時間の単位です。ベースカウントやテンポによって時間の長さが決まります。<br>
+  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を使い、<a href="rf_getPlayerMidiTick.html">getPlayerMidiTick()</a>や<a href="rf_getMidiTotalTime.html">getMidiTotalTime()</a>でティックを調べることができます。<br>
   <br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   
-  <h3>����</h3>
+  <h3>書式</h3>
 <pre>
 setMidiStartTick(startTick)
 </pre>
 <dl>
 <dt>startTick</dt>
-<dd>���t�J�n����e�B�b�N���w��(1�`(���t����midi�̑��e�B�b�N-1))�A�w�肵�Ȃ��Ȃ�0<br>
- 0�ȊO�̒l�ɂ���ƁA�ŏ�����midi�̖`���̋󔒃X�L�b�v���s���܂���i���[�v��͍s���܂��j</dd>
+<dd>演奏開始するティックを指定(1～(演奏するmidiの総ティック-1))、指定しないなら0<br>
+ 0以外の値にすると、最初だけmidiの冒頭の空白スキップが行われません（ループ後は行われます）</dd>
 </dl>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

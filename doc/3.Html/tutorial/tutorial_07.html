@@ -8,100 +8,100 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;�`���[�g���A��&nbsp;
+   &nbsp;チュートリアル&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>�g���Ă݂�uMusicPlayer�̏�Ԃ��擾����v</h2>
-  MusicPlayer����A�uMidi,Ogg�̏�ԁv�u�Đ�����Midi,Ogg�̏��v�u�R���s���[�^���̓��t�Ǝ����v<br>
-  �u�f�B�X�v���C�̉𑜓x�v�uOS�̃o�[�W�����v�u�W���C�X�e�B�b�N�̐ڑ���ԁv���擾�ł��܂��B<br>
-  �� ���ۂ����ۂɎ擾�ł��鍀�ڂł��B<br>
+  <h2>使ってみる「MusicPlayerの状態を取得する」</h2>
+  MusicPlayerから、「Midi,Oggの状態」「再生中のMidi,Oggの情報」「コンピュータ内の日付と時刻」<br>
+  「ディスプレイの解像度」「OSのバージョン」「ジョイスティックの接続状態」が取得できます。<br>
+  ※ 白丸が実際に取得できる項目です。<br>
   <br>
   <ul>
-   <li>Midi�̏��</li>
+   <li>Midiの状態</li>
    <ul>
-    <li>����Midi�́A�Đ�������~�����ꎞ��~����</li>
-    <li>���t����Midi�ԍ��iMusicPlayer�Ŋ���U��ꂽ�ԍ��j</li>
+    <li>現在Midiは、再生中か停止中か一時停止中か</li>
+    <li>演奏中のMidi番号（MusicPlayerで割り振られた番号）</li>
     <ul>
-     <li>���v���W�F�N�g��Midi��o�^�������ԂɁA0����ԍ�������U���܂��B<br>
-         <s>256��(255��)�܂Ő���Ɋ���U���܂����A257��(256��)�ȍ~�͑S��255�ԂɂȂ�܂��B</s><br>
-         <font color="#FF0000">65536��(65535��)�܂Ő���Ɋ���U���܂����A65537��(65536��)�ȍ~�͑S��65535�ԂɂȂ�܂��B(ver2.20����ύX)</font></li>
+     <li>↑プロジェクトでMidiを登録した順番に、0から番号が割り振られます。<br>
+         <s>256個(255番)まで正常に割り振られますが、257個(256番)以降は全て255番になります。</s><br>
+         <font color="#FF0000">65536個(65535番)まで正常に割り振られますが、65537個(65536番)以降は全て65535番になります。(ver2.20から変更)</font></li>
     </ul>
-    <li>���t����Midi�́A���݂̃f�[�^���̃e���|</li>
-    <li>���t����Midi�́A���݂̃e�B�b�N</li>
-    <li>���݂�Midi�f�[�^���ł̉��t����(�~���b�P��)</li>
-    <li>Midi���Đ����Ă���̃��[�v��</li>
+    <li>演奏中のMidiの、現在のデータ内のテンポ</li>
+    <li>演奏中のMidiの、現在のティック</li>
+    <li>現在のMidiデータ内での演奏時間(ミリ秒単位)</li>
+    <li>Midiを再生してからのループ回数</li>
    </ul>
-   <li>���t����Midi�̏��</li>
+   <li>演奏中のMidiの情報</li>
    <ul>
-    <li>�x�[�X�J�E���g</li>
-    <li>���e�B�b�N</li>
-    <li>�����t���ԁi�~���b�P�ʁj</li>
-    <li>�ŏ��̔����e�B�b�N</li>
-    <li>�ŏ��̔����̎��ԁi�~���b�P�ʁj</li>
-    <li>�Ō�̔����e�B�b�N</li>
-    <li>�Ō�̔����̎��ԁi�~���b�P�ʁj</li>
-    <li>CC#111�̈ʒu�i�e�B�b�N�P�ʁj</li>
-    <li>CC#111�̈ʒu�i�~���b�P�ʁj</li>
+    <li>ベースカウント</li>
+    <li>総ティック</li>
+    <li>総演奏時間（ミリ秒単位）</li>
+    <li>最初の発音ティック</li>
+    <li>最初の発音の時間（ミリ秒単位）</li>
+    <li>最後の発音ティック</li>
+    <li>最後の発音の時間（ミリ秒単位）</li>
+    <li>CC#111の位置（ティック単位）</li>
+    <li>CC#111の位置（ミリ秒単位）</li>
    </ul>
-   <li>Ogg�̏��</li>
+   <li>Oggの状態</li>
    <ul>
-    <li>����Ogg�́A�Đ�������~�����ꎞ��~����</li>
-    <li>�Đ�����Ogg�̃t�@�C�����i�g���q(.ogg)���܂ށj</li>
-    <li>���݂�Ogg�f�[�^���ł̉��t����(�~���b�P��)</li>
-    <li>Ogg���Đ����Ă���̃��[�v��</li>
+    <li>現在Oggは、再生中か停止中か一時停止中か</li>
+    <li>再生中のOggのファイル名（拡張子(.ogg)も含む）</li>
+    <li>現在のOggデータ内での演奏時間(ミリ秒単位)</li>
+    <li>Oggを再生してからのループ回数</li>
    </ul>
-   <li>�Đ�����Ogg�̏��</li>
+   <li>再生中のOggの情報</li>
    <ul>
-    <li>�`�����l����</li>
-    <li>�T���v�����O���[�g</li>
-    <li>���Đ����ԁi�~���b�P�ʁj</li>
-    <li>���T���v�����O��</li>
-    <li>Ogg���[�v�̊J�n�ʒu�i�~���b�P�ʁj�iOgg���[�v�ɑΉ����Ă���ꍇ�j</li>
-    <li>Ogg���[�v�̏I���ʒu�i�~���b�P�ʁj�iOgg���[�v�ɑΉ����Ă���ꍇ�j</li>
+    <li>チャンネル数</li>
+    <li>サンプリングレート</li>
+    <li>総再生時間（ミリ秒単位）</li>
+    <li>総サンプリング数</li>
+    <li>Oggループの開始位置（ミリ秒単位）（Oggループに対応している場合）</li>
+    <li>Oggループの終了位置（ミリ秒単位）（Oggループに対応している場合）</li>
    </ul>
-   <li>�R���s���[�^���̓��t�Ǝ���</li>
+   <li>コンピュータ内の日付と時刻</li>
    <ul>
-    <li>���݂̎����u���v</li>
-    <li>���݂̎����u���v</li>
-    <li>���݂̎����u�b�v</li>
-    <li>���݂̎����u�~���b�v</li>
-    <li>���݂̓��t�u�N�v</li>
-    <li>���݂̓��t�u���v</li>
-    <li>���݂̓��t�u���v</li>
-    <li>���݂̓��t�u�j���v(0:��,1:��,2:��,�c,6:�y)</li>
+    <li>現在の時刻「時」</li>
+    <li>現在の時刻「分」</li>
+    <li>現在の時刻「秒」</li>
+    <li>現在の時刻「ミリ秒」</li>
+    <li>現在の日付「年」</li>
+    <li>現在の日付「月」</li>
+    <li>現在の日付「日」</li>
+    <li>現在の日付「曜日」(0:日,1:月,2:火,…,6:土)</li>
    </ul>
-   <li>�f�B�X�v���C�̉𑜓x</li>
+   <li>ディスプレイの解像度</li>
    <ul>
-    <li>�f�B�X�v���C�̉𑜓x�u���v</li>
-    <li>�f�B�X�v���C�̉𑜓x�u�����v</li>
+    <li>ディスプレイの解像度「幅」</li>
+    <li>ディスプレイの解像度「高さ」</li>
    </ul>
-   <li>OS(Windows)�̃o�[�W����</li>
+   <li>OS(Windows)のバージョン</li>
    <ul>
-    <li>OS�̎�ށiNT�n��9x�n���j</li>
-    <li>OS�́u���W���[�o�[�W�����v</li>
-    <li>OS�́u�}�C�i�[�o�[�W�����v</li>
+    <li>OSの種類（NT系か9x系か）</li>
+    <li>OSの「メジャーバージョン」</li>
+    <li>OSの「マイナーバージョン」</li>
    </ul>
-   <li>�W���C�X�e�B�b�N�̐ڑ����</li>
+   <li>ジョイスティックの接続状態</li>
    <ul>
-    <li>ID��1�܂���2�̃W���C�X�e�B�b�N��PC�ɐڑ�����Ă��邩</li>
+    <li>IDが1または2のジョイスティックがPCに接続されているか</li>
    </ul>
   </ul>
-  MusicPlayer�̏�Ԃ��擾����菇�F
+  MusicPlayerの状態を取得する手順：
   <ol>
-   <li><a href="../reference/rf_setGettingPlayerStatus.html">setGetMode()</a>�ŁAMusicPlayer�̏�Ԏ擾�@�\��ON�ɂ��܂��B</li>
-   <li><a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>�ŁA��Ԏ擾�@�\��ON�ɂ������Ƃ�MusicPlayer�ɔ��f�����܂��B</li>
-   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a>��MusicPlayer�������Tonyu���Ŏ󂯎��܂��B<br>
-   �� MusicPlayer�̏�Ԏ擾�@�\��ON�ɂ���ƁAMusicPlayer���t�@�C���̏������݂����܂��B</li>
-   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()�̃y�[�W</a>�ɂ���Aget�`()���g���Ǝ��ۂɏ�񂪎擾�ł��܂��B</li>
+   <li><a href="../reference/rf_setGettingPlayerStatus.html">setGetMode()</a>で、MusicPlayerの状態取得機能をONにします。</li>
+   <li><a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>で、状態取得機能をONにしたことをMusicPlayerに反映させます。</li>
+   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a>でMusicPlayerから情報をTonyu側で受け取ります。<br>
+   ※ MusicPlayerの状態取得機能をONにすると、MusicPlayerがファイルの書き込みをします。</li>
+   <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()のページ</a>にある、get～()を使うと実際に情報が取得できます。</li>
   </ol>
   <br>
-  �g�����́A�ȉ��̃y�[�W���Q�Ƃ��Ă��������B<br>
+  使い方は、以下のページを参照してください。<br>
   <ul>
    <li><a href="../reference/rf_setGettingPlayerStatus.html">setGetMode()</a></li>
    <li><a href="../reference/rf_getPlayerStatus.html">getPlayerStatus()</a></li>
   </ul>
-  <a href="../tutorial.html">�߂�</a>
+  <a href="../tutorial.html">戻る</a>
   <hr>
  </body>
 </html>

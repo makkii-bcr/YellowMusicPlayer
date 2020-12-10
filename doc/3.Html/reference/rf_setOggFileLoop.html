@@ -8,26 +8,26 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setOggFileLoop</h2>
-  Ogg�t�@�C����Ogg���[�v���g�p���邩ON/OFF��ݒ肵�܂��B<br>
-  Ogg�t�@�C����Ogg���[�v(RPG�c�N�[���p���[�v)�ɑΉ����Ă���ꍇ�́A���̃��[�v���g���܂��B<br>
+  OggファイルのOggループを使用するかON/OFFを設定します。<br>
+  OggファイルがOggループ(RPGツクール用ループ)に対応している場合は、そのループを使います。<br>
   <br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   
-  <h3>����</h3>
+  <h3>書式</h3>
 <pre>
 setOggFileLoop(fileLoop)
 </pre>
 <dl>
 <dt>fileLoop</dt>
-<dd>Ogg�t�@�C����Ogg���[�v(RPG�c�N�[���p���[�v)�ɑΉ����Ă��āA���̃��[�v���g���Ȃ�1�A�g��Ȃ��Ȃ�0<br>
- �� �Ή����Ă��Ȃ�������ʏ�̃��[�v�ɂȂ邪�AfileLoop �� 1 �Ȃ� <a href="rf_setOggloopStartTime.html">setOggloopStartTime()</a>, <a href="rf_setOggloopEndTime.html">setOggloopEndTime()</a> �̐ݒ�͖��������</dd>
+<dd>OggファイルがOggループ(RPGツクール用ループ)に対応していて、そのループを使うなら1、使わないなら0<br>
+ ※ 対応していなかったら通常のループになるが、fileLoop が 1 なら <a href="rf_setOggloopStartTime.html">setOggloopStartTime()</a>, <a href="rf_setOggloopEndTime.html">setOggloopEndTime()</a> の設定は無視される</dd>
 </dl>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

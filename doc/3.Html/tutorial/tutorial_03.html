@@ -8,62 +8,62 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éu‰¹—Ê’²ßEƒeƒ“ƒ|’²ßEƒsƒbƒ`’²ßv (Midi)</h2>
-  ‚±‚ê‚ç‚Ìİ’è‚ÍA‰‰‘t’†‚É“®“I‚É•Ï‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€ŒéŸ³é‡èª¿ç¯€ãƒ»ãƒ†ãƒ³ãƒèª¿ç¯€ãƒ»ãƒ”ãƒƒãƒèª¿ç¯€ã€ (Midi)</h2>
+  ã“ã‚Œã‚‰ã®è¨­å®šã¯ã€æ¼”å¥ä¸­ã«å‹•çš„ã«å¤‰ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚<br>
   <br>
-  <a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a>‚Å‰¹—ÊA<br>
-  <a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a>‚Åƒeƒ“ƒ|A<br>
-  <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>‚Åƒsƒbƒ`‚ğ’²ß‚Å‚«‚Ü‚·B<br>
+  <a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a>ã§éŸ³é‡ã€<br>
+  <a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a>ã§ãƒ†ãƒ³ãƒã€<br>
+  <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>ã§ãƒ”ãƒƒãƒã‚’èª¿ç¯€ã§ãã¾ã™ã€‚<br>
   <br>
-  ã‹L‚Ìƒƒ\ƒbƒh‚ğg‚Á‚½Œã‚ÉA<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>‚ğg‚¤‚ÆAİ’è‚ªMusicPlayer‚É”½‰f‚³‚ê‚Ü‚·B<br>
+  ä¸Šè¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã£ãŸå¾Œã«ã€<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>ã‚’ä½¿ã†ã¨ã€è¨­å®šãŒMusicPlayerã«åæ˜ ã•ã‚Œã¾ã™ã€‚<br>
   <br>
-  ¦ <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>‚ğg‚¤‚Æ‚«‚ÍA<a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>‚Åƒ}ƒXƒ^[ƒsƒbƒ`‹@”\‚ğON‚É‚µ‚Ä‚©‚çÄ¶‚µ‚Ä‚­‚¾‚³‚¢B<br>
+  â€» <a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a>ã‚’ä½¿ã†ã¨ãã¯ã€<a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>ã§ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½ã‚’ONã«ã—ã¦ã‹ã‚‰å†ç”Ÿã—ã¦ãã ã•ã„ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
-$mplayer.<strong2>setMidiMasterPitch</strong2>(1); // ƒ}ƒXƒ^[ƒsƒbƒ`‹@”\‚ğON‚É‚·‚é(setMidiPitch()‚ğg‚¤‚½‚ß)
-$mplayer.<strong>updatePlayInfo</strong>(); // XV
-$mplayer.play($se_test, 1); // Ä¶
+$mplayer.<strong2>setMidiMasterPitch</strong2>(1); // ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½ã‚’ONã«ã™ã‚‹(setMidiPitch()ã‚’ä½¿ã†ãŸã‚)
+$mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
+$mplayer.play($se_test, 1); // å†ç”Ÿ
 midiVolume = 127;
 midiTempo  = 1;
 midiPitch  = 0;
 v = 1;
 while (1) {
-  if (getkey(65) > 0 && midiVolume >     0) midiVolume --;       // A:‰¹—Ê|
-  if (getkey(83) > 0 && midiVolume <   127) midiVolume ++;       // S:‰¹—Ê{
-  if (getkey(68) > 0 && midiTempo  >   0.1) midiTempo  -= 0.125; // D:ƒeƒ“ƒ||
-  if (getkey(70) > 0 && midiTempo  <   8  ) midiTempo  += 0.125; // F:ƒeƒ“ƒ|{
-  if (getkey(71) > 0 && midiPitch  > -8192) midiPitch  -= 64;    // G:ƒsƒbƒ`|
-  if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ƒsƒbƒ`{
-  if (v % 6 == 0) { // ‚P•bŠÔ‚É10‰ñXV
-    $mplayer.<strong>setMidiVolume</strong>(midiVolume); // ‰¹—Êİ’è
-    $mplayer.<strong>setMidiTempo</strong>(midiTempo);   // ƒeƒ“ƒ|İ’è
-    $mplayer.<strong>setMidiPitch</strong>(midiPitch);   // ƒsƒbƒ`İ’è
-    $mplayer.<strong>updatePlayInfo</strong>(); // XV
+  if (getkey(65) > 0 && midiVolume >     0) midiVolume --;       // A:éŸ³é‡ï¼
+  if (getkey(83) > 0 && midiVolume <   127) midiVolume ++;       // S:éŸ³é‡ï¼‹
+  if (getkey(68) > 0 && midiTempo  >   0.1) midiTempo  -= 0.125; // D:ãƒ†ãƒ³ãƒï¼
+  if (getkey(70) > 0 && midiTempo  <   8  ) midiTempo  += 0.125; // F:ãƒ†ãƒ³ãƒï¼‹
+  if (getkey(71) > 0 && midiPitch  > -8192) midiPitch  -= 64;    // G:ãƒ”ãƒƒãƒï¼
+  if (getkey(72) > 0 && midiPitch  <  8191) midiPitch  += 64;    // H:ãƒ”ãƒƒãƒï¼‹
+  if (v % 6 == 0) { // ï¼‘ç§’é–“ã«10å›æ›´æ–°
+    $mplayer.<strong>setMidiVolume</strong>(midiVolume); // éŸ³é‡è¨­å®š
+    $mplayer.<strong>setMidiTempo</strong>(midiTempo);   // ãƒ†ãƒ³ãƒè¨­å®š
+    $mplayer.<strong>setMidiPitch</strong>(midiPitch);   // ãƒ”ãƒƒãƒè¨­å®š
+    $mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
   }
-  drawText(100,  0, "‰¹—Ê@F" + midiVolume, $clWhite);
-  drawText(100, 20, "ƒeƒ“ƒ|F" + midiTempo , $clWhite);
-  drawText(100, 40, "ƒsƒbƒ`F" + midiPitch , $clWhite);
+  drawText(100,  0, "éŸ³é‡ã€€ï¼š" + midiVolume, $clWhite);
+  drawText(100, 20, "ãƒ†ãƒ³ãƒï¼š" + midiTempo , $clWhite);
+  drawText(100, 40, "ãƒ”ãƒƒãƒï¼š" + midiPitch , $clWhite);
   v ++;
   update();
 }
 </pre>
   <br>
-  ƒƒ\ƒbƒh‚ÌÚ×<br>
+  ãƒ¡ã‚½ãƒƒãƒ‰ã®è©³ç´°<br>
   <ul>
    <li><a href="../reference/rf_setMidiVolume.html">setMidiVolume()</a></li>
    <li><a href="../reference/rf_setMidiTempo.html">setMidiTempo()</a></li>
    <li><a href="../reference/rf_setMidiPitch.html">setMidiPitch()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

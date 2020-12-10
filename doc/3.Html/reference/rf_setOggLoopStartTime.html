@@ -8,29 +8,29 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setOggLoopStartTime</h2>
-  Ogg�̃��[�v������ɖ߂�Đ��ʒu(���[�v�n�[)��ύX���܂��B<br>
+  Oggのループした後に戻る再生位置(ループ始端)を変更します。<br>
   <br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
   
-  <h3>����</h3>
+  <h3>書式</h3>
 <pre>
 setOggLoopStartTime(loopStartTime)
 </pre>
 <dl>
 <dt>loopStartTime</dt>
-<dd>���[�v������ɖ߂�Đ��ʒu(���[�v�n�[)���~���b�P�ʂŎw��(1�`(�Đ�����ogg�̑��Đ�����-40))�A�w�肵�Ȃ��Ȃ�0</dd>
+<dd>ループした後に戻る再生位置(ループ始端)をミリ秒単位で指定(1～(再生するoggの総再生時間-40))、指定しないなら0</dd>
 </dl>
   <br>
-  <b>�ystartTime, loopStartTime, loopEndTime �̊֌W�z</b><br>
+  <b>【startTime, loopStartTime, loopEndTime の関係】</b><br>
   <img src="../res/rf_01.png" border=1><br>
   <br>
   <br>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

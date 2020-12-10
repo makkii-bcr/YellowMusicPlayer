@@ -8,41 +8,41 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setStaticEffectOgg</h2>
-  Ogg�̍Đ��O�E��~�O�ɂ��炩���ߐݒ肷��G�t�F�N�g�֌W�̍��ڂ��Z�b�g���܂�<br><br>
-  �ύX�������Ȃ����ڂ́A������null�ɂ�����A�ȗ������肵�Ă�������<br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
-  <h3>����</h3>
+  Oggの再生前・停止前にあらかじめ設定するエフェクト関係の項目をセットします<br><br>
+  変更したくない項目は、引数をnullにしたり、省略したりしてください<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
 <pre>
 setStaticEffectOgg(fadeInTime, fadeOutTime, startTime, loopStartTime, loopEndTime, fileLoop)
 </pre>
 <dl>
-<dt>fadeInTime(�ȗ��\)</dt>
-<dd>�t�F�[�h�C�����Ȃ���Đ����鎞�ԁi�~���b�j(1�`)�A�t�F�[�h�C�����Ȃ��Ȃ�0</dd>
-<dt>fadeOutTime(�ȗ��\)</dt>
-<dd>�t�F�[�h�A�E�g���Ȃ����~���鎞�ԁi�~���b�j(1�`)�A�t�F�[�h�A�E�g���Ȃ��Ȃ�0</dd>
-<dt>startTime(�ȗ��\)</dt>
-<dd>�Đ��J�n���鎞�Ԃ��~���b�P�ʂŎw��(1�`(�Đ�����ogg�̑��Đ�����-1))�A�w�肵�Ȃ��Ȃ�0<br>
-    �� loopEndTime��0�ȊO�̎��́A�l���w��ł���͈͂�(1�`loopEndTime)�ɂȂ�܂�</dd>
-<dt>loopStartTime(�ȗ��\)</dt>
-<dd>���[�v������ɖ߂�Đ��ʒu(���[�v�n�[)���~���b�P�ʂŎw��(1�`(�Đ�����ogg�̑��Đ�����-40))�A�w�肵�Ȃ��Ȃ�0</dd>
-<dt>loopEndTime(�ȗ��\)</dt>
-<dd>���[�v����Đ��ʒu(���[�v�I�[)���~���b�P�ʂŎw��(1�`(�Đ�����ogg�̑��Đ�����) �� loopStartTime + 40 �ȏ�)�A�w�肵�Ȃ��Ȃ�0</dd>
-<dt>fileLoop(�ȗ��\)</dt>
-<dd>Ogg�t�@�C����Ogg���[�v(RPG�c�N�[���p���[�v)�ɑΉ����Ă��āA���̃��[�v���g���Ȃ�1�A�g��Ȃ��Ȃ�0<br>
-    �� �Ή����Ă��Ȃ�������ʏ�̃��[�v�ɂȂ邪�AfileLoop �� 1 �Ȃ� loopStartTime, loopEndTime �̒l�͖��������</dd>
+<dt>fadeInTime(省略可能)</dt>
+<dd>フェードインしながら再生する時間（ミリ秒）(1～)、フェードインしないなら0</dd>
+<dt>fadeOutTime(省略可能)</dt>
+<dd>フェードアウトしながら停止する時間（ミリ秒）(1～)、フェードアウトしないなら0</dd>
+<dt>startTime(省略可能)</dt>
+<dd>再生開始する時間をミリ秒単位で指定(1～(再生するoggの総再生時間-1))、指定しないなら0<br>
+    ※ loopEndTimeが0以外の時は、値を指定できる範囲は(1～loopEndTime)になります</dd>
+<dt>loopStartTime(省略可能)</dt>
+<dd>ループした後に戻る再生位置(ループ始端)をミリ秒単位で指定(1～(再生するoggの総再生時間-40))、指定しないなら0</dd>
+<dt>loopEndTime(省略可能)</dt>
+<dd>ループする再生位置(ループ終端)をミリ秒単位で指定(1～(再生するoggの総再生時間) ＆ loopStartTime + 40 以上)、指定しないなら0</dd>
+<dt>fileLoop(省略可能)</dt>
+<dd>OggファイルがOggループ(RPGツクール用ループ)に対応していて、そのループを使うなら1、使わないなら0<br>
+    ※ 対応していなかったら通常のループになるが、fileLoop が 1 なら loopStartTime, loopEndTime の値は無視される</dd>
 </dl>
 <br>
-<b>�ystartTime, loopStartTime, loopEndTime �̊֌W�z</b><br>
+<b>【startTime, loopStartTime, loopEndTime の関係】</b><br>
 <img src="../res/rf_01.png" border=1><br>
 <br>
 <br>
-<font color="#FF0000">���̃��\�b�h���g�����A���L�̃��\�b�h���g�����Ƃ𐄏����܂�</font><br>
-���L�̃��\�b�h���g�p������ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo���Ȃ���MusicPlayer�ɔ��f����܂���B<br>
+<font color="#FF0000">このメソッドを使うより、下記のメソッドを使うことを推奨します</font><br>
+下記のメソッドを使用した後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出さないとMusicPlayerに反映されません。<br>
 <ul>
 <li><a href="rf_setOggFadeInTime.html">oggFadeInTime</a></li>
 <li><a href="rf_setOggFadeOutTime.html">oggFadeOutTime</a></li>
@@ -51,14 +51,14 @@ setStaticEffectOgg(fadeInTime, fadeOutTime, startTime, loopStartTime, loopEndTim
 <li><a href="rf_setOggLoopEndTime.html">oggLoopEndTime</a></li>
 <li><a href="rf_setOggFileLoop.html">oggFileLoop</a></li>
 </ul>
-  <h3>��</h3>
-  �i�\�� test.mid ��Tonyu�ɓo�^���Ă����Ă��������j<br>
-  �i�\�� test.ogg ���v���W�F�N�g�̃t�H���_�ɒu���Ă��������j<br>
+  <h3>例</h3>
+  （予め test.mid をTonyuに登録しておいてください）<br>
+  （予め test.ogg をプロジェクトのフォルダに置いてください）<br>
 <pre>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
-$mplayer.play($se_test, 0); // Tonyu�J�����łł́A�N�����Ă����xmidi���Đ����Ȃ���ogg���Đ��ł��Ȃ�
+$mplayer.play($se_test, 0); // Tonyu開発環境版では、起動してから一度midiを再生しないとoggを再生できない
 wait(20);
 $mplayer.stop();
 wait(20);
@@ -69,39 +69,39 @@ oggLoopStartTime = 0;
 oggLoopEndTime   = 0;
 oggFileLoop      = 0;
 while (1) {
-  if (getkey(65)  > 0 && oggFadeInTime    > 0) oggFadeInTime    -= 50;     // A:�t�F�[�h�C���|
-  if (getkey(83)  > 0)                         oggFadeInTime    += 50;     // S:�t�F�[�h�C���{
-  if (getkey(68)  > 0 && oggFadeOutTime   > 0) oggFadeOutTime   -= 50;     // D:�t�F�[�h�A�E�g�|
-  if (getkey(70)  > 0)                         oggFadeOutTime   += 50;     // F:�t�F�[�h�A�E�g�{
-  if (getkey(71)  > 0 && oggStartTime     > 0) oggStartTime     -= 100;    // G:�J�n�ʒu�|
-  if (getkey(72)  > 0)                         oggStartTime     += 100;    // H:�J�n�ʒu�{
-  if (getkey(74)  > 0 && oggLoopStartTime > 0) oggLoopStartTime -= 100;    // J:���[�v�J�n�ʒu�|
-  if (getkey(75)  > 0)                         oggLoopStartTime += 100;    // K:���[�v�J�n�ʒu�{
-  if (getkey(76)  > 0 && oggLoopEndTime   > 0) oggLoopEndTime   -= 100;    // L:���[�v�I���ʒu�|
-  if (getkey(187) > 0)                         oggLoopEndTime   += 100;    // ;:���[�v�I���ʒu�{
-  if (getkey(186) == 1)                        oggFileLoop = !oggFileLoop; // ::Ogg���[�vON/OFF
-  if (getkey(90) == 1) { // Z:�Đ�
-    $mplayer.<strong>setStaticEffectOgg</strong>(oggFadeInTime, null, oggStartTime, oggLoopStartTime, oggLoopEndTime, oggFileLoop); // �t�F�[�h�A�E�g�ȊO��ύX
-    $mplayer.updatePlayInfo(); // �X�V
+  if (getkey(65)  > 0 && oggFadeInTime    > 0) oggFadeInTime    -= 50;     // A:フェードイン－
+  if (getkey(83)  > 0)                         oggFadeInTime    += 50;     // S:フェードイン＋
+  if (getkey(68)  > 0 && oggFadeOutTime   > 0) oggFadeOutTime   -= 50;     // D:フェードアウト－
+  if (getkey(70)  > 0)                         oggFadeOutTime   += 50;     // F:フェードアウト＋
+  if (getkey(71)  > 0 && oggStartTime     > 0) oggStartTime     -= 100;    // G:開始位置－
+  if (getkey(72)  > 0)                         oggStartTime     += 100;    // H:開始位置＋
+  if (getkey(74)  > 0 && oggLoopStartTime > 0) oggLoopStartTime -= 100;    // J:ループ開始位置－
+  if (getkey(75)  > 0)                         oggLoopStartTime += 100;    // K:ループ開始位置＋
+  if (getkey(76)  > 0 && oggLoopEndTime   > 0) oggLoopEndTime   -= 100;    // L:ループ終了位置－
+  if (getkey(187) > 0)                         oggLoopEndTime   += 100;    // ;:ループ終了位置＋
+  if (getkey(186) == 1)                        oggFileLoop = !oggFileLoop; // ::OggループON/OFF
+  if (getkey(90) == 1) { // Z:再生
+    $mplayer.<strong>setStaticEffectOgg</strong>(oggFadeInTime, null, oggStartTime, oggLoopStartTime, oggLoopEndTime, oggFileLoop); // フェードアウト以外を変更
+    $mplayer.updatePlayInfo(); // 更新
     $mplayer.play("test.ogg", 1);
   }
-  if (getkey(88)==1) { // X:��~
-    $mplayer.setStaticEffectOgg(null, oggFadeOutTime, null, null); // �t�F�[�h�A�E�g�̂ݕύX
-    $mplayer.updatePlayInfo(); // �X�V
+  if (getkey(88)==1) { // X:停止
+    $mplayer.setStaticEffectOgg(null, oggFadeOutTime, null, null); // フェードアウトのみ変更
+    $mplayer.updatePlayInfo(); // 更新
     $mplayer.stop();
   }
   
-  drawText(100,   0, "�t�F�[�h�C���@�F" + oggFadeInTime   , $clWhite);
-  drawText(100,  20, "�t�F�[�h�A�E�g�F" + oggFadeOutTime  , $clWhite);
-  drawText(100,  40, "�J�n�ʒu�@�@�@�F" + oggStartTime    , $clWhite);
-  drawText(100,  60, "���[�v�J�n�ʒu�F" + oggLoopStartTime, $clWhite);
-  drawText(100,  80, "���[�v�I���ʒu�F" + oggLoopEndTime  , $clWhite);
-  drawText(100, 100, "Ogg���[�v�@�@ �F" + oggFileLoop     , $clWhite);
+  drawText(100,   0, "フェードイン　：" + oggFadeInTime   , $clWhite);
+  drawText(100,  20, "フェードアウト：" + oggFadeOutTime  , $clWhite);
+  drawText(100,  40, "開始位置　　　：" + oggStartTime    , $clWhite);
+  drawText(100,  60, "ループ開始位置：" + oggLoopStartTime, $clWhite);
+  drawText(100,  80, "ループ終了位置：" + oggLoopEndTime  , $clWhite);
+  drawText(100, 100, "Oggループ　　 ：" + oggFileLoop     , $clWhite);
   update();
 }
 </pre>
   <br>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

@@ -8,43 +8,43 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éuˆê’â~v (Midi)</h2>
-  ‚±‚±‚©‚ç‚ÍAYellowMusicPlayer‚Ì‹@”\‚É‚È‚è‚Ü‚·B<br>
-  ˆê’â~‚Æˆê’â~‚©‚ç‚ÌÄŠJ‚ğ‚µ‚Ü‚·B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€Œä¸€æ™‚åœæ­¢ã€ (Midi)</h2>
+  ã“ã“ã‹ã‚‰ã¯ã€YellowMusicPlayerã®æ©Ÿèƒ½ã«ãªã‚Šã¾ã™ã€‚<br>
+  ä¸€æ™‚åœæ­¢ã¨ä¸€æ™‚åœæ­¢ã‹ã‚‰ã®å†é–‹ã‚’ã—ã¾ã™ã€‚<br>
   <br>
-  <a href="../reference/rf_pause.html">pause()</a>‚Åˆê’â~A<a href="../reference/rf_restart.html">restart()</a>‚Åˆê’â~‚©‚ç‚ÌÄŠJ‚ª‚Å‚«‚Ü‚·B<br>
+  <a href="../reference/rf_pause.html">pause()</a>ã§ä¸€æ™‚åœæ­¢ã€<a href="../reference/rf_restart.html">restart()</a>ã§ä¸€æ™‚åœæ­¢ã‹ã‚‰ã®å†é–‹ãŒã§ãã¾ã™ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
-$mplayer = new Ymplayer(); // $mplayer‚ğYmplayer‚Åã‘‚«
+$mplayer = new Ymplayer(); // $mplayerã‚’Ymplayerã§ä¸Šæ›¸ã
 while (1) {
-  if (getkey(90) == 1) $mplayer.play($se_test ,1); // Z:Ä¶
-  if (getkey(88) == 1) $mplayer.stop();            // X:’â~
-  if (getkey(67) == 1) $mplayer.<strong>pause</strong>();           // C:ˆê’â~
-  if (getkey(86) == 1) $mplayer.<strong>restart</strong>();         // V:ˆê’â~‚©‚ç‚ÌÄŠJ
+  if (getkey(90) == 1) $mplayer.play($se_test ,1); // Z:å†ç”Ÿ
+  if (getkey(88) == 1) $mplayer.stop();            // X:åœæ­¢
+  if (getkey(67) == 1) $mplayer.<strong>pause</strong>();           // C:ä¸€æ™‚åœæ­¢
+  if (getkey(86) == 1) $mplayer.<strong>restart</strong>();         // V:ä¸€æ™‚åœæ­¢ã‹ã‚‰ã®å†é–‹
   
   update();
 }
 </pre>
   <br>
-  pause(), restart()‚ÆAƒƒ\ƒbƒh‚ğŒÄ‚Ño‚·‚¾‚¯‚Åg‚¦‚Ü‚·B<br>
+  pause(), restart()ã¨ã€ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã™ã ã‘ã§ä½¿ãˆã¾ã™ã€‚<br>
   <br>
-  ‚¿‚È‚İ‚ÉApause(),restart() ‚Í Midi‚ÆOgg‚Ì—¼•û‚É‘Î‚µ‚ÄA–½—ß‚ªÀs‚³‚ê‚Ü‚·B<br>
-  pause(1),restart(1) ‚É‚·‚é‚ÆAMidi‚É‘Î‚µ‚Ä‚Ì‚İ–½—ß‚ªÀs‚³‚ê‚Ü‚·B<br>
+  ã¡ãªã¿ã«ã€pause(),restart() ã¯ Midiã¨Oggã®ä¸¡æ–¹ã«å¯¾ã—ã¦ã€å‘½ä»¤ãŒå®Ÿè¡Œã•ã‚Œã¾ã™ã€‚<br>
+  pause(1),restart(1) ã«ã™ã‚‹ã¨ã€Midiã«å¯¾ã—ã¦ã®ã¿å‘½ä»¤ãŒå®Ÿè¡Œã•ã‚Œã¾ã™ã€‚<br>
   <br>
-  ˆÈ‰º‚Ìƒy[ƒW‚ÉÚ‚µ‚¢g‚¢•û‚ªÚ‚Á‚Ä‚¢‚Ü‚·B<br>
+  ä»¥ä¸‹ã®ãƒšãƒ¼ã‚¸ã«è©³ã—ã„ä½¿ã„æ–¹ãŒè¼‰ã£ã¦ã„ã¾ã™ã€‚<br>
   <ul>
    <li><a href="../reference/rf_pause.html">pause()</a></li>
    <li><a href="../reference/rf_restart.html">restart()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

@@ -8,21 +8,21 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éuÄ¶ƒIƒvƒVƒ‡ƒ“v (Midi)</h2>
-    ‚±‚ê‚ç‚Ìİ’è‚ÍA‰‰‘t‘O‚Éİ’è‚µ‚Ü‚·B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€Œå†ç”Ÿã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€ (Midi)</h2>
+    ã“ã‚Œã‚‰ã®è¨­å®šã¯ã€æ¼”å¥å‰ã«è¨­å®šã—ã¾ã™ã€‚<br>
   <br>
-  <a href="../reference/rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a>‚ÅMidi‚Ì–`“ª‚Ì‹ó”’ƒXƒLƒbƒvA<br>
-  <a href="../reference/rf_setMidiSkipEnding.html">setMidiSkipEnding()</a>‚ÅMidi‚Ì––”ö‚Ì‹ó”’ƒXƒLƒbƒvA<br>
-  <a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>‚ÅMidi‚Ìƒ}ƒXƒ^[ƒsƒbƒ`‹@”\‚ÌON/OFFA<br>
-  <a href="../reference/rf_setMidiNormalize.html">setMidiNormalize()</a>‚ÅMidi‚Ìƒm[ƒ}ƒ‰ƒCƒY‹@”\‚ÌON/OFFA<br>
-  <a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a>‚ÅMidiƒf[ƒ^’†‚ÌƒGƒNƒXƒNƒ‹[ƒVƒu‘—M‚ÌON/OFF‚ğAİ’è‚Å‚«‚Ü‚·B<br>
+  <a href="../reference/rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a>ã§Midiã®å†’é ­ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã€<br>
+  <a href="../reference/rf_setMidiSkipEnding.html">setMidiSkipEnding()</a>ã§Midiã®æœ«å°¾ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã€<br>
+  <a href="../reference/rf_setMidiMasterPitch.html">setMidiMasterPitch()</a>ã§Midiã®ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½ã®ON/OFFã€<br>
+  <a href="../reference/rf_setMidiNormalize.html">setMidiNormalize()</a>ã§Midiã®ãƒãƒ¼ãƒãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã®ON/OFFã€<br>
+  <a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a>ã§Midiãƒ‡ãƒ¼ã‚¿ä¸­ã®ã‚¨ã‚¯ã‚¹ã‚¯ãƒ«ãƒ¼ã‚·ãƒ–é€ä¿¡ã®ON/OFFã‚’ã€è¨­å®šã§ãã¾ã™ã€‚<br>
 
   <br>
-  ã‹L‚Ìƒƒ\ƒbƒh‚ğg‚Á‚½Œã‚ÉA<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>‚ğg‚¤‚ÆAİ’è‚ªMusicPlayer‚É”½‰f‚³‚ê‚Ü‚·B<br>
+  ä¸Šè¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã£ãŸå¾Œã«ã€<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>ã‚’ä½¿ã†ã¨ã€è¨­å®šãŒMusicPlayerã«åæ˜ ã•ã‚Œã¾ã™ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
@@ -35,34 +35,34 @@ midiMasterPitch   = 0;
 midiNormalize     = 0;
 midiExclusive     = 0;
 while (1) {
-  if (getkey(65) == 1) midiSkipBeginning = !midiSkipBeginning; // A:–`“ª‚Ì‹ó”’ƒXƒLƒbƒv
-  if (getkey(83) == 1) midiSkipEnding    = !midiSkipEnding;    // S:––”ö‚Ì‹ó”’ƒXƒLƒbƒv
-  if (getkey(68) == 1) midiMasterPitch   = !midiMasterPitch;   // D:ƒ}ƒXƒ^[ƒsƒbƒ`‹@”\
-  if (getkey(70) == 1) midiNormalize     = !midiNormalize;     // F:ƒm[ƒ}ƒ‰ƒCƒY‹@”\
-  if (getkey(71) == 1) midiExclusive     = !midiExclusive;     // G:ƒGƒNƒXƒNƒ‹[ƒVƒu‘—M
-  if (getkey(90) == 1) { // Z:Ä¶
-    $mplayer.<strong>setMidiSkipBeginning</strong>(midiSkipBeginning); // Midi‚Ì–`“ª‚Ì‹ó”’ƒXƒLƒbƒv‚ğİ’è
-    $mplayer.<strong>setMidiSkipEnding</strong>(midiSkipEnding);       // Midi‚Ì––”ö‚Ì‹ó”’ƒXƒLƒbƒv‚ğİ’è
-    $mplayer.<strong>setMidiMasterPitch</strong>(midiMasterPitch);     // Midi‚Ìƒ}ƒXƒ^[ƒsƒbƒ`‹@”\‚ÌON/OFF‚ğİ’è
-    $mplayer.<strong>setMidiNormalize</strong>(midiNormalize);         // Midi‚Ìƒm[ƒ}ƒ‰ƒCƒY‹@”\‚ÌON/OFF‚ğİ’è
-    $mplayer.<strong>setMidiExclusive</strong>(midiExclusive);         // Midiƒf[ƒ^’†‚ÌƒGƒNƒXƒNƒ‹[ƒVƒu‘—M‚ÌON/OFF‚ğİ’è
-    $mplayer.<strong>updatePlayInfo</strong>(); // XV
+  if (getkey(65) == 1) midiSkipBeginning = !midiSkipBeginning; // A:å†’é ­ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—
+  if (getkey(83) == 1) midiSkipEnding    = !midiSkipEnding;    // S:æœ«å°¾ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—
+  if (getkey(68) == 1) midiMasterPitch   = !midiMasterPitch;   // D:ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½
+  if (getkey(70) == 1) midiNormalize     = !midiNormalize;     // F:ãƒãƒ¼ãƒãƒ©ã‚¤ã‚ºæ©Ÿèƒ½
+  if (getkey(71) == 1) midiExclusive     = !midiExclusive;     // G:ã‚¨ã‚¯ã‚¹ã‚¯ãƒ«ãƒ¼ã‚·ãƒ–é€ä¿¡
+  if (getkey(90) == 1) { // Z:å†ç”Ÿ
+    $mplayer.<strong>setMidiSkipBeginning</strong>(midiSkipBeginning); // Midiã®å†’é ­ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã‚’è¨­å®š
+    $mplayer.<strong>setMidiSkipEnding</strong>(midiSkipEnding);       // Midiã®æœ«å°¾ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã‚’è¨­å®š
+    $mplayer.<strong>setMidiMasterPitch</strong>(midiMasterPitch);     // Midiã®ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½ã®ON/OFFã‚’è¨­å®š
+    $mplayer.<strong>setMidiNormalize</strong>(midiNormalize);         // Midiã®ãƒãƒ¼ãƒãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã®ON/OFFã‚’è¨­å®š
+    $mplayer.<strong>setMidiExclusive</strong>(midiExclusive);         // Midiãƒ‡ãƒ¼ã‚¿ä¸­ã®ã‚¨ã‚¯ã‚¹ã‚¯ãƒ«ãƒ¼ã‚·ãƒ–é€ä¿¡ã®ON/OFFã‚’è¨­å®š
+    $mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
     $mplayer.play($se_test, 1);
   }
-  if (getkey(88) == 1) { // X:’â~
+  if (getkey(88) == 1) { // X:åœæ­¢
     $mplayer.stop();
   }
   
-  drawText(100,  0, "–`“ª‚Ì‹ó”’ƒXƒLƒbƒv@F" + midiSkipBeginning, $clWhite);
-  drawText(100, 20, "––”ö‚Ì‹ó”’ƒXƒLƒbƒv@F" + midiSkipEnding   , $clWhite);
-  drawText(100, 40, "ƒ}ƒXƒ^[ƒsƒbƒ`‹@”\@F" + midiMasterPitch  , $clWhite);
-  drawText(100, 60, "ƒm[ƒ}ƒ‰ƒCƒY‹@”\@@F" + midiNormalize    , $clWhite);
-  drawText(100, 80, "ƒGƒNƒXƒNƒ‹[ƒVƒu‘—MF" + midiExclusive    , $clWhite);
+  drawText(100,  0, "å†’é ­ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã€€ï¼š" + midiSkipBeginning, $clWhite);
+  drawText(100, 20, "æœ«å°¾ã®ç©ºç™½ã‚¹ã‚­ãƒƒãƒ—ã€€ï¼š" + midiSkipEnding   , $clWhite);
+  drawText(100, 40, "ãƒã‚¹ã‚¿ãƒ¼ãƒ”ãƒƒãƒæ©Ÿèƒ½ã€€ï¼š" + midiMasterPitch  , $clWhite);
+  drawText(100, 60, "ãƒãƒ¼ãƒãƒ©ã‚¤ã‚ºæ©Ÿèƒ½ã€€ã€€ï¼š" + midiNormalize    , $clWhite);
+  drawText(100, 80, "ã‚¨ã‚¯ã‚¹ã‚¯ãƒ«ãƒ¼ã‚·ãƒ–é€ä¿¡ï¼š" + midiExclusive    , $clWhite);
   update();
 }
 </pre>
   <br>
-  ƒƒ\ƒbƒh‚ÌÚ×<br>
+  ãƒ¡ã‚½ãƒƒãƒ‰ã®è©³ç´°<br>
   <ul>
    <li><a href="../reference/rf_setMidiSkipBeginning.html">setMidiSkipBeginning()</a></li>
    <li><a href="../reference/rf_setMidiSkipEnding.html">setMidiSkipEnding()</a></li>
@@ -71,7 +71,7 @@ while (1) {
    <li><a href="../reference/rf_setMidiExclusive.html">setMidiExclusive()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

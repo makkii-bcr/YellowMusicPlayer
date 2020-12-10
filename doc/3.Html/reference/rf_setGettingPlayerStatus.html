@@ -8,23 +8,23 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.setGettingPlayerStatus</h2>
   <h2>Ymplayer.setGetMode</h2>
-  MusicPlayer�̏�Ԏ擾�@�\��L���E�����ɂ��܂�<br>
-  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>���g���ꍇ�ɁA�L���ɂ��܂�<br>
+  MusicPlayerの状態取得機能を有効・無効にします<br>
+  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を使う場合に、有効にします<br>
   <br>
-  �L���ɂ����MusicPlayer���������ݏ������s���܂�<br>
-  files�t�H���_�ɁuYMPStatus.dat�v���������܂�܂�<br>
+  有効にするとMusicPlayerが書き込み処理を行います<br>
+  filesフォルダに「YMPStatus.dat」が書き込まれます<br>
   <br>
-  �������ރ^�C�~���O�́AMidi, Ogg �̍Đ��E��~�E�ꎞ��~�E�ꎞ��~����ĊJ���s��ꂽ�ꍇ�ƁA<br>
-  ���L�̈���interval��1�`999�ɂ����Ƃ��́A����I�ɏ������ނ悤�ɂȂ�܂�<br>
+  書き込むタイミングは、Midi, Ogg の再生・停止・一時停止・一時停止から再開が行われた場合と、<br>
+  下記の引数intervalを1～999にしたときは、定期的に書き込むようになります<br>
   <br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
-  <h3>����</h3>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
 <pre>
 setGettingPlayerStatus(interval)
 </pre>
@@ -33,21 +33,21 @@ setGetMode(interval)
 </pre>
 <dl>
 <dt>interval</dt>
-<dd>0�ɂ���Ɩ����A<br>
+<dd>0にすると無効、<br>
 <br>
-1�`999�ɂ���ƗL���ŁAMusicPlayer������I�ɏ����������݂܂�<br>
-�l���������قǁA�������݂̕p�x�������Ȃ�܂�<br>
-�� 66.66 / interval ���v�Z����ƁA��b�Ԃɏ������݂��s����� <br>
-�@�@interval / 66.66 ���v�Z����ƁA�������݂��s���Ԋu�i�b�P�ʁj���킩��܂� <br>
-�@�@1��15�~���b���A2��30�~���b���A�c�A�̕p�x�ŏ������݂��s���܂�<br>
+1～999にすると有効で、MusicPlayerが定期的に情報を書き込みます<br>
+値が小さいほど、書き込みの頻度が多くなります<br>
+※ 66.66 / interval を計算すると、一秒間に書き込みが行われる回数 <br>
+　　interval / 66.66 を計算すると、書き込みを行う間隔（秒単位）がわかります <br>
+　　1で15ミリ秒毎、2で30ミリ秒毎、…、の頻度で書き込みを行います<br>
 <br>
-1000�ɂ���ƗL���ł����A����I�ȏ������݂͍s���܂���<br>
-Midi, Ogg �̍Đ��E��~�E�ꎞ��~�E�ꎞ��~����ĊJ�̎��̂݁A�������݂��s���܂�</dd>
+1000にすると有効ですが、定期的な書き込みは行われません<br>
+Midi, Ogg の再生・停止・一時停止・一時停止から再開の時のみ、書き込みが行われます</dd>
 </dl>
-  <h3>��</h3>
-  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>���Q��<br>
+  <h3>例</h3>
+  <a href="rf_getPlayerStatus.html">getPlayerStatus()</a>を参照<br>
   <br>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

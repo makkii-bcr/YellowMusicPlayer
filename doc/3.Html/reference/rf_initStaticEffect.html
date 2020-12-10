@@ -8,28 +8,28 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;���߃��t�@�����X&nbsp;
+   &nbsp;命令リファレンス&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.initStaticEffect</h2>
-  Midi�̍Đ��O�ɂ��炩���ߐݒ肷��e�G�t�F�N�g���ڂ��f�t�H���g�l�ɖ߂��܂�<br>
+  Midiの再生前にあらかじめ設定する各エフェクト項目をデフォルト値に戻します<br>
   <br>
-  Ymplayer�N���X�� new �Ő��������Ƃ��ɁA���̃��\�b�h�������I�ɌĂяo����܂�<br>
-  (�R���X�g���N�^�ŌĂяo���Ă��邽��)<br>
-  �� ���̃��\�b�h�̌�ɁA<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>���Ăяo�����ƂŁAMusicPlayer�ɔ��f����܂�<br>
-  <h3>����</h3>
+  Ymplayerクラスを new で生成したときに、このメソッドが自動的に呼び出されます<br>
+  (コンストラクタで呼び出しているため)<br>
+  ※ このメソッドの後に、<a href="rf_updatePlayingInfomation.html">updatePlayInfo()</a>を呼び出すことで、MusicPlayerに反映されます<br>
+  <h3>書式</h3>
 <pre>
 initStaticEffect()
 </pre>
-���L�̂悤�ɕϐ����f�t�H���g�l�ɂȂ�܂�<br>
+下記のように変数がデフォルト値になります<br>
 <ul>
 <li>midiFadeInTime  = 0;</li>
 <li>midiFadeOutTime = 0;</li>
 <li>midiStartTick   = 0;</li>
 <li>midiKeyShift    = 0;</li>
 </ul>
-  <a href="../reference.html">�߂�</a>
+  <a href="../reference.html">戻る</a>
   <hr>
  </body>
 </html>

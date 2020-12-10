@@ -8,49 +8,49 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;�`���[�g���A��&nbsp;
+   &nbsp;チュートリアル&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>�g���Ă݂�u�Đ��E��~�v (Ogg)</h2>
-  �� �utest.mid�v�Ɓutest.ogg�v��p�ӂ��āA�utest.mid�v�͂��炩����Tonyu�œo�^���Ă����Ă��������B<br>
-  �@�@�utest.ogg�v�̓v���W�F�N�g�̃t�H���_�ɒu���Ă��������B�idefault.tonyuprj������t�H���_�j<br>
-  �@�@Tonyu�J�����łł́A�v���W�F�N�g���J���Ă����x�ł�Midi��炳�Ȃ��ƁAOgg����܂���B<br>
-  �@�@Tonyu�����^�C���łł́AOgg����Đ����Ă���܂��B<br>
+  <h2>使ってみる「再生・停止」 (Ogg)</h2>
+  ※ 「test.mid」と「test.ogg」を用意して、「test.mid」はあらかじめTonyuで登録しておいてください。<br>
+  　　「test.ogg」はプロジェクトのフォルダに置いてください。（default.tonyuprjがあるフォルダ）<br>
+  　　Tonyu開発環境版では、プロジェクトを開いてから一度でもMidiを鳴らさないと、Oggが鳴りません。<br>
+  　　Tonyuランタイム版では、Oggから再生しても鳴ります。<br>
   <br>
-  Ymplayer���g����Ogg�̍Đ��E��~�����܂��B<br>
+  Ymplayerを使ってOggの再生・停止をします。<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
-$mplayer = new Ymplayer(); // $mplayer��Ymplayer�ŏ㏑��
-$mplayer.play($se_test); // Tonyu�J�����łŖ�悤�ɂ܂�Midi��炵�Ă���
+$mplayer = new Ymplayer(); // $mplayerをYmplayerで上書き
+$mplayer.play($se_test); // Tonyu開発環境版で鳴るようにまずMidiを鳴らしておく
 wait(20);
-$mplayer.stop(); // ��~
+$mplayer.stop(); // 停止
 while (1) {
-  if (getkey(90) == 1) $mplayer.<strong>play</strong>("test.ogg" ,1); // Z:�Đ�
-  if (getkey(88) == 1) $mplayer.<strong>stop</strong>();              // X:��~
+  if (getkey(90) == 1) $mplayer.<strong>play</strong>("test.ogg" ,1); // Z:再生
+  if (getkey(88) == 1) $mplayer.<strong>stop</strong>();              // X:停止
   
   update();
 }
 </pre>
   <br>
-  Midi�ƈႤ�̂́Aplay() �̂P�Ԗڂ̈�����������(�t�@�C����)�ɂȂ������Ƃł��B<br>
-  play() �̓����ł́A�T�E���h�I�u�W�F�N�g($se_test�Ȃ�) �� ������ ���𔻒f���āA<br>
-  �T�E���h�I�u�W�F�N�g��������Midi�Ɣ��f���A�����񂾂�����Ogg�Ɣ��f���܂��B<br>
+  Midiと違うのは、play() の１番目の引数が文字列(ファイル名)になったことです。<br>
+  play() の内部では、サウンドオブジェクト($se_testなど) か 文字列 かを判断して、<br>
+  サウンドオブジェクトだったらMidiと判断し、文字列だったらOggと判断します。<br>
   <br>
-  �� �u$mplayer.play("test.mid");�v�̂悤�Ȏg�����͂ł��܂���B<br>
+  ※ 「$mplayer.play("test.mid");」のような使い方はできません。<br>
   <br>
-  stop() �� Midi��Ogg�̗����ɑ΂��āA���߂����s����܂��B<br>
-  stop(2) �ɂ���ƁAOgg�ɑ΂��Ă̂ݖ��߂����s����܂��B<br>
+  stop() は MidiとOggの両方に対して、命令が実行されます。<br>
+  stop(2) にすると、Oggに対してのみ命令が実行されます。<br>
   <br>
-  �ȉ��̃y�[�W�ɏڂ����g�������ڂ��Ă��܂��B<br>
+  以下のページに詳しい使い方が載っています。<br>
   <ul>
    <li><a href="../reference/rf_play.html">play()</a></li>
    <li><a href="../reference/rf_stop.html">stop()</a></li>
   </ul>
-  <a href="../tutorial.html">�߂�</a>
+  <a href="../tutorial.html">戻る</a>
   <hr>
  </body>
 </html>

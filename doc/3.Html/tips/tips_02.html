@@ -8,199 +8,199 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;Tips�E���̑�&nbsp;
+   &nbsp;Tips・その他&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>YellowMusicPlayer�̐ݒ��ς���</h2>
-  files�t�H���_�ɁA�uYMPConfig.txt�v�Ƃ����t�@�C��������<br>
-  YellowMusicPlayer�̐ݒ��ύX�ł��܂��B<br>
+  <h2>YellowMusicPlayerの設定を変える</h2>
+  filesフォルダに、「YMPConfig.txt」というファイルを作ると<br>
+  YellowMusicPlayerの設定を変更できます。<br>
   <br>
-  ���L�̐ݒ肪�ł��܂��B<br>
+  下記の設定ができます。<br>
   <ul>
-   <li><s>Player.exe�̃t�@�C������ς��Ă��ATonyu�����I����YellowMusicPlayer�������I���ł���悤�ɂ���</s><br>
-       <font color="#FF0000">�� ver2.10���ݒ���ȗ����Ă������I���ł���悤�ɂȂ�܂���</font></li>
-   <li>DirectMusic�� ON / OFF ��ݒ�</li>
-   <li>����MidiPlayer, OggPlayer �̓�����Č�</li>
-   <li>�t�@�C���̓ǂݍ��ݕp�x�̒���</li>
-   <li><s>Midi�t�@�C�����������ɕێ����邩���Ȃ����ݒ�</s><br>
-       <font color="#FF0000">�� ver2.20��肱�̋@�\�͔p�~</font></li>
+   <li><s>Player.exeのファイル名を変えても、Tonyu強制終了にYellowMusicPlayerが自動終了できるようにする</s><br>
+       <font color="#FF0000">※ ver2.10より設定を省略しても自動終了できるようになりました</font></li>
+   <li>DirectMusicの ON / OFF を設定</li>
+   <li>他のMidiPlayer, OggPlayer の動作を再現</li>
+   <li>ファイルの読み込み頻度の調節</li>
+   <li><s>Midiファイルをメモリに保持するかしないか設定</s><br>
+       <font color="#FF0000">※ ver2.20よりこの機能は廃止</font></li>
   </ul>
-  �� Tonyu�J�����łɓ�������YellowMusicPlayer�̐ݒ��ς���ꍇ�́A<br>
-  �@�@Tonyu.exe�������Ă���t�H���_��Usr�t�H���_�ɁAfiles�t�H���_�����<br>
-  �@�@���̒��ɁAYMPConfig.txt���쐬���Ă�������<br>
+  ※ Tonyu開発環境版に導入したYellowMusicPlayerの設定を変える場合は、<br>
+  　　Tonyu.exeが入っているフォルダのUsrフォルダに、filesフォルダを作り<br>
+  　　その中に、YMPConfig.txtを作成してください<br>
   <br>
-  MusicPlayer�N�����ɂ��̐ݒ肪�K������܂��B�i�N�����ɐݒ��ύX�ł��Ȃ��j<br>
+  MusicPlayer起動時にこの設定が適応されます。（起動中に設定を変更できない）<br>
   <br>
   <br>
   <dl>
-   <dt>�P�s��(�ȗ��\)</dt>
+   <dt>１行目(省略可能)</dt>
    <dd>
-    ���s�t�@�C��(Player.exe �܂��� Tonyu.exe)�̖��O��ς������́A���̃t�@�C�������L�q���Ă��������i��F�u����Q�[��.exe�v�j<br>
-    ���s�t�@�C���̖��O��ς��Ă��Ȃ��ꍇ�́A�����L�q���Ȃ��Ă����ł��B<br>
+    実行ファイル(Player.exe または Tonyu.exe)の名前を変えた時は、そのファイル名を記述してください（例：「自作ゲーム.exe」）<br>
+    実行ファイルの名前を変えていない場合は、何も記述しなくていいです。<br>
     <br>
-    <font color="#FF0000">�� ver 2.10����A���s�t�@�C�����̖��O��ς������A�ݒ肵�Ȃ��Ă������I�ɏI���ł���悤�ɂȂ�܂����B<br>
-    �@ �����Ŏw�肵�����s�t�@�C����D�悵�ĊĎ�����d�l�ɂȂ�܂����B<br>
-    �@ ���s�t�@�C���̖��O��ς����ꍇ�A���Aexe�t�@�C����Tonyu���s�t�@�C���̏ꏊ�ɕ�������ꍇ�ɁA�L�p�ȋ@�\�ł��B</font><br>
+    <font color="#FF0000">※ ver 2.10から、実行ファイル名の名前を変えた時、設定しなくても自動的に終了できるようになりました。<br>
+    　 ここで指定した実行ファイルを優先して監視する仕様になりました。<br>
+    　 実行ファイルの名前を変えた場合、かつ、exeファイルがTonyu実行ファイルの場所に複数ある場合に、有用な機能です。</font><br>
     
    </dd>
    <br>
-   <dt>�Q�s��(�ȗ��\)</dt>
+   <dt>２行目(省略可能)</dt>
    <dd>
-    Midi�̉��t��DirectMusic���g�����g��Ȃ����𐧌䂵�܂��B<br>
-    DirectMusic��OFF�̏ꍇ�́AWindows�Őݒ肳��Ă���Midi�f�o�C�X���g�p���܂��B<br>
+    Midiの演奏にDirectMusicを使うか使わないかを制御します。<br>
+    DirectMusicがOFFの場合は、Windowsで設定されているMidiデバイスを使用します。<br>
     <br>
     <dl>
-     <dt>0�i�f�t�H���g�̐ݒ�j�F</dt>
+     <dt>0（デフォルトの設定）：</dt>
      <dd>
-      Windows 98�AMe�AWindows 2000�AXP�ł�DirectMusic���g���܂���<br>
-      Windows Vista�A7�A8�A8.1�A10�ł�DirectMusic���g���܂�<br>
+      Windows 98、Me、Windows 2000、XPではDirectMusicを使いません<br>
+      Windows Vista、7、8、8.1、10ではDirectMusicを使います<br>
      </dd>
-     <dt>1�F</dt>
-     <dd>�S�Ă�OS��DirectMusic���g���܂�</dd>
-     <dt>2�F</dt>
-     <dd>�S�Ă�OS��DirectMusic���g���܂���</dd>
+     <dt>1：</dt>
+     <dd>全てのOSでDirectMusicを使います</dd>
+     <dt>2：</dt>
+     <dd>全てのOSでDirectMusicを使いません</dd>
     </dl>
     <br>
     <dd>
-     <s>�� Windows 98SE �œ���m�F�����Ƃ���ADirectMusic���g�����ꍇ�A<br>
-     �@�@YellowMusicPlayer���t���[�Y������A�V�X�e�����t���[�Y���邱�Ƃ�����܂����B<br>
-     �@�@���萫���l�����āA�f�t�H���g�̐ݒ�ł�9x�n��OS�ł�DirectMusic��OFF�ɂ���悤�ɂ��Ă��܂��B</s><br>
-     <font color="#FF0000">�� ver2.34����AWindows XP�ȑO�ł́A�f�t�H���g�̐ݒ�ł�DirectMusic��OFF�ɂ���悤�ɂ��܂����B<br>
-     �@�@XP�ȑO�ł́ADirectMusic��ON�����OFF�ɂ��Ă��鎞�����AMidi�̉��ʂ��������������邽��<br>
-     �@�@���ʉ��Ƃ̃o�����X�������Ȃ�Ǝv���A�d�l��ύX���܂����B</font><br>
-     �� DirectMusic��OFF�ŁAMidi�f�o�C�X�ɁuTiMidity++�v��ݒ肵�Ă���ꍇ�A<br>
-     �@�@Midi�̉��F���S�ăs�A�m�ɂȂ邱�Ƃ�����܂��B<br>
+     <s>※ Windows 98SE で動作確認したところ、DirectMusicを使った場合、<br>
+     　　YellowMusicPlayerがフリーズしたり、システムがフリーズすることがありました。<br>
+     　　安定性を考慮して、デフォルトの設定では9x系のOSではDirectMusicをOFFにするようにしています。</s><br>
+     <font color="#FF0000">※ ver2.34から、Windows XP以前では、デフォルトの設定ではDirectMusicをOFFにするようにしました。<br>
+     　　XP以前では、DirectMusicをONするとOFFにしている時よりも、Midiの音量が小さく聞こえるため<br>
+     　　効果音とのバランスが悪くなると思い、仕様を変更しました。</font><br>
+     ※ DirectMusicがOFFで、Midiデバイスに「TiMidity++」を設定している場合、<br>
+     　　Midiの音色が全てピアノになることがあります。<br>
      <br>
-     Windows Vista, 7, 8, 8.1, 10 �ł́A�o�b�ɂ����DirectMusic�̏����Ɏ��Ԃ������邱�Ƃ�����܂��B�i���Ԃ�������Ȃ�win7�o�b������j<br>
-     DirectMusic��OFF�ɂ��邱�ƂŁAYellowMusicPlayer�̋N���������Ȃ�܂��B<br>
-     �������ADirectMusic���g�������̃����b�g���������ƂɂȂ�̂ŁA�������l�������ق��������ł��B<br>
+     Windows Vista, 7, 8, 8.1, 10 では、ＰＣによってDirectMusicの準備に時間がかかることがあります。（時間がかからないwin7ＰＣもある）<br>
+     DirectMusicをOFFにすることで、YellowMusicPlayerの起動が早くなります。<br>
+     しかし、DirectMusicを使った時のメリットも失うことになるので、そこも考慮したほうがいいです。<br>
      <br>
-     �Q�[����Midi���g��Ȃ��iOgg�̂ݍĐ�����j�ꍇ��DirectMusic�͎g��Ȃ��̂ŁAOFF�ɂ���ƋN���������Ȃ�܂��B
+     ゲームでMidiを使わない（Oggのみ再生する）場合はDirectMusicは使わないので、OFFにすると起動が速くなります。
      <dl>
-      <dt>DirectMusic���g�����Ƃɂ�郁���b�g</dt>
-      <dd>�E�W��Midi�f�o�C�X�̉�����艹�����ꂢ</dd>
-      <dd>�EVista, 7, 8, 8.1, 10 �ł͕W��Midi�f�o�C�X�̉�����艹�����������i�Ƃ��Ƀ��Y���p�[�g(�h�������Ȃ�)�������Ɩ�悤�ɂȂ�j</dd>
-      <dd>�E����������</dd>
-      <dd>�EMidi���t���ɁA����Midi�ɐ؂芷����Ƃ��́A�؂�ւ�������</dd>
-      <dd>�E�ǂ̂o�b�ł��������ς��Ȃ��̂ŁA�������Ŗ点��<br>
-          �i�W��Midi�f�o�C�X�̏ꍇ�́A�o�b�ɂ���ăf�o�C�X���Ⴄ�\��������̂ŉ����ς�邱�Ƃ�����܂��j</dd>
+      <dt>DirectMusicを使うことによるメリット</dt>
+      <dd>・標準Midiデバイスの音源より音がきれい</dd>
+      <dd>・Vista, 7, 8, 8.1, 10 では標準Midiデバイスの音源より音がしっかり鳴る（とくにリズムパート(ドラム音など)がちゃんと鳴るようになる）</dd>
+      <dd>・反応が速い</dd>
+      <dd>・Midi演奏中に、他のMidiに切り換えるときの、切り替えが速い</dd>
+      <dd>・どのＰＣでも音源が変わらないので、同じ音で鳴らせる<br>
+          （標準Midiデバイスの場合は、ＰＣによってデバイスが違う可能性があるので音が変わることがあります）</dd>
      </dl>
      </ul>
     </dd>
    </dd>
    
-   <dt>�R�s��(�ȗ��\)</dt>
-   <dd>YellowMusicPlayer�̃��[�h��ς��邱�Ƃ��ł��܂�<br>
-       ����MidiPlayer,OggPlayer�̓���E�d�l���Č����܂�<br>
+   <dt>３行目(省略可能)</dt>
+   <dd>YellowMusicPlayerのモードを変えることができます<br>
+       他のMidiPlayer,OggPlayerの動作・仕様を再現します<br>
        <br>
-       �ȉ��̃v���C���[�ɑΉ����Ă��܂��B<br>
-       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=327&" target="_blank">�uTonyu Midi Litest�v</a>(ver 3.01)�@(by LefTonbo����)<br>
-       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=665&" target="_blank">�uMidiOggPlayer�v</a>(ver 0.01)�@(by ����[�񂰁[�ށB����)<br>
-       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=330&" target="_blank">�uTonyu��Ogg Vorbis��炷�T���v���v</a>(ver 0.031)�@(by soy����)<br>
+       以下のプレイヤーに対応しています。<br>
+       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=327&" target="_blank">「Tonyu Midi Litest」</a>(ver 3.01)　(by LefTonboさん)<br>
+       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=665&" target="_blank">「MidiOggPlayer」</a>(ver 0.01)　(by ぐりーんげーむ。さん)<br>
+       <a href="https://www.tonyu.jp/project/viewProject.cgi?mainkey=330&" target="_blank">「TonyuでOgg Vorbisを鳴らすサンプル」</a>(ver 0.031)　(by soyさん)<br>
        <br>
-       ��҂�YellowMusicPlayer���A����Player���g���Ă���Q�[���ɓ������Ă݂��������̂ŁA����Ȃ�����ꂽ�@�\�ł�<br>
-       ���\��������������Ȃ̂ōČ��x�͂��Ȃ荂���Ǝv���܂��B<br>
-       �� DirectMusic��ON/OFF�܂ł͍Č�����܂���<br>
-       �@�@�P�s�ڂŐݒ肵�Ă�������
+       作者がYellowMusicPlayerを、他のPlayerが使われているゲームに導入してみたかったので、勝手ながら入れた機能です<br>
+       結構こだわった部分なので再現度はかなり高いと思います。<br>
+       ※ DirectMusicのON/OFFまでは再現されません<br>
+       　　１行目で設定してください
    <dl>
-    <dt>0�i�f�t�H���g�̐ݒ�j�F</dt>
-    <dd>YellowMusicPlayer���[�h�ɂȂ�܂��B�܂�A�ʏ�̃��[�h�ł�<br>
-        ���̏�Ԃł��A������x�́uTonyuMidiLitest�v�ƌ݊���������܂��i���S�݊�����ɂ�TonyuMidiLitest���[�h�ɂ��Ă��������j<br>
-        Tonyu�W���́uMidiPlayer2�v�Ƃ͊��S�݊��ł�<br>
-        ���̃��[�h�ł́AMidi��Ogg�𓯎��ɖ炷���Ƃ��ł��܂�</dd>
-    <dt>1�F</dt>
-    <dd>TonyuMidiLitest���[�h�ɂȂ�܂��iver 3.01 ���Č����Ă��܂��j<br>
-        TonyuMidiLitest�ł́A���[�v�Ȃ��Đ��ɂ��܂��Ή����Ă��Ȃ����߁A<br>
-        �P�x���[�v����Đ������Ă��܂��ƁA�S�Ă�Midi�����[�v�Đ�����܂�<br>
+    <dt>0（デフォルトの設定）：</dt>
+    <dd>YellowMusicPlayerモードになります。つまり、通常のモードです<br>
+        この状態でも、ある程度は「TonyuMidiLitest」と互換性があります（完全互換するにはTonyuMidiLitestモードにしてください）<br>
+        Tonyu標準の「MidiPlayer2」とは完全互換です<br>
+        このモードでは、MidiとOggを同時に鳴らすことができます</dd>
+    <dt>1：</dt>
+    <dd>TonyuMidiLitestモードになります（ver 3.01 を再現しています）<br>
+        TonyuMidiLitestでは、ループなし再生にうまく対応していないため、<br>
+        １度ループあり再生をしてしまうと、全てのMidiがループ再生されます<br>
         <br>
-        TonyuMidiLitest���g�����Q�[���ɁAYellowMusicPlayer�𓱓������<br>
-        �Ȃ����[�v�����Ɏ~�܂��Ă��܂��Q�[��������܂���<br>
-        ���̂悤�ȃQ�[���ł́A���̃��[�h�ɂ���Ƃ����ł��傤<br>
-        ���̂悤�ȃQ�[���ȊO�́AYellowMusicPlayer���[�h�ł����������삵�܂�<br>
-        ���ƁATonyuMidiLitest�ł�Midi�̖������X�L�b�v�����̂ŁA�������Č����Ă��܂�<br>
+        TonyuMidiLitestを使ったゲームに、YellowMusicPlayerを導入すると<br>
+        曲がループせずに止まってしまうゲームがありました<br>
+        このようなゲームでは、このモードにするといいでしょう<br>
+        このようなゲーム以外は、YellowMusicPlayerモードでも正しく動作します<br>
+        あと、TonyuMidiLitestではMidiの末尾がスキップされるので、そこも再現しています<br>
         <br>
-        ���̃��[�h�ł́A���ʒ��߁E�e���|�ύX�E�t�F�[�h�A�E�g��~�E�ꎞ��~�E�ꎞ��~����̍ĊJ<br>
-        �����̋@�\���g���܂�<br>
-        ���̃��[�h�ł�Ogg��炷���Ƃ͂ł��܂���<br>
+        このモードでは、音量調節・テンポ変更・フェードアウト停止・一時停止・一時停止からの再開<br>
+        これらの機能が使えます<br>
+        このモードではOggを鳴らすことはできません<br>
         <br>
     </dd>
-    <dt>2�F</dt>
-    <dd>MidiOggPlayer���[�h�ɂȂ�܂��iver 0.01 ���Č����Ă��܂��j<br>
-        MidiOggPlayer�ł́AMidi�̍Đ��Ɂumidi_sig.dat�v�Ɓu(Kernel�t�H���_��)sig�v���A<br>
-        Ogg�̍Đ��ɂ́uogg_sig.dat�v�A�Đ����ɂ́ubgm_config.dat�v���Ď�����̂ŁA<br>
-        ���̓�����Č����܂���<br>
+    <dt>2：</dt>
+    <dd>MidiOggPlayerモードになります（ver 0.01 を再現しています）<br>
+        MidiOggPlayerでは、Midiの再生に「midi_sig.dat」と「(Kernelフォルダの)sig」を、<br>
+        Oggの再生には「ogg_sig.dat」、再生情報には「bgm_config.dat」を監視するので、<br>
+        その動作を再現しました<br>
         <br>
-        �܂��AMidiOggPlayer�͈�xBGM��炷�ƁA����BGM���Đ����悤�Ƃ��Ă�BGM���ŏ�����Đ��������Ȃ��d�l������<br>
-        �������Č����Ă��܂�<br>
-        ���ƁAver 0.01�ł�Ogg�̃t�F�[�h�A�E�g��~�ɂ��܂��Ή����Ă��Ȃ��̂ł����A<br>
-        ���̃��[�h�ł͑Ή������Ă��܂�<br>
-        MusicPlayer���N���������Ԃ��L�^����A�urealtime.dat�v�̍쐬���Č����Ă��܂�<br>
+        また、MidiOggPlayerは一度BGMを鳴らすと、同じBGMを再生しようとしてもBGMが最初から再生し直さない仕様があり<br>
+        そこも再現しています<br>
+        あと、ver 0.01ではOggのフェードアウト停止にうまく対応していないのですが、<br>
+        このモードでは対応させています<br>
+        MusicPlayerが起動した時間を記録する、「realtime.dat」の作成も再現しています<br>
         <br>
-        �������肭�Č��ł��Ă��Ȃ�����������܂�<br>
-        MidiOggPlayer�́AOgg�̃��[�v��ɖ߂�ʒu���Đ����ɕύX�ł��đ����ɔ��f���܂�<br>
-        �������AYellowMusicPlayer�͎d�l��̊֌W�ŁA�Đ����ɕύX�����ꍇ�W�b�x��Ĕ��f����Ă��܂��܂�<br>
-        �i�Đ��O�ɐݒ肵���ꍇ�͑����ɔ��f����܂��j�i�Đ����ɕύX�ł���̂͂��̃��[�h����ł��j<br>
+        動作を上手く再現できていない部分もあります<br>
+        MidiOggPlayerは、Oggのループ後に戻る位置が再生中に変更できて即座に反映します<br>
+        しかし、YellowMusicPlayerは仕様上の関係で、再生中に変更した場合８秒遅れて反映されてしまいます<br>
+        （再生前に設定した場合は即座に反映されます）（再生中に変更できるのはこのモード限定です）<br>
         <br>
-        ���̃��[�h�ł́A���ʒ��߁E�t�F�[�h�A�E�g��~�E�ꎞ��~�E�ꎞ��~����̍ĊJ�EOgg�̃��[�v��ɖ߂�ʒu�̎w��<br>
-        �����̋@�\���g���܂�<br>
-        Midi��Ogg�͓����ɖ炷���Ƃ��ł��܂�<br>
+        このモードでは、音量調節・フェードアウト停止・一時停止・一時停止からの再開・Oggのループ後に戻る位置の指定<br>
+        これらの機能が使えます<br>
+        MidiとOggは同時に鳴らすことができます<br>
         <br>
-        Tonyu�J�����łł́umidi_sig.dat�v�uogg_sig.dat�v�ɏ������݂����Ă�BGM��点�܂���<br>
-        �iTonyu.exe�̂���ꏊ���瑊�΃p�X�ŋ��߂Ă��邽�߁j<br>
-        $mplayer.play() ����Midi��炷���Ƃ̂݉\�ł�<br>
+        Tonyu開発環境版では「midi_sig.dat」「ogg_sig.dat」に書き込みをしてもBGMを鳴らせません<br>
+        （Tonyu.exeのある場所から相対パスで求めているため）<br>
+        $mplayer.play() からMidiを鳴らすことのみ可能です<br>
     </dd>
-    <dt>3�F</dt>
-    <dd>Tonyu��Ogg Vorbis��炷�T���v�����[�h�ɂȂ�܂��iver 0.031 ���Č����Ă��܂��j<br>
-        Ogg�̕����́ATonyu��Ogg Vorbis��炷�T���v���̓�����Č����A<br>
-        Midi�̕����́AYellowMusicPlayer�Ƃ��ē��삵�܂�<br>
+    <dt>3：</dt>
+    <dd>TonyuでOgg Vorbisを鳴らすサンプルモードになります（ver 0.031 を再現しています）<br>
+        Oggの部分は、TonyuでOgg Vorbisを鳴らすサンプルの動作を再現し、<br>
+        Midiの部分は、YellowMusicPlayerとして動作します<br>
         <br>
-        Ogg��炷�T���v�����g���Ă���Q�[���́A�utest_ogg.exe�v������A�����ꏊ�ɁuProgram�v�t�H���_������A<br>
-        �uProgram�v�t�H���_�̒��ɁuKernel�v�uUsr�v�uPlayer.exe�v�Ȃǂ������Ԃœ��삵�܂�<br>
-        YellowMusicPlayer�����̃��[�h�œ��삳����ɂ́A<br>
-        YellowMusicPlayer��Kernel�t�H���_�ɒu���A�uPlayer.exe�v���N������Ɠ��삵�܂�<br>
-        �uPlayer.exe�v�Ȃǂ̃t�H���_�E�t�@�C������̊K�w�Ɉړ����āA�uProgram�v�t�H���_�������Ă����삵�܂�<br>
+        Oggを鳴らすサンプルを使っているゲームは、「test_ogg.exe」があり、同じ場所に「Program」フォルダがあり、<br>
+        「Program」フォルダの中に「Kernel」「Usr」「Player.exe」などがある状態で動作します<br>
+        YellowMusicPlayerをこのモードで動作させるには、<br>
+        YellowMusicPlayerをKernelフォルダに置き、「Player.exe」を起動すると動作します<br>
+        「Player.exe」などのフォルダ・ファイルを上の階層に移動して、「Program」フォルダを消しても動作します<br>
         <br>
-        Ogg��炷�T���v���ł́A���ʂɑΐ����������Ă��Ȃ��̂ŁA<br>
-        �{�����[���l�Ɗ��o�I�ɕ������鉹�ʂƂł̓o�����X������Ȃ������܂����A�����Ă������Č����Ă��܂�<br>
+        Oggを鳴らすサンプルでは、音量に対数処理をしていないので、<br>
+        ボリューム値と感覚的に聞こえる音量とではバランスが合わなく感じますが、あえてそこも再現しています<br>
         <br>
-        �Đ����̉��ʒ��߁E�t�F�[�h�A�E�g��~���Č����Ă��܂�<br>
-        �������AOgg��炷�T���v���ł�250�~���b���݂ŉ��ʂ��ω����܂����A�����͍Č������Ɋ��炩�ȉ��ʕω��ɂ��܂���<br>
-        YellowMusicPlayer�ł�15�~�����݂ŉ��ʂ��ω����܂�<br>
+        再生中の音量調節・フェードアウト停止も再現しています<br>
+        ただし、Oggを鳴らすサンプルでは250ミリ秒刻みで音量が変化しますが、そこは再現せずに滑らかな音量変化にしました<br>
+        YellowMusicPlayerでは15ミリ刻みで音量が変化します<br>
         <br>
-        Ogg��炷�T���v����Wav���点�܂����AYellowMusicPlayer�ł͖点�܂���<br>
+        Oggを鳴らすサンプルはWavも鳴らせますが、YellowMusicPlayerでは鳴らせません<br>
         <br>
-        ���̃��[�h�ł́AOgg�͉��ʒ��߁E�t�F�[�h�A�E�g��~�E�ꎞ��~�E�ꎞ��~����̍ĊJ�A<br>
-        Midi��YellowMusicPlayer�̋@�\���g���܂�<br>
-        Ogg�̍Đ����Ԃ���Ȃǂ��擾���邱�Ƃ��ł��܂�<br>
-        Midi��Ogg�͓����ɖ炷���Ƃ��ł��܂�<br>
+        このモードでは、Oggは音量調節・フェードアウト停止・一時停止・一時停止からの再開、<br>
+        MidiはYellowMusicPlayerの機能が使えます<br>
+        Oggの再生時間や情報などを取得することもできます<br>
+        MidiとOggは同時に鳴らすことができます<br>
         <br>
-        Tonyu�J�����łł�Ogg��点�܂���iTonyu.exe�̂���ꏊ���瑊�΃p�X�ŋ��߂Ă��邽�߁j<br>
-        Midi�͖炷���Ƃ��ł��܂�<br>
+        Tonyu開発環境版ではOggを鳴らせません（Tonyu.exeのある場所から相対パスで求めているため）<br>
+        Midiは鳴らすことができます<br>
     </dd>
    </dl>
-   <dt>�S�s��(�ȗ��\)</dt>
-   <dd>YellowMusicPlayer���t�@�C����ǂݍ��ޕp�x�𒲐߂ł��܂��B<br>
-       �����ł����t�@�C���Ƃ́A�ǂ�Midi, Ogg��炷�̂���MusicPlayer�ɒm�点�邽�߂ɁA<br>
-       Tonyu���珑�����܂��t�@�C���̂��Ƃł��B�i�usig�v�uogg_sig.dat�v�ueff_midi.txt�v�Ȃǂ̃t�@�C���j<br>
-       �����̃t�@�C���̓��e���ς�����̂����`�F�b�N����p�x�𒲐߂ł���Ƃ������Ƃł��B<br>
+   <dt>４行目(省略可能)</dt>
+   <dd>YellowMusicPlayerがファイルを読み込む頻度を調節できます。<br>
+       ここでいうファイルとは、どのMidi, Oggを鳴らすのかをMusicPlayerに知らせるために、<br>
+       Tonyuから書き込まれるファイルのことです。（「sig」「ogg_sig.dat」「eff_midi.txt」などのファイル）<br>
+       それらのファイルの内容が変わったのかをチェックする頻度を調節できるということです。<br>
        <br>
-       �f�t�H���g�ł͓ǂݍ��ޕp�x���A15�~���b���ƍ��߂ɐݒ肳��Ă���̂ŁA�p�x��Ⴍ���������͒l��傫�����Ă�������<br>
-       �p�x��Ⴍ����ƁACPU�g�p�������炷���Ƃ��ł��܂��B<br>
-       Tonyu�Ƃ̃t�@�C���̓ǂݏ����̏Փ˂����Ȃ��Ȃ�AMidi,Ogg���Đ�����Ȃ��o�O�����Ȃ��Ȃ邩������܂���B<br>
-       �������A�l��傫������Ƃ��̕��������x���Ȃ�܂��B<br>
+       デフォルトでは読み込む頻度が、15ミリ秒毎と高めに設定されているので、頻度を低くしたい時は値を大きくしてください<br>
+       頻度を低くすると、CPU使用率を減らすことができます。<br>
+       Tonyuとのファイルの読み書きの衝突も少なくなり、Midi,Oggが再生されないバグも少なくなるかもしれません。<br>
+       しかし、値を大きくするとその分反応が遅くなります。<br>
        <br>
-       �^�C�~���O���V�r�A�ɋ��߂�Q�[���ȊO�́A���̒l��3�Ƃ�5�Ƃ��ɂ��Ă��x��������Ȃ��Ǝv���܂��B
+       タイミングをシビアに求めるゲーム以外は、この値を3とか5とかにしても遅れを感じないと思います。
     <dl>
-     <dt>0�i�f�t�H���g�̐ݒ�j�F</dt>
-     <dd>15�~���b���ƂɃt�@�C����ǂݍ��݂܂��B</dd>
-     <dt>1�`100�F</dt>
-     <dd>(15 * (�S�s�ڂ̒l + 1))�~���b���ƂɃt�@�C����ǂݍ��݂܂��B</dd>
+     <dt>0（デフォルトの設定）：</dt>
+     <dd>15ミリ秒ごとにファイルを読み込みます。</dd>
+     <dt>1～100：</dt>
+     <dd>(15 * (４行目の値 + 1))ミリ秒ごとにファイルを読み込みます。</dd>
     </dl>
    </dd>
   </dl>
   <br>
-  <h3>��P</h3>
+  <h3>例１</h3>
   [YMPConfig.txt]<br>
 <pre>
 
@@ -208,20 +208,20 @@
 1
 2
 </pre>
-  DirectMusic��OFF�ɂ��āATonyuMidiLitest���[�h�œ��삵�܂��B<br>
-  �t�@�C���̓ǂݍ��ݕp�x�́A(15 * (2 + 1)) = 45�~���b���ƂɂȂ�܂��B<br>
+  DirectMusicをOFFにして、TonyuMidiLitestモードで動作します。<br>
+  ファイルの読み込み頻度は、(15 * (2 + 1)) = 45ミリ秒ごとになります。<br>
   <br>
-  <h3>��Q</h3>
+  <h3>例２</h3>
   [YMPConfig.txt]<br>
 <pre>
 
 0
 2
 </pre>
-  DirectMusic��ON/OFF�̓f�t�H���g�ݒ�ŁAMidiOggPlayer���[�h�œ��삵�܂��B<br>
-  �t�@�C���̓ǂݍ��ݕp�x�́A(�ȗ������̂�)15�~���b���ƂɂȂ�܂��B<br>
+  DirectMusicのON/OFFはデフォルト設定で、MidiOggPlayerモードで動作します。<br>
+  ファイルの読み込み頻度は、(省略したので)15ミリ秒ごとになります。<br>
   <br>
-  <h3>��R</h3>
+  <h3>例３</h3>
   [YMPConfig.txt]<br>
 <pre>
 
@@ -229,10 +229,10 @@
 0
 9
 </pre>
-  DirectMusic��ON/OFF�̓f�t�H���g�ݒ�ŁAYellowMusicPlayer���[�h�i�ʏ�̃��[�h�j�œ��삵�܂��B<br>
-  �t�@�C���̓ǂݍ��ݕp�x�́A(15 * (9 + 1)) = 150�~���b���ƂɂȂ�܂��B<br>
+  DirectMusicのON/OFFはデフォルト設定で、YellowMusicPlayerモード（通常のモード）で動作します。<br>
+  ファイルの読み込み頻度は、(15 * (9 + 1)) = 150ミリ秒ごとになります。<br>
   <br>
-  <h3>��S</h3>
+  <h3>例４</h3>
   [YMPConfig.txt]<br>
 <pre>
 
@@ -240,23 +240,23 @@
 
 1
 </pre>
-  ��̍s�̓f�t�H���g�ݒ�Ƃ��ĔF������܂��B�i�u1�v�Ə����Ă���̂͂S�s�ڂł��j<br>
-  DirectMusic��ON/OFF�̓f�t�H���g�ݒ�ŁAYellowMusicPlayer���[�h�i�ʏ�̃��[�h�j�œ��삵�܂��B<br>
-  �t�@�C���̓ǂݍ��ݕp�x�́A(15 * (1 + 1)) = 30�~���b���ƂɂȂ�܂��B<br>
+  空の行はデフォルト設定として認識されます。（「1」と書いているのは４行目です）<br>
+  DirectMusicのON/OFFはデフォルト設定で、YellowMusicPlayerモード（通常のモード）で動作します。<br>
+  ファイルの読み込み頻度は、(15 * (1 + 1)) = 30ミリ秒ごとになります。<br>
   <br>
-  <h3>��T</h3>
+  <h3>例５</h3>
   [YMPConfig.txt]<br>
 <pre>
-�V���[�e�B���O�Q�[��.exe
+シューティングゲーム.exe
 0
 3
 16
 </pre>
-  ���s�t�@�C�������u�V���[�e�B���O.exe�v�ł��邱�Ƃ�F�����ATonyu�������I�����Ă�YellowMusicPlayer�͎����I���ł��܂��B<br>
-  DirectMusic��ON/OFF�̓f�t�H���g�ݒ�ŁATonyu��Ogg Vorbis��炷�T���v�����[�h�œ��삵�܂��B<br>
-  �t�@�C���̓ǂݍ��ݕp�x�́A(15 * (16 + 1)) = 255�~���b���ƂɂȂ�܂��B<br>
+  実行ファイル名が「シューティング.exe」であることを認識し、Tonyuが強制終了してもYellowMusicPlayerは自動終了できます。<br>
+  DirectMusicのON/OFFはデフォルト設定で、TonyuでOgg Vorbisを鳴らすサンプルモードで動作します。<br>
+  ファイルの読み込み頻度は、(15 * (16 + 1)) = 255ミリ秒ごとになります。<br>
   <br>
-  <a href="../tips.html">�߂�</a>
+  <a href="../tips.html">戻る</a>
   <hr>
  </body>
 </html>

@@ -8,28 +8,28 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;�`���[�g���A��&nbsp;
+   &nbsp;チュートリアル&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>�g���� (Ogg)</h2>
-  <h3>Ogg��炷</h3>
-  Ogg��炷�ɂ�Ymplayer�N���X���K�v�ł��B<br>
-  ���炩���߁AYellowMusicPlayer �� Ymplayer.tonyu �𓱓����Ă����Ă��������B<br>
-  <a href="../install.html">�� �������@</a><br>
+  <h2>使い方 (Ogg)</h2>
+  <h3>Oggを鳴らす</h3>
+  Oggを鳴らすにはYmplayerクラスが必要です。<br>
+  あらかじめ、YellowMusicPlayer と Ymplayer.tonyu を導入しておいてください。<br>
+  <a href="../install.html">⇒ 導入方法</a><br>
   <br>
-  Ogg��炷���@�́AYmplayer�N���X�� play()���\�b�h ���Ăяo�������Ŏg���܂��B<br>
-  Midi�̍Đ��ƈႤ�Ƃ���� play() �̂P�Ԗڂ̈����Ƀt�@�C�������w�肷�邱�Ƃł��B<br>
+  Oggを鳴らす方法は、Ymplayerクラスの play()メソッド を呼び出すだけで使えます。<br>
+  Midiの再生と違うところは play() の１番目の引数にファイル名を指定することです。<br>
   <br>
-  Midi���Đ�����Ƃ��́A�uYmplayer.play($se_test);�v�̂悤�� $se_ ����n�܂�T�E���h�I�u�W�F�N�g���A�����Ɏw�肵�܂����B<br>
-  Ogg���Đ�����Ƃ��́A�uYmplayer.play("test.ogg");�v�̂悤�� ������Ńt�@�C�������A�����Ɏw�肵�܂��B<br>
+  Midiを再生するときは、「Ymplayer.play($se_test);」のように $se_ から始まるサウンドオブジェクトを、引数に指定しました。<br>
+  Oggを再生するときは、「Ymplayer.play("test.ogg");」のように 文字列でファイル名を、引数に指定します。<br>
   <br>
-  �܂��A�uYmplayer.play("test.ogg", 1);�v�ƋL�q����� Ogg��Midi�Ɠ������A�J��Ԃ��Đ��̐ݒ肪�ł��܂��B<br>
+  また、「Ymplayer.play("test.ogg", 1);」と記述すると OggもMidiと同じく、繰り返し再生の設定ができます。<br>
   <br>
   </ul>
-  <a href="../reference.html">���߃��t�@�����X</a>�ɋ@�\�̈ꗗ���ڂ��Ă��܂��B<br>
+  <a href="../reference.html">命令リファレンス</a>に機能の一覧が載っています。<br>
   <br>
-  <a href="../tutorial.html">�߂�</a>
+  <a href="../tutorial.html">戻る</a>
   <hr>
  </body>
 </html>

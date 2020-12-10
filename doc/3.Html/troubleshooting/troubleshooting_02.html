@@ -8,41 +8,41 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;�g���u���V���[�e�B���O&nbsp;
+   &nbsp;トラブルシューティング&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>�J�����ł�ogg�͖邪�A�����^�C���ł�ogg����Ȃ��Ȃ�</h2>
+  <h2>開発環境版でoggは鳴るが、ランタイム版でoggが鳴らなくなる</h2>
   <br>
-  ���̖��́A�����^�C���쐬���ɁATonyu�������^�C������ogg�t�@�C�����R�s�[���Ȃ����Ƃ������ł��B<br>
-  Tonyu�͐����ɓo�^���ꂽ�t�@�C���̂݃����^�C�����ɃR�s�[����̂ŁAogg�t�@�C���͏��O���Ă��܂��R�s�[���Ȃ��悤�ł��B<br>
+  この問題は、ランタイム作成時に、Tonyuがランタイム側にoggファイルをコピーしないことが原因です。<br>
+  Tonyuは正式に登録されたファイルのみランタイム側にコピーするので、oggファイルは除外してしまいコピーしないようです。<br>
   <br>
-  �����^�C���ł�Usr�t�H���_����ogg�t�@�C�������邩�m�F���Ă��������B<br>
-  ogg�t�@�C�����Ȃ��ꍇ�͍Đ�����܂���B<br>
+  ランタイム版のUsrフォルダ内にoggファイルがあるか確認してください。<br>
+  oggファイルがない場合は再生されません。<br>
   <br>
-  ��������ɂ͈ȉ��̂����ꂩ�̕��@�������Ă��������B<br>
+  解決するには以下のいずれかの方法を試してください。<br>
   <ul>
-   <li><b>ogg�t�@�C���������^�C���łɎ蓮�i�G�N�X�v���[�����j�ŃR�s�[����B</b></li>
+   <li><b>oggファイルをランタイム版に手動（エクスプローラ等）でコピーする。</b></li>
    <br>
-   ���̏ꂵ�̂��̕��@�ł��B<br>
-   �����葁���ł��܂����A�����^�C���쐬���ɖ���R�s�[���Ȃ���΂Ȃ�܂���B<br>
+   その場しのぎの方法です。<br>
+   手っ取り早くできますが、ランタイム作成時に毎回コピーしなければなりません。<br>
    <br>
-   <li><b>files�t�H���_��ogg�t�@�C��������B</b></li>
+   <li><b>filesフォルダにoggファイルを入れる。</b></li>
    <br>
-   files�t�H���_���̃t�@�C���͂��ׂăR�s�[�����悤�ł��B�iogg�t�@�C���������ƃR�s�[����܂��j<br>
-   files�t�H���_��ogg�t�@�C�����ڂ����ꍇ�A�v���O�������u$mplayer.play("files/bgm01.ogg");�v�̂悤��<br>
-   �ύX���Ă��������B<br>
+   filesフォルダ内のファイルはすべてコピーされるようです。（oggファイルもちゃんとコピーされます）<br>
+   filesフォルダにoggファイルを移した場合、プログラムを「$mplayer.play("files/bgm01.ogg");」のように<br>
+   変更してください。<br>
    <br>
-   <li><b>Usr�t�H���_������Ɨ̈�Ƃ��ĊJ�����Ă����B</b></li>
+   <li><b>Usrフォルダ内を作業領域として開発していく。</b></li>
    <br>
-   �����^�C���ł�Usr�t�H���_����v���W�F�N�g���J���āA���̂܂܂����ŊJ�����Ă��܂����Ƃ����l�����ł��B<br>
-   �����^�C���쐬��ogg�t�@�C���������R�s�[����Ȃ��Ƃ������Ƃ��N����Ȃ��Ȃ�܂��B<br>
-   ���񃉃��^�C�����쐬����K�v���Ȃ��Ȃ�܂��B<br>
-   �������A�v���O������ύX�������ƂɃ����^�C���łŋN������ƁA���܂ɃG���[���o�邱�Ƃ�����̂ŁA<br>
-   ���̏ꍇ�́ATemp�t�H���_���폜���Ă��������B<br>
+   ランタイム版のUsrフォルダからプロジェクトを開いて、そのままそこで開発してしまおうという考え方です。<br>
+   ランタイム作成でoggファイルだけがコピーされないということが起こらなくなります。<br>
+   毎回ランタイムを作成する必要がなくなります。<br>
+   ただし、プログラムを変更したあとにランタイム版で起動すると、たまにエラーが出ることがあるので、<br>
+   その場合は、Tempフォルダを削除してください。<br>
   </ul>
   <br>
-  <a href="../troubleshooting.html">�߂�</a>
+  <a href="../troubleshooting.html">戻る</a>
   <hr>
  </body>
 </html>

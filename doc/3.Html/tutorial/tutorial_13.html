@@ -8,65 +8,65 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éu‰¹—Ê’²ßEƒeƒ“ƒ|’²ßEƒpƒ“’²ßv (Ogg)</h2>
-  ‚±‚ê‚ç‚Ìİ’è‚ÍAÄ¶’†‚É“®“I‚É•Ï‚¦‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€ŒéŸ³é‡èª¿ç¯€ãƒ»ãƒ†ãƒ³ãƒèª¿ç¯€ãƒ»ãƒ‘ãƒ³èª¿ç¯€ã€ (Ogg)</h2>
+  ã“ã‚Œã‚‰ã®è¨­å®šã¯ã€å†ç”Ÿä¸­ã«å‹•çš„ã«å¤‰ãˆã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚<br>
   <br>
-  <a href="../reference/rf_setOggVolume.html">setOggVolume()</a>‚Å‰¹—ÊA<br>
-  <a href="../reference/rf_setOggTempo.html">setOggTempo()</a>‚Åƒeƒ“ƒ|A<br>
-  <a href="../reference/rf_setOggPan.html">setOggPan()</a>‚Åƒpƒ“i¶‰E‚ÌƒXƒs[ƒJ[‚Ì‰¹—Êƒoƒ‰ƒ“ƒXj‚ğA’²ß‚Å‚«‚Ü‚·B<br>
+  <a href="../reference/rf_setOggVolume.html">setOggVolume()</a>ã§éŸ³é‡ã€<br>
+  <a href="../reference/rf_setOggTempo.html">setOggTempo()</a>ã§ãƒ†ãƒ³ãƒã€<br>
+  <a href="../reference/rf_setOggPan.html">setOggPan()</a>ã§ãƒ‘ãƒ³ï¼ˆå·¦å³ã®ã‚¹ãƒ”ãƒ¼ã‚«ãƒ¼ã®éŸ³é‡ãƒãƒ©ãƒ³ã‚¹ï¼‰ã‚’ã€èª¿ç¯€ã§ãã¾ã™ã€‚<br>
   <br>
-  ã‹L‚Ìƒƒ\ƒbƒh‚ğg‚Á‚½Œã‚ÉA<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>‚ğg‚¤‚ÆAİ’è‚ªMusicPlayer‚É”½‰f‚³‚ê‚Ü‚·B<br>
+  ä¸Šè¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã£ãŸå¾Œã«ã€<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>ã‚’ä½¿ã†ã¨ã€è¨­å®šãŒMusicPlayerã«åæ˜ ã•ã‚Œã¾ã™ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
-// ŠJ”­ŠÂ‹«”Å ‚ÅOgg‚ğ–Â‚ç‚·‚½‚ß‚Ìˆ— ////
-$mplayer.updatePlayInfo(); // XV
-$mplayer.play($se_test, 0); // TonyuŠJ”­ŠÂ‹«”Å‚Å‚ÍAƒvƒƒWƒFƒNƒg‚ğŠJ‚¢‚Ä‚©‚çˆê“xmidi‚ğÄ¶‚µ‚È‚¢‚Æogg‚ğÄ¶‚Å‚«‚È‚¢
+// é–‹ç™ºç’°å¢ƒç‰ˆ ã§Oggã‚’é³´ã‚‰ã™ãŸã‚ã®å‡¦ç† ////
+$mplayer.updatePlayInfo(); // æ›´æ–°
+$mplayer.play($se_test, 0); // Tonyué–‹ç™ºç’°å¢ƒç‰ˆã§ã¯ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’é–‹ã„ã¦ã‹ã‚‰ä¸€åº¦midiã‚’å†ç”Ÿã—ãªã„ã¨oggã‚’å†ç”Ÿã§ããªã„
 wait(20);
 $mplayer.stop();
 wait(20);
 //////////////////////////////////////////
-$mplayer.play("test.ogg", 1); // Ä¶
+$mplayer.play("test.ogg", 1); // å†ç”Ÿ
 oggVolume = 127;
 oggTempo  = 1;
 oggPan    = 0;
 v = 1;
 while (1) {
-  if (getkey(65) > 0) oggVolume --;        // A:‰¹—Ê|
-  if (getkey(83) > 0) oggVolume ++;        // S:‰¹—Ê{
-  if (getkey(68) > 0) oggTempo  -= 0.125;  // D:ƒeƒ“ƒ||
-  if (getkey(70) > 0) oggTempo  += 0.125;  // F:ƒeƒ“ƒ|{
-  if (getkey(71) > 0) oggPan    -= 1 / 64; // G:ƒpƒ“|
-  if (getkey(72) > 0) oggPan    += 1 / 64; // H:ƒpƒ“{
-  if (v % 6 == 0) { // ‚P•bŠÔ‚É10‰ñXV
-    $mplayer.<strong>setOggVolume</strong>(oggVolume); // ‰¹—Êİ’è
-    $mplayer.<strong>setOggTempo</strong>(oggTempo);   // ƒeƒ“ƒ|İ’è
-    $mplayer.<strong>setOggPan</strong>(oggPan);       // ƒpƒ“İ’è
-    $mplayer.<strong>updatePlayInfo</strong>(); // XV
+  if (getkey(65) > 0) oggVolume --;        // A:éŸ³é‡ï¼
+  if (getkey(83) > 0) oggVolume ++;        // S:éŸ³é‡ï¼‹
+  if (getkey(68) > 0) oggTempo  -= 0.125;  // D:ãƒ†ãƒ³ãƒï¼
+  if (getkey(70) > 0) oggTempo  += 0.125;  // F:ãƒ†ãƒ³ãƒï¼‹
+  if (getkey(71) > 0) oggPan    -= 1 / 64; // G:ãƒ‘ãƒ³ï¼
+  if (getkey(72) > 0) oggPan    += 1 / 64; // H:ãƒ‘ãƒ³ï¼‹
+  if (v % 6 == 0) { // ï¼‘ç§’é–“ã«10å›æ›´æ–°
+    $mplayer.<strong>setOggVolume</strong>(oggVolume); // éŸ³é‡è¨­å®š
+    $mplayer.<strong>setOggTempo</strong>(oggTempo);   // ãƒ†ãƒ³ãƒè¨­å®š
+    $mplayer.<strong>setOggPan</strong>(oggPan);       // ãƒ‘ãƒ³è¨­å®š
+    $mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
   }
-  drawText(100,  0, "‰¹—Ê@F" + oggVolume, $clWhite);
-  drawText(100, 20, "ƒeƒ“ƒ|F" + oggTempo , $clWhite);
-  drawText(100, 40, "ƒpƒ“@F" + oggPan   , $clWhite);
+  drawText(100,  0, "éŸ³é‡ã€€ï¼š" + oggVolume, $clWhite);
+  drawText(100, 20, "ãƒ†ãƒ³ãƒï¼š" + oggTempo , $clWhite);
+  drawText(100, 40, "ãƒ‘ãƒ³ã€€ï¼š" + oggPan   , $clWhite);
   v++;
   update();
 }
 </pre>
   <br>
-  ƒƒ\ƒbƒh‚ÌÚ×<br>
+  ãƒ¡ã‚½ãƒƒãƒ‰ã®è©³ç´°<br>
   <ul>
    <li><a href="../reference/rf_setOggVolume.html">setOggVolume()</a></li>
    <li><a href="../reference/rf_setOggTempo.html">setOggTempo()</a></li>
    <li><a href="../reference/rf_setOggPan.html">setOggPan()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

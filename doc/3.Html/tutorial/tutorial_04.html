@@ -8,20 +8,20 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;ƒ`ƒ…[ƒgƒŠƒAƒ‹&nbsp;
+   &nbsp;ãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
-  <h2>g‚Á‚Ä‚İ‚éuƒtƒF[ƒhƒCƒ“Ä¶EƒtƒF[ƒhƒAƒEƒg’â~E‰‰‘tŠJnˆÊ’uw’èEƒL[ƒVƒtƒgv (Midi)</h2>
-  ‚±‚ê‚ç‚Ìİ’è‚ÍA‰‰‘t‘OE’â~‘O‚Éİ’è‚µ‚Ü‚·B<br>
+  <h2>ä½¿ã£ã¦ã¿ã‚‹ã€Œãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³å†ç”Ÿãƒ»ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆåœæ­¢ãƒ»æ¼”å¥é–‹å§‹ä½ç½®æŒ‡å®šãƒ»ã‚­ãƒ¼ã‚·ãƒ•ãƒˆã€ (Midi)</h2>
+  ã“ã‚Œã‚‰ã®è¨­å®šã¯ã€æ¼”å¥å‰ãƒ»åœæ­¢å‰ã«è¨­å®šã—ã¾ã™ã€‚<br>
   <br>
-  <a href="../reference/rf_setMidiFadeInTime.html">setMidiFadeInTime()</a>‚ÅƒtƒF[ƒhƒCƒ“A<br>
-  <a href="../reference/rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a>‚ÅƒtƒF[ƒhƒAƒEƒgA<br>
-  <a href="../reference/rf_setMidiStartTick.html">setMidiStartTick()</a>‚Å‰‰‘tŠJnˆÊ’uA<br>
-  <a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a>‚ÅƒL[ƒVƒtƒgiˆÚ’²j‚ğİ’è‚Å‚«‚Ü‚·B<br>
+  <a href="../reference/rf_setMidiFadeInTime.html">setMidiFadeInTime()</a>ã§ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã€<br>
+  <a href="../reference/rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a>ã§ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã€<br>
+  <a href="../reference/rf_setMidiStartTick.html">setMidiStartTick()</a>ã§æ¼”å¥é–‹å§‹ä½ç½®ã€<br>
+  <a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a>ã§ã‚­ãƒ¼ã‚·ãƒ•ãƒˆï¼ˆç§»èª¿ï¼‰ã‚’è¨­å®šã§ãã¾ã™ã€‚<br>
 
   <br>
-  ã‹L‚Ìƒƒ\ƒbƒh‚ğg‚Á‚½Œã‚ÉA<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>‚ğg‚¤‚ÆAİ’è‚ªMusicPlayer‚É”½‰f‚³‚ê‚Ü‚·B<br>
+  ä¸Šè¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’ä½¿ã£ãŸå¾Œã«ã€<a href="../reference/rf_updatePlayingInfomation.html">updatePlayInfo()</a>ã‚’ä½¿ã†ã¨ã€è¨­å®šãŒMusicPlayerã«åæ˜ ã•ã‚Œã¾ã™ã€‚<br>
   <br>
   [Main.tonyu]<br>
 <pre>
@@ -33,36 +33,36 @@ midiFadeInTime  = 0;
 midiKeyShift    = 0;
 midiStartTick   = 0;
 while (1) {
-  if (getkey(65) > 0 && midiFadeInTime  > 0) midiFadeInTime  -= 50;  // A:ƒtƒF[ƒhƒCƒ“|
-  if (getkey(83) > 0)                        midiFadeInTime  += 50;  // S:ƒtƒF[ƒhƒCƒ“{
-  if (getkey(68) > 0 && midiFadeOutTime > 0) midiFadeOutTime -= 50;  // D:ƒtƒF[ƒhƒAƒEƒg|
-  if (getkey(70) > 0)                        midiFadeOutTime += 50;  // F:ƒtƒF[ƒhƒAƒEƒg{
-  if (getkey(71) > 0 && midiStartTick   > 0) midiStartTick   -= 100; // G:ŠJnƒeƒBƒbƒN|
-  if (getkey(72) > 0)                        midiStartTick   += 100; // H:ŠJnƒeƒBƒbƒN{
-  if (getkey(74) % 5 == 1)                   midiKeyShift    --;     // J:ƒL[ƒVƒtƒg|
-  if (getkey(75) % 5 == 1)                   midiKeyShift    ++;     // K:ƒL[ƒVƒtƒg{
-  if (getkey(90) == 1) { // Z:Ä¶
-    $mplayer.<strong>setMidiFadeInTime</strong>(midiFadeInTime); // ƒtƒF[ƒhƒCƒ“İ’è
-    $mplayer.<strong>setMidiStartTick</strong>(midiStartTick);   // ŠJnˆÊ’uİ’èiƒeƒBƒbƒN’PˆÊj
-    $mplayer.<strong>setMidiKeyShift</strong>(midiKeyShift);     // ƒL[ƒVƒtƒgİ’è
-    $mplayer.<strong>updatePlayInfo</strong>(); // XV
+  if (getkey(65) > 0 && midiFadeInTime  > 0) midiFadeInTime  -= 50;  // A:ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ï¼
+  if (getkey(83) > 0)                        midiFadeInTime  += 50;  // S:ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ï¼‹
+  if (getkey(68) > 0 && midiFadeOutTime > 0) midiFadeOutTime -= 50;  // D:ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼
+  if (getkey(70) > 0)                        midiFadeOutTime += 50;  // F:ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼‹
+  if (getkey(71) > 0 && midiStartTick   > 0) midiStartTick   -= 100; // G:é–‹å§‹ãƒ†ã‚£ãƒƒã‚¯ï¼
+  if (getkey(72) > 0)                        midiStartTick   += 100; // H:é–‹å§‹ãƒ†ã‚£ãƒƒã‚¯ï¼‹
+  if (getkey(74) % 5 == 1)                   midiKeyShift    --;     // J:ã‚­ãƒ¼ã‚·ãƒ•ãƒˆï¼
+  if (getkey(75) % 5 == 1)                   midiKeyShift    ++;     // K:ã‚­ãƒ¼ã‚·ãƒ•ãƒˆï¼‹
+  if (getkey(90) == 1) { // Z:å†ç”Ÿ
+    $mplayer.<strong>setMidiFadeInTime</strong>(midiFadeInTime); // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³è¨­å®š
+    $mplayer.<strong>setMidiStartTick</strong>(midiStartTick);   // é–‹å§‹ä½ç½®è¨­å®šï¼ˆãƒ†ã‚£ãƒƒã‚¯å˜ä½ï¼‰
+    $mplayer.<strong>setMidiKeyShift</strong>(midiKeyShift);     // ã‚­ãƒ¼ã‚·ãƒ•ãƒˆè¨­å®š
+    $mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
     $mplayer.play($se_test, 1);
   }
-  if (getkey(88) == 1) { // X:’â~
-    $mplayer.<strong>setMidiFadeOutTime</strong>(midiFadeOutTime); // ƒtƒF[ƒhƒAƒEƒgİ’è
-    $mplayer.<strong>updatePlayInfo</strong>(); // XV
+  if (getkey(88) == 1) { // X:åœæ­¢
+    $mplayer.<strong>setMidiFadeOutTime</strong>(midiFadeOutTime); // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆè¨­å®š
+    $mplayer.<strong>updatePlayInfo</strong>(); // æ›´æ–°
     $mplayer.stop();
   }
   
-  drawText(100,  0, "ƒtƒF[ƒhƒCƒ“@F" + midiFadeInTime , $clWhite);
-  drawText(100, 20, "ƒtƒF[ƒhƒAƒEƒgF" + midiFadeOutTime, $clWhite);
-  drawText(100, 40, "ŠJnˆÊ’u@@@F" + midiStartTick  , $clWhite);
-  drawText(100, 60, "ƒL[ƒVƒtƒg@@F" + midiKeyShift   , $clWhite);
+  drawText(100,  0, "ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³ã€€ï¼š" + midiFadeInTime , $clWhite);
+  drawText(100, 20, "ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆï¼š" + midiFadeOutTime, $clWhite);
+  drawText(100, 40, "é–‹å§‹ä½ç½®ã€€ã€€ã€€ï¼š" + midiStartTick  , $clWhite);
+  drawText(100, 60, "ã‚­ãƒ¼ã‚·ãƒ•ãƒˆã€€ã€€ï¼š" + midiKeyShift   , $clWhite);
   update();
 }
 </pre>
   <br>
-  ƒƒ\ƒbƒh‚ÌÚ×<br>
+  ãƒ¡ã‚½ãƒƒãƒ‰ã®è©³ç´°<br>
   <ul>
    <li><a href="../reference/rf_setMidiFadeInTime.html">setMidiFadeInTime()</a></li>
    <li><a href="../reference/rf_setMidiFadeOutTime.html">setMidiFadeOutTime()</a></li>
@@ -70,7 +70,7 @@ while (1) {
    <li><a href="../reference/rf_setMidiKeyShift.html">setMidiKeyShift()</a></li>
   </ul>
   <br>
-  <a href="../tutorial.html">–ß‚é</a>
+  <a href="../tutorial.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

@@ -8,51 +8,51 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;–½—ßƒŠƒtƒ@ƒŒƒ“ƒX&nbsp;
+   &nbsp;å‘½ä»¤ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.getPlayerConfig</h2>
-MusicPlayer‚Ìİ’è’liYMPConfig.txt‚É‘‚©‚ê‚Ä‚¢‚é“à—ej‚ğæ“¾‚µ‚Ü‚·B<br>
+MusicPlayerã®è¨­å®šå€¤ï¼ˆYMPConfig.txtã«æ›¸ã‹ã‚Œã¦ã„ã‚‹å†…å®¹ï¼‰ã‚’å–å¾—ã—ã¾ã™ã€‚<br>
 <br>
-Œ‹‰Ê‚Í‰º‹L‚Ìƒƒ\ƒbƒh‚©‚çæ“¾‚µ‚Ä‚­‚¾‚³‚¢B<br>
-<font color="#FF0000">ver2.10‚©‚çA•Ï”‚ğ’¼ÚQÆ‚·‚é•û–@‚Í”ñ„§‚É‚È‚è‚Ü‚µ‚½B</font><br>
-  <h3>‘®</h3>
+çµæœã¯ä¸‹è¨˜ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‹ã‚‰å–å¾—ã—ã¦ãã ã•ã„ã€‚<br>
+<font color="#FF0000">ver2.10ã‹ã‚‰ã€å¤‰æ•°ã‚’ç›´æ¥å‚ç…§ã™ã‚‹æ–¹æ³•ã¯éæ¨å¥¨ã«ãªã‚Šã¾ã—ãŸã€‚</font><br>
+  <h3>æ›¸å¼</h3>
 <pre>
 getPlayerConfig()
 </pre>
 <br>
 <ul>
-  <li><a href="rf_getPlayerExeName.html">getPlayerExeName()</a>@@@(Àsƒtƒ@ƒCƒ‹–¼)</li>
-  <li><a href="rf_getPlayerDirectMusicSW.html">getPlayerDirectMusicSW()</a>@@@(DirectMusic‚ÌON/OFF)</li>
-  <li><a href="rf_getPlayerMode.html">getPlayerMode()</a>@@@(‘¼‚ÌƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh)</li>
-  <li><a href="rf_getPlayerReadSpeed.html">getPlayerReadSpeed()</a>@@@(ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ•p“x)</li>
+  <li><a href="rf_getPlayerExeName.html">getPlayerExeName()</a>ã€€ã€€ã€€(å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«å)</li>
+  <li><a href="rf_getPlayerDirectMusicSW.html">getPlayerDirectMusicSW()</a>ã€€ã€€ã€€(DirectMusicã®ON/OFF)</li>
+  <li><a href="rf_getPlayerMode.html">getPlayerMode()</a>ã€€ã€€ã€€(ä»–ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰)</li>
+  <li><a href="rf_getPlayerReadSpeed.html">getPlayerReadSpeed()</a>ã€€ã€€ã€€(ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿é »åº¦)</li>
 </ul>
 <br>
-Ú‚µ‚­‚ÍA<a href="../tips/tips_02.html">MusicPlayer‚Ìİ’è</a>‚ğQÆ‚µ‚Ä‚­‚¾‚³‚¢B<br>
+è©³ã—ãã¯ã€<a href="../tips/tips_02.html">MusicPlayerã®è¨­å®š</a>ã‚’å‚ç…§ã—ã¦ãã ã•ã„ã€‚<br>
 <br>
-  <h3>—á‚P</h3>
+  <h3>ä¾‹ï¼‘</h3>
 <pre>
 extends SpriteChar;
 
-setFont("‚l‚r ƒSƒVƒbƒN"); // •¶š‚ğ‚»‚ë‚¦‚â‚·‚­‚È‚é
+setFont("ï¼­ï¼³ ã‚´ã‚·ãƒƒã‚¯"); // æ–‡å­—ã‚’ãã‚ãˆã‚„ã™ããªã‚‹
 $mplayer = new Ymplayer();
 $mplayer.<strong>getPlayerConfig</strong>();
 while (1) {
   
-  drawText(80, 11* 0 , "Àsƒtƒ@ƒCƒ‹–¼         : " + $mplayer.<strong2>getPlayerExeName</strong2>()      , $clWhite, 9);
-  drawText(80, 11* 1 , "DirectMusic‚ÌON/OFF    : " + $mplayer.<strong2>getPlayerDirectMusicSW</strong2>(), $clWhite, 9);
-  drawText(80, 11* 2 , "‘¼‚ÌƒvƒŒƒCƒ„[‚Ìƒ‚[ƒh : " + $mplayer.<strong2>getPlayerMode</strong2>()         , $clWhite, 9);
-  drawText(80, 11* 3 , "ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ•p“x : " + $mplayer.<strong2>getPlayerReadSpeed</strong2>()    , $clWhite, 9);
+  drawText(80, 11* 0 , "å®Ÿè¡Œãƒ•ã‚¡ã‚¤ãƒ«å         : " + $mplayer.<strong2>getPlayerExeName</strong2>()      , $clWhite, 9);
+  drawText(80, 11* 1 , "DirectMusicã®ON/OFF    : " + $mplayer.<strong2>getPlayerDirectMusicSW</strong2>(), $clWhite, 9);
+  drawText(80, 11* 2 , "ä»–ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒ¢ãƒ¼ãƒ‰ : " + $mplayer.<strong2>getPlayerMode</strong2>()         , $clWhite, 9);
+  drawText(80, 11* 3 , "ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿é »åº¦ : " + $mplayer.<strong2>getPlayerReadSpeed</strong2>()    , $clWhite, 9);
   
   update();
 }
 </pre>
-YMPConfig.txt‚É‘‚©‚ê‚Ä‚¢‚é“à—e‚ğ‚»‚Ì‚Ü‚Ü•\¦‚µ‚Ä‚¢‚Ü‚·B<br>
-‹ó”’‚Ìs‚ÍA‚»‚Ìs‚É‘Î‰‚·‚é•Ï”‚ÍƒfƒtƒHƒ‹ƒg’l‚É‚È‚è‚Ü‚·B<br>
-ƒtƒ@ƒCƒ‹‚ª–³‚¢ê‡‚àA•Ï”‚ÍƒfƒtƒHƒ‹ƒg’l‚É‚È‚è‚Ü‚·B<br>
+YMPConfig.txtã«æ›¸ã‹ã‚Œã¦ã„ã‚‹å†…å®¹ã‚’ãã®ã¾ã¾è¡¨ç¤ºã—ã¦ã„ã¾ã™ã€‚<br>
+ç©ºç™½ã®è¡Œã¯ã€ãã®è¡Œã«å¯¾å¿œã™ã‚‹å¤‰æ•°ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã«ãªã‚Šã¾ã™ã€‚<br>
+ãƒ•ã‚¡ã‚¤ãƒ«ãŒç„¡ã„å ´åˆã‚‚ã€å¤‰æ•°ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆå€¤ã«ãªã‚Šã¾ã™ã€‚<br>
 <br>
-  <a href="../reference.html">–ß‚é</a>
+  <a href="../reference.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>

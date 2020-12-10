@@ -8,51 +8,51 @@
  <body>
   <h1>
    <img src="../res/icon.png" align="top">
-   &nbsp;–½—ßƒŠƒtƒ@ƒŒƒ“ƒX&nbsp;
+   &nbsp;å‘½ä»¤ãƒªãƒ•ã‚¡ãƒ¬ãƒ³ã‚¹&nbsp;
    <img src="../res/icon.png" align="top">
   </h1>
   <hr>
   <h2>Ymplayer.stop</h2>
-  Midi, Ogg ,Mzo ‚ğ’â~‚µ‚Ü‚·<br>
+  Midi, Ogg ,Mzo ã‚’åœæ­¢ã—ã¾ã™<br>
   
-  <h3>‘®</h3>
+  <h3>æ›¸å¼</h3>
 <pre>
 stop(bgmType)
 </pre>
 <dl>
- <dt>bgmType(È—ª‰Â”\)</dt>
- <dd>0, null, (È—ª) = Midi(‚Ü‚½‚ÍMzo), Ogg ‚Ì—¼•û‚ğ’â~<br>
-     1 = Midi(‚Ü‚½‚ÍMzo)‚¾‚¯’â~<br>
-     2 = Ogg‚¾‚¯’â~<br>
+ <dt>bgmType(çœç•¥å¯èƒ½)</dt>
+ <dd>0, null, (çœç•¥) = Midi(ã¾ãŸã¯Mzo), Ogg ã®ä¸¡æ–¹ã‚’åœæ­¢<br>
+     1 = Midi(ã¾ãŸã¯Mzo)ã ã‘åœæ­¢<br>
+     2 = Oggã ã‘åœæ­¢<br>
  </dd>
 </dl>
-  <h3>–ß‚è’l</h3>
-  Ogg‚Ì’â~‚ğ‚µ‚½ê‡‚ÉŒÀ‚èA–ß‚è’l‚ğ•Ô‚µ‚Ü‚·<br>
-  MusicPlayer‚É–½—ß‚ğ’m‚ç‚¹‚éƒtƒ@ƒCƒ‹(ogg_sig.dat)‚ğ‘‚«‚ß‚½‚ç0A<br>
-  ƒGƒ‰[‚ª‹N‚«‚½‚ç-1‚ğ•Ô‚µ‚Ü‚·<br>
+  <h3>æˆ»ã‚Šå€¤</h3>
+  Oggã®åœæ­¢ã‚’ã—ãŸå ´åˆã«é™ã‚Šã€æˆ»ã‚Šå€¤ã‚’è¿”ã—ã¾ã™<br>
+  MusicPlayerã«å‘½ä»¤ã‚’çŸ¥ã‚‰ã›ã‚‹ãƒ•ã‚¡ã‚¤ãƒ«(ogg_sig.dat)ã‚’æ›¸ãè¾¼ã‚ãŸã‚‰0ã€<br>
+  ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰-1ã‚’è¿”ã—ã¾ã™<br>
   <br>
-  <h3>—á‚P</h3>
-  i—\‚ß test.mid ‚ğTonyu‚É“o˜^‚µ‚Ä‚¨‚¢‚Ä‚­‚¾‚³‚¢j<br>
-  i—\‚ß test.ogg ‚ğƒvƒƒWƒFƒNƒg‚ÌƒtƒHƒ‹ƒ_‚É’u‚¢‚Ä‚­‚¾‚³‚¢j<br>
-  iTonyuŠJ”­ŠÂ‹«”Å‚Å‚ÍƒvƒƒWƒFƒNƒg‚ğŠJ‚¢‚Ä‚©‚çAˆê“xMidi‚ğ‰‰‘t‚³‚¹‚È‚¢‚ÆOgg‚ªÄ¶‚Å‚«‚Ü‚¹‚ñj<br>
+  <h3>ä¾‹ï¼‘</h3>
+  ï¼ˆäºˆã‚ test.mid ã‚’Tonyuã«ç™»éŒ²ã—ã¦ãŠã„ã¦ãã ã•ã„ï¼‰<br>
+  ï¼ˆäºˆã‚ test.ogg ã‚’ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ•ã‚©ãƒ«ãƒ€ã«ç½®ã„ã¦ãã ã•ã„ï¼‰<br>
+  ï¼ˆTonyué–‹ç™ºç’°å¢ƒç‰ˆã§ã¯ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’é–‹ã„ã¦ã‹ã‚‰ã€ä¸€åº¦Midiã‚’æ¼”å¥ã•ã›ãªã„ã¨OggãŒå†ç”Ÿã§ãã¾ã›ã‚“ï¼‰<br>
 <pre>
 extends SpriteChar;
 
 $mplayer = new Ymplayer();
 while (1) {
-  if (getkey(90) == 1) $mplayer.play($se_test, 1);   // Z:MidiÄ¶
-  if (getkey(88) == 1) $mplayer.<strong>stop</strong>(1);             // X:Midi’â~
-  if (getkey(67) == 1) $mplayer.play("test.ogg", 1); // C:OggÄ¶
-  if (getkey(86) == 1) $mplayer.<strong>stop</strong>(2);             // V:Ogg’â~
-  if (getkey(66) == 1) $mplayer.<strong>stop</strong>();              // B:‚·‚×‚Ä’â~
+  if (getkey(90) == 1) $mplayer.play($se_test, 1);   // Z:Midiå†ç”Ÿ
+  if (getkey(88) == 1) $mplayer.<strong>stop</strong>(1);             // X:Midiåœæ­¢
+  if (getkey(67) == 1) $mplayer.play("test.ogg", 1); // C:Oggå†ç”Ÿ
+  if (getkey(86) == 1) $mplayer.<strong>stop</strong>(2);             // V:Oggåœæ­¢
+  if (getkey(66) == 1) $mplayer.<strong>stop</strong>();              // B:ã™ã¹ã¦åœæ­¢
   update();
 }
 </pre>
-  ¦ TonyuŠJ”­ŠÂ‹«”Å‚Å‚ÍAƒvƒƒWƒFƒNƒg‚ğŠJ‚¢‚Ä‚©‚çˆê“x‚Å‚àMidi‚ğ‰‰‘t‚µ‚È‚¢‚ÆAOgg‚ğ–Â‚ç‚·‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñB<br>
-  @@iMidi‚ğ‰‰‘t‚·‚é‚ÆA¡ŠJ‚¢‚Ä‚¢‚éƒvƒƒWƒFƒNƒg‚ÌêŠ(ƒpƒX)‚ª‚í‚©‚é‚½‚ßj<br>
-  @@Tonyuƒ‰ƒ“ƒ^ƒCƒ€”Å‚Å‚ÍA‚·‚®‚ÉOgg‚ğ–Â‚ç‚¹‚Ü‚·B<br>
+  â€» Tonyué–‹ç™ºç’°å¢ƒç‰ˆã§ã¯ã€ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã‚’é–‹ã„ã¦ã‹ã‚‰ä¸€åº¦ã§ã‚‚Midiã‚’æ¼”å¥ã—ãªã„ã¨ã€Oggã‚’é³´ã‚‰ã™ã“ã¨ãŒã§ãã¾ã›ã‚“ã€‚<br>
+  ã€€ã€€ï¼ˆMidiã‚’æ¼”å¥ã™ã‚‹ã¨ã€ä»Šé–‹ã„ã¦ã„ã‚‹ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ãƒˆã®å ´æ‰€(ãƒ‘ã‚¹)ãŒã‚ã‹ã‚‹ãŸã‚ï¼‰<br>
+  ã€€ã€€Tonyuãƒ©ãƒ³ã‚¿ã‚¤ãƒ ç‰ˆã§ã¯ã€ã™ãã«Oggã‚’é³´ã‚‰ã›ã¾ã™ã€‚<br>
   <br>
-  <a href="../reference.html">–ß‚é</a>
+  <a href="../reference.html">æˆ»ã‚‹</a>
   <hr>
  </body>
 </html>
