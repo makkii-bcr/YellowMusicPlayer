@@ -8,6 +8,9 @@ MIDIファイル、Ogg Vorbisファイルが再生できます。
 
 （長いので、略してYMPlayerと書いたりしています）
 
+## ドキュメント
+[docs/ReadMe.html](https://makkii-bcr.github.io/YellowMusicPlayer/ReadMe.html)
+
 ## 動作環境
 
 - Windows 10 / 8.1 / 8 / 7 / Vista / XP / Me / 2000 / 98SE
@@ -22,7 +25,7 @@ MIDIファイル、Ogg Vorbisファイルが再生できます。
 |API|Win32API|
 ||DirectSound|
 ||DirectMusic|
-|ライブラリ|GuruGuruSMF|
+|ライブラリ|[GuruGuruSMF](http://gurugurusmf.migmig.net/)|
 
 ## 開発環境
 
