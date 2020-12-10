@@ -4,11 +4,14 @@ Tonyu System 1（Tonyu1）用のBGM再生ソフトです。
 
 MIDIファイル、Ogg Vorbisファイルが再生できます。
 
-[プロジェクトボードのYellowMusicPlayerのページ](https://www.tonyu.jp/project/viewProject.cgi?mainkey=667&)
-
 （長いので、略してYMPlayerと書いたりしています）
 
+## ダウンロード
+
+[Tonyu System プロジェクトボード](https://www.tonyu.jp/project/viewProject.cgi?mainkey=667&)
+
 ## ドキュメント
+
 [docs/ReadMe.html](https://makkii-bcr.github.io/YellowMusicPlayer/ReadMe.html)
 
 ## 動作環境
