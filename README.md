@@ -76,6 +76,11 @@ http://phys.cool.coocan.jp/physjpn/bccwin.htm
 1. 「ビルド(B)」→「リビルド(R)」でビルドします。
     - パスがあっていないと思うので、ビルドに失敗すると思います。
     - 「プロジェクト(P)」→「設定(E)」で、パス等を適切なものに置き換えてください。
+      - 下記のincludeパスを再設定する必要があります。
+        - DirectXのIncludeフォルダ
+        - src/includeOggVorbisフォルダ
+      - それでもビルドに失敗する場合は、プロジェクトファイル「midiplayer2.vwp」をテキストエディタで開いて、現在のプロジェクトフォルダのパスなどを書き換える必要があるかもしれません。
+        - src内のファイルは、エンコードがShift_JIS(MS932)なので注意してください。
     - ビルドが成功すると、Releaseフォルダに「Midiplayer2.exe」が作られます。
 
 ### アイコンの適用
@@ -94,5 +99,7 @@ lzhファイルのため、解凍ソフトが必要です。
 1. 起動後、「環境設定」→「コンパイラ」にBorland\Bcc55\Bin\bcc32.exeのパスを設定します。
 1. 「midiplayer2_2.bdp」を開きます。
 1. 「プロジェクト(P)」→「再構築(B)」でビルドします。
+    - ビルドに失敗する場合は、下記のincludeパスを再設定してください。
+      - DirectXのIncludeフォルダ
     - ビルドが成功すると、Releaseフォルダに「midiplayer2_2.exe」が作られます。
 1. 「midiplayer2_2.exe」を「Midiplayer2.exe」にリネームします。
