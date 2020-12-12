@@ -4,6 +4,7 @@
 
 #include <tchar.h>
 #include <windows.h>
+#include "resource.h"
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
@@ -19,7 +20,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
     winc.cbClsExtra    = 0;
     winc.cbWndExtra    = 0;
     winc.hInstance     = hInstance;
-    winc.hIcon         = NULL;
+    winc.hIcon         = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON_1));
     winc.hCursor       = LoadCursor(NULL, IDC_ARROW);
     winc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
     winc.lpszMenuName  = NULL;

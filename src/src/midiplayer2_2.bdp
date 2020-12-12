@@ -1,9 +1,11 @@
 [Project]
 Version=1.2.21
-Count=3
+Count=5
 Filename1=Main.c,1,midiplayer2_2.bdp,1,Main.c
 Filename2=GuruGuruSMF4_C_Dynamic.c,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.c
 Filename3=GuruGuruSMF4_C_Dynamic.h,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.h
+Filename4=Define.h,1,midiplayer2_2.bdp,1,Define.h
+Filename5=resource.h,1,midiplayer2_2.bdp,1,resource.h
 
 [Compile]
 ResourceName=resource.rc
@@ -53,7 +55,7 @@ PreHeader=-H-
 Call=-pc
 Language=-AT
 Option=
-IncludePath=C:\Dev\Borland\Bcc55\IncludeDX2004;includeOggVorbis
+IncludePath=..\..\..\..\..\..\..\..\..\dev\Borland\Bcc55\IncludeDX2004;include
 LibraryFile=
 Define=
 ResIncludePath=
@@ -62,7 +64,6 @@ MakeBefore=
 MakeAfter=
 
 [OpenFiles]
-FileCount=1
-FileName1=Main.c
-ActivePageIndex=0
+FileCount=0
+ActivePageIndex=-1
 
