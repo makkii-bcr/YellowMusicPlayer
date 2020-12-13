@@ -27,5 +27,4 @@ Option(Debug)>
 ObjLibfile(Debug)>
 Files([開(1)|リストに含(1):行,カーソル])>
 1[1|1:51?1,2479-2479]GuruGuruSMF4_C_Dynamic.c
-0[1|1:11?1,295-295]Main.c
-2[1|1:24?1,515-515]GuruGuruSMF4_C_Dynamic.h
+2[1|1:6?16,134-134]GuruGuruSMF4_C_Dynamic.h

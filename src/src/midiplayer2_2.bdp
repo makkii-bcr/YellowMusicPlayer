@@ -1,11 +1,12 @@
 [Project]
 Version=1.2.21
-Count=5
-Filename1=Main.c,1,midiplayer2_2.bdp,1,Main.c
-Filename2=GuruGuruSMF4_C_Dynamic.c,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.c
-Filename3=GuruGuruSMF4_C_Dynamic.h,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.h
-Filename4=Define.h,1,midiplayer2_2.bdp,1,Define.h
-Filename5=resource.h,1,midiplayer2_2.bdp,1,resource.h
+Count=6
+Filename1=GuruGuruSMF4_C_Dynamic.c,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.c
+Filename2=GuruGuruSMF4_C_Dynamic.h,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.h
+Filename3=define.h,1,midiplayer2_2.bdp,1,define.h
+Filename4=resource.h,1,midiplayer2_2.bdp,1,resource.h
+Filename5=main.cpp,1,midiplayer2_2.bdp,1,main.cpp
+Filename6=ymp_main.cpp,1,midiplayer2_2.bdp,1,ymp_main.cpp
 
 [Compile]
 ResourceName=resource.rc

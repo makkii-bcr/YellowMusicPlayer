@@ -9,6 +9,11 @@
 #define BUF_SIZE_M        2048
 #define BUF_SIZE_L        32768
 
+#define BUF_SIZE_PRINT    1024
+
 #define JOYSTICK_CHECK_TIME 65 * 5
+
+// Message WM_APP(0x8000) ~ 0xBFFF
+#define YMP_MSG_TEST1 (WM_APP + 0x0000)
 
 #endif
