@@ -44,7 +44,7 @@ extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LP
         timeBeginPeriod(timeCaps.wPeriodMin);
     }
 
-    if (ympMain(hWnd)) {
+    if (YMPlayer::ympMain(hWnd)) {
         return 0;
     }
 

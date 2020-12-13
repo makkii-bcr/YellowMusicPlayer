@@ -65,6 +65,7 @@ MakeBefore=
 MakeAfter=
 
 [OpenFiles]
-FileCount=0
-ActivePageIndex=-1
+FileCount=1
+FileName1=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\main.cpp
+ActivePageIndex=0
 

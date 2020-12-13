@@ -3,6 +3,8 @@
 
 #include <windows.h>
 
+namespace YMPlayer {
 int ympMain(HWND hWnd);
+}
 
 #endif
