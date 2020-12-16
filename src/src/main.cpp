@@ -6,13 +6,12 @@
 #include <tchar.h>
 #include <windows.h>
 #include <mmsystem.h>
-#include "define.h"
 #include "main.h"
+#include "define.h"
 #include "resource.h"
 #include "ymp_main.h"
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
-
 
 extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
     WNDCLASS wc;
@@ -44,7 +43,8 @@ extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LP
         timeBeginPeriod(timeCaps.wPeriodMin);
     }
 
-    if (YMPlayer::ympMain(hWnd)) {
+    YMPlayer ymplayer;
+    if (ymplayer.ympInit(hWnd)) {
         return 0;
     }
 
@@ -72,7 +72,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
     case YMP_MSG_TEST1: {
         TCHAR str[BUF_SIZE_PRINT];
         DWORD cnt = timeGetTime();
-        _sntprintf(str, sizeof(str), "Test: %d", cnt);
+        _sntprintf(str, sizeof(str), _T("Test: %d"), cnt);
         SetWindowText(hWnd, str);
         break;
     }

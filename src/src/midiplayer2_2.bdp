@@ -1,12 +1,17 @@
 [Project]
 Version=1.2.21
-Count=6
+Count=11
 Filename1=GuruGuruSMF4_C_Dynamic.c,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.c
 Filename2=GuruGuruSMF4_C_Dynamic.h,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.h
 Filename3=define.h,1,midiplayer2_2.bdp,1,define.h
 Filename4=resource.h,1,midiplayer2_2.bdp,1,resource.h
 Filename5=main.cpp,1,midiplayer2_2.bdp,1,main.cpp
 Filename6=ymp_main.cpp,1,midiplayer2_2.bdp,1,ymp_main.cpp
+Filename7=ymp_midi.cpp,1,midiplayer2_2.bdp,1,ymp_midi.cpp
+Filename8=ymp_midi.h,1,midiplayer2_2.bdp,1,ymp_midi.h
+Filename9=ymp_main.h,1,midiplayer2_2.bdp,1,ymp_main.h
+Filename10=ymp_ogg.cpp,1,midiplayer2_2.bdp,1,ymp_ogg.cpp
+Filename11=ymp_ogg.h,1,midiplayer2_2.bdp,1,ymp_ogg.h
 
 [Compile]
 ResourceName=resource.rc
@@ -65,7 +70,8 @@ MakeBefore=
 MakeAfter=
 
 [OpenFiles]
-FileCount=1
-FileName1=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\main.cpp
+FileCount=2
+FileName1=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\ymp_main.cpp
+FileName2=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\ymp_main.h
 ActivePageIndex=0
 
