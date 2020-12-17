@@ -1,6 +1,8 @@
 // DirectMusic Portモードプレイヤー
 
-#pragma once
+// #pragma once
+#ifndef DMPORTPLAYER_H
+#define DMPORTPLAYER_H
 
 #include <Windows.h>
 #include <map>
@@ -154,3 +156,4 @@ namespace GuruGuruSmf { namespace Core { namespace DirectMusicPort {
 
 }}}
 
+#endif

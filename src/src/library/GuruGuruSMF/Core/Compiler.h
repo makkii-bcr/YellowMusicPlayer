@@ -1,6 +1,8 @@
 // SMF¨“à•”ƒR[ƒh•ÏŠ·
 
-#pragma once
+// #pragma once
+#ifndef COMPILER_H
+#define COMPILER_H
 
 #include "Constants.h"
 #include "Interface.h"
@@ -169,4 +171,4 @@ namespace GuruGuruSmf { namespace Core { namespace Compiler {
 }}}
 
 
-
+#endif

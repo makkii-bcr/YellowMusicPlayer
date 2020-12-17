@@ -1,5 +1,7 @@
 
 #pragma once
+#ifndef PORT_H
+#define PORT_H
 #include <dmusici.h>
 #include <dmusicc.h>
 
@@ -50,9 +52,9 @@ namespace GuruGuruSmf {	namespace Dxmus
 		~Port();
 		GGSERROR Open(HWND handle);
 		void Close();
-		GGSERROR GetReferenceTime(long long* time);
-		GGSERROR SendShortMessage(long long time, int midiMessage);
-		GGSERROR SendLongMessage(long long time, LPBYTE midiMessage, int length);
+		GGSERROR GetReferenceTime(__int64* time);
+		GGSERROR SendShortMessage(__int64 time, int midiMessage);
+		GGSERROR SendLongMessage(__int64 time, LPBYTE midiMessage, int length);
 		void SetVoiceList(DWORD* list, int count);
 		GGSERROR AddDls(wchar_t* fileName);
 		int GetInstrument(int voice, IDirectMusicInstrument8** instrument);
@@ -63,3 +65,4 @@ namespace GuruGuruSmf {	namespace Dxmus
 
 }}
 
+#endif

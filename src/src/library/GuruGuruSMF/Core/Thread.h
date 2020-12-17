@@ -1,6 +1,8 @@
 // スレッド(今のところDirectMusic Portモードのみ使用)
 
-#pragma once
+// #pragma once
+#ifndef THREAD_H
+#define THREAD_H
 
 #include <Windows.h>
 #include "Constants.h"
@@ -29,3 +31,4 @@ namespace GuruGuruSmf { namespace Core {
 
 }}
 
+#endif

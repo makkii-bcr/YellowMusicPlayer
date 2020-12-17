@@ -1,6 +1,8 @@
 // ŠÔŠÖŒW‚Ìƒf[ƒ^
 
-#pragma once
+// #pragma once
+#ifndef TIMES_H
+#define TIMES_H
 
 #include "Constants.h"
 #include "Interface.h"
@@ -234,4 +236,4 @@ namespace DirectMusicPort {
 
 }}
 
-
+#endif

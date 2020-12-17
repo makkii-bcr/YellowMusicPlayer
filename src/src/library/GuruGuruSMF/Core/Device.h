@@ -1,6 +1,8 @@
 // MIDIデバイス
 
-#pragma once
+// #pragma once
+#ifndef DEVICE_H
+#define DEVICE_H
 
 #include <MMSystem.h>
 #include "Constants.h"
@@ -107,4 +109,4 @@ namespace DirectMusicPort {
 }}
 
 
-
+#endif

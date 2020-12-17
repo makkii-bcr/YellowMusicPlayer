@@ -1,6 +1,8 @@
 // DirectMusic PerformanceÉÇÅ[Éh(Legacy)
 
-#pragma once
+// #pragma once
+#ifndef DMPERFORMANCEPLAYER_H
+#define DMPERFORMANCEPLAYER_H
 
 #include <Windows.h>
 #include "Constants.h"
@@ -62,3 +64,5 @@ namespace GuruGuruSmf { namespace Core { namespace DirectMusicPerformance {
 
 
 }}}
+
+#endif

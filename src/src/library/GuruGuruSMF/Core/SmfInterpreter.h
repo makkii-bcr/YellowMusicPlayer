@@ -1,6 +1,8 @@
 // SMFëÄçÏ
 
-#pragma once
+// #pragma once
+#ifndef SMFINTERPRETER_H
+#define SMFINTERPRETER_H
 
 #include "Constants.h"
 #include "Smf.h"
@@ -64,4 +66,4 @@ namespace GuruGuruSmf { namespace Core {
 
 
 
-
+#endif

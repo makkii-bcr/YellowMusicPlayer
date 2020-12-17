@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stdafx2.h"
 #include <dmksctrl.h>
 #include "Port.h"
 
@@ -267,7 +267,7 @@ namespace GuruGuruSmf {	namespace Dxmus
 	}
 
 	// 遅延付き時間を取得
-	GGSERROR Port::GetReferenceTime(long long* time)
+	GGSERROR Port::GetReferenceTime(__int64* time)
 	{
 		HRESULT hr = clock->GetTime(time);
 		if(FAILED(hr)) return GgsError::Failed;
@@ -275,7 +275,7 @@ namespace GuruGuruSmf {	namespace Dxmus
 	}
 
 	// 短いメッセージを送る
-	GGSERROR Port::SendShortMessage(long long time, int midiMessage)
+	GGSERROR Port::SendShortMessage(__int64 time, int midiMessage)
 	{
 		if(!isOpen)	return GgsError::NotReady;
 
@@ -289,7 +289,7 @@ namespace GuruGuruSmf {	namespace Dxmus
 	}
 
 	// 長いメッセージを送る
-	GGSERROR Port::SendLongMessage(long long time, LPBYTE midiMessage, int length)
+	GGSERROR Port::SendLongMessage(__int64 time, LPBYTE midiMessage, int length)
 	{
 		if(!isOpen) return GgsError::NotReady;
 

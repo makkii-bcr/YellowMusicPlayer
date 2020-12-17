@@ -1,6 +1,8 @@
 // プレイヤーの基底クラス
 
-#pragma once
+// #pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "Interface.h"
 #include "SmfController.h"
@@ -283,3 +285,4 @@ namespace GuruGuruSmf { namespace Core { namespace Player {
 
 }}}
 
+#endif

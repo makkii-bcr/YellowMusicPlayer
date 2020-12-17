@@ -1,6 +1,8 @@
 // 内部で使用するインターフェイス
 
-#pragma once
+// #pragma once
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <Windows.h>
 #include "Smf.h"
@@ -152,3 +154,4 @@ namespace GuruGuruSmf { namespace Core
 	
 }}
 
+#endif

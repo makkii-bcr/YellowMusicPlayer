@@ -445,7 +445,7 @@ namespace GuruGuruSmf { namespace Core { namespace DirectMusicPort {
 	// SMF‚Å‰Šú‰»
 	void Player::Initialize(Smf* newSmf)
 	{
-		PlayerBase::Initialize(newSmf);
+		GuruGuruSmf::Core::Player::PlayerBase::Initialize(newSmf);
 		
 		times->Initialize(newSmf);
 		loopPosition = -1;
@@ -460,7 +460,7 @@ namespace GuruGuruSmf { namespace Core { namespace DirectMusicPort {
 	// –`“ª‚ÉŠª‚«–ß‚µ
 	void Player::Rewind()
 	{
-		PlayerBase::Rewind();
+		GuruGuruSmf::Core::Player::PlayerBase::Rewind();
 		isMusicEnd = false;
 
 		times->Rewind();

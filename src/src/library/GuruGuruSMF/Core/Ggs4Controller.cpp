@@ -133,10 +133,12 @@ namespace GuruGuruSmf { namespace Core {
 
 		int count = smfListKeys.Count;
 		if(count){
-			sprintf_s(buf, 16, "%d", listKeys[0]);
+			// sprintf_s(buf, 16, "%d", listKeys[0]);
+			sprintf(buf, "%d", listKeys[0]);
 			listKeysString += buf;
 			for(int i=1; i<count; i++){
-				sprintf_s(buf, 16, ",%d", listKeys[i]);
+				// sprintf_s(buf, 16, ",%d", listKeys[i]);
+				sprintf(buf, ",%d", listKeys[i]);
 				listKeysString += buf;
 			}
 		}

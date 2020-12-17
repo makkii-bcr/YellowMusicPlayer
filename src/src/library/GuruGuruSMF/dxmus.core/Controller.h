@@ -1,5 +1,7 @@
 
-#pragma once
+// #pragma once
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include "PerformancePlayer.h"
 #include "Port.h"
@@ -64,15 +66,15 @@ namespace GuruGuruSmf{ namespace Dxmus
 		{
 			port->Close();
 		}
-		GGSERROR PortGetReferenceTime(long long* time)
+		GGSERROR PortGetReferenceTime(__int64* time)
 		{
 			return port->GetReferenceTime(time);
 		}
-		GGSERROR PortSendShortMessage(long long time, int midiMessage)
+		GGSERROR PortSendShortMessage(__int64 time, int midiMessage)
 		{
 			return port->SendShortMessage(time, midiMessage);
 		}
-		GGSERROR PortSendLongMessage(long long time, LPBYTE midiMessage, int length)
+		GGSERROR PortSendLongMessage(__int64 time, LPBYTE midiMessage, int length)
 		{
 			return port->SendLongMessage(time, midiMessage, length);
 		}
@@ -90,3 +92,4 @@ namespace GuruGuruSmf{ namespace Dxmus
 
 }}
 
+#endif

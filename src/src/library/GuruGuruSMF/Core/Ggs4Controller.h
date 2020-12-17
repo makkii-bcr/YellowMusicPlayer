@@ -1,7 +1,10 @@
 // GuruGuruSMF4‚Ì‘‹Œû
 
-#pragma once
+// #pragma once
+#ifndef GGS4CONTROLLER_H
+#define GGS4CONTROLLER_H
 
+#include <stdio.h>
 #include <Windows.h>
 #include <map>
 
@@ -188,4 +191,4 @@ namespace GuruGuruSmf { namespace Core {
 		
 }}
 
-
+#endif

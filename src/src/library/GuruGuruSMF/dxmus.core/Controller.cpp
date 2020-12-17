@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "stdafx2.h"
 #include "Controller.h"
 
 namespace GuruGuruSmf{ namespace Dxmus{

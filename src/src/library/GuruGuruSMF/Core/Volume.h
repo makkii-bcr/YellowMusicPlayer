@@ -1,6 +1,8 @@
 // ‰¹—ÊŠÖŒW
 
-#pragma once
+// #pragma once
+#ifndef VOLUME_H
+#define VOLUME_H
 
 #include <Windows.h>
 #include "Constants.h"
@@ -58,4 +60,4 @@ namespace GuruGuruSmf { namespace Core {
 
 }}
 
-
+#endif

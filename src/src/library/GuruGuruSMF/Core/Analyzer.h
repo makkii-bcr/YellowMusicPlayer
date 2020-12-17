@@ -1,6 +1,8 @@
 // SMFâêÕ
 
-#pragma once
+// #pragma once
+#ifndef ANALYZER_H
+#define ANALYZER_H
 
 #include <set>
 
@@ -160,4 +162,4 @@ namespace GuruGuruSmf { namespace Core { namespace Analyzer {
 
 
 
-
+#endif

@@ -1,5 +1,7 @@
 
-#pragma once
+// #pragma once
+#ifndef PERFORMANCEPLAYER_H
+#define PERFORMANCEPLAYER_H
 
 #include <windows.h>
 #include <dmusici.h>
@@ -41,4 +43,4 @@ namespace GuruGuruSmf { namespace Dxmus {
 
 }}
 
-
+#endif

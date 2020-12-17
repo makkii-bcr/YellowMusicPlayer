@@ -3,7 +3,9 @@
 // ‚ğ‹Lq‚µ‚Ü‚·B
 //
 
-#pragma once
+// #pragma once
+#ifndef STDAFX_H
+#define STDAFX_H
 
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN	// Exclude rarely-used items from Windows headers.
@@ -37,4 +39,4 @@
 
 #include "Debug.h"
 
-
+#endif

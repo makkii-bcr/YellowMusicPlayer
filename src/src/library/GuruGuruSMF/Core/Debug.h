@@ -1,6 +1,8 @@
 // デバッグ関係
 
-#pragma once
+// #pragma once
+#ifndef DEBUG_H
+#define DEBUG_H
 
 
 #if defined(_DEBUG) || defined(DEBUG)
@@ -44,5 +46,7 @@ __int64 GgsLoggingGetTime();
 #define GGS_LOGGING_SHORTMSG(t, s, a, b)
 #define GGS_LOGGING_LONGMSG(t, l)
 #define GGS_LOGGING_GETTIME() 0
+
+#endif
 
 #endif

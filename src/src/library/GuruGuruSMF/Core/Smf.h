@@ -1,6 +1,8 @@
 // SMFデータ関連
 
-#pragma once
+// #pragma once
+#ifndef SMF_H
+#define SMF_H
 
 #include <Windows.h>
 #include <string>
@@ -355,3 +357,4 @@ namespace GuruGuruSmf { namespace Core {
 
 }}
 
+#endif

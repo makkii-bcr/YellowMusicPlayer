@@ -1,6 +1,8 @@
 // SMF‘€ìƒNƒ‰ƒX
 
-#pragma once
+// #pragma once
+#ifndef SMFCONTROLLER_H
+#define SMFCONTROLLER_H
 
 #include "Interface.h"
 #include "Analyzer.h"
@@ -118,4 +120,4 @@ namespace GuruGuruSmf { namespace Core {
 
 }}
 
-
+#endif

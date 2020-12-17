@@ -1,5 +1,5 @@
 
-#include "stdafx.h"
+#include "stdafx2.h"
 #include "PerformancePlayer.h"
 
 
@@ -113,7 +113,7 @@ namespace GuruGuruSmf {	namespace Dxmus	{
 	// Tick‚ðMUSIC_TIME‚É•ÏŠ·
 	MUSIC_TIME PerformancePlayer::TickToMusicTime(int tick, int timeBase)
 	{
-		long long a = tick;
+		__int64 a = tick;
 		a = a * DMUS_PPQ / timeBase;
 		return (MUSIC_TIME)a;
 	}

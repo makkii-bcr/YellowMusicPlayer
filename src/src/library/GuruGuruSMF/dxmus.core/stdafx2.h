@@ -3,7 +3,9 @@
 // ‚ğ‹Lq‚µ‚Ü‚·B
 //
 
-#pragma once
+// #pragma once
+#ifndef STDAFX2_H
+#define STDAFX2_H
 
 #ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN	// Exclude rarely-used items from Windows headers.
@@ -34,3 +36,4 @@
 
 #include <vector>
 
+#endif

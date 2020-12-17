@@ -1,6 +1,8 @@
 // Windows Multimedia APIÇÃÉvÉåÉCÉÑÅ[
 
-#pragma once
+// #pragma once
+#ifndef WINMMPLAYER_H
+#define WINMMPLAYER_H
 
 #include <map>
 
@@ -145,4 +147,4 @@ namespace GuruGuruSmf { namespace Core { namespace WindowsMultimedia {
 
 }}}
 
-
+#endif

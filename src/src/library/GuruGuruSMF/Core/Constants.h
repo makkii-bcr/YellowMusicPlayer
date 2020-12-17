@@ -1,6 +1,8 @@
 // GuruGuruSMF4�̒萔
 
-#pragma once
+// #pragma once
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 typedef unsigned char byte;
 typedef unsigned int uint;
@@ -222,4 +224,4 @@ namespace GuruGuruSmf { namespace Core
 
 
 
-
+#endif
