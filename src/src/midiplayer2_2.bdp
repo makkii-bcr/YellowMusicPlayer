@@ -1,6 +1,6 @@
 [Project]
 Version=1.2.21
-Count=11
+Count=37
 Filename1=GuruGuruSMF4_C_Dynamic.c,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.c
 Filename2=GuruGuruSMF4_C_Dynamic.h,1,midiplayer2_2.bdp,1,GuruGuruSMF4_C_Dynamic.h
 Filename3=define.h,1,midiplayer2_2.bdp,1,define.h
@@ -12,6 +12,32 @@ Filename8=ymp_midi.h,1,midiplayer2_2.bdp,1,ymp_midi.h
 Filename9=ymp_main.h,1,midiplayer2_2.bdp,1,ymp_main.h
 Filename10=ymp_ogg.cpp,1,midiplayer2_2.bdp,1,ymp_ogg.cpp
 Filename11=ymp_ogg.h,1,midiplayer2_2.bdp,1,ymp_ogg.h
+Filename12=libogg,1,midiplayer2_2.bdp,0
+Filename13=bitwise.c,2,libogg,1,library\libogg\bitwise.c
+Filename14=framing.c,2,libogg,1,library\libogg\framing.c
+Filename15=libvorbis,1,midiplayer2_2.bdp,0
+Filename16=analysis.c,2,libvorbis,1,library\libvorbis\analysis.c
+Filename17=bitrate.c,2,libvorbis,1,library\libvorbis\bitrate.c
+Filename18=block.c,2,libvorbis,1,library\libvorbis\block.c
+Filename19=codebook.c,2,libvorbis,1,library\libvorbis\codebook.c
+Filename20=envelope.c,2,libvorbis,1,library\libvorbis\envelope.c
+Filename21=floor0.c,2,libvorbis,1,library\libvorbis\floor0.c
+Filename22=floor1.c,2,libvorbis,1,library\libvorbis\floor1.c
+Filename23=info.c,2,libvorbis,1,library\libvorbis\info.c
+Filename24=lookup.c,2,libvorbis,1,library\libvorbis\lookup.c
+Filename25=lpc.c,2,libvorbis,1,library\libvorbis\lpc.c
+Filename26=lsp.c,2,libvorbis,1,library\libvorbis\lsp.c
+Filename27=mapping0.c,2,libvorbis,1,library\libvorbis\mapping0.c
+Filename28=mdct.c,2,libvorbis,1,library\libvorbis\mdct.c
+Filename29=psy.c,2,libvorbis,1,library\libvorbis\psy.c
+Filename30=registry.c,2,libvorbis,1,library\libvorbis\registry.c
+Filename31=res0.c,2,libvorbis,1,library\libvorbis\res0.c
+Filename32=sharedbook.c,2,libvorbis,1,library\libvorbis\sharedbook.c
+Filename33=smallft.c,2,libvorbis,1,library\libvorbis\smallft.c
+Filename34=synthesis.c,2,libvorbis,1,library\libvorbis\synthesis.c
+Filename35=vorbisenc.c,2,libvorbis,1,library\libvorbis\vorbisenc.c
+Filename36=vorbisfile.c,2,libvorbis,1,library\libvorbis\vorbisfile.c
+Filename37=window.c,2,libvorbis,1,library\libvorbis\window.c
 
 [Compile]
 ResourceName=resource.rc
@@ -70,8 +96,13 @@ MakeBefore=
 MakeAfter=
 
 [OpenFiles]
-FileCount=2
+FileCount=7
 FileName1=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\ymp_main.cpp
 FileName2=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\ymp_main.h
-ActivePageIndex=0
+FileName3=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\library\libvorbis\psytune.c
+FileName4=library\libvorbis\vorbisfile.c
+FileName5=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\library\libvorbis\scales.h
+FileName6=E:\dev\Borland\Bcc55\Include\stdio.h
+FileName7=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\library\libvorbis\psy.c
+ActivePageIndex=2
 
