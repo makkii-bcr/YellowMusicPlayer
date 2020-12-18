@@ -1,5 +1,5 @@
-#ifndef RESOURCE_H
-#define RESOURCE_H
+#ifndef _RESOURCE_H_
+#define _RESOURCE_H_
 
 #define IDI_ICON_1 100
 // マニフェスト

@@ -1,8 +1,8 @@
 // GuruGuruSMF4�̒萔
 
 // #pragma once
-#ifndef CONSTANTS_H
-#define CONSTANTS_H
+#ifndef _CONSTANTS_H_
+#define _CONSTANTS_H_
 
 typedef unsigned char byte;
 typedef unsigned int uint;

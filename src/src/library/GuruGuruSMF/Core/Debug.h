@@ -1,8 +1,8 @@
 // デバッグ関係
 
 // #pragma once
-#ifndef DEBUG_H
-#define DEBUG_H
+#ifndef _DEBUG_H_
+#define _DEBUG_H_
 
 
 #if defined(_DEBUG) || defined(DEBUG)

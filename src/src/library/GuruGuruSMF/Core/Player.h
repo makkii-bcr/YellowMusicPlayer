@@ -1,8 +1,8 @@
 // プレイヤーの基底クラス
 
 // #pragma once
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef _PLAYER_H_
+#define _PLAYER_H_
 
 #include "Interface.h"
 #include "SmfController.h"

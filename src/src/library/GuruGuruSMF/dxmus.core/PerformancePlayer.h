@@ -1,7 +1,7 @@
 
 // #pragma once
-#ifndef PERFORMANCEPLAYER_H
-#define PERFORMANCEPLAYER_H
+#ifndef _PERFORMANCEPLAYER_H_
+#define _PERFORMANCEPLAYER_H_
 
 #include <windows.h>
 #include <dmusici.h>

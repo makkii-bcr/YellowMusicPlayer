@@ -1,5 +1,5 @@
-#ifndef YMP_MIDI_H
-#define YMP_MIDI_H
+#ifndef _YMP_MIDI_H_
+#define _YMP_MIDI_H_
 
 #include <windows.h>
 

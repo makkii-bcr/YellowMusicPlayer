@@ -1,8 +1,8 @@
 // スレッド(今のところDirectMusic Portモードのみ使用)
 
 // #pragma once
-#ifndef THREAD_H
-#define THREAD_H
+#ifndef _THREAD_H_
+#define _THREAD_H_
 
 #include <Windows.h>
 #include "Constants.h"

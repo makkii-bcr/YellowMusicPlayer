@@ -1,8 +1,8 @@
 // Windows Multimedia APIÇÃÉvÉåÉCÉÑÅ[
 
 // #pragma once
-#ifndef WINMMPLAYER_H
-#define WINMMPLAYER_H
+#ifndef _WINMMPLAYER_H_
+#define _WINMMPLAYER_H_
 
 #include <map>
 
