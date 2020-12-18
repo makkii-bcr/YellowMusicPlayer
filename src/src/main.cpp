@@ -6,10 +6,12 @@
 #include <tchar.h>
 #include <windows.h>
 #include <mmsystem.h>
-#include "main.h"
 #include "define.h"
 #include "resource.h"
 #include "ymp_main.h"
+
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "lib/dxguid.lib")
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 

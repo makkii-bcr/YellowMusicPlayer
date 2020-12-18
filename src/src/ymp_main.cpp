@@ -9,7 +9,7 @@ int YMPlayer::ympInit(const HWND hWnd) {
     // Midi‚Ì€”õ
     // Ogg‚Ì€”õ
 
-    int midiOK = m_ympMidi.init();
+    int midiOK = m_ympMidi.init(hWnd);
     int oggOK = m_ympOgg.init();
 
     m_hWnd = hWnd;

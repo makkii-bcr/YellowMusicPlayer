@@ -1,7 +1,7 @@
 #ifndef DEFINE_H
 #define DEFINE_H
 
-#define DEBUG             0
+// #define DEBUG             0
 #define CREATE_TONYU_OLD  0
 #define MIDIFILELIST_SIZE 65535
 #define FILEPATH_SIZE     300
