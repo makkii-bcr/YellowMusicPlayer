@@ -11,6 +11,9 @@
 #include "resource.h"
 #include "ymp_main.h"
 
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "lib/dxguid.lib")
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp);
 
 extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {
