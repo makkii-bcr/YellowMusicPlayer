@@ -67,7 +67,7 @@ Filename61=stdafx2.cpp,2,GuruGuruSMF_dxmus_core,1,library\GuruGuruSMF\dxmus.core
 ResourceName=resource.rc
 RunParam=
 Count=2
-Current=2
+Current=1
 
 [Compile1]
 DefName=Debug
@@ -120,8 +120,6 @@ MakeBefore=
 MakeAfter=
 
 [OpenFiles]
-FileCount=2
-FileName1=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\library\GuruGuruSMF\main\GuruGuruSMF4.cpp
-FileName2=E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\library\GuruGuruSMF\Core\Compiler.cpp
-ActivePageIndex=1
+FileCount=0
+ActivePageIndex=-1
 

@@ -9,7 +9,7 @@ void MyOutputDebugString(LPCWSTR pszFormat, ...)
 	va_start(argp, pszFormat);
 	vswprintf(pszBuf, pszFormat, argp);
 	va_end(argp);
-	OutputDebugString( pszBuf);
+	OutputDebugStringW( pszBuf);
 }
 #endif
 

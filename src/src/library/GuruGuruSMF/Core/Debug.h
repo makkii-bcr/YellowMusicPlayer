@@ -5,12 +5,13 @@
 #define _DEBUG_H_
 
 
-#if defined(_DEBUG) || defined(DEBUG)
+//#if defined(_DEBUG) || defined(DEBUG)
+#ifdef _DEBUG
 void MyOutputDebugString(LPCWSTR pszFormat, ...);
 
 // Debug‚Ì‚Æ‚«
-#define TRACE(x)   OutputDebugString(x)
-#define TRACE0(x)   OutputDebugString(x)
+#define TRACE(x)   OutputDebugStringW(x)
+#define TRACE0(x)   OutputDebugStringW(x)
 #define TRACE1(x, a)            MyOutputDebugString(x, a)
 #define TRACE2(x, a, b)         MyOutputDebugString(x, a, b)
 #define TRACE3(x, a, b, c)      MyOutputDebugString(x, a, b, c)
