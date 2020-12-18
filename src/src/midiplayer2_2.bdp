@@ -67,7 +67,7 @@ Filename61=stdafx2.cpp,2,GuruGuruSMF_dxmus_core,1,library\GuruGuruSMF\dxmus.core
 ResourceName=resource.rc
 RunParam=
 Count=2
-Current=1
+Current=2
 
 [Compile1]
 DefName=Debug
