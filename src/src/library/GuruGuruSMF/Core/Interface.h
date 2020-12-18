@@ -1,8 +1,8 @@
 // 内部で使用するインターフェイス
 
 // #pragma once
-#ifndef _INTERFACE_H_
-#define _INTERFACE_H_
+#ifndef INTERFACE_H
+#define INTERFACE_H
 
 #include <Windows.h>
 #include "Smf.h"

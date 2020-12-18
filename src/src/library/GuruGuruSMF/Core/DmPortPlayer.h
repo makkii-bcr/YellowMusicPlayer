@@ -1,8 +1,8 @@
 // DirectMusic Portモードプレイヤー
 
 // #pragma once
-#ifndef _DMPORTPLAYER_H_
-#define _DMPORTPLAYER_H_
+#ifndef DMPORTPLAYER_H
+#define DMPORTPLAYER_H
 
 #include <Windows.h>
 #include <map>

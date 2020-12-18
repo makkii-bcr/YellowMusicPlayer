@@ -1,8 +1,8 @@
 // ŠÔŠÖŒW‚Ìƒf[ƒ^
 
 // #pragma once
-#ifndef _TIMES_H_
-#define _TIMES_H_
+#ifndef TIMES_H
+#define TIMES_H
 
 #include "Constants.h"
 #include "Interface.h"

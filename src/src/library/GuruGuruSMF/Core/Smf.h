@@ -1,8 +1,8 @@
 // SMFデータ関連
 
 // #pragma once
-#ifndef _SMF_H_
-#define _SMF_H_
+#ifndef SMF_H
+#define SMF_H
 
 #include <Windows.h>
 #include <string>

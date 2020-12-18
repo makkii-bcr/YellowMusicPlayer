@@ -1,8 +1,8 @@
 // SMFâêÕ
 
 // #pragma once
-#ifndef _ANALYZER_H_
-#define _ANALYZER_H_
+#ifndef ANALYZER_H
+#define ANALYZER_H
 
 #include <set>
 

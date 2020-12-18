@@ -1,7 +1,7 @@
 
 // #pragma once
-#ifndef _CONTROLLER_H_
-#define _CONTROLLER_H_
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
 
 #include "PerformancePlayer.h"
 #include "Port.h"

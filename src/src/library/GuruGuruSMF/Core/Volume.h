@@ -1,8 +1,8 @@
 // ‰¹—ÊŠÖŒW
 
 // #pragma once
-#ifndef _VOLUME_H_
-#define _VOLUME_H_
+#ifndef VOLUME_H
+#define VOLUME_H
 
 #include <Windows.h>
 #include "Constants.h"

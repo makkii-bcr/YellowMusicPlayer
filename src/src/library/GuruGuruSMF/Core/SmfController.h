@@ -1,8 +1,8 @@
 // SMFëÄçÏÉNÉâÉX
 
 // #pragma once
-#ifndef _SMFCONTROLLER_H_
-#define _SMFCONTROLLER_H_
+#ifndef SMFCONTROLLER_H
+#define SMFCONTROLLER_H
 
 #include "Interface.h"
 #include "Analyzer.h"

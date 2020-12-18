@@ -1,5 +1,5 @@
-#ifndef _YMP_MAIN_H_
-#define _YMP_MAIN_H_
+#ifndef YMP_MAIN_H
+#define YMP_MAIN_H
 
 #include <windows.h>
 #include "define.h"

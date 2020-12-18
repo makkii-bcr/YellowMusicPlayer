@@ -1,8 +1,8 @@
 // MIDIデバイス
 
 // #pragma once
-#ifndef _DEVICE_H_
-#define _DEVICE_H_
+#ifndef DEVICE_H
+#define DEVICE_H
 
 #include <MMSystem.h>
 #include "Constants.h"

@@ -1,8 +1,8 @@
 // DirectMusic PerformanceÉÇÅ[Éh(Legacy)
 
 // #pragma once
-#ifndef _DMPERFORMANCEPLAYER_H_
-#define _DMPERFORMANCEPLAYER_H_
+#ifndef DMPERFORMANCEPLAYER_H
+#define DMPERFORMANCEPLAYER_H
 
 #include <Windows.h>
 #include "Constants.h"

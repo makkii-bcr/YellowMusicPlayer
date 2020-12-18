@@ -1,8 +1,8 @@
 // GuruGuruSMF4‚Ì‘‹Œû
 
 // #pragma once
-#ifndef _GGS4CONTROLLER_H_
-#define _GGS4CONTROLLER_H_
+#ifndef GGS4CONTROLLER_H
+#define GGS4CONTROLLER_H
 
 #include <stdio.h>
 #include <Windows.h>

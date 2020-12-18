@@ -1,5 +1,5 @@
-#ifndef _DEFINE_H_
-#define _DEFINE_H_
+#ifndef DEFINE_H
+#define DEFINE_H
 
 // #define DEBUG             0
 #define CREATE_TONYU_OLD  0

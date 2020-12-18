@@ -1,8 +1,8 @@
 // SMFëÄçÏ
 
 // #pragma once
-#ifndef _SMFINTERPRETER_H_
-#define _SMFINTERPRETER_H_
+#ifndef SMFINTERPRETER_H
+#define SMFINTERPRETER_H
 
 #include "Constants.h"
 #include "Smf.h"

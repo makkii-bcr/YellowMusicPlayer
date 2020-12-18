@@ -1,7 +1,7 @@
 
-// #pragma once
-#ifndef _PORT_H_
-#define _PORT_H_
+#pragma once
+#ifndef PORT_H
+#define PORT_H
 #include <dmusici.h>
 #include <dmusicc.h>
 
