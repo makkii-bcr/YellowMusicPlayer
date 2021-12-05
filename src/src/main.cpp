@@ -73,8 +73,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
         return 0;
     case YMP_MSG_TEST1: {
         TCHAR str[BUF_SIZE_PRINT];
-        DWORD cnt = timeGetTime();
-        _sntprintf(str, sizeof(str), _T("Test: %d"), cnt);
+        DWORD time = timeGetTime();
+        DWORD cnt = wp;
+        _sntprintf(str, sizeof(str), _T("c:%d t:%d"), cnt, time);
         SetWindowText(hWnd, str);
         break;
     }

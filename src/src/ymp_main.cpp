@@ -1,6 +1,7 @@
 #include "ymp_main.h"
 #include "ymp_midi.h"
 #include "ymp_ogg.h"
+#include "ymp_msg.h"
 
 static void CALLBACK timerProc(UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2);
 
@@ -20,7 +21,12 @@ int YMPlayer::ympInit(const HWND hWnd) {
 static void CALLBACK timerProc(UINT uTimerID, UINT uMsg, DWORD dwUser, DWORD dw1, DWORD dw2) {
     YMPlayer &ymplayer = *((YMPlayer *)dwUser);
     HWND hWnd = ymplayer.getHWnd();
-    PostMessage(hWnd, YMP_MSG_TEST1, 0, 0);
+    static int cnt = 0;
+    cnt++;
+
+    TCHAR text[100];
+    PostMsgData2 a(123, text);
+    PostMessage(hWnd, YMP_MSG_TEST1, cnt, 0);
 
     // ÉtÉ@ÉCÉãÇÃì«Ç›çûÇ›
     // MidiÇÃèàóù
