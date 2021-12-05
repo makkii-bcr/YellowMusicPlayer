@@ -1,0 +1,30 @@
+既定のオプションは明示されていません。"Extension(フォルダ名:拡張子)>"のリスト順は変更不可。
+>記号で終わる行は書き換えないで下さい。
+BaseFolder>
+E:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src
+ExeType>
+ｳｨﾝﾄﾞｳｽﾞ型
+DebugMode(1)>
+0
+Option>
+-IE:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\includeOggVorbis;E:\dev\Borland\Bcc55\IncludeDX2004
+-6
+-ff
+-O2
+-i250
+-eMidiplayer2.exe
+-tW
+ObjLibfile>
+OptionForRun(尋ねる(1)|オプション)>
+Extension(フォルダ名:拡張子)>
+Source Files:c;cpp;rc;asm;dlg(1)
+Header Files:h;hpp;txt;mac;mes(1)
+Resources:bmp;ico;cur(0)
+FolderAtSearch>
+C:\MMTF\MF\ゲーム・開発\WinAPI開発\Projects\VWBC\TonyuNet\TonyuNet_server
+Option(Debug)>
+-IE:\MMTF\MF\dev\WinAPIapp\Projects\BCCDeveloper\midiplayer2_2\src\src\includeOggVorbis;E:\dev\Borland\Bcc55\IncludeDX2004
+ObjLibfile(Debug)>
+Files([開(1)|リストに含(1):行,カーソル])>
+1[1|1:51?1,2479-2479]GuruGuruSMF4_C_Dynamic.c
+2[1|1:6?16,134-134]GuruGuruSMF4_C_Dynamic.h
