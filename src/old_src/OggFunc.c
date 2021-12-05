@@ -56,8 +56,8 @@ int    ogg3Volume      = 127;
 int    ogg3FadeOutTime = 0;
 
 // 調節
-int    oggPlayTime = 2;
-DWORD  oggSect     = 50;
+int    oggPlayTime = 8;
+DWORD  oggSect     = 200;
 
 // イベント関連
 HANDLE g_hNotificationEvent = NULL;
@@ -190,9 +190,9 @@ BOOL InitLock(IDirectSoundBuffer *pDSBuffer) {
     if (IDirectSoundBuffer_Lock(pDSBuffer, 0, 0, &AP1, &AB1, &AP2, &AB2, DSBLOCK_ENTIREBUFFER) == DS_OK) {
 	//if (IDirectSoundBuffer_Lock(pDSBuffer, oggSectSize * oggFlag, oggSectSize * 5, &AP1, &AB1, &AP2, &AB2, 0) == DS_OK) {
         memset(AP1, 0, AB1);
-		getPCMBuffer(&ovf, (char*)AP1, oggSectSize * 22, oggLoopFlag, oggLoopSeek, oggLoopEndSeek, &oggEndFlag);
+		getPCMBuffer(&ovf, (char*)AP1, oggSectSize * 10, oggLoopFlag, oggLoopSeek, oggLoopEndSeek, &oggEndFlag);
 		IDirectSoundBuffer_Unlock(pDSBuffer, AP1, AB1, AP2, AB2);
-		oggFlag = (oggFlag + 22) % oggSect;
+		oggFlag = (oggFlag + 10) % oggSect;
 		oggAllWriteFlag = 1;  // バッファの最初を通った回数
 		oggAllWriteFlag_thread = 1;  // バッファの最初を通った回数
 		oggBufWriteSpeed = 0; // 最初は遅くバッファに書き込む

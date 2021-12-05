@@ -264,7 +264,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	if (mainInit()) {
 		// 初期化できたらスレッドを実行
 		oldTime = timeGetTime();
-		dwTimer = timeSetEvent(15, 0, TimerThreadC, CREATE_SUSPENDED, TIME_PERIODIC);
+		dwTimer = timeSetEvent(1, 0, TimerThreadC, CREATE_SUSPENDED, TIME_ONESHOT /*TIME_PERIODIC*/);
 		//hMusicThread = CreateThread(NULL, 0, musicThread, hWnd, 0, &dwMusicThreadParam);
 	}
 	while (GetMessage(&msg, NULL, 0, 0) > 0){
@@ -354,6 +354,7 @@ LRESULT CALLBACK WndProc(HWND hWnd , UINT msg , WPARAM wp , LPARAM lp) {
 
 //static DWORD WINAPI musicThread(LPVOID hWnd) {
 static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dwNo1, DWORD dwNo2) {
+	DWORD subTime = 0;
 	//StopProc();
 	if (threadClose) return ;
 	
@@ -385,13 +386,13 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 //	}
 	
 	// 処理されすぎないように制御
-	if (frameSkipCnt >= 1) {
-		Sleep(1);
-		#if DEBUG
-		RPSOutput();
-		#endif
-		return ;
-	}
+	// if (frameSkipCnt >= 1) {
+	// 	Sleep(1);
+	// 	#if DEBUG
+	// 	RPSOutput();
+	// 	#endif
+	// 	return ;
+	// }
 	
 	//while (windowClose == 0) {
 	
@@ -1710,6 +1711,9 @@ static void CALLBACK TimerThreadC(UINT uiID, UINT uiNo, DWORD dwCookie, DWORD dw
 		
 	#endif
 	
+	subTime = 30 - (nowTime - oldTime);
+	if (subTime >= 0x80000000 || subTime <= 0) subTime = 1;
+	dwTimer = timeSetEvent(subTime, 0, TimerThreadC, CREATE_SUSPENDED, TIME_ONESHOT /*TIME_PERIODIC*/);
 	
 	oldTime = nowTime;
 	
