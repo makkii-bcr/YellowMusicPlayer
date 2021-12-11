@@ -255,10 +255,10 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	}
 	
 	// タイマー分解能の精度を高める
-	timerCapsResult = timeGetDevCaps(&timeCaps, sizeof(TIMECAPS));
-	if (timerCapsResult == TIMERR_NOERROR) {
-		timeBeginPeriod(timeCaps.wPeriodMin);
-	}
+	// timerCapsResult = timeGetDevCaps(&timeCaps, sizeof(TIMECAPS));
+	// if (timerCapsResult == TIMERR_NOERROR) {
+	// 	timeBeginPeriod(timeCaps.wPeriodMin);
+	// }
 	
 	// スレッド関係の初期化
 	if (mainInit()) {
@@ -273,9 +273,9 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	}
 	
 	// タイマー分解能の精度を元に戻す
-	if (timerCapsResult == TIMERR_NOERROR) {
-		timeEndPeriod(timeCaps.wPeriodMin);
-	}
+	// if (timerCapsResult == TIMERR_NOERROR) {
+	// 	timeEndPeriod(timeCaps.wPeriodMin);
+	// }
 	
 	return msg.wParam;
 }
