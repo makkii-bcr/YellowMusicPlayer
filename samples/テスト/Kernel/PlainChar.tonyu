@@ -217,8 +217,8 @@ function waitSelect(prompt,title) {
    return $selectBox.getStatus()==1;
 }
 
-function waitInput(title,prompt,default) {
-   $inputBox.open(title,prompt,default);
+function waitInput(title,prompt,_default) {
+   $inputBox.open(title,prompt,_default);
    while (!$inputBox.getStatus()) update();
    return $inputBox.getText();
 }

@@ -11,12 +11,16 @@ constructor MediaPlayer() {
    _stopOnPageLoad  = 1; 
    prevFc=null;
    soundInterval=trunc(44100*16/1000);
-   soundDelay   =1000;
+   soundDelay   =1350;
    timeLag=2000;
    soundNextTime=null;
    frameOffset=0;
    playPosOffset=0;
    bsize=6000;
+   rewrite=0;
+   rewriteCnt=0;
+   rewriteBGM=0;
+   rewriteReplay=0;
 }
 function setFrameRate(r) {
   soundInterval=trunc(44100*trunc(r)/1000);
@@ -40,22 +44,53 @@ function freeAllSE() {
 //  _n_freeAllSE();	
 }
 
-function play( s,ar,v) {
+function _play(s,ar,v) {
+  var r;
+  r=0;
   if ( s) {
-    if (s is BGM) stop(1);
-    if (!v || (v>=0 && v<=128)) {
-      s.play(ar,v);
-    } else {
-      s.play(ar,128);
+    if (s is BGM) {
+      r=_stop();
+      if (!r) return r;
     }
-  }/* else {
-    (new BGM()).play();
-  }*/
+    if (!v || (v>=0 && v<=128)) {
+      r=s.play(ar,v);
+    } else {
+      r=s.play(ar,128);
+    }
+  }
+  return r;
+}
+
+function play(s,ar,v) {
+  var r;
+  r=_play(s,ar,v);
+  if (s is BGM) {
+    if (!r) { // BGMÄ¶Ž¸”s(ƒtƒ@ƒCƒ‹‘‚«ž‚ÝŽ¸”s)
+      rewrite=1;
+      rewriteBGM=s;
+      rewriteReplay=ar;
+    } else {
+      rewrite=0;
+    }
+    rewriteCnt=0;
+  }
 }
 
 native _n_stop;
+
+function _stop() {
+  return _n_stop();
+}
+
 function stop() {
-  _n_stop();
+  var r;
+  r=_stop();
+  if (!r) { // BGM’âŽ~Ž¸”s(ƒtƒ@ƒCƒ‹‘‚«ž‚ÝŽ¸”s)
+    rewrite=2;
+  } else {
+    rewrite=0;
+  }
+  rewriteCnt=0;
 }
 
 native _n_setEnable;
@@ -129,4 +164,19 @@ native _n_calibration;
 function calibration(len,lag) {
   timeLag=lag;
   _n_calibration(len,lag);
+}
+
+function rewriteUpdate() {
+  var r;
+  if (rewriteCnt>=60) return;
+  if (rewrite!=0) rewriteCnt++;
+  if (rewriteCnt>=2) {
+    if (rewrite==1) {
+      r=_play(rewriteBGM,rewriteReplay);
+      if (r) rewrite=0;
+    } else if (rewrite==2) {
+      r=_stop();
+      if (r) rewrite=0;
+    }
+  }
 }
