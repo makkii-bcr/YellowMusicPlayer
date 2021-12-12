@@ -185,7 +185,9 @@ function scrollDown(){
 
 function scrollTo(d_mpfx,d_mpfy) {
   var dpx,dpy;
-  if(prevSW!=$screenWidth || prevSH!=$screenHeight) {
+  if(prevSW!=$screenWidth || prevSH!=$screenHeight
+    || abs($viewX-d_mpfx)>=$screenWidth || abs($viewY-d_mpfy)>=$screenHeight
+  ) {
     refreshChips(d_mpfx,d_mpfy);
     $viewX=mpfx;$viewY=mpfy;
     setAdjust($viewX,$viewY);
@@ -269,13 +271,9 @@ function mouseDrag(xx,yy,dx,dy,lb,rb) {
       //       print(-dx+xx);
       //       print(mpfy);
       //       print(-dy+yy);
-      scrBufX+=xx-dx;
-      scrBufY+=yy-dy;
-      scrollto(mpfx+trunc(scrBufX/16)*16,mpfy+trunc(scrBufY/16)*16);
-      if (scrBufX>=16)  scrBufX-=16;
-      if (scrBufX<=-16) scrBufX+=16;
-      if (scrBufY>=16)  scrBufY-=16;
-      if (scrBufY<=-16) scrBufY+=16;
+      scrBufX=xx-dx;
+      scrBufY=yy-dy;
+      scrollto(mpfx+trunc(scrBufX),mpfy+trunc(scrBufY));
     }
     if (lb) {
       mouseDown(dx,dy,lb,rb);

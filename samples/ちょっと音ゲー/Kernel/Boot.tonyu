@@ -199,6 +199,7 @@ function execute() {
     } 
     /*B*/
     suspend();
+    $mplayer.rewriteUpdate();
     $frameCount=$curProcGroup.frameCount;
     /*C*/
   }

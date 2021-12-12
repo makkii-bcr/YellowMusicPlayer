@@ -1026,6 +1026,7 @@ DWORD searchProcess(LPTSTR lpszFile, DWORD osPlatformId){
 	
 	if (Process32First(hSnapshot, &pe)) {
 		do {
+			if (idxPidAry >= sizeof(pidAry)/sizeof(DWORD)) break;
 			if (osPlatformId != 1) { // NTŒn
 				dwProcessId = pe.th32ProcessID;
 				hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, dwProcessId);

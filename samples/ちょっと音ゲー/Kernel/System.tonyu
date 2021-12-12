@@ -27,6 +27,32 @@ function setFrameRate(frate, maxSkip) {
   if ($mplayer is MediaPlayer) $mplayer.setFrameRate(flen);
   return _n_setFrameRate(flen,maxSkip);
 }
+
+native _n_setVSync;
+function setVSync(enable) {
+  return _n_setVSync(enable);
+}
+
+native _n_setAdjustScanLine;
+function setAdjustScanLine(rate) {
+  return _n_setAdjustScanLine(rate);
+}
+
+native _n_setAutoAdjustScanLine;
+function setAutoAdjustScanLine(enable) {
+  return _n_setAutoAdjustScanLine(enable);
+}
+
+native _n_setTimerResolution;
+function setTimerResolution(ms) {
+  return _n_setTimerResolution(ms);
+}
+
+native _n_setLoopMode;
+function setLoopMode(mode) {
+  return _n_setLoopMode(mode);
+}
+
 native _n_setStackSize;
 function setStackSize(n) {
   _n_setStackSize(n);

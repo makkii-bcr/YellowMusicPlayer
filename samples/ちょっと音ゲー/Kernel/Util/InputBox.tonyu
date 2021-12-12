@@ -1,8 +1,8 @@
 extends Object;
 
 native _n_open;
-function open(title,prompt,default,left,top,width,hegiht) {
-  _n_open(title,prompt,default,left,top,width,hegiht);
+function open(title,prompt,_default,left,top,width,hegiht) {
+  _n_open(title,prompt,_default,left,top,width,hegiht);
 }
 native _n_getStatus;
 function getStatus() {
