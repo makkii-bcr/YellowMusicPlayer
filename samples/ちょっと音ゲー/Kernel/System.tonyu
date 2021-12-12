@@ -28,14 +28,19 @@ function setFrameRate(frate, maxSkip) {
   return _n_setFrameRate(flen,maxSkip);
 }
 
+native _n_setVSync;
+function setVSync(enable) {
+  return _n_setVSync(enable);
+}
+
 native _n_setAdjustScanLine;
 function setAdjustScanLine(rate) {
   return _n_setAdjustScanLine(rate);
 }
 
-native _n_setVSync;
-function setVSync(enable) {
-  return _n_setVSync(enable);
+native _n_setAutoAdjustScanLine;
+function setAutoAdjustScanLine(enable) {
+  return _n_setAutoAdjustScanLine(enable);
 }
 
 native _n_setTimerResolution;
