@@ -39,11 +39,11 @@ extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LP
     UpdateWindow(hWnd);
 
     // タイマー分解能の精度を高める
-    TIMECAPS timeCaps;
-    MMRESULT timerCapsResult = timeGetDevCaps(&timeCaps, sizeof(TIMECAPS));
-    if (timerCapsResult == TIMERR_NOERROR) {
-        timeBeginPeriod(timeCaps.wPeriodMin);
-    }
+    // TIMECAPS timeCaps;
+    // MMRESULT timerCapsResult = timeGetDevCaps(&timeCaps, sizeof(TIMECAPS));
+    // if (timerCapsResult == TIMERR_NOERROR) {
+    //     timeBeginPeriod(timeCaps.wPeriodMin);
+    // }
 
     YMPlayer ymplayer;
     if (ymplayer.ympInit(hWnd)) {
@@ -57,9 +57,9 @@ extern "C" int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LP
     }
 
     // タイマー分解能の精度を元に戻す
-    if (timerCapsResult == TIMERR_NOERROR) {
-        timeEndPeriod(timeCaps.wPeriodMin);
-    }
+    // if (timerCapsResult == TIMERR_NOERROR) {
+    //     timeEndPeriod(timeCaps.wPeriodMin);
+    // }
 
     return msg.wParam;
 }
